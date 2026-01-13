@@ -11,6 +11,7 @@ interface CRMColumnProps {
   color: string
   leads: CRMLead[]
   onDropLead: (leadId: string, status: CRMColumnId) => void
+  onCardClick?: (lead: CRMLead) => void
 }
 
 export function CRMColumn({
@@ -19,6 +20,7 @@ export function CRMColumn({
   color,
   leads,
   onDropLead,
+  onCardClick,
 }: CRMColumnProps) {
   const [isOver, setIsOver] = useState(false)
 
@@ -78,7 +80,12 @@ export function CRMColumn({
           </div>
         ) : (
           leads.map((lead) => (
-            <CRMCard key={lead.id} lead={lead} onDragStart={handleDragStart} />
+            <CRMCard
+              key={lead.id}
+              lead={lead}
+              onDragStart={handleDragStart}
+              onClick={onCardClick}
+            />
           ))
         )}
       </div>

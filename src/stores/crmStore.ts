@@ -1,9 +1,28 @@
 import { create } from 'zustand'
 import { googleSheetsService, Lead } from '@/services/googleSheetsService'
-import { differenceInDays } from 'date-fns'
+import { v4 as uuidv4 } from 'uuid'
+
+export interface Note {
+  id: string
+  content: string
+  createdAt: string
+  author: string
+}
+
+export interface HistoryItem {
+  id: string
+  type: 'status_change' | 'interaction' | 'note_added' | 'follow_up_set'
+  description: string
+  date: string
+  author: string
+  metadata?: any
+}
 
 export interface CRMLead extends Lead {
   lastInteraction: string
+  notes: Note[]
+  history: HistoryItem[]
+  followUp?: string
 }
 
 export type CRMColumnId =
@@ -43,9 +62,40 @@ interface CRMStore {
   setFilter: (key: keyof FilterState, value: any) => void
   clearFilters: () => void
   moveLead: (leadId: string, newStatus: CRMColumnId) => void
+  addNote: (leadId: string, noteContent: string) => void
+  addInteraction: (leadId: string, type: string, details: string) => void
+  scheduleFollowUp: (leadId: string, date: string) => void
 }
 
-const STORAGE_KEY = 'crm_leads_data'
+const STORAGE_KEY = 'crm_leads_data_v2'
+
+const saveToStorage = (leads: CRMLead[]) => {
+  const persistenceData = leads.reduce(
+    (acc, lead) => {
+      acc[lead.id] = {
+        status: lead.status,
+        lastInteraction: lead.lastInteraction,
+        notes: lead.notes,
+        history: lead.history,
+        followUp: lead.followUp,
+      }
+      return acc
+    },
+    {} as Record<string, Partial<CRMLead>>,
+  )
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(persistenceData))
+}
+
+const createHistoryItem = (
+  type: HistoryItem['type'],
+  description: string,
+): HistoryItem => ({
+  id: uuidv4(),
+  type,
+  description,
+  date: new Date().toISOString(),
+  author: 'Você',
+})
 
 export const useCRMStore = create<CRMStore>((set, get) => ({
   leads: [],
@@ -63,39 +113,49 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
     set({ loading: true, error: false })
     try {
       const apiLeads = await googleSheetsService.fetchLeads()
-
-      // Load local overrides
       const localDataStr = localStorage.getItem(STORAGE_KEY)
       const localData = localDataStr ? JSON.parse(localDataStr) : {}
 
-      // Merge API leads with local state (status and lastInteraction)
       const mergedLeads: CRMLead[] = apiLeads.map((lead) => {
-        const localLead = localData[lead.id]
+        const local = localData[lead.id] || {}
         return {
           ...lead,
-          status: localLead?.status || lead.status || 'Capturado',
-          lastInteraction: localLead?.lastInteraction || lead.dataCaptacao,
+          status: local.status || lead.status || 'Capturado',
+          lastInteraction: local.lastInteraction || lead.dataCaptacao,
+          notes: local.notes || [],
+          history: local.history || [
+            {
+              id: 'initial',
+              type: 'status_change',
+              description: 'Lead capturado',
+              date: lead.dataCaptacao,
+              author: 'Sistema',
+            },
+          ],
+          followUp: local.followUp,
         }
       })
 
-      // Add extra mock leads to populate the board if it's too empty
+      // Generate mocks if needed
       if (mergedLeads.length < 5) {
         const mockMore = generateMockLeads(15)
         mockMore.forEach((m) => {
-          // Only add if not exists (mocking uniqueness by id)
           if (!mergedLeads.find((l) => l.id === m.id)) {
-            const localM = localData[m.id]
+            const local = localData[m.id] || {}
             mergedLeads.push({
               ...m,
-              status: localM?.status || m.status,
-              lastInteraction: localM?.lastInteraction || m.dataCaptacao,
+              status: local.status || m.status,
+              lastInteraction: local.lastInteraction || m.dataCaptacao,
+              notes: local.notes || m.notes,
+              history: local.history || m.history,
+              followUp: local.followUp || m.followUp,
             })
           }
         })
       }
 
       set({ leads: mergedLeads })
-      get().setFilter('search', get().filters.search) // Trigger filtering
+      get().setFilter('search', get().filters.search)
     } catch (error) {
       console.error(error)
       set({ error: true })
@@ -120,10 +180,7 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
         dateRange: undefined,
         valueRange: { min: '', max: '' },
       }
-      return {
-        filters: defaultFilters,
-        filteredLeads: state.leads,
-      }
+      return { filters: defaultFilters, filteredLeads: state.leads }
     })
   },
 
@@ -131,39 +188,103 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
     set((state) => {
       const updatedLeads = state.leads.map((lead) => {
         if (lead.id === leadId) {
+          if (lead.status === newStatus) return lead
+          const historyItem = createHistoryItem(
+            'status_change',
+            `Status alterado de ${lead.status} para ${newStatus}`,
+          )
           return {
             ...lead,
             status: newStatus,
+            lastInteraction: new Date().toISOString(),
+            history: [historyItem, ...lead.history],
+          }
+        }
+        return lead
+      })
+      saveToStorage(updatedLeads)
+      const filtered = applyFilters(updatedLeads, state.filters)
+      return { leads: updatedLeads, filteredLeads: filtered }
+    })
+  },
+
+  addNote: (leadId, noteContent) => {
+    set((state) => {
+      const updatedLeads = state.leads.map((lead) => {
+        if (lead.id === leadId) {
+          const newNote: Note = {
+            id: uuidv4(),
+            content: noteContent,
+            createdAt: new Date().toISOString(),
+            author: 'Você',
+          }
+          const historyItem = createHistoryItem(
+            'note_added',
+            'Nota adicionada ao lead',
+          )
+          return {
+            ...lead,
+            notes: [newNote, ...lead.notes],
+            history: [historyItem, ...lead.history],
             lastInteraction: new Date().toISOString(),
           }
         }
         return lead
       })
+      saveToStorage(updatedLeads)
+      const filtered = applyFilters(updatedLeads, state.filters)
+      return { leads: updatedLeads, filteredLeads: filtered }
+    })
+  },
 
-      // Persist to LocalStorage
-      const persistenceData = updatedLeads.reduce(
-        (acc, lead) => {
-          acc[lead.id] = {
-            status: lead.status,
-            lastInteraction: lead.lastInteraction,
+  addInteraction: (leadId, type, details) => {
+    set((state) => {
+      const updatedLeads = state.leads.map((lead) => {
+        if (lead.id === leadId) {
+          const historyItem = createHistoryItem(
+            'interaction',
+            `Interação registrada: ${type} - ${details}`,
+          )
+          return {
+            ...lead,
+            history: [historyItem, ...lead.history],
+            lastInteraction: new Date().toISOString(),
           }
-          return acc
-        },
-        {} as Record<string, { status: string; lastInteraction: string }>,
-      )
+        }
+        return lead
+      })
+      saveToStorage(updatedLeads)
+      const filtered = applyFilters(updatedLeads, state.filters)
+      return { leads: updatedLeads, filteredLeads: filtered }
+    })
+  },
 
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(persistenceData))
-
+  scheduleFollowUp: (leadId, date) => {
+    set((state) => {
+      const updatedLeads = state.leads.map((lead) => {
+        if (lead.id === leadId) {
+          const historyItem = createHistoryItem(
+            'follow_up_set',
+            `Follow-up agendado para ${new Date(date).toLocaleString('pt-BR')}`,
+          )
+          return {
+            ...lead,
+            followUp: date,
+            history: [historyItem, ...lead.history],
+            lastInteraction: new Date().toISOString(),
+          }
+        }
+        return lead
+      })
+      saveToStorage(updatedLeads)
       const filtered = applyFilters(updatedLeads, state.filters)
       return { leads: updatedLeads, filteredLeads: filtered }
     })
   },
 }))
 
-// Helper to filter leads
 function applyFilters(leads: CRMLead[], filters: FilterState): CRMLead[] {
   return leads.filter((lead) => {
-    // Search
     if (filters.search) {
       const searchLower = filters.search.toLowerCase()
       const matches =
@@ -172,44 +293,31 @@ function applyFilters(leads: CRMLead[], filters: FilterState): CRMLead[] {
         lead.telefone.includes(searchLower)
       if (!matches) return false
     }
-
-    // Origin
-    if (filters.origin !== 'all' && lead.origem !== filters.origin) {
-      return false
-    }
-
-    // Date Range
+    if (filters.origin !== 'all' && lead.origem !== filters.origin) return false
     if (filters.dateRange?.from) {
       const leadDate = new Date(lead.dataCaptacao).getTime()
       const fromDate = filters.dateRange.from.getTime()
       if (leadDate < fromDate) return false
-
       if (filters.dateRange.to) {
-        const toDate = filters.dateRange.to.getTime() + 86400000 // End of day approximation
+        const toDate = filters.dateRange.to.getTime() + 86400000
         if (leadDate > toDate) return false
       }
     }
-
-    // Value Range
     const potentialValue = lead.assentosAdicionais * 500
     if (
       filters.valueRange.min &&
       potentialValue < Number(filters.valueRange.min)
-    ) {
+    )
       return false
-    }
     if (
       filters.valueRange.max &&
       potentialValue > Number(filters.valueRange.max)
-    ) {
+    )
       return false
-    }
-
     return true
   })
 }
 
-// Generate some mock leads to make the board look alive
 function generateMockLeads(count: number): CRMLead[] {
   const statuses = COLUMNS.map((c) => c.id)
   const origins = ['Planilha', 'Manual', 'Site', 'Indicação']
@@ -236,6 +344,10 @@ function generateMockLeads(count: number): CRMLead[] {
   return Array.from({ length: count }).map((_, i) => {
     const name = names[Math.floor(Math.random() * names.length)]
     const surname = surnames[Math.floor(Math.random() * surnames.length)]
+    const captureDate = new Date(
+      Date.now() - Math.floor(Math.random() * 10 * 24 * 60 * 60 * 1000),
+    ).toISOString()
+
     return {
       id: `mock-${i}`,
       nomeCompleto: `${name} ${surname}`,
@@ -244,12 +356,18 @@ function generateMockLeads(count: number): CRMLead[] {
       assentosAdicionais: Math.floor(Math.random() * 10) + 1,
       origem: origins[Math.floor(Math.random() * origins.length)],
       status: statuses[Math.floor(Math.random() * statuses.length)],
-      dataCaptacao: new Date(
-        Date.now() - Math.floor(Math.random() * 10 * 24 * 60 * 60 * 1000),
-      ).toISOString(),
-      lastInteraction: new Date(
-        Date.now() - Math.floor(Math.random() * 5 * 24 * 60 * 60 * 1000),
-      ).toISOString(),
+      dataCaptacao: captureDate,
+      lastInteraction: captureDate,
+      notes: [],
+      history: [
+        {
+          id: uuidv4(),
+          type: 'status_change',
+          description: 'Lead capturado automaticamente',
+          date: captureDate,
+          author: 'Sistema',
+        },
+      ],
     }
   })
 }

@@ -9,9 +9,10 @@ import { Badge } from '@/components/ui/badge'
 interface CRMCardProps {
   lead: CRMLead
   onDragStart: (e: React.DragEvent<HTMLDivElement>, leadId: string) => void
+  onClick?: (lead: CRMLead) => void
 }
 
-export const CRMCard = memo(({ lead, onDragStart }: CRMCardProps) => {
+export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
   const lastInteraction = new Date(lead.lastInteraction)
   const now = new Date()
   const hoursSinceInteraction = differenceInHours(now, lastInteraction)
@@ -31,11 +32,12 @@ export const CRMCard = memo(({ lead, onDragStart }: CRMCardProps) => {
     <div
       draggable
       onDragStart={(e) => onDragStart(e, lead.id)}
-      className="cursor-grab active:cursor-grabbing touch-none"
+      onClick={() => onClick?.(lead)}
+      className="cursor-grab active:cursor-grabbing touch-none select-none"
     >
       <Card
         className={cn(
-          'mb-3 overflow-hidden border-l-4 transition-all hover:shadow-md',
+          'mb-3 overflow-hidden border-l-4 transition-all hover:shadow-md cursor-pointer',
           borderColorClass,
         )}
       >
