@@ -10,6 +10,7 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Skeleton } from '@/components/ui/skeleton'
 import { LiveData } from '@/services/googleSheetsService'
 import { cn } from '@/lib/utils'
+import { AnimatedCounter } from '@/components/ui/animated-counter'
 
 interface LiveKPIsProps {
   data: LiveData[]
@@ -19,12 +20,13 @@ interface LiveKPIsProps {
 
 interface KPIProps {
   title: string
-  value: string
+  value: number
   icon: React.ElementType
   trend?: number
   loading: boolean
   prefix?: string
   suffix?: string
+  decimals?: number
 }
 
 const KPICard = ({
@@ -35,9 +37,10 @@ const KPICard = ({
   loading,
   prefix = '',
   suffix = '',
+  decimals = 0,
 }: KPIProps) => {
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden hover:shadow-md transition-shadow duration-300">
       <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
         <CardTitle className="text-sm font-medium text-muted-foreground">
           {title}
@@ -49,15 +52,23 @@ const KPICard = ({
       <CardContent>
         {loading ? (
           <div className="space-y-2">
-            <Skeleton className="h-8 w-24" />
-            <Skeleton className="h-4 w-16" />
+            <Skeleton className="h-8 w-24 shimmer" />
+            <Skeleton className="h-4 w-16 shimmer" />
           </div>
         ) : (
           <>
             <div className="text-2xl font-bold">
-              {prefix}
-              {value}
-              {suffix}
+              <AnimatedCounter
+                value={value}
+                prefix={prefix}
+                suffix={suffix}
+                formatter={(val) =>
+                  val.toLocaleString('pt-BR', {
+                    minimumFractionDigits: decimals,
+                    maximumFractionDigits: decimals,
+                  })
+                }
+              />
             </div>
             {trend !== undefined && !isNaN(trend) && (
               <p className="flex items-center text-xs text-muted-foreground mt-1">
@@ -126,33 +137,28 @@ export function LiveKPIs({ data, previousData, loading }: LiveKPIsProps) {
     return ((curr - prev) / prev) * 100
   }
 
-  const formatCurrency = (val: number) =>
-    new Intl.NumberFormat('pt-BR', {
-      style: 'decimal',
-      minimumFractionDigits: 2,
-      maximumFractionDigits: 2,
-    }).format(val)
-
   return (
     <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4 mb-6">
       <KPICard
         title="Vendas Totais"
-        value={metrics.sales.current.toLocaleString('pt-BR')}
+        value={metrics.sales.current}
         icon={TrendingUp}
         trend={calculateTrend(metrics.sales.current, metrics.sales.prev)}
         loading={loading}
       />
       <KPICard
         title="Faturamento Total"
-        value={formatCurrency(metrics.revenue.current)}
+        value={metrics.revenue.current}
         prefix="R$ "
+        decimals={2}
         icon={DollarSign}
         trend={calculateTrend(metrics.revenue.current, metrics.revenue.prev)}
         loading={loading}
       />
       <KPICard
         title="Taxa de Conversão"
-        value={metrics.conversion.current.toFixed(1)}
+        value={metrics.conversion.current}
+        decimals={1}
         suffix="%"
         icon={Activity}
         trend={calculateTrend(
@@ -163,7 +169,7 @@ export function LiveKPIs({ data, previousData, loading }: LiveKPIsProps) {
       />
       <KPICard
         title="Pico Médio"
-        value={Math.round(metrics.peak.current).toLocaleString('pt-BR')}
+        value={Math.round(metrics.peak.current)}
         icon={Users}
         trend={calculateTrend(metrics.peak.current, metrics.peak.prev)}
         loading={loading}

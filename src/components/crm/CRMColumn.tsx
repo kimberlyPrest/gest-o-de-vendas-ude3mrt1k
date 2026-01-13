@@ -4,6 +4,8 @@ import { CRMCard } from './CRMCard'
 import { cn } from '@/lib/utils'
 import { Badge } from '@/components/ui/badge'
 import { FolderOpen } from 'lucide-react'
+import { VirtualList } from '@/components/ui/virtual-list'
+import { EmptyState } from '@/components/ui/empty-state'
 
 interface CRMColumnProps {
   id: CRMColumnId
@@ -53,8 +55,9 @@ export function CRMColumn({
   return (
     <div
       className={cn(
-        'flex h-full min-w-[280px] w-[280px] flex-col rounded-lg border bg-gray-50/50 transition-colors',
-        isOver && 'bg-blue-50 border-blue-300 border-dashed',
+        'flex h-full min-w-[280px] w-[280px] flex-col rounded-lg border bg-gray-50/50 dark:bg-gray-900/50 transition-colors',
+        isOver &&
+          'bg-blue-50 dark:bg-blue-900/20 border-blue-300 border-dashed',
       )}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
@@ -62,31 +65,39 @@ export function CRMColumn({
     >
       {/* Header */}
       <div
-        className="flex items-center justify-between border-b p-3"
+        className="flex items-center justify-between border-b p-3 bg-background/50 rounded-t-lg backdrop-blur-sm"
         style={{ borderTop: `4px solid ${color}` }}
       >
-        <h3 className="font-semibold text-gray-700">{label}</h3>
-        <Badge variant="secondary" className="bg-white text-gray-600 shadow-sm">
+        <h3 className="font-semibold text-gray-700 dark:text-gray-200">
+          {label}
+        </h3>
+        <Badge
+          variant="secondary"
+          className="bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300 shadow-sm"
+        >
           {leads.length}
         </Badge>
       </div>
 
-      {/* Content */}
-      <div className="flex-1 overflow-y-auto p-2 scrollbar-thin scrollbar-thumb-gray-200">
+      {/* Content with Virtualization */}
+      <div className="flex-1 p-2">
         {leads.length === 0 ? (
-          <div className="mt-8 flex flex-col items-center justify-center text-gray-400">
-            <FolderOpen className="mb-2 h-8 w-8 opacity-20" />
-            <p className="text-sm">Vazio</p>
-          </div>
+          <EmptyState icon={FolderOpen} title="Vazio" className="h-full" />
         ) : (
-          leads.map((lead) => (
-            <CRMCard
-              key={lead.id}
-              lead={lead}
-              onDragStart={handleDragStart}
-              onClick={onCardClick}
-            />
-          ))
+          <VirtualList
+            items={leads}
+            height="100%"
+            itemHeight={160} // Approximate height of CRMCard + margin
+            className="scrollbar-thin scrollbar-thumb-gray-200 dark:scrollbar-thumb-gray-700"
+            renderItem={(lead) => (
+              <CRMCard
+                key={lead.id}
+                lead={lead}
+                onDragStart={handleDragStart}
+                onClick={onCardClick}
+              />
+            )}
+          />
         )}
       </div>
     </div>

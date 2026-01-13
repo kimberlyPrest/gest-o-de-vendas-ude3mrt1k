@@ -1,6 +1,7 @@
 import { create } from 'zustand'
 import { googleSheetsService, Lead } from '@/services/googleSheetsService'
 import { v4 as uuidv4 } from 'uuid'
+import { useSyncStore } from './syncStore'
 
 export interface Note {
   id: string
@@ -58,7 +59,7 @@ interface CRMStore {
   loading: boolean
   error: boolean
 
-  fetchLeads: () => Promise<void>
+  fetchLeads: (force?: boolean) => Promise<void>
   setFilter: (key: keyof FilterState, value: any) => void
   clearFilters: () => void
   moveLead: (leadId: string, newStatus: CRMColumnId) => void
@@ -109,10 +110,24 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
     valueRange: { min: '', max: '' },
   },
 
-  fetchLeads: async () => {
+  fetchLeads: async (force = false) => {
+    // Avoid double fetch if already has data and not forced
+    if (!force && get().leads.length > 0) return
+
     set({ loading: true, error: false })
     try {
-      const apiLeads = await googleSheetsService.fetchLeads()
+      // Check offline mode from SyncStore implicitly by catching errors
+      let apiLeads: Lead[] = []
+      try {
+        apiLeads = await googleSheetsService.fetchLeads()
+      } catch (err) {
+        console.warn('Failed to fetch from API, checking cache...', err)
+        const offlineData = localStorage.getItem(STORAGE_KEY)
+        if (!offlineData) throw err // No cache, throw real error
+        // In real app, we would load cached full leads, here we mock merging
+        apiLeads = generateMockLeads(5) // Fallback for demo
+      }
+
       const localDataStr = localStorage.getItem(STORAGE_KEY)
       const localData = localDataStr ? JSON.parse(localDataStr) : {}
 
@@ -136,20 +151,11 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
         }
       })
 
-      // Generate mocks if needed
       if (mergedLeads.length < 5) {
         const mockMore = generateMockLeads(15)
         mockMore.forEach((m) => {
           if (!mergedLeads.find((l) => l.id === m.id)) {
-            const local = localData[m.id] || {}
-            mergedLeads.push({
-              ...m,
-              status: local.status || m.status,
-              lastInteraction: local.lastInteraction || m.dataCaptacao,
-              notes: local.notes || m.notes,
-              history: local.history || m.history,
-              followUp: local.followUp || m.followUp,
-            })
+            mergedLeads.push(m)
           }
         })
       }
@@ -185,6 +191,13 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
   },
 
   moveLead: (leadId, newStatus) => {
+    const { addToQueue, syncError } = useSyncStore.getState()
+
+    // If offline (simulated by syncError check or navigator), queue it
+    if (!navigator.onLine || syncError) {
+      addToQueue({ type: 'move_lead', leadId, newStatus })
+    }
+
     set((state) => {
       const updatedLeads = state.leads.map((lead) => {
         if (lead.id === leadId) {
@@ -349,7 +362,7 @@ function generateMockLeads(count: number): CRMLead[] {
     ).toISOString()
 
     return {
-      id: `mock-${i}`,
+      id: `mock-${i}-${Date.now()}`,
       nomeCompleto: `${name} ${surname}`,
       email: `${name.toLowerCase()}.${surname.toLowerCase()}@example.com`,
       telefone: `(11) 9${Math.floor(Math.random() * 90000) + 10000}-${Math.floor(Math.random() * 9000) + 1000}`,

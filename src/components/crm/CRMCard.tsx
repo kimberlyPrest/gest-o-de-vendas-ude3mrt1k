@@ -31,20 +31,27 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
   return (
     <div
       draggable
-      onDragStart={(e) => onDragStart(e, lead.id)}
+      onDragStart={(e) => {
+        // Rotate -2deg during drag as per requirements
+        e.currentTarget.style.transform = 'rotate(-2deg)'
+        onDragStart(e, lead.id)
+      }}
+      onDragEnd={(e) => {
+        e.currentTarget.style.transform = 'none'
+      }}
       onClick={() => onClick?.(lead)}
-      className="cursor-grab active:cursor-grabbing touch-none select-none"
+      className="cursor-grab active:cursor-grabbing touch-none select-none pb-3"
     >
       <Card
         className={cn(
-          'mb-3 overflow-hidden border-l-4 transition-all hover:shadow-md cursor-pointer',
+          'overflow-hidden border-l-4 transition-all duration-200 hover:shadow-md hover:-translate-y-1 active:scale-95',
           borderColorClass,
         )}
       >
         <CardContent className="p-3">
           <div className="mb-2 flex items-start justify-between">
             <div className="flex-1 overflow-hidden">
-              <h4 className="truncate text-sm font-semibold text-gray-900">
+              <h4 className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100">
                 {lead.nomeCompleto}
               </h4>
             </div>
@@ -54,11 +61,11 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
           </div>
 
           <div className="space-y-1.5">
-            <div className="flex items-center gap-2 text-xs text-gray-500">
+            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
               <Mail className="h-3 w-3" />
               <span className="truncate">{lead.email}</span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-gray-500">
+            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
               <Phone className="h-3 w-3" />
               <span>{lead.telefone}</span>
             </div>
@@ -70,7 +77,7 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
             </Badge>
             <div className="flex items-center gap-1">
               <User className="h-3 w-3 text-gray-400" />
-              <span className="text-xs font-medium text-gray-600">
+              <span className="text-xs font-medium text-gray-600 dark:text-gray-300">
                 {lead.assentosAdicionais} assentos
               </span>
             </div>

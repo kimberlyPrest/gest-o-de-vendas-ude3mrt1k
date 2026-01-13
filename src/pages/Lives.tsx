@@ -1,7 +1,7 @@
 import { useEffect, useState, useMemo } from 'react'
-import { googleSheetsService, LiveData } from '@/services/googleSheetsService'
+import { LiveData } from '@/services/googleSheetsService'
 import { useToast } from '@/hooks/use-toast'
-import { useConnectionStore } from '@/stores/connectionStore'
+import { useLivesStore } from '@/stores/livesStore'
 import { Button } from '@/components/ui/button'
 import { RefreshCw, AlertCircle } from 'lucide-react'
 import { LiveFilters, FilterState } from '@/components/lives/LiveFilters'
@@ -9,6 +9,9 @@ import { LiveKPIs } from '@/components/lives/LiveKPIs'
 import { LiveChart } from '@/components/lives/LiveChart'
 import { LiveComparative } from '@/components/lives/LiveComparative'
 import { AddLiveModal } from '@/components/lives/AddLiveModal'
+import { InsightsCard } from '@/components/lives/InsightsCard'
+import { ExportButton } from '@/components/common/ExportButton'
+import { formatLiveForExport } from '@/utils/exportUtils'
 import {
   differenceInDays,
   subDays,
@@ -18,12 +21,7 @@ import {
 
 export default function Lives() {
   const { toast } = useToast()
-  const { status, checkConnection } = useConnectionStore()
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-
-  // Raw Data
-  const [allData, setAllData] = useState<LiveData[]>([])
+  const { allData, loading, error, fetchData } = useLivesStore()
 
   // Filter State
   const [activeFilters, setActiveFilters] = useState<FilterState>({
@@ -123,37 +121,15 @@ export default function Lives() {
     }
   }, [allData, activeFilters])
 
-  const loadData = async () => {
-    setLoading(true)
-    setError(false)
-    try {
-      const data = await googleSheetsService.fetchLivesData()
-      setAllData(data)
-      if (status === 'offline') checkConnection()
-    } catch (err) {
-      console.error(err)
-      setError(true)
-      toast({
-        title: 'Erro',
-        description: 'Erro ao carregar dados de Lives',
-        variant: 'destructive',
-        className: 'bg-[#EF4444] text-white border-none',
-      })
-    } finally {
-      setLoading(false)
-    }
-  }
-
   useEffect(() => {
-    loadData()
+    // Only fetch if empty to respect global state (avoid double fetch if already loaded)
+    if (allData.length === 0) fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   const handleApplyFilters = async (filters: FilterState) => {
-    setLoading(true)
-    await new Promise((r) => setTimeout(r, 600))
+    // Mock loading delay for UX
     setActiveFilters(filters)
-    setLoading(false)
     toast({
       title: 'Filtros aplicados',
       description: 'Dados atualizados com sucesso.',
@@ -178,20 +154,17 @@ export default function Lives() {
   }
 
   const handleLiveAdded = () => {
-    loadData()
+    fetchData()
   }
 
   if (error) {
     return (
-      <div className="flex h-screen flex-col items-center justify-center gap-4 bg-gray-50 p-4 text-center">
+      <div className="flex h-screen flex-col items-center justify-center gap-4 bg-gray-50 dark:bg-background p-4 text-center">
         <AlertCircle className="h-12 w-12 text-[#F59E0B]" />
-        <h2 className="text-xl font-semibold text-gray-900">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
           Erro ao carregar dados
         </h2>
-        <p className="text-gray-500">
-          Não foi possível conectar à planilha. Verifique sua conexão.
-        </p>
-        <Button onClick={loadData} className="bg-[#3B82F6] hover:bg-[#2563EB]">
+        <Button onClick={fetchData} className="bg-[#3B82F6] hover:bg-[#2563EB]">
           <RefreshCw className="mr-2 h-4 w-4" />
           Tentar Novamente
         </Button>
@@ -200,18 +173,29 @@ export default function Lives() {
   }
 
   return (
-    <div className="flex min-h-full flex-col bg-[#F9FAFB]">
-      <header className="sticky top-0 z-10 flex items-center justify-between border-b bg-white px-4 py-4 shadow-sm md:px-8 md:py-6">
-        <h1 className="text-xl font-bold text-[#1F2937] md:text-2xl">
-          📊 Dashboard de Lives
-        </h1>
-        <AddLiveModal
-          presenters={uniquePresenters}
-          onSuccess={handleLiveAdded}
-        />
+    <div className="flex min-h-full flex-col bg-[#F9FAFB] dark:bg-background transition-colors duration-300">
+      <header className="sticky top-0 z-10 flex items-center justify-between border-b bg-white dark:bg-card dark:border-border px-4 py-4 shadow-sm md:px-8 md:py-6 animate-fade-in-down">
+        <div className="flex items-center gap-4">
+          <h1 className="text-xl font-bold text-[#1F2937] dark:text-white md:text-2xl">
+            📊 Dashboard de Lives
+          </h1>
+        </div>
+        <div className="flex items-center gap-2">
+          <ExportButton
+            data={filteredData}
+            filename="lives_report"
+            formatData={formatLiveForExport}
+          />
+          <AddLiveModal
+            presenters={uniquePresenters}
+            onSuccess={handleLiveAdded}
+          />
+        </div>
       </header>
 
-      <main className="flex-1 space-y-6 p-4 md:p-8">
+      <main className="flex-1 space-y-6 p-4 md:p-8 animate-fade-in">
+        <InsightsCard />
+
         <LiveFilters
           presenters={uniquePresenters}
           onApply={handleApplyFilters}

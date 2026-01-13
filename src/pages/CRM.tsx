@@ -5,9 +5,11 @@ import { CRMMetrics } from '@/components/crm/CRMMetrics'
 import { CRMBoard } from '@/components/crm/CRMBoard'
 import { Loader2, AlertCircle, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
+import { ExportButton } from '@/components/common/ExportButton'
+import { formatLeadsForExport } from '@/utils/exportUtils'
 
 export default function CRM() {
-  const { fetchLeads, loading, error, leads } = useCRMStore()
+  const { fetchLeads, loading, error, leads, filteredLeads } = useCRMStore()
 
   useEffect(() => {
     fetchLeads()
@@ -15,12 +17,12 @@ export default function CRM() {
 
   if (error) {
     return (
-      <div className="flex h-full flex-col items-center justify-center gap-4 bg-gray-50">
+      <div className="flex h-full flex-col items-center justify-center gap-4 bg-gray-50 dark:bg-background">
         <AlertCircle className="h-12 w-12 text-yellow-500" />
-        <h2 className="text-xl font-semibold text-gray-900">
+        <h2 className="text-xl font-semibold text-gray-900 dark:text-gray-100">
           Erro ao carregar CRM
         </h2>
-        <Button onClick={() => fetchLeads()}>
+        <Button onClick={() => fetchLeads(true)}>
           <RefreshCw className="mr-2 h-4 w-4" />
           Tentar Novamente
         </Button>
@@ -29,22 +31,30 @@ export default function CRM() {
   }
 
   return (
-    <div className="flex h-full flex-col bg-[#F3F4F6]">
+    <div className="flex h-full flex-col bg-[#F3F4F6] dark:bg-background transition-colors">
       {/* Header */}
-      <header className="sticky top-0 z-10 flex items-center border-b bg-white px-6 py-4 shadow-sm">
-        <h1 className="text-xl font-bold text-[#1F2937] md:text-2xl">
-          🎯 CRM - Pipeline de Vendas
-        </h1>
-        {loading && (
-          <div className="ml-4 flex items-center text-sm text-gray-500">
-            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-            Sincronizando...
-          </div>
-        )}
+      <header className="sticky top-0 z-10 flex items-center justify-between border-b bg-white dark:bg-card px-6 py-4 shadow-sm animate-fade-in-down">
+        <div className="flex items-center gap-4">
+          <h1 className="text-xl font-bold text-[#1F2937] dark:text-white md:text-2xl">
+            🎯 CRM - Pipeline de Vendas
+          </h1>
+          {loading && (
+            <div className="flex items-center text-sm text-gray-500">
+              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+              Sincronizando...
+            </div>
+          )}
+        </div>
+        <ExportButton
+          data={filteredLeads}
+          filename="crm_leads"
+          formatData={formatLeadsForExport}
+          label="Exportar Leads"
+        />
       </header>
 
       {/* Content */}
-      <div className="flex flex-1 flex-col overflow-hidden">
+      <div className="flex flex-1 flex-col overflow-hidden animate-fade-in">
         <CRMMetrics />
         <CRMFilters />
 
