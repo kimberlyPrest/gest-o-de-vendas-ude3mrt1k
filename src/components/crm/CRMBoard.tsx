@@ -37,7 +37,9 @@ export function CRMBoard() {
           {/* Mobile Tabs */}
           <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4 pb-2">
             {COLUMNS.map((col) => {
-              const count = filteredLeads.filter((l) => l.status === col.id).length
+              const count = filteredLeads.filter(
+                (l) => l.status === col.id,
+              ).length
               const isActive = activeTab === col.id
               return (
                 <button
@@ -54,7 +56,9 @@ export function CRMBoard() {
                   <span
                     className="text-[11px] px-1.5 py-0.5 rounded-full"
                     style={{
-                      backgroundColor: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.05)',
+                      backgroundColor: isActive
+                        ? 'rgba(255,255,255,0.2)'
+                        : 'rgba(0,0,0,0.05)',
                     }}
                   >
                     {count}
@@ -66,7 +70,7 @@ export function CRMBoard() {
 
           {/* Mobile Content */}
           <div className="h-[calc(100vh-380px)]">
-            {COLUMNS.filter(col => col.id === activeTab).map((col) => (
+            {COLUMNS.filter((col) => col.id === activeTab).map((col) => (
               <CRMColumn
                 key={col.id}
                 id={col.id}

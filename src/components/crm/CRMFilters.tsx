@@ -42,7 +42,10 @@ export function CRMFilters() {
     <div className="apple-card p-5 mb-8 flex flex-wrap items-center gap-8">
       {/* Search */}
       <div className="flex flex-col gap-1.5 flex-1 min-w-[250px]">
-        <label className="text-[11px] font-semibold uppercase tracking-wider ml-1" style={{ color: '#86868B' }}>
+        <label
+          className="text-[11px] font-semibold uppercase tracking-wider ml-1"
+          style={{ color: '#86868B' }}
+        >
           Buscar Lead
         </label>
         <div className="relative">
@@ -61,7 +64,7 @@ export function CRMFilters() {
             style={{
               backgroundColor: 'rgba(0,0,0,0.03)',
               borderColor: '#E5E5E7',
-              color: '#1D1D1F'
+              color: '#1D1D1F',
             }}
           />
         </div>
@@ -69,7 +72,10 @@ export function CRMFilters() {
 
       {/* Origin Filter */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-[11px] font-semibold uppercase tracking-wider ml-1" style={{ color: '#86868B' }}>
+        <label
+          className="text-[11px] font-semibold uppercase tracking-wider ml-1"
+          style={{ color: '#86868B' }}
+        >
           Origem
         </label>
         <select
@@ -79,7 +85,7 @@ export function CRMFilters() {
           style={{
             backgroundColor: 'rgba(0,0,0,0.03)',
             borderColor: '#E5E5E7',
-            color: '#1D1D1F'
+            color: '#1D1D1F',
           }}
         >
           <option value="all">Todas Origens</option>
@@ -91,7 +97,10 @@ export function CRMFilters() {
 
       {/* Date Range Filter */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-[11px] font-semibold uppercase tracking-wider ml-1" style={{ color: '#86868B' }}>
+        <label
+          className="text-[11px] font-semibold uppercase tracking-wider ml-1"
+          style={{ color: '#86868B' }}
+        >
           Data de Captura
         </label>
         <Popover>
@@ -102,17 +111,20 @@ export function CRMFilters() {
               )}
               style={{
                 backgroundColor: 'rgba(0,0,0,0.03)',
-                borderColor: '#E5E5E7'
+                borderColor: '#E5E5E7',
               }}
             >
               <span
                 className="text-[13px] font-medium"
-                style={{ color: filters.dateRange?.from ? '#1D1D1F' : '#86868B' }}
+                style={{
+                  color: filters.dateRange?.from ? '#1D1D1F' : '#86868B',
+                }}
               >
                 {filters.dateRange?.from ? (
                   filters.dateRange.to ? (
                     <>
-                      {format(filters.dateRange.from, 'dd/MM/yyyy')} - {format(filters.dateRange.to, 'dd/MM/yyyy')}
+                      {format(filters.dateRange.from, 'dd/MM/yyyy')} -{' '}
+                      {format(filters.dateRange.to, 'dd/MM/yyyy')}
                     </>
                   ) : (
                     format(filters.dateRange.from, 'dd/MM/yyyy')
@@ -121,7 +133,10 @@ export function CRMFilters() {
                   'Selecione...'
                 )}
               </span>
-              <span className="material-symbols-outlined text-[18px] ml-auto" style={{ color: '#86868B' }}>
+              <span
+                className="material-symbols-outlined text-[18px] ml-auto"
+                style={{ color: '#86868B' }}
+              >
                 calendar_month
               </span>
             </button>
@@ -142,7 +157,10 @@ export function CRMFilters() {
 
       {/* Value Range Filter */}
       <div className="flex flex-col gap-1.5">
-        <label className="text-[11px] font-semibold uppercase tracking-wider ml-1" style={{ color: '#86868B' }}>
+        <label
+          className="text-[11px] font-semibold uppercase tracking-wider ml-1"
+          style={{ color: '#86868B' }}
+        >
           Valor Potencial
         </label>
         <Popover>
@@ -151,17 +169,28 @@ export function CRMFilters() {
               className="flex items-center gap-2 px-3 py-2 border rounded-lg cursor-pointer"
               style={{
                 backgroundColor: 'rgba(0,0,0,0.03)',
-                borderColor: (filters.valueRange.min || filters.valueRange.max) ? '#0071E3' : '#E5E5E7'
+                borderColor:
+                  filters.valueRange.min || filters.valueRange.max
+                    ? '#0071E3'
+                    : '#E5E5E7',
               }}
             >
-              <span className="material-symbols-outlined text-[18px]" style={{ color: '#86868B' }}>
+              <span
+                className="material-symbols-outlined text-[18px]"
+                style={{ color: '#86868B' }}
+              >
                 filter_list
               </span>
               <span
                 className="text-[13px] font-medium"
-                style={{ color: (filters.valueRange.min || filters.valueRange.max) ? '#0071E3' : '#1D1D1F' }}
+                style={{
+                  color:
+                    filters.valueRange.min || filters.valueRange.max
+                      ? '#0071E3'
+                      : '#1D1D1F',
+                }}
               >
-                {(filters.valueRange.min || filters.valueRange.max)
+                {filters.valueRange.min || filters.valueRange.max
                   ? `R$ ${filters.valueRange.min || '0'} - R$ ${filters.valueRange.max || '∞'}`
                   : 'Filtrar valor'}
               </span>
@@ -170,7 +199,10 @@ export function CRMFilters() {
           <PopoverContent className="w-80 p-4" style={{ borderRadius: '16px' }}>
             <div className="grid gap-4">
               <div className="space-y-2">
-                <h4 className="font-medium leading-none" style={{ color: '#1D1D1F' }}>
+                <h4
+                  className="font-medium leading-none"
+                  style={{ color: '#1D1D1F' }}
+                >
                   Valor Potencial
                 </h4>
                 <p className="text-sm" style={{ color: '#86868B' }}>
@@ -179,7 +211,10 @@ export function CRMFilters() {
               </div>
               <div className="grid grid-cols-2 gap-3">
                 <div className="grid gap-2">
-                  <label className="text-xs font-medium" style={{ color: '#86868B' }}>
+                  <label
+                    className="text-xs font-medium"
+                    style={{ color: '#86868B' }}
+                  >
                     Mínimo
                   </label>
                   <Input
@@ -196,7 +231,10 @@ export function CRMFilters() {
                   />
                 </div>
                 <div className="grid gap-2">
-                  <label className="text-xs font-medium" style={{ color: '#86868B' }}>
+                  <label
+                    className="text-xs font-medium"
+                    style={{ color: '#86868B' }}
+                  >
                     Máximo
                   </label>
                   <Input
@@ -220,13 +258,19 @@ export function CRMFilters() {
 
       {/* Clear Filters & Count */}
       <div className="flex flex-col gap-1.5 ml-auto">
-        <label className="text-[11px] font-semibold uppercase tracking-wider ml-1" style={{ color: '#86868B' }}>
+        <label
+          className="text-[11px] font-semibold uppercase tracking-wider ml-1"
+          style={{ color: '#86868B' }}
+        >
           Resultados
         </label>
         <div className="flex items-center gap-3">
           <div
             className="px-4 py-2 rounded-xl text-[13px] font-semibold"
-            style={{ backgroundColor: 'rgba(0, 113, 227, 0.08)', color: '#0071E3' }}
+            style={{
+              backgroundColor: 'rgba(0, 113, 227, 0.08)',
+              color: '#0071E3',
+            }}
           >
             {filteredLeads.length} Leads
           </div>
@@ -237,7 +281,9 @@ export function CRMFilters() {
               style={{ color: '#86868B' }}
             >
               Limpar
-              <span className="material-symbols-outlined text-[16px]">close</span>
+              <span className="material-symbols-outlined text-[16px]">
+                close
+              </span>
             </button>
           )}
         </div>

@@ -77,7 +77,8 @@ export function CRMMetrics() {
       icon: 'trending_up',
       iconBg: '#EFF6FF',
       iconColor: '#0071E3',
-      trending: conversionRate >= 5 ? 'up' : conversionRate >= 3 ? 'neutral' : 'down',
+      trending:
+        conversionRate >= 5 ? 'up' : conversionRate >= 3 ? 'neutral' : 'down',
     },
     {
       title: 'Tempo Médio',
@@ -124,36 +125,58 @@ export function CRMMetrics() {
           <div className="flex justify-between items-start mb-4">
             <div
               className="size-10 rounded-xl flex items-center justify-center"
-              style={{ backgroundColor: metric.iconBg, color: metric.iconColor }}
+              style={{
+                backgroundColor: metric.iconBg,
+                color: metric.iconColor,
+              }}
             >
               <span className="material-symbols-outlined">{metric.icon}</span>
             </div>
             {metric.trending === 'up' && (
-              <span className="text-[12px] font-bold flex items-center" style={{ color: '#34C759' }}>
-                <span className="material-symbols-outlined text-[14px]">arrow_upward</span>
+              <span
+                className="text-[12px] font-bold flex items-center"
+                style={{ color: '#34C759' }}
+              >
+                <span className="material-symbols-outlined text-[14px]">
+                  arrow_upward
+                </span>
               </span>
             )}
             {metric.trending === 'down' && (
-              <span className="text-[12px] font-bold flex items-center" style={{ color: '#FF3B30' }}>
-                <span className="material-symbols-outlined text-[14px]">arrow_downward</span>
+              <span
+                className="text-[12px] font-bold flex items-center"
+                style={{ color: '#FF3B30' }}
+              >
+                <span className="material-symbols-outlined text-[14px]">
+                  arrow_downward
+                </span>
               </span>
             )}
           </div>
-          <p className="text-[12px] font-semibold uppercase tracking-wider" style={{ color: '#86868B' }}>
+          <p
+            className="text-[12px] font-semibold uppercase tracking-wider"
+            style={{ color: '#86868B' }}
+          >
             {metric.title}
           </p>
           <h3
             className="text-[28px] font-bold tracking-tight mt-1"
             style={{
-              color: metric.title === 'Valor Convertido' ? '#34C759' :
-                metric.title === 'Taxa de Conversão' && conversionRate < 3 ? '#FF3B30' :
-                  metric.title === 'Taxa de Conversão' && conversionRate < 5 ? '#FF9500' :
-                    '#1D1D1F'
+              color:
+                metric.title === 'Valor Convertido'
+                  ? '#34C759'
+                  : metric.title === 'Taxa de Conversão' && conversionRate < 3
+                    ? '#FF3B30'
+                    : metric.title === 'Taxa de Conversão' && conversionRate < 5
+                      ? '#FF9500'
+                      : '#1D1D1F',
             }}
           >
             {metric.value}
           </h3>
-          <p className="text-[12px] mt-1" style={{ color: '#86868B' }}>{metric.subtitle}</p>
+          <p className="text-[12px] mt-1" style={{ color: '#86868B' }}>
+            {metric.subtitle}
+          </p>
         </div>
       ))}
     </div>

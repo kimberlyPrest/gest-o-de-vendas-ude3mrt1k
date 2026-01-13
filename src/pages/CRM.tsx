@@ -40,12 +40,20 @@ export default function CRM() {
     return (
       <>
         <style>{appleStyles}</style>
-        <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+        <link
+          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+          rel="stylesheet"
+        />
         <div
           className="flex h-full flex-col items-center justify-center gap-4"
           style={{ backgroundColor: '#F5F5F7' }}
         >
-          <span className="material-symbols-outlined text-[48px]" style={{ color: '#FF9500' }}>error</span>
+          <span
+            className="material-symbols-outlined text-[48px]"
+            style={{ color: '#FF9500' }}
+          >
+            error
+          </span>
           <h2 className="text-xl font-semibold" style={{ color: '#1D1D1F' }}>
             Erro ao carregar CRM
           </h2>
@@ -53,7 +61,9 @@ export default function CRM() {
             onClick={() => fetchLeads(true)}
             className="apple-btn-primary hover:opacity-90 text-white px-5 py-2.5 text-[14px] font-medium flex items-center gap-2 transition-all"
           >
-            <span className="material-symbols-outlined text-[20px]">refresh</span>
+            <span className="material-symbols-outlined text-[20px]">
+              refresh
+            </span>
             Tentar Novamente
           </button>
         </div>
@@ -64,27 +74,45 @@ export default function CRM() {
   return (
     <>
       <style>{appleStyles}</style>
-      <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
-      <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet"
+      />
 
       <div
         className="flex h-full flex-col transition-colors"
         style={{
           backgroundColor: '#F5F5F7',
-          fontFamily: '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+          fontFamily:
+            '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
         }}
       >
         {/* Header */}
         <header className="flex flex-wrap justify-between items-end gap-4 px-10 py-8">
           <div>
-            <h2 className="text-[32px] font-semibold tracking-tight" style={{ color: '#1D1D1F' }}>
+            <h2
+              className="text-[32px] font-semibold tracking-tight"
+              style={{ color: '#1D1D1F' }}
+            >
               CRM - Pipeline de Vendas
             </h2>
-            <p className="text-[15px] mt-1 flex items-center gap-2" style={{ color: '#86868B' }}>
+            <p
+              className="text-[15px] mt-1 flex items-center gap-2"
+              style={{ color: '#86868B' }}
+            >
               Gerencie seus leads e acompanhe o funil de vendas.
               {loading && (
-                <span className="flex items-center text-[13px]" style={{ color: '#0071E3' }}>
-                  <span className="material-symbols-outlined text-[16px] animate-spin mr-1">progress_activity</span>
+                <span
+                  className="flex items-center text-[13px]"
+                  style={{ color: '#0071E3' }}
+                >
+                  <span className="material-symbols-outlined text-[16px] animate-spin mr-1">
+                    progress_activity
+                  </span>
                   Sincronizando...
                 </span>
               )}
@@ -97,7 +125,9 @@ export default function CRM() {
             label="Exportar Leads"
             customButton={
               <button className="apple-btn-primary hover:opacity-90 text-white px-5 py-2.5 text-[14px] font-medium flex items-center gap-2 transition-all">
-                <span className="material-symbols-outlined text-[20px]">download</span>
+                <span className="material-symbols-outlined text-[20px]">
+                  download
+                </span>
                 Exportar Leads
               </button>
             }
@@ -111,7 +141,12 @@ export default function CRM() {
 
           {loading && leads.length === 0 ? (
             <div className="flex flex-1 items-center justify-center">
-              <span className="material-symbols-outlined text-[48px] animate-spin" style={{ color: '#0071E3' }}>progress_activity</span>
+              <span
+                className="material-symbols-outlined text-[48px] animate-spin"
+                style={{ color: '#0071E3' }}
+              >
+                progress_activity
+              </span>
             </div>
           ) : (
             <CRMBoard />

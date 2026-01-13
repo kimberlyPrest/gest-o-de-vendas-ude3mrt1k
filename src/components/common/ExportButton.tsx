@@ -45,11 +45,21 @@ export function ExportButton({
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end" style={{ borderRadius: '12px' }}>
         <DropdownMenuItem onClick={handleExportCSV} className="cursor-pointer">
-          <span className="material-symbols-outlined text-[16px] mr-2" style={{ color: '#34C759' }}>table_chart</span>
+          <span
+            className="material-symbols-outlined text-[16px] mr-2"
+            style={{ color: '#34C759' }}
+          >
+            table_chart
+          </span>
           Exportar CSV
         </DropdownMenuItem>
         <DropdownMenuItem onClick={handleExportPDF} className="cursor-pointer">
-          <span className="material-symbols-outlined text-[16px] mr-2" style={{ color: '#0071E3' }}>print</span>
+          <span
+            className="material-symbols-outlined text-[16px] mr-2"
+            style={{ color: '#0071E3' }}
+          >
+            print
+          </span>
           Imprimir / PDF
         </DropdownMenuItem>
       </DropdownMenuContent>

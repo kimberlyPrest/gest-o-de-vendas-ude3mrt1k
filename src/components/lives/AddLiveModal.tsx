@@ -64,7 +64,11 @@ interface AddLiveModalProps {
   customTrigger?: React.ReactNode
 }
 
-export function AddLiveModal({ presenters, onSuccess, customTrigger }: AddLiveModalProps) {
+export function AddLiveModal({
+  presenters,
+  onSuccess,
+  customTrigger,
+}: AddLiveModalProps) {
   const { toast } = useToast()
   const [open, setOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)

@@ -101,22 +101,22 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
               >
                 phone
               </span>
-              <span
-                className="text-[12px]"
-                style={{ color: '#86868B' }}
-              >
+              <span className="text-[12px]" style={{ color: '#86868B' }}>
                 {lead.telefone}
               </span>
             </div>
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between pt-3" style={{ borderTop: '1px solid #F5F5F7' }}>
+          <div
+            className="flex items-center justify-between pt-3"
+            style={{ borderTop: '1px solid #F5F5F7' }}
+          >
             <div
               className="px-2 py-1 rounded-md text-[10px] font-medium"
               style={{
                 backgroundColor: 'rgba(0, 0, 0, 0.03)',
-                color: '#86868B'
+                color: '#86868B',
               }}
             >
               {lead.origem}
@@ -142,9 +142,11 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
             className="mt-2 text-right text-[10px]"
             style={{ color: borderColor }}
           >
-            {hoursSinceInteraction < 1 ? 'Agora mesmo' :
-              hoursSinceInteraction < 24 ? `${hoursSinceInteraction}h sem interação` :
-                `${daysSinceInteraction}d sem interação`}
+            {hoursSinceInteraction < 1
+              ? 'Agora mesmo'
+              : hoursSinceInteraction < 24
+                ? `${hoursSinceInteraction}h sem interação`
+                : `${daysSinceInteraction}d sem interação`}
           </div>
         </div>
       </div>

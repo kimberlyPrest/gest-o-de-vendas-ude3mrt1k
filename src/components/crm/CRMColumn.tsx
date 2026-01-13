@@ -56,7 +56,9 @@ export function CRMColumn({
         isOver && 'ring-2 ring-blue-400 ring-offset-2',
       )}
       style={{
-        backgroundColor: isOver ? 'rgba(0, 113, 227, 0.05)' : 'rgba(255, 255, 255, 0.6)',
+        backgroundColor: isOver
+          ? 'rgba(0, 113, 227, 0.05)'
+          : 'rgba(255, 255, 255, 0.6)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
         border: isOver ? '2px dashed #0071E3' : '1px solid #E5E5E7',
@@ -81,7 +83,7 @@ export function CRMColumn({
           className="px-2.5 py-1 rounded-full text-[12px] font-semibold"
           style={{
             backgroundColor: 'rgba(0, 0, 0, 0.05)',
-            color: '#1D1D1F'
+            color: '#1D1D1F',
           }}
         >
           {leads.length}
@@ -95,7 +97,7 @@ export function CRMColumn({
             className="h-full flex flex-col items-center justify-center rounded-xl"
             style={{
               backgroundColor: 'rgba(0, 0, 0, 0.02)',
-              border: '2px dashed #E5E5E7'
+              border: '2px dashed #E5E5E7',
             }}
           >
             <span
