@@ -44,7 +44,7 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
         title: match ? `Movido para ${match[1]}` : 'Alteração de Status',
         description: desc,
         icon: <ArrowRightLeft className="h-4 w-4" />,
-        colorClass: 'bg-[#8E8E93]/10 text-[#8E8E93]', // System Gray as requested
+        colorClass: 'bg-[#8E8E93]/10 text-[#8E8E93]', // System Gray
       }
     }
 
@@ -72,7 +72,7 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
         ) : (
           <Users className="h-4 w-4" />
         ),
-        colorClass: 'bg-[#34C759]/10 text-[#34C759]', // Green as requested
+        colorClass: 'bg-[#34C759]/10 text-[#34C759]', // Green
       }
     }
 
@@ -83,7 +83,7 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
         title: 'Follow-up Agendado',
         description: dateMatch ? dateMatch[1] : desc,
         icon: <CalendarClock className="h-4 w-4" />,
-        colorClass: 'bg-[#007AFF]/10 text-[#007AFF]', // Blue as requested
+        colorClass: 'bg-[#007AFF]/10 text-[#007AFF]', // Blue
       }
     }
 
@@ -93,7 +93,7 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
         title: 'Nota Adicionada',
         description: 'Nota interna registrada',
         icon: <StickyNote className="h-4 w-4" />,
-        colorClass: 'bg-[#FF9500]/10 text-[#FF9500]', // Orange/Yellow for notes
+        colorClass: 'bg-[#FF9500]/10 text-[#FF9500]', // Orange
       }
     }
 
@@ -109,8 +109,8 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
   }
 
   return (
-    <div className="space-y-3">
-      <h3 className="pl-4 text-[13px] font-medium uppercase tracking-wider text-[#8E8E93]">
+    <div className="space-y-3 animate-fade-in-up">
+      <h3 className="pl-4 text-[13px] font-semibold uppercase tracking-wider text-[#8E8E93]">
         Histórico de Atividade
       </h3>
 
@@ -128,7 +128,10 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
               return (
                 <div
                   key={item.id}
-                  className="group relative flex gap-4 p-4 transition-colors hover:bg-gray-50/50"
+                  className={cn(
+                    'group relative flex gap-4 p-4 transition-colors hover:bg-gray-50/50',
+                    !isLast && 'pb-8',
+                  )}
                 >
                   {/* Connector Line */}
                   {!isLast && <div className="timeline-connector" />}
@@ -146,20 +149,20 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
                   {/* Content */}
                   <div className="flex min-w-0 flex-1 flex-col gap-1 pt-0.5">
                     <div className="flex items-center justify-between gap-2">
-                      <span className="text-[14px] font-bold text-gray-900 truncate">
+                      <span className="text-[15px] font-semibold text-gray-900 truncate">
                         {details.title}
                       </span>
-                      <span className="shrink-0 text-[11px] text-[#8E8E93]">
+                      <span className="shrink-0 text-[12px] text-[#8E8E93]">
                         {formatTimestamp(item.date)}
                       </span>
                     </div>
 
-                    <p className="text-[13px] leading-relaxed text-[#8E8E93] line-clamp-2">
+                    <p className="text-[14px] leading-relaxed text-[#8E8E93] line-clamp-2">
                       {details.description}
                     </p>
 
                     <div className="pt-1">
-                      <span className="text-[11px] font-medium text-[#007AFF]">
+                      <span className="text-[12px] font-medium text-[#007AFF]">
                         {item.author === 'Sistema'
                           ? 'Sistema (Auto)'
                           : `@${item.author.toLowerCase().replace(' ', '.')}`}

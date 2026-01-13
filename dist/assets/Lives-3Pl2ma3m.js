@@ -1,5 +1,5 @@
-import { S as DollarSign, T as Activity, a as TabsContent, b as addMonths, c as Card, d as CardTitle, f as Calendar, g as subDays, h as PopoverTrigger, i as Tabs, l as CardContent, m as PopoverContent, o as TabsList, p as Popover, r as formatLiveForExport, s as TabsTrigger, t as ExportButton, u as CardHeader, v as differenceInDays, w as ArrowUp, x as Users } from "./ExportButton-od0MJEwa.js";
-import { C as DialogTitle, Ct as Slot, D as format, Et as TooltipTrigger, Gt as Check, Ht as ChevronUp, Jt as createLucideIcon, Kt as Calendar$1, Lt as Search, Pt as cn, R as startOfDay, Rt as RefreshCw, S as DialogHeader, T as ptBR, Tt as TooltipContent, U as toDate, Vt as CircleAlert, Wt as ChevronDown, Xt as clsx_default, _ as Dialog, a as SelectValue, b as DialogDescription, bt as Button, d as CommandEmpty, dn as require_react, f as CommandGroup, fn as __commonJSMin, g as CommandSeparator, h as CommandList, i as SelectTrigger, m as CommandItem, mn as __toESM, n as SelectContent, o as Label, p as CommandInput, pn as __export, r as SelectItem, rt as Skeleton, s as useLivesStore, sn as require_jsx_runtime, t as Select, tt as googleSheetsService, u as Command, un as useToast, w as DialogTrigger, wt as Tooltip$1, x as DialogFooter, y as DialogContent, yt as Input, zt as LoaderCircle } from "./index-Vt2pe5IC.js";
+import { C as ArrowUp, a as TabsContent, b as Users, c as Card, d as CardTitle, f as Calendar, g as subDays, h as PopoverTrigger, i as Tabs, l as CardContent, m as PopoverContent, o as TabsList, p as Popover, r as formatLiveForExport, s as TabsTrigger, t as ExportButton, u as CardHeader, w as Activity, x as DollarSign, y as addMonths } from "./ExportButton-Bvw2g7o7.js";
+import { Bt as RefreshCw, C as DialogTitle, D as format, Dt as TooltipTrigger, Et as TooltipContent, Ft as cn, Jt as Calendar$1, Kt as ChevronDown, P as differenceInDays, Qt as clsx_default, Rt as TrendingUp, S as DialogHeader, T as ptBR, Tt as Tooltip$1, Ut as CircleAlert, Vt as LoaderCircle, W as toDate, Wt as ChevronUp, Xt as createLucideIcon, _ as Dialog, a as SelectValue, b as DialogDescription, bt as Input, d as CommandEmpty, f as CommandGroup, fn as useToast, g as CommandSeparator, gn as __toESM, h as CommandList, hn as __export, i as SelectTrigger, it as Skeleton, ln as require_jsx_runtime, m as CommandItem, mn as __commonJSMin, n as SelectContent, nt as googleSheetsService, o as Label, p as CommandInput, pn as require_react, qt as Check, r as SelectItem, s as useLivesStore, t as Select, u as Command, w as DialogTrigger, wt as Slot, x as DialogFooter, xt as Button, y as DialogContent, z as startOfDay, zt as Search } from "./index-Du8vqS2w.js";
 var ArrowDown = createLucideIcon("arrow-down", [["path", {
 	d: "M12 5v14",
 	key: "s699le"
@@ -131,13 +131,6 @@ var SearchX = createLucideIcon("search-x", [
 		key: "1qie3q"
 	}]
 ]);
-var TrendingUp = createLucideIcon("trending-up", [["path", {
-	d: "M16 7h6v6",
-	key: "box55l"
-}], ["path", {
-	d: "m22 7-8.5 8.5-5-5L2 17",
-	key: "1t1m79"
-}]]);
 var Trophy = createLucideIcon("trophy", [
 	["path", {
 		d: "M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978",
@@ -29489,4 +29482,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-BqUy2d4i.js.map
+//# sourceMappingURL=Lives-3Pl2ma3m.js.map

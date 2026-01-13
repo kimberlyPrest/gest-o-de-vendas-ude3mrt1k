@@ -1,5 +1,5 @@
-import { C as ChevronLeft, S as DollarSign, T as Activity, _ as isBefore, a as TabsContent, c as Card, d as CardTitle, f as Calendar$1, g as subDays, h as PopoverTrigger, i as Tabs, l as CardContent, m as PopoverContent, n as formatLeadsForExport, o as TabsList, p as Popover, s as TabsTrigger, t as ExportButton, u as CardHeader, v as differenceInDays, w as ArrowUp, x as Users, y as isSameDay } from "./ExportButton-od0MJEwa.js";
-import { Bt as Clock, C as DialogTitle, D as format, E as formatDistanceToNow, Ft as X, G as millisecondsInHour, I as constructNow, It as User, Jt as createLucideIcon, K as millisecondsInMinute, Kt as Calendar, Lt as Search, N as getRoundingMethod, Nt as toast, Pt as cn, Rt as RefreshCw, S as DialogHeader, St as useIsMobile, T as ptBR, U as toDate, Vt as CircleAlert, W as constructFrom, Yt as cva, _ as Dialog, a as SelectValue, an as createSlottable, at as Content, bt as Button, c as COLUMNS, cn as useComposedRefs, ct as Portal, dn as require_react, dt as Trigger, en as useLayoutEffect2, ft as WarningProvider, i as SelectTrigger, it as Close, l as useCRMStore, ln as composeEventHandlers, lt as Root$1, mn as __toESM, n as SelectContent, nn as useCallbackRef, nt as require_shim, o as Label, on as createContextScope, ot as Description, pt as createDialogScope, qt as Bell, r as SelectItem, rt as Skeleton, sn as require_jsx_runtime, st as Overlay, t as Select, ut as Title, v as DialogClose, vt as Primitive, x as DialogFooter, xt as buttonVariants, y as DialogContent, yt as Input, z as normalizeDates, zt as LoaderCircle } from "./index-Vt2pe5IC.js";
+import { C as ArrowUp, S as ChevronLeft, _ as isBefore, a as TabsContent, b as Users, c as Card, d as CardTitle, f as Calendar$1, g as subDays, h as PopoverTrigger, i as Tabs, l as CardContent, m as PopoverContent, n as formatLeadsForExport, o as TabsList, p as Popover, s as TabsTrigger, t as ExportButton, u as CardHeader, v as isSameDay, w as Activity, x as DollarSign } from "./ExportButton-Bvw2g7o7.js";
+import { B as normalizeDates, Bt as RefreshCw, C as DialogTitle, Ct as useIsMobile, D as format, E as formatDistanceToNow, Ft as cn, G as constructFrom, Ht as Clock, It as X, Jt as Calendar, K as millisecondsInHour, L as constructNow, Lt as User, N as getRoundingMethod, P as differenceInDays, Pt as toast, S as DialogHeader, St as buttonVariants, T as ptBR, Ut as CircleAlert, Vt as LoaderCircle, W as toDate, Xt as createLucideIcon, Yt as Bell, Zt as cva, _ as Dialog, a as SelectValue, at as Close, bt as Input, c as COLUMNS, cn as createContextScope, ct as Overlay, dn as composeEventHandlers, dt as Title, ft as Trigger, gn as __toESM, i as SelectTrigger, in as useCallbackRef, it as Skeleton, l as useCRMStore, ln as require_jsx_runtime, lt as Portal, mt as createDialogScope, n as SelectContent, nn as useLayoutEffect2, o as Label, ot as Content, pn as require_react, pt as WarningProvider, q as millisecondsInMinute, r as SelectItem, rt as require_shim, sn as createSlottable, st as Description, t as Select, un as useComposedRefs, ut as Root$1, v as DialogClose, x as DialogFooter, xt as Button, y as DialogContent, yt as Primitive, zt as Search } from "./index-Du8vqS2w.js";
 var ArrowRightLeft = createLucideIcon("arrow-right-left", [
 	["path", {
 		d: "m16 3 4 4-4 4",
@@ -650,9 +650,9 @@ const CRMCard = (0, import_react.memo)(({ lead, onDragStart, onClick }) => {
 			e.currentTarget.style.transform = "none";
 		},
 		onClick: () => onClick?.(lead),
-		className: "cursor-grab active:cursor-grabbing touch-none select-none pb-3",
+		className: "cursor-grab active:cursor-grabbing touch-none select-none pb-3 transform transition-transform duration-200",
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-			className: cn("overflow-hidden border-l-4 transition-all duration-200 hover:shadow-md hover:-translate-y-1 active:scale-95", borderColorClass),
+			className: cn("overflow-hidden border-l-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 active:scale-95 bg-white dark:bg-card", borderColorClass),
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
 				className: "p-3",
 				children: [
@@ -683,7 +683,7 @@ const CRMCard = (0, import_react.memo)(({ lead, onDragStart, onClick }) => {
 						className: "mt-3 flex items-center justify-between",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
 							variant: "outline",
-							className: "text-[10px] font-normal",
+							className: "text-[10px] font-normal bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700",
 							children: lead.origem
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center gap-1",
@@ -1022,14 +1022,14 @@ function LeadInfo({ lead }) {
 	const location = "São Paulo, BR";
 	const probability = 92;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "flex flex-col gap-8",
+		className: "flex flex-col gap-8 animate-fade-in",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex flex-col items-center space-y-4 pt-2 text-center",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "relative",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Avatar, {
-						className: "h-24 w-24 border-4 border-white shadow-sm",
+						className: "h-24 w-24 border-4 border-white shadow-lg",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarImage, { src: `https://img.usecurling.com/ppl/medium?seed=${lead.id}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarFallback, {
 							className: "bg-gray-200 text-2xl text-gray-500",
 							children: initials
@@ -1041,10 +1041,10 @@ function LeadInfo({ lead }) {
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex items-center justify-center gap-2",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-							className: "text-2xl font-bold text-gray-900",
+							className: "text-2xl font-bold text-gray-900 tracking-tight",
 							children: lead.nomeCompleto
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
-							className: "rounded-full border-0 bg-orange-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-orange-600 hover:bg-orange-100",
+							className: "rounded-full border-0 bg-orange-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-orange-600 hover:bg-orange-200",
 							children: [
 								"HOT LEAD (",
 								probability,
@@ -1066,24 +1066,24 @@ function LeadInfo({ lead }) {
 					})]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex w-full max-w-xs items-center justify-center gap-6 pt-2",
+					className: "flex w-full max-w-xs items-center justify-center gap-8 pt-4",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
 							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-6 w-6" }),
 							label: "Ligar",
-							color: "bg-[#007AFF]",
+							color: "bg-[#007AFF] shadow-blue-200",
 							onClick: () => window.open(`tel:${lead.telefone}`)
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
 							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-6 w-6" }),
 							label: "E-mail",
-							color: "bg-[#5856D6]",
+							color: "bg-[#5856D6] shadow-indigo-200",
 							onClick: () => window.open(`mailto:${lead.email}`)
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
 							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageCircle, { className: "h-6 w-6" }),
 							label: "WhatsApp",
-							color: "bg-[#34C759]",
+							color: "bg-[#34C759] shadow-green-200",
 							onClick: () => window.open(`https://wa.me/55${lead.telefone.replace(/\D/g, "")}`)
 						})
 					]
@@ -1094,23 +1094,23 @@ function LeadInfo({ lead }) {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "space-y-2",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-					className: "pl-4 text-xs font-semibold uppercase tracking-wider text-gray-400",
+					className: "pl-4 text-[13px] font-semibold uppercase tracking-wider text-[#8E8E93]",
 					children: "Informações Pessoais"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "overflow-hidden rounded-xl border border-gray-200/60 bg-white shadow-sm",
+					className: "ios-group-container",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-5 w-5 text-gray-400" }),
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-5 w-5 text-[#007AFF]" }),
 							label: "E-mail",
 							value: lead.email
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-5 w-5 text-gray-400" }),
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-5 w-5 text-[#34C759]" }),
 							label: "Telefone",
 							value: lead.telefone
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Activity, { className: "h-5 w-5 text-gray-400" }),
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Activity, { className: "h-5 w-5 text-[#FF9500]" }),
 							label: "Status",
 							value: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "flex items-center gap-2",
@@ -1118,13 +1118,13 @@ function LeadInfo({ lead }) {
 									className: "h-2 w-2 rounded-full",
 									style: { backgroundColor: statusColor }
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									style: { color: "#007AFF" },
+									className: "font-medium text-[#007AFF]",
 									children: lead.status
 								})]
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Globe, { className: "h-5 w-5 text-gray-400" }),
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Globe, { className: "h-5 w-5 text-[#5856D6]" }),
 							label: "Origem",
 							value: lead.origem,
 							isLast: true
@@ -1134,22 +1134,22 @@ function LeadInfo({ lead }) {
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "space-y-2",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-					className: "pl-4 text-xs font-semibold uppercase tracking-wider text-gray-400",
+					className: "pl-4 text-[13px] font-semibold uppercase tracking-wider text-[#8E8E93]",
 					children: "Dados da Venda"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "overflow-hidden rounded-xl border border-gray-200/60 bg-white shadow-sm",
+					className: "ios-group-container",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "h-5 w-5 text-gray-400" }),
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "h-5 w-5 text-gray-500" }),
 							label: "Assentos Adicionais",
 							value: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
 								variant: "secondary",
-								className: "bg-gray-100 font-normal text-gray-700",
+								className: "bg-gray-100 font-normal text-gray-700 hover:bg-gray-200",
 								children: [lead.assentosAdicionais, " Unidades"]
 							})
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, { className: "h-5 w-5 text-gray-400" }),
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, { className: "h-5 w-5 text-gray-500" }),
 							label: "Valor Estimado",
 							value: new Intl.NumberFormat("pt-BR", {
 								style: "currency",
@@ -1157,7 +1157,7 @@ function LeadInfo({ lead }) {
 							}).format(potentialValue)
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Hash, { className: "h-5 w-5 text-gray-400" }),
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Hash, { className: "h-5 w-5 text-gray-500" }),
 							label: "Probabilidade",
 							value: `${probability}%`,
 							isLast: true
@@ -1173,25 +1173,25 @@ function ActionButton({ icon, label, color, onClick }) {
 		className: "group flex cursor-pointer flex-col items-center gap-2",
 		onClick,
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: cn("flex h-12 w-12 items-center justify-center rounded-full text-white shadow-md transition-transform active:scale-95", color),
+			className: cn("flex h-12 w-12 items-center justify-center rounded-full text-white shadow-lg transition-all duration-200 group-hover:scale-105 active:scale-95", color),
 			children: icon
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-			className: "text-[10px] font-medium uppercase tracking-tight text-blue-600 group-hover:opacity-80",
+			className: "text-[11px] font-medium text-[#007AFF] group-hover:opacity-80",
 			children: label
 		})]
 	});
 }
 function InfoRow({ icon, label, value, isLast }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: cn("flex items-center justify-between bg-white p-4", !isLast && "border-b border-gray-100"),
+		className: cn("flex items-center justify-between bg-white px-4 py-3.5", !isLast && "border-b border-gray-100 ml-4 pl-0"),
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex items-center gap-3",
 			children: [icon, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				className: "text-sm font-medium text-gray-900",
+				className: "text-[15px] text-gray-900",
 				children: label
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "text-sm font-normal text-gray-500",
+			className: "text-[15px] text-gray-500",
 			children: value
 		})]
 	});
@@ -1252,9 +1252,9 @@ function LeadTimeline({ lead }) {
 		};
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "space-y-3",
+		className: "space-y-3 animate-fade-in-up",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-			className: "pl-4 text-[13px] font-medium uppercase tracking-wider text-[#8E8E93]",
+			className: "pl-4 text-[13px] font-semibold uppercase tracking-wider text-[#8E8E93]",
 			children: "Histórico de Atividade"
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 			className: "ios-group-container",
@@ -1265,10 +1265,11 @@ function LeadTimeline({ lead }) {
 				className: "flex flex-col",
 				children: history.map((item, index) => {
 					const details = getEventDetails(item);
+					const isLast = index === history.length - 1;
 					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "group relative flex gap-4 p-4 transition-colors hover:bg-gray-50/50",
+						className: cn("group relative flex gap-4 p-4 transition-colors hover:bg-gray-50/50", !isLast && "pb-8"),
 						children: [
-							!(index === history.length - 1) && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "timeline-connector" }),
+							!isLast && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "timeline-connector" }),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 								className: cn("relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-transform group-hover:scale-105", details.colorClass),
 								children: details.icon
@@ -1279,21 +1280,21 @@ function LeadTimeline({ lead }) {
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 										className: "flex items-center justify-between gap-2",
 										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "text-[14px] font-bold text-gray-900 truncate",
+											className: "text-[15px] font-semibold text-gray-900 truncate",
 											children: details.title
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "shrink-0 text-[11px] text-[#8E8E93]",
+											className: "shrink-0 text-[12px] text-[#8E8E93]",
 											children: formatTimestamp(item.date)
 										})]
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "text-[13px] leading-relaxed text-[#8E8E93] line-clamp-2",
+										className: "text-[14px] leading-relaxed text-[#8E8E93] line-clamp-2",
 										children: details.description
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "pt-1",
 										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-											className: "text-[11px] font-medium text-[#007AFF]",
+											className: "text-[12px] font-medium text-[#007AFF]",
 											children: item.author === "Sistema" ? "Sistema (Auto)" : `@${item.author.toLowerCase().replace(" ", ".")}`
 										})
 									})
@@ -1515,72 +1516,75 @@ function LeadNotes({ lead }) {
 	};
 	const notes = [...lead.notes || []].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "space-y-4",
+		className: "space-y-4 animate-fade-in-up",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-				className: "pl-4 text-xs font-semibold uppercase tracking-wider text-gray-400",
+				className: "pl-4 text-[13px] font-semibold uppercase tracking-wider text-[#8E8E93]",
 				children: "Notas Recentes"
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "space-y-3",
 				children: notes.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "rounded-xl border border-gray-200/60 bg-white p-8 text-center text-sm italic text-gray-400",
+					className: "ios-group-container p-8 text-center text-sm italic text-gray-400",
 					children: "Sem notas recentes."
-				}) : notes.map((note) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "group rounded-xl border border-gray-200/60 bg-white p-4 shadow-sm transition-all hover:shadow-md",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-start justify-between gap-3",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex w-full items-start gap-3",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Avatar, {
-								className: "mt-1 h-8 w-8",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarImage, { src: `https://img.usecurling.com/ppl/thumbnail?seed=${note.author}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarFallback, { children: "U" })]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex-1 space-y-1",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex items-center justify-between",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-xs font-semibold text-gray-900",
-										children: note.author
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-[10px] text-gray-400",
-										children: formatDistanceToNow(new Date(note.createdAt), {
-											addSuffix: true,
-											locale: ptBR
-										})
+				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "flex flex-col gap-3",
+					children: notes.map((note) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "group ios-group-container p-4 transition-all hover:shadow-md",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-start justify-between gap-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex w-full items-start gap-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Avatar, {
+									className: "mt-1 h-8 w-8 border border-gray-100",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarImage, { src: `https://img.usecurling.com/ppl/thumbnail?seed=${note.author}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarFallback, { children: "U" })]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex-1 space-y-1",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[14px] font-semibold text-gray-900",
+											children: note.author
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[12px] text-gray-400",
+											children: formatDistanceToNow(new Date(note.createdAt), {
+												addSuffix: true,
+												locale: ptBR
+											})
+										})]
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-[14px] leading-relaxed text-gray-600",
+										children: note.content
 									})]
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-sm leading-relaxed text-gray-600",
-									children: note.content
 								})]
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialog, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogTrigger, {
-							asChild: true,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-								variant: "ghost",
-								size: "icon",
-								className: "-mr-1 -mt-1 h-6 w-6 text-gray-400 opacity-0 transition-opacity hover:text-red-500 group-hover:opacity-100",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash2, { className: "h-3 w-3" })
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogContent, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogHeader, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogTitle, { children: "Excluir nota?" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogDescription, { children: "Esta ação é irreversível." })] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogFooter, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogCancel, { children: "Cancelar" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogAction, {
-							onClick: handleDeleteMock,
-							className: "bg-red-600 hover:bg-red-700",
-							children: "Excluir"
-						})] })] })] })]
-					})
-				}, note.id))
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialog, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogTrigger, {
+								asChild: true,
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+									variant: "ghost",
+									size: "icon",
+									className: "-mr-1 -mt-1 h-6 w-6 text-gray-400 opacity-0 transition-opacity hover:text-red-500 group-hover:opacity-100",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash2, { className: "h-3 w-3" })
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogContent, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogHeader, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogTitle, { children: "Excluir nota?" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogDescription, { children: "Esta ação é irreversível." })] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogFooter, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogCancel, { children: "Cancelar" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogAction, {
+								onClick: handleDeleteMock,
+								className: "bg-red-600 hover:bg-red-700",
+								children: "Excluir"
+							})] })] })] })]
+						})
+					}, note.id))
+				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "mt-2 flex items-center gap-2 rounded-full border border-gray-300 bg-white p-2 shadow-sm transition-all focus-within:ring-2 focus-within:ring-blue-500/20",
+				className: "mt-4 flex items-center gap-2 rounded-full border border-gray-300 bg-white p-2 shadow-sm transition-all focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-400",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-					className: "h-10 flex-1 border-0 bg-transparent px-4 text-sm shadow-none focus-visible:ring-0",
+					className: "h-10 flex-1 border-0 bg-transparent px-4 text-sm shadow-none focus-visible:ring-0 placeholder:text-gray-400",
 					placeholder: "Adicionar uma nota...",
 					value: noteContent,
 					onChange: (e) => setNoteContent(e.target.value),
 					onKeyDown: (e) => e.key === "Enter" && handleAddNote()
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
 					size: "icon",
-					className: cn("h-8 w-8 shrink-0 rounded-full transition-all", noteContent.trim() ? "bg-[#007AFF] hover:bg-blue-600" : "cursor-not-allowed bg-gray-200 text-gray-400"),
+					className: cn("h-8 w-8 shrink-0 rounded-full transition-all duration-300", noteContent.trim() ? "bg-[#007AFF] hover:bg-blue-600 scale-100" : "scale-90 bg-gray-200 text-gray-400 hover:bg-gray-300"),
 					onClick: handleAddNote,
 					disabled: !noteContent.trim(),
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUp, { className: "h-4 w-4" })
@@ -1741,7 +1745,7 @@ function LeadDetailsModal({ lead, open, onOpenChange }) {
 				className: "flex h-[100dvh] max-w-[800px] flex-col gap-0 overflow-hidden border-0 bg-[#F2F2F7] p-0 shadow-2xl outline-none focus:outline-none md:h-[90vh] md:max-h-[850px] md:rounded-[24px] [&>button]:hidden",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "supports-[backdrop-filter]:bg-white/60 sticky top-0 z-20 flex items-center justify-between border-b border-gray-200/50 bg-white/80 px-4 py-3 backdrop-blur-xl",
+						className: "sticky top-0 z-20 flex items-center justify-between border-b border-gray-200/50 bg-white/80 px-4 py-3 backdrop-blur-xl",
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 								variant: "ghost",
@@ -1765,34 +1769,29 @@ function LeadDetailsModal({ lead, open, onOpenChange }) {
 						className: "flex-1 overflow-y-auto overflow-x-hidden",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "mx-auto flex w-full max-w-3xl flex-col gap-8 p-4 pb-24 md:p-8 md:pb-32",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadInfo, { lead }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadTimeline, { lead }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadNotes, { lead })
-							]
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadInfo, { lead }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex flex-col gap-6",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadTimeline, { lead }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadNotes, { lead })]
+							})]
 						})
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "supports-[backdrop-filter]:bg-white/80 absolute bottom-0 left-0 right-0 z-20 border-t border-gray-200/50 bg-white/80 p-4 pb-6 backdrop-blur-xl md:pb-4",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "absolute bottom-0 left-0 right-0 z-20 border-t border-gray-200/50 bg-white/80 p-4 pb-6 backdrop-blur-xl md:pb-4",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							className: "mx-auto flex w-full max-w-3xl flex-col gap-4",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "grid grid-cols-2 gap-3",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 									variant: "outline",
-									className: "h-12 rounded-xl border-gray-200 bg-white font-semibold text-gray-900 shadow-sm hover:bg-gray-50",
+									className: "h-12 rounded-xl border-gray-200 bg-white font-semibold text-gray-900 shadow-sm hover:bg-gray-50 active:scale-95 transition-transform",
 									onClick: () => setFollowUpOpen(true),
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CalendarClock, { className: "mr-2 h-5 w-5" }), "Agendar Follow-up"]
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-									className: "h-12 rounded-xl bg-[#007AFF] font-semibold text-white shadow-sm hover:bg-[#0062CC]",
+									className: "h-12 rounded-xl bg-[#007AFF] font-semibold text-white shadow-sm hover:bg-[#0062CC] active:scale-95 transition-transform",
 									onClick: () => setInteractionOpen(true),
 									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageSquarePlus, { className: "mr-2 h-5 w-5" }), "Registrar Interação"]
 								})]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-								className: "text-center text-sm text-gray-400 transition-colors hover:text-gray-600",
-								onClick: () => onOpenChange(false),
-								children: "Fechar Perfil"
-							})]
+							})
 						})
 					})
 				]
@@ -1931,4 +1930,4 @@ function CRM() {
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-Cdqb_1gy.js.map
+//# sourceMappingURL=CRM-W4csOQSP.js.map

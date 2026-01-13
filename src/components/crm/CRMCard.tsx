@@ -40,11 +40,11 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
         e.currentTarget.style.transform = 'none'
       }}
       onClick={() => onClick?.(lead)}
-      className="cursor-grab active:cursor-grabbing touch-none select-none pb-3"
+      className="cursor-grab active:cursor-grabbing touch-none select-none pb-3 transform transition-transform duration-200"
     >
       <Card
         className={cn(
-          'overflow-hidden border-l-4 transition-all duration-200 hover:shadow-md hover:-translate-y-1 active:scale-95',
+          'overflow-hidden border-l-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 active:scale-95 bg-white dark:bg-card',
           borderColorClass,
         )}
       >
@@ -72,7 +72,10 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
           </div>
 
           <div className="mt-3 flex items-center justify-between">
-            <Badge variant="outline" className="text-[10px] font-normal">
+            <Badge
+              variant="outline"
+              className="text-[10px] font-normal bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700"
+            >
               {lead.origem}
             </Badge>
             <div className="flex items-center gap-1">

@@ -2,6 +2,7 @@ import { create } from 'zustand'
 import { googleSheetsService, Lead } from '@/services/googleSheetsService'
 import { v4 as uuidv4 } from 'uuid'
 import { useSyncStore } from './syncStore'
+import { useNotificationStore } from './notificationStore'
 
 export interface Note {
   id: string
@@ -116,20 +117,32 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
 
     set({ loading: true, error: false })
     try {
-      // Check offline mode from SyncStore implicitly by catching errors
       let apiLeads: Lead[] = []
       try {
         apiLeads = await googleSheetsService.fetchLeads()
       } catch (err) {
         console.warn('Failed to fetch from API, checking cache...', err)
         const offlineData = localStorage.getItem(STORAGE_KEY)
-        if (!offlineData) throw err // No cache, throw real error
-        // In real app, we would load cached full leads, here we mock merging
-        apiLeads = generateMockLeads(5) // Fallback for demo
+        if (!offlineData) throw err
+        apiLeads = generateMockLeads(5) // Fallback
       }
 
       const localDataStr = localStorage.getItem(STORAGE_KEY)
       const localData = localDataStr ? JSON.parse(localDataStr) : {}
+
+      // Calculate if new leads arrived
+      const currentIds = get().leads.map((l) => l.id)
+      const newApiIds = apiLeads.map((l) => l.id)
+      const hasNewLeads = newApiIds.some((id) => !currentIds.includes(id))
+
+      if (hasNewLeads && currentIds.length > 0) {
+        useNotificationStore.getState().addNotification({
+          type: 'new_lead',
+          title: 'Novos Leads Capturados',
+          message: 'Novos leads foram sincronizados da planilha.',
+          actionUrl: '/crm',
+        })
+      }
 
       const mergedLeads: CRMLead[] = apiLeads.map((lead) => {
         const local = localData[lead.id] || {}
@@ -192,13 +205,33 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
 
   moveLead: (leadId, newStatus) => {
     const { addToQueue, syncError } = useSyncStore.getState()
+    const { addNotification } = useNotificationStore.getState()
 
-    // If offline (simulated by syncError check or navigator), queue it
+    // If offline, queue it
     if (!navigator.onLine || syncError) {
       addToQueue({ type: 'move_lead', leadId, newStatus })
     }
 
     set((state) => {
+      // Check for conversion goal
+      const boughtLeads = state.leads.filter(
+        (l) => l.status === 'Comprou',
+      ).length
+      const totalLeads = state.leads.length
+      const currentRate = (boughtLeads / totalLeads) * 100
+
+      if (newStatus === 'Comprou') {
+        const newRate = ((boughtLeads + 1) / totalLeads) * 100
+        if (currentRate < 5 && newRate >= 5) {
+          addNotification({
+            type: 'goal',
+            title: 'Meta de Conversão Atingida!',
+            message: 'A taxa de conversão do CRM ultrapassou 5%.',
+            actionUrl: '/crm',
+          })
+        }
+      }
+
       const updatedLeads = state.leads.map((lead) => {
         if (lead.id === leadId) {
           if (lead.status === newStatus) return lead
@@ -273,6 +306,20 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
   },
 
   scheduleFollowUp: (leadId, date) => {
+    const { addNotification } = useNotificationStore.getState()
+
+    // Schedule local notification (mock)
+    const timeDiff = new Date(date).getTime() - Date.now()
+    if (timeDiff > 0 && timeDiff < 7200000) {
+      // If within 2 hours
+      addNotification({
+        type: 'follow_up',
+        title: 'Follow-up Próximo',
+        message: 'Você tem um follow-up agendado em breve.',
+        actionUrl: '/crm',
+      })
+    }
+
     set((state) => {
       const updatedLeads = state.leads.map((lead) => {
         if (lead.id === leadId) {

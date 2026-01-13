@@ -1,12 +1,14 @@
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
 import { v4 as uuidv4 } from 'uuid'
+import { differenceInDays } from 'date-fns'
 
 export type NotificationType =
   | 'inactive_lead'
   | 'follow_up'
   | 'new_lead'
   | 'goal'
+  | 'high_performance'
   | 'system'
 
 export interface Notification {
@@ -28,6 +30,7 @@ interface NotificationState {
   markAsRead: (id: string) => void
   markAllAsRead: () => void
   clearAll: () => void
+  cleanupOldNotifications: () => void
   getUnreadCount: () => number
 }
 
@@ -57,10 +60,19 @@ export const useNotificationStore = create<NotificationState>()(
           notifications: state.notifications.map((n) => ({ ...n, read: true })),
         })),
       clearAll: () => set({ notifications: [] }),
+      cleanupOldNotifications: () =>
+        set((state) => ({
+          notifications: state.notifications.filter(
+            (n) => differenceInDays(new Date(), new Date(n.timestamp)) < 7,
+          ),
+        })),
       getUnreadCount: () => get().notifications.filter((n) => !n.read).length,
     }),
     {
       name: 'app-notifications-v1',
+      onRehydrateStorage: () => (state) => {
+        state?.cleanupOldNotifications()
+      },
     },
   ),
 )

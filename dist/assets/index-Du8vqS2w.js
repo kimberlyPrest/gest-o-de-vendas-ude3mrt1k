@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-BqUy2d4i.js","assets/ExportButton-od0MJEwa.js","assets/CRM-Cdqb_1gy.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-3Pl2ma3m.js","assets/ExportButton-Bvw2g7o7.js","assets/CRM-W4csOQSP.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -19044,6 +19044,26 @@ var Settings = createLucideIcon("settings", [["path", {
 	r: "3",
 	key: "1v7zrd"
 }]]);
+var Sparkles = createLucideIcon("sparkles", [
+	["path", {
+		d: "M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z",
+		key: "1s2grr"
+	}],
+	["path", {
+		d: "M20 2v4",
+		key: "1rf3ol"
+	}],
+	["path", {
+		d: "M22 4h-4",
+		key: "gwowj6"
+	}],
+	["circle", {
+		cx: "4",
+		cy: "20",
+		r: "2",
+		key: "6kqj1y"
+	}]
+]);
 var Sun = createLucideIcon("sun", [
 	["circle", {
 		cx: "12",
@@ -19084,6 +19104,13 @@ var Sun = createLucideIcon("sun", [
 		key: "1shlcs"
 	}]
 ]);
+var TrendingUp = createLucideIcon("trending-up", [["path", {
+	d: "M16 7h6v6",
+	key: "box55l"
+}], ["path", {
+	d: "m22 7-8.5 8.5-5-5L2 17",
+	key: "1t1m79"
+}]]);
 var User = createLucideIcon("user", [["path", {
 	d: "M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2",
 	key: "975kel"
@@ -27592,28 +27619,6 @@ function v4(options$1, buf, offset$3) {
 	return unsafeStringify(rnds);
 }
 var v4_default = v4;
-const useNotificationStore = create()(persist((set, get) => ({
-	notifications: [],
-	addNotification: (data) => {
-		const newNotification = {
-			id: v4_default(),
-			timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-			read: false,
-			...data
-		};
-		set((state) => ({ notifications: [newNotification, ...state.notifications].slice(0, 50) }));
-	},
-	markAsRead: (id) => set((state) => ({ notifications: state.notifications.map((n) => n.id === id ? {
-		...n,
-		read: true
-	} : n) })),
-	markAllAsRead: () => set((state) => ({ notifications: state.notifications.map((n) => ({
-		...n,
-		read: true
-	})) })),
-	clearAll: () => set({ notifications: [] }),
-	getUnreadCount: () => get().notifications.filter((n) => !n.read).length
-}), { name: "app-notifications-v1" }));
 const daysInYear = 365.2425;
 Math.pow(10, 8) * 24 * 60 * 60 * 1e3;
 const millisecondsInWeek = 6048e5;
@@ -27720,6 +27725,20 @@ function differenceInCalendarMonths(laterDate, earlierDate, options$1) {
 	const yearsDiff = laterDate_.getFullYear() - earlierDate_.getFullYear();
 	const monthsDiff = laterDate_.getMonth() - earlierDate_.getMonth();
 	return yearsDiff * 12 + monthsDiff;
+}
+function differenceInDays(laterDate, earlierDate, options$1) {
+	const [laterDate_, earlierDate_] = normalizeDates(options$1?.in, laterDate, earlierDate);
+	const sign = compareLocalAsc(laterDate_, earlierDate_);
+	const difference = Math.abs(differenceInCalendarDays(laterDate_, earlierDate_));
+	laterDate_.setDate(laterDate_.getDate() - sign * difference);
+	const result = sign * (difference - Number(compareLocalAsc(laterDate_, earlierDate_) === -sign));
+	return result === 0 ? 0 : result;
+}
+function compareLocalAsc(laterDate, earlierDate) {
+	const diff = laterDate.getFullYear() - earlierDate.getFullYear() || laterDate.getMonth() - earlierDate.getMonth() || laterDate.getDate() - earlierDate.getDate() || laterDate.getHours() - earlierDate.getHours() || laterDate.getMinutes() - earlierDate.getMinutes() || laterDate.getSeconds() - earlierDate.getSeconds() || laterDate.getMilliseconds() - earlierDate.getMilliseconds();
+	if (diff < 0) return -1;
+	if (diff > 0) return 1;
+	return diff;
 }
 function getRoundingMethod(method) {
 	return (number) => {
@@ -28969,6 +28988,34 @@ function formatDistance$1(laterDate, earlierDate, options$1) {
 function formatDistanceToNow(date, options$1) {
 	return formatDistance$1(date, constructNow(date), options$1);
 }
+const useNotificationStore = create()(persist((set, get) => ({
+	notifications: [],
+	addNotification: (data) => {
+		const newNotification = {
+			id: v4_default(),
+			timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+			read: false,
+			...data
+		};
+		set((state) => ({ notifications: [newNotification, ...state.notifications].slice(0, 50) }));
+	},
+	markAsRead: (id) => set((state) => ({ notifications: state.notifications.map((n) => n.id === id ? {
+		...n,
+		read: true
+	} : n) })),
+	markAllAsRead: () => set((state) => ({ notifications: state.notifications.map((n) => ({
+		...n,
+		read: true
+	})) })),
+	clearAll: () => set({ notifications: [] }),
+	cleanupOldNotifications: () => set((state) => ({ notifications: state.notifications.filter((n) => differenceInDays(/* @__PURE__ */ new Date(), new Date(n.timestamp)) < 7) })),
+	getUnreadCount: () => get().notifications.filter((n) => !n.read).length
+}), {
+	name: "app-notifications-v1",
+	onRehydrateStorage: () => (state) => {
+		state?.cleanupOldNotifications();
+	}
+}));
 var formatDistanceLocale = {
 	lessThanXSeconds: {
 		one: "menos de um segundo",
@@ -29435,18 +29482,31 @@ function NotificationCenter() {
 	const { notifications, getUnreadCount, markAsRead, markAllAsRead } = useNotificationStore();
 	const unreadCount = getUnreadCount();
 	const [open, setOpen] = (0, import_react.useState)(false);
+	const navigate = useNavigate();
 	const getIcon = (type) => {
 		switch (type) {
 			case "inactive_lead": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleAlert, { className: "h-4 w-4 text-red-500" });
 			case "follow_up": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Clock, { className: "h-4 w-4 text-yellow-500" });
-			case "new_lead": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Info, { className: "h-4 w-4 text-green-500" });
-			case "goal": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: "h-4 w-4 text-emerald-500" });
+			case "new_lead": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Info, { className: "h-4 w-4 text-blue-500" });
+			case "goal": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Sparkles, { className: "h-4 w-4 text-emerald-500" });
+			case "high_performance": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingUp, { className: "h-4 w-4 text-purple-500" });
 			default: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bell, { className: "h-4 w-4 text-gray-500" });
+		}
+	};
+	const getBgColor = (type) => {
+		switch (type) {
+			case "inactive_lead": return "bg-red-50";
+			case "follow_up": return "bg-yellow-50";
+			case "new_lead": return "bg-blue-50";
+			case "goal": return "bg-emerald-50";
+			case "high_performance": return "bg-purple-50";
+			default: return "bg-gray-50";
 		}
 	};
 	const handleNotificationClick = (id, actionUrl) => {
 		markAsRead(id);
-		if (actionUrl) console.log("Navigating to", actionUrl);
+		setOpen(false);
+		if (actionUrl) navigate(actionUrl);
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenu, {
 		open,
@@ -29456,60 +29516,76 @@ function NotificationCenter() {
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 				variant: "ghost",
 				size: "icon",
-				className: "relative",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bell, { className: "h-5 w-5" }), unreadCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-					className: "absolute right-1 top-1 flex h-2.5 w-2.5",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "relative inline-flex h-2.5 w-2.5 rounded-full bg-red-500" })]
+				className: "relative hover:bg-transparent",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bell, { className: cn("h-5 w-5 transition-colors", unreadCount > 0 ? "text-gray-800" : "text-gray-500") }), unreadCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+					className: "absolute right-2 top-2 flex h-2.5 w-2.5 translate-x-1/2 -translate-y-1/2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "absolute inline-flex h-full w-full animate-ping rounded-full bg-red-400 opacity-75" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "relative inline-flex h-2.5 w-2.5 items-center justify-center rounded-full bg-red-500 text-[8px] font-bold text-white" })]
 				})]
 			})
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuContent, {
 			align: "end",
-			className: "w-80",
+			className: "w-[320px] sm:w-[380px] p-0 overflow-hidden shadow-xl border-gray-100",
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuLabel, {
-					className: "flex items-center justify-between",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Notificações" }), unreadCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+					className: "flex items-center justify-between p-4 bg-gray-50/50",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "font-semibold text-gray-900",
+						children: "Notificações"
+					}), unreadCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
 						variant: "ghost",
 						size: "sm",
-						className: "h-auto px-2 text-xs text-muted-foreground",
+						className: "h-auto px-2 text-xs font-medium text-blue-600 hover:text-blue-700 hover:bg-blue-50",
 						onClick: markAllAsRead,
 						children: "Marcar lidas"
 					})]
 				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuSeparator, {}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DropdownMenuSeparator, { className: "m-0" }),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "max-h-[300px] overflow-y-auto",
-					children: notifications.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "p-4 text-center text-sm text-muted-foreground",
-						children: "Nenhuma notificação recente."
-					}) : notifications.map((notification) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuItem, {
-						className: cn("flex cursor-pointer flex-col items-start gap-1 p-3", !notification.read && "bg-accent/50"),
-						onClick: () => handleNotificationClick(notification.id, notification.actionUrl),
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex w-full items-start gap-2",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-									className: "mt-0.5",
-									children: getIcon(notification.type)
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-									className: "flex-1 space-y-1",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "font-medium leading-none",
-										children: notification.title
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-										className: "text-xs text-muted-foreground",
-										children: notification.message
-									})]
-								}),
-								!notification.read && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-2 w-2 rounded-full bg-blue-500" })
-							]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "ml-6 text-[10px] text-muted-foreground",
-							children: formatDistanceToNow(new Date(notification.timestamp), {
-								addSuffix: true,
-								locale: ptBR
+					className: "max-h-[400px] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-200",
+					children: notifications.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex flex-col items-center justify-center py-8 text-center",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "bg-gray-100 p-3 rounded-full mb-3",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bell, { className: "h-6 w-6 text-gray-400" })
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-sm font-medium text-gray-900",
+								children: "Tudo limpo!"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-xs text-muted-foreground mt-1",
+								children: "Nenhuma notificação recente."
 							})
+						]
+					}) : notifications.map((notification) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DropdownMenuItem, {
+						className: cn("flex cursor-pointer items-start gap-3 border-b border-gray-50 p-4 transition-colors last:border-0 focus:bg-gray-50", !notification.read ? "bg-white" : "bg-gray-50/50 opacity-70"),
+						onClick: () => handleNotificationClick(notification.id, notification.actionUrl),
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: cn("mt-1 flex h-8 w-8 shrink-0 items-center justify-center rounded-full", getBgColor(notification.type)),
+							children: getIcon(notification.type)
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex-1 space-y-1",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex justify-between items-start",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: cn("text-sm font-medium leading-none", !notification.read ? "text-gray-900" : "text-gray-600"),
+										children: notification.title
+									}), !notification.read && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { className: "block h-2 w-2 rounded-full bg-blue-500 shadow-sm" })]
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-xs text-muted-foreground line-clamp-2 leading-relaxed",
+									children: notification.message
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[10px] text-gray-400 pt-1",
+									children: formatDistanceToNow(new Date(notification.timestamp), {
+										addSuffix: true,
+										locale: ptBR
+									})
+								})
+							]
 						})]
 					}, notification.id))
 				})
@@ -30089,19 +30165,32 @@ var CommandShortcut = ({ className, ...props }) => {
 	});
 };
 CommandShortcut.displayName = "CommandShortcut";
-const useSyncStore = create((set) => ({
+const useSyncStore = create((set, get) => ({
 	lastSync: null,
 	isSyncing: false,
 	syncError: false,
+	failCount: 0,
 	offlineQueue: [],
 	setLastSync: (date) => set({
 		lastSync: date,
-		syncError: false
+		syncError: false,
+		failCount: 0
 	}),
 	setIsSyncing: (isSyncing) => set({ isSyncing }),
 	setSyncError: (syncError) => set({ syncError }),
+	incrementFailCount: () => set((state) => ({ failCount: state.failCount + 1 })),
+	resetFailCount: () => set({
+		failCount: 0,
+		syncError: false
+	}),
 	addToQueue: (action) => set((state) => ({ offlineQueue: [...state.offlineQueue, action] })),
-	clearQueue: () => set({ offlineQueue: [] })
+	clearQueue: () => set({ offlineQueue: [] }),
+	processQueue: async () => {
+		const { offlineQueue, clearQueue } = get();
+		if (offlineQueue.length === 0) return;
+		console.log("Processing offline queue:", offlineQueue);
+		clearQueue();
+	}
 }));
 const COLUMNS = [
 	{
@@ -30192,6 +30281,13 @@ const useCRMStore = create((set, get) => ({
 			}
 			const localDataStr = localStorage.getItem(STORAGE_KEY);
 			const localData = localDataStr ? JSON.parse(localDataStr) : {};
+			const currentIds = get().leads.map((l) => l.id);
+			if (apiLeads.map((l) => l.id).some((id) => !currentIds.includes(id)) && currentIds.length > 0) useNotificationStore.getState().addNotification({
+				type: "new_lead",
+				title: "Novos Leads Capturados",
+				message: "Novos leads foram sincronizados da planilha.",
+				actionUrl: "/crm"
+			});
 			const mergedLeads = apiLeads.map((lead) => {
 				const local = localData[lead.id] || {};
 				return {
@@ -30251,12 +30347,25 @@ const useCRMStore = create((set, get) => ({
 	},
 	moveLead: (leadId, newStatus) => {
 		const { addToQueue, syncError } = useSyncStore.getState();
+		const { addNotification } = useNotificationStore.getState();
 		if (!navigator.onLine || syncError) addToQueue({
 			type: "move_lead",
 			leadId,
 			newStatus
 		});
 		set((state) => {
+			const boughtLeads = state.leads.filter((l) => l.status === "Comprou").length;
+			const totalLeads = state.leads.length;
+			const currentRate = boughtLeads / totalLeads * 100;
+			if (newStatus === "Comprou") {
+				const newRate = (boughtLeads + 1) / totalLeads * 100;
+				if (currentRate < 5 && newRate >= 5) addNotification({
+					type: "goal",
+					title: "Meta de Conversão Atingida!",
+					message: "A taxa de conversão do CRM ultrapassou 5%.",
+					actionUrl: "/crm"
+				});
+			}
 			const updatedLeads = state.leads.map((lead) => {
 				if (lead.id === leadId) {
 					if (lead.status === newStatus) return lead;
@@ -30325,6 +30434,14 @@ const useCRMStore = create((set, get) => ({
 		});
 	},
 	scheduleFollowUp: (leadId, date) => {
+		const { addNotification } = useNotificationStore.getState();
+		const timeDiff = new Date(date).getTime() - Date.now();
+		if (timeDiff > 0 && timeDiff < 72e5) addNotification({
+			type: "follow_up",
+			title: "Follow-up Próximo",
+			message: "Você tem um follow-up agendado em breve.",
+			actionUrl: "/crm"
+		});
 		set((state) => {
 			const updatedLeads = state.leads.map((lead) => {
 				if (lead.id === leadId) {
@@ -31838,19 +31955,20 @@ function SettingsModal({ open, onOpenChange }) {
 function Header() {
 	const [settingsOpen, setSettingsOpen] = (0, import_react.useState)(false);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-		className: "sticky top-0 z-10 flex h-14 items-center gap-4 border-b bg-background px-4 shadow-sm md:px-6",
+		className: "sticky top-0 z-20 flex h-16 items-center gap-4 border-b bg-white/80 dark:bg-card/80 px-4 shadow-sm backdrop-blur-md md:px-6 transition-all",
 		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarTrigger, { className: "-ml-2" }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarTrigger, { className: "-ml-2 h-9 w-9 hover:bg-gray-100 dark:hover:bg-gray-800" }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "flex-1 flex items-center gap-4 md:ml-4",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GlobalSearch, {})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex items-center gap-2",
+				className: "flex items-center gap-1 sm:gap-2",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotificationCenter, {}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
 					variant: "ghost",
 					size: "icon",
 					onClick: () => setSettingsOpen(true),
+					className: "text-gray-500 hover:bg-transparent hover:text-gray-800",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Settings, { className: "h-5 w-5" })
 				})]
 			}),
@@ -31863,7 +31981,7 @@ function Header() {
 }
 function SyncManager() {
 	const { syncFrequency } = useSettingsStore();
-	const { setIsSyncing, setLastSync, setSyncError, syncError } = useSyncStore();
+	const { setIsSyncing, setLastSync, setSyncError, failCount, incrementFailCount, resetFailCount, processQueue } = useSyncStore();
 	const { fetchLeads } = useCRMStore();
 	const { fetchData: fetchLives } = useLivesStore();
 	const { checkConnection } = useConnectionStore();
@@ -31875,10 +31993,13 @@ function SyncManager() {
 		const handleOnline = () => {
 			toast.success("Conexão restaurada", { description: "Sincronizando dados pendentes..." });
 			checkConnection();
+			resetFailCount();
+			processQueue();
 			syncData();
 		};
 		const handleOffline = () => {
-			toast.error("Você está offline", { description: "Alterações serão salvas localmente." });
+			toast.error("Modo Offline", { description: "Alterações serão salvas localmente." });
+			setSyncError(true);
 			checkConnection();
 		};
 		window.addEventListener("online", handleOnline);
@@ -31895,17 +32016,29 @@ function SyncManager() {
 			return;
 		}
 		setIsSyncing(true);
+		const toastId = setTimeout(() => {
+			toast("Sincronizando...", {
+				icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-4 w-4 animate-spin text-blue-500" }),
+				duration: 2e3
+			});
+		}, 1e3);
 		try {
 			await Promise.all([
 				fetchLeads(true),
 				fetchLives(),
 				checkConnection()
 			]);
+			clearTimeout(toastId);
 			setLastSync(/* @__PURE__ */ new Date());
-			setSyncError(false);
+			resetFailCount();
+			toast.success("Dados atualizados", { duration: 2e3 });
 		} catch (error) {
 			console.error("Sync failed", error);
-			setSyncError(true);
+			incrementFailCount();
+			if (failCount >= 2) {
+				setSyncError(true);
+				toast.error("Falha na sincronização", { description: "O sistema entrará em modo offline." });
+			}
 		} finally {
 			setIsSyncing(false);
 		}
@@ -31972,8 +32105,8 @@ var NotFound = () => {
 	});
 };
 var NotFound_default = NotFound;
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-BqUy2d4i.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-Cdqb_1gy.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-3Pl2ma3m.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-W4csOQSP.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -32024,6 +32157,6 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(J, {
 });
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
-export { createRovingFocusGroupScope as $, Portal as $t, enUS as A, Root2$2 as At, startOfISOWeek as B, Clock as Bt, DialogTitle as C, Slot$2 as Ct, format as D, Anchor as Dt, formatDistanceToNow as E, TooltipTrigger as Et, isDate as F, X as Ft, millisecondsInHour as G, Check as Gt, getDefaultOptions as H, ChevronUp as Ht, constructNow as I, User as It, DropdownMenuContent as J, createLucideIcon as Jt, millisecondsInMinute as K, Calendar as Kt, differenceInCalendarDays as L, Search as Lt, endOfMonth as M, useId as Mt, getRoundingMethod as N, toast as Nt, getWeek as O, Arrow as Ot, differenceInCalendarMonths as P, cn as Pt, Root$2 as Q, Presence as Qt, startOfDay as R, RefreshCw as Rt, DialogHeader as S, useIsMobile as St, ptBR as T, TooltipContent as Tt, toDate as U, ChevronRight as Ut, startOfWeek as V, CircleAlert as Vt, constructFrom as W, ChevronDown as Wt, DropdownMenuTrigger as X, clsx_default as Xt, DropdownMenuItem as Y, cva as Yt, Item$1 as Z, useControllableState as Zt, Dialog as _, FocusScope as _t, SelectValue as a, createSlottable as an, Content as at, DialogDescription as b, Button as bt, COLUMNS as c, useComposedRefs as cn, Portal$3 as ct, CommandEmpty as d, require_react as dn, Trigger$2 as dt, useLayoutEffect2 as en, useDirection as et, CommandGroup as f, __commonJSMin as fn, WarningProvider as ft, CommandSeparator as g, useFocusGuards as gt, CommandList as h, Combination_default as ht, SelectTrigger as i, createSlot as in, Close as it, startOfYear as j, createPopperScope as jt, getISOWeek as k, Content$1 as kt, useCRMStore as l, composeEventHandlers as ln, Root$3 as lt, CommandItem as m, __toESM as mn, hideOthers as mt, SelectContent as n, useCallbackRef as nn, require_shim as nt, Label as o, createContextScope as on, Description as ot, CommandInput as p, __export as pn, createDialogScope as pt, DropdownMenu as q, Bell as qt, SelectItem as r, Primitive as rn, Skeleton as rt, useLivesStore as s, require_jsx_runtime as sn, Overlay as st, Select as t, DismissableLayer as tn, googleSheetsService as tt, Command as u, useToast as un, Title as ut, DialogClose as v, Primitive$1 as vt, DialogTrigger as w, Tooltip as wt, DialogFooter as x, buttonVariants as xt, DialogContent as y, Input as yt, normalizeDates as z, LoaderCircle as zt };
+export { Root$2 as $, useControllableState as $t, enUS as A, Content$1 as At, normalizeDates as B, RefreshCw as Bt, DialogTitle as C, useIsMobile as Ct, format as D, TooltipTrigger as Dt, formatDistanceToNow as E, TooltipContent as Et, differenceInCalendarMonths as F, cn as Ft, constructFrom as G, ChevronRight as Gt, startOfWeek as H, Clock as Ht, isDate as I, X as It, DropdownMenu as J, Calendar as Jt, millisecondsInHour as K, ChevronDown as Kt, constructNow as L, User as Lt, endOfMonth as M, createPopperScope as Mt, getRoundingMethod as N, useId as Nt, getWeek as O, Anchor as Ot, differenceInDays as P, toast as Pt, Item$1 as Q, clsx_default as Qt, differenceInCalendarDays as R, TrendingUp as Rt, DialogHeader as S, buttonVariants as St, ptBR as T, Tooltip as Tt, getDefaultOptions as U, CircleAlert as Ut, startOfISOWeek as V, LoaderCircle as Vt, toDate as W, ChevronUp as Wt, DropdownMenuItem as X, createLucideIcon as Xt, DropdownMenuContent as Y, Bell as Yt, DropdownMenuTrigger as Z, cva as Zt, Dialog as _, useFocusGuards as _t, SelectValue as a, Primitive as an, Close as at, DialogDescription as b, Input as bt, COLUMNS as c, createContextScope as cn, Overlay as ct, CommandEmpty as d, composeEventHandlers as dn, Title as dt, Presence as en, createRovingFocusGroupScope as et, CommandGroup as f, useToast as fn, Trigger$2 as ft, CommandSeparator as g, __toESM as gn, Combination_default as gt, CommandList as h, __export as hn, hideOthers as ht, SelectTrigger as i, useCallbackRef as in, Skeleton as it, startOfYear as j, Root2$2 as jt, getISOWeek as k, Arrow as kt, useCRMStore as l, require_jsx_runtime as ln, Portal$3 as lt, CommandItem as m, __commonJSMin as mn, createDialogScope as mt, SelectContent as n, useLayoutEffect2 as nn, googleSheetsService as nt, Label as o, createSlot as on, Content as ot, CommandInput as p, require_react as pn, WarningProvider as pt, millisecondsInMinute as q, Check as qt, SelectItem as r, DismissableLayer as rn, require_shim as rt, useLivesStore as s, createSlottable as sn, Description as st, Select as t, Portal as tn, useDirection as tt, Command as u, useComposedRefs as un, Root$3 as ut, DialogClose as v, FocusScope as vt, DialogTrigger as w, Slot$2 as wt, DialogFooter as x, Button as xt, DialogContent as y, Primitive$1 as yt, startOfDay as z, Search as zt };
 
-//# sourceMappingURL=index-Vt2pe5IC.js.map
+//# sourceMappingURL=index-Du8vqS2w.js.map
