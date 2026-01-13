@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-Ck4XPu5v.js","assets/select-BYndtMDj.js","assets/CRM-C_hoGHOw.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-DSFVNSbY.js","assets/select-BY-D7Rud.js","assets/CRM-D0gCc7Ah.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -25800,41 +25800,69 @@ var createImpl = (createState) => {
 	return useBoundStore;
 };
 var create = (createState) => createState ? createImpl(createState) : createImpl;
-var delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
-var generateMockLivesData = () => {
-	const presenters = [
-		"Ana",
-		"Carlos",
-		"Beatriz",
-		"João",
-		"Sofia"
-	];
-	const data = [];
-	const today = /* @__PURE__ */ new Date();
-	const startDate = new Date(today.getFullYear(), today.getMonth() - 5, 1);
-	for (let d = new Date(startDate); d <= today; d.setDate(d.getDate() + 1)) if (Math.random() > .3) {
-		const sales = Math.floor(Math.random() * 150) + 10;
-		const ticket = Math.floor(Math.random() * 50) + 40;
-		data.push({
-			date: d.toISOString().split("T")[0],
-			weekday: d.toLocaleDateString("pt-BR", { weekday: "long" }),
-			peakViewers: Math.floor(Math.random() * 3e3) + 500,
-			retainedViewers: Math.floor(Math.random() * 2e3) + 300,
-			sales,
-			presenter: presenters[Math.floor(Math.random() * presenters.length)],
-			conversionRate: parseFloat((Math.random() * 5 + 1).toFixed(1)),
-			retentionRate: parseFloat((Math.random() * 40 + 50).toFixed(1)),
-			revenue: sales * ticket,
-			additionalSeats: Math.floor(Math.random() * 15)
-		});
+var API_KEY = "AIzaSyCwdVm83ZNLdP9I8vDKK8KHuz4Dg8vHwUg";
+var CRM_SHEET_ID = "1j_Rwr5t3RPcs2HjEkrRBzJEnfhmJM8jZoq8IZNEpMk0";
+var LIVES_SHEET_ID = "1ZkYOpKQIefyc5jrb3_fVKQ1jCSXLh_7HOzlN7Xw3_oc";
+var CRM_TAB = "Adapta Elite";
+var LIVES_TAB = "🟢 Onboarding";
+var parseCurrency = (value) => {
+	if (typeof value === "number") return value;
+	if (!value) return 0;
+	const cleanStr = value.toString().replace(/[^0-9,-]+/g, "");
+	return Number(cleanStr.replace(".", "").replace(",", "."));
+};
+var parseDate = (value) => {
+	if (!value) return (/* @__PURE__ */ new Date()).toISOString();
+	if (value.match(/^\d{4}-\d{2}-\d{2}/)) return value;
+	const parts = value.split("/");
+	if (parts.length === 3) {
+		const day = parts[0].padStart(2, "0");
+		const month = parts[1].padStart(2, "0");
+		const year = parts[2].split(" ")[0];
+		if (year.length === 4) return `${year}-${month}-${day}`;
 	}
-	return data.sort((a, b$1) => new Date(a.date).getTime() - new Date(b$1.date).getTime());
+	return (/* @__PURE__ */ new Date()).toISOString();
+};
+var generateId = (item) => {
+	const seed = item.email || item.nomeCompleto || JSON.stringify(item);
+	let hash = 0;
+	for (let i = 0; i < seed.length; i++) {
+		const char = seed.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+		hash = hash & hash;
+	}
+	return Math.abs(hash).toString(16);
+};
+var fetchSheetData = async (spreadsheetId, range) => {
+	const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}?key=${API_KEY}`;
+	const response = await fetch(url);
+	if (!response.ok) {
+		const errorBody = await response.json();
+		throw new Error(errorBody.error?.message || `Failed to fetch sheet: ${response.status}`);
+	}
+	return (await response.json()).values || [];
+};
+var mapRowsToObjects = (rows) => {
+	if (rows.length < 2) return [];
+	const headers = rows[0].map((h) => h.toLowerCase().trim());
+	return rows.slice(1).map((row) => {
+		const obj = {};
+		headers.forEach((header, index$1) => {
+			obj[header] = row[index$1];
+		});
+		return obj;
+	});
+};
+var findValue = (obj, keys) => {
+	for (const key of keys) {
+		const found = Object.keys(obj).find((k) => k.includes(key));
+		if (found) return obj[found];
+	}
 };
 const googleSheetsService = {
 	async checkConnection() {
 		try {
-			await delay(1500);
-			if (!(Math.random() > .1)) throw new Error("Falha na conexão");
+			await fetchSheetData(LIVES_SHEET_ID, `${LIVES_TAB}!A1`);
 			return true;
 		} catch (error) {
 			console.error("Connection check failed:", error);
@@ -25843,26 +25871,32 @@ const googleSheetsService = {
 	},
 	async fetchLeads() {
 		try {
-			await delay(1e3);
-			return [{
-				id: "1",
-				nomeCompleto: "João Silva",
-				email: "joao.silva@email.com",
-				telefone: "(11) 99999-9999",
-				assentosAdicionais: 1,
-				origem: "Planilha",
-				status: "Capturado",
-				dataCaptacao: (/* @__PURE__ */ new Date()).toISOString()
-			}, {
-				id: "2",
-				nomeCompleto: "Maria Oliveira",
-				email: "maria.o@email.com",
-				telefone: "(21) 98888-8888",
-				assentosAdicionais: 0,
-				origem: "Planilha",
-				status: "Capturado",
-				dataCaptacao: (/* @__PURE__ */ new Date()).toISOString()
-			}];
+			return mapRowsToObjects(await fetchSheetData(CRM_SHEET_ID, `${CRM_TAB}!A:Z`)).filter((o) => findValue(o, ["nome", "lead"]) || findValue(o, ["email"])).map((o) => {
+				const nome = findValue(o, ["nome", "lead"]) || "Sem Nome";
+				const email = findValue(o, ["email", "e-mail"]) || "";
+				return {
+					id: generateId({
+						nome,
+						email
+					}),
+					nomeCompleto: nome,
+					email,
+					telefone: findValue(o, [
+						"telefone",
+						"whatsapp",
+						"celular",
+						"fone"
+					]) || "",
+					assentosAdicionais: Number(findValue(o, ["assentos", "lugares"]) || 0),
+					origem: findValue(o, ["origem", "fonte"]) || "Planilha",
+					status: findValue(o, [
+						"status",
+						"fase",
+						"etapa"
+					]) || "Capturado",
+					dataCaptacao: parseDate(findValue(o, ["data", "criado"]) || (/* @__PURE__ */ new Date()).toISOString())
+				};
+			});
 		} catch (error) {
 			console.error("Error fetching leads:", error);
 			throw error;
@@ -25870,20 +25904,47 @@ const googleSheetsService = {
 	},
 	async fetchLivesData() {
 		try {
-			await delay(1200);
-			return generateMockLivesData();
+			return mapRowsToObjects(await fetchSheetData(LIVES_SHEET_ID, `${LIVES_TAB}!A:Z`)).filter((o) => findValue(o, ["data"])).map((o) => {
+				const peak = Number(findValue(o, ["pico", "espectadores"]) || 0);
+				const sales = Number(findValue(o, ["vendas"]) || 0);
+				const retained = Number(findValue(o, ["retidos", "retenção"]) || 0);
+				const revenue = parseCurrency(findValue(o, ["faturamento", "receita"]) || 0);
+				let conversion = findValue(o, ["conversão", "conversion"]);
+				if (typeof conversion === "string") conversion = Number(conversion.replace("%", "").replace(",", "."));
+				if (!conversion && peak > 0) conversion = sales / peak * 100;
+				let retention = findValue(o, ["retenção", "retention"]);
+				if (typeof retention === "string") retention = Number(retention.replace("%", "").replace(",", "."));
+				if (!retention && peak > 0) retention = retained / peak * 100;
+				return {
+					date: parseDate(findValue(o, ["data"])),
+					weekday: findValue(o, ["dia", "semana"]) || "",
+					peakViewers: peak,
+					retainedViewers: retained,
+					sales,
+					presenter: findValue(o, [
+						"apresentador",
+						"expert",
+						"responsável"
+					]) || "Desconhecido",
+					conversionRate: Number(conversion?.toFixed(2) || 0),
+					retentionRate: Number(retention?.toFixed(2) || 0),
+					revenue,
+					additionalSeats: Number(findValue(o, ["assentos"]) || 0)
+				};
+			}).sort((a, b$1) => new Date(a.date).getTime() - new Date(b$1.date).getTime());
 		} catch (error) {
 			console.error("Error fetching lives data:", error);
 			throw error;
 		}
 	},
 	async addLiveToSheet(data) {
-		await delay(800);
-		console.log("Adding data to sheet:", data);
+		console.warn("Writing to Google Sheets is not supported with API Key only. Mocking success.");
+		await new Promise((resolve) => setTimeout(resolve, 800));
+		console.log("Would add data to sheet:", data);
 		toast$1({
-			title: "Sucesso",
-			description: "Dados adicionados à planilha com sucesso.",
-			className: "bg-[#10B981] text-white border-none"
+			title: "Simulação",
+			description: "Dados processados localmente. Escrita requer OAuth (não configurado).",
+			className: "bg-[#3B82F6] text-white border-none"
 		});
 	}
 };
@@ -26833,8 +26894,8 @@ var NotFound = () => {
 	});
 };
 var NotFound_default = NotFound;
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-Ck4XPu5v.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-C_hoGHOw.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-DSFVNSbY.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-D0gCc7Ah.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -26887,4 +26948,4 @@ var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 export { Portal as $, useFocusGuards as A, Content$1 as B, Root as C, createDialogScope as D, WarningProvider as E, buttonVariants as F, cn as G, createPopperScope as H, useIsMobile as I, createLucideIcon as J, X as K, Slot as L, Primitive$1 as M, Input as N, hideOthers as O, Button as P, Presence as Q, Anchor as R, Portal$1 as S, Trigger as T, useId as U, Root2 as V, toast as W, VISUALLY_HIDDEN_STYLES as X, cva as Y, useControllableState as Z, require_shim as _, __toESM as _t, differenceInCalendarDays as a, createCollection as at, Description as b, getTimezoneOffsetInMilliseconds as c, createContextScope as ct, millisecondsInHour as d, useComposedRefs as dt, useLayoutEffect2 as et, millisecondsInMinute as f, composeEventHandlers as ft, googleSheetsService as g, __export as gt, minutesInMonth as h, require_react as ht, differenceInDays as i, dispatchDiscreteCustomEvent as it, FocusScope as j, Combination_default as k, toDate as l, require_jsx_runtime as lt, minutesInDay as m, require_react_dom as mt, COLUMNS as n, useCallbackRef$1 as nt, startOfDay as o, createSlot as ot, millisecondsInWeek as p, useToast as pt, LoaderCircle as q, useCRMStore as r, Primitive as rt, normalizeDates as s, createSlottable as st, useLivesStore as t, DismissableLayer as tt, constructFrom as u, composeRefs as ut, Close as v, Title as w, Overlay as x, Content as y, Arrow as z };
 
-//# sourceMappingURL=index-DHScq5dP.js.map
+//# sourceMappingURL=index-DX74J17E.js.map
