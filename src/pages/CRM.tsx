@@ -1,77 +1,59 @@
-import { useEffect, useState } from 'react'
-import { googleSheetsService } from '@/services/googleSheetsService'
-import { useToast } from '@/hooks/use-toast'
-import { useConnectionStore } from '@/stores/connectionStore'
+import { useEffect } from 'react'
+import { useCRMStore } from '@/stores/crmStore'
+import { CRMFilters } from '@/components/crm/CRMFilters'
+import { CRMMetrics } from '@/components/crm/CRMMetrics'
+import { CRMBoard } from '@/components/crm/CRMBoard'
+import { Loader2, AlertCircle, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
-import { AlertCircle, RefreshCw } from 'lucide-react'
 
 export default function CRM() {
-  const { toast } = useToast()
-  const { status, checkConnection } = useConnectionStore()
-  const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(false)
-
-  const loadData = async () => {
-    setLoading(true)
-    setError(false)
-    try {
-      await googleSheetsService.fetchLeads()
-      if (status === 'offline') checkConnection()
-    } catch (err) {
-      console.error(err)
-      setError(true)
-      toast({
-        title: 'Erro',
-        description: 'Erro ao carregar Leads',
-        variant: 'destructive',
-        className: 'bg-[#EF4444] text-white border-none',
-      })
-    } finally {
-      setLoading(false)
-    }
-  }
+  const { fetchLeads, loading, error, leads } = useCRMStore()
 
   useEffect(() => {
-    loadData()
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
+    fetchLeads()
+  }, [fetchLeads])
+
+  if (error) {
+    return (
+      <div className="flex h-full flex-col items-center justify-center gap-4 bg-gray-50">
+        <AlertCircle className="h-12 w-12 text-yellow-500" />
+        <h2 className="text-xl font-semibold text-gray-900">
+          Erro ao carregar CRM
+        </h2>
+        <Button onClick={() => fetchLeads()}>
+          <RefreshCw className="mr-2 h-4 w-4" />
+          Tentar Novamente
+        </Button>
+      </div>
+    )
+  }
 
   return (
-    <div className="flex min-h-full flex-col">
-      <header className="sticky top-0 z-10 flex items-center border-b bg-white px-8 py-6 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-        <h1 className="text-2xl font-bold text-[#1F2937]">
+    <div className="flex h-full flex-col bg-[#F3F4F6]">
+      {/* Header */}
+      <header className="sticky top-0 z-10 flex items-center border-b bg-white px-6 py-4 shadow-sm">
+        <h1 className="text-xl font-bold text-[#1F2937] md:text-2xl">
           🎯 CRM - Pipeline de Vendas
         </h1>
+        {loading && (
+          <div className="ml-4 flex items-center text-sm text-gray-500">
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Sincronizando...
+          </div>
+        )}
       </header>
 
-      <div
-        className="flex flex-1 flex-col p-8"
-        style={{ backgroundColor: '#F3F4F6' }}
-      >
-        {loading ? (
+      {/* Content */}
+      <div className="flex flex-1 flex-col overflow-hidden">
+        <CRMMetrics />
+        <CRMFilters />
+
+        {loading && leads.length === 0 ? (
           <div className="flex flex-1 items-center justify-center">
-            <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#3B82F6] border-t-transparent"></div>
-          </div>
-        ) : error ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-            <AlertCircle className="h-12 w-12 text-[#F59E0B]" />
-            <p className="text-lg font-medium text-[#1F2937]">
-              Erro ao carregar
-            </p>
-            <Button
-              onClick={loadData}
-              className="bg-[#3B82F6] hover:bg-[#2563EB]"
-            >
-              <RefreshCw className="mr-2 h-4 w-4" />
-              Recarregar
-            </Button>
+            <Loader2 className="h-8 w-8 animate-spin text-primary" />
           </div>
         ) : (
-          <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed border-gray-300 p-12">
-            <span className="text-lg font-medium text-[#6B7280]">
-              CRM - Em Construção
-            </span>
-          </div>
+          <CRMBoard />
         )}
       </div>
     </div>
