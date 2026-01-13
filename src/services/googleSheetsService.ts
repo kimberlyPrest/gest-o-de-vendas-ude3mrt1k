@@ -26,13 +26,40 @@ export interface LiveData {
 
 const delay = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms))
 
+const generateMockLivesData = (): LiveData[] => {
+  const presenters = ['Ana', 'Carlos', 'Beatriz', 'João', 'Sofia']
+  const data: LiveData[] = []
+  const today = new Date()
+  const startDate = new Date(today.getFullYear(), today.getMonth() - 5, 1)
+
+  for (let d = new Date(startDate); d <= today; d.setDate(d.getDate() + 1)) {
+    if (Math.random() > 0.3) {
+      const sales = Math.floor(Math.random() * 150) + 10
+      const ticket = Math.floor(Math.random() * 50) + 40
+      data.push({
+        date: d.toISOString().split('T')[0],
+        weekday: d.toLocaleDateString('pt-BR', { weekday: 'long' }),
+        peakViewers: Math.floor(Math.random() * 3000) + 500,
+        retainedViewers: Math.floor(Math.random() * 2000) + 300,
+        sales: sales,
+        presenter: presenters[Math.floor(Math.random() * presenters.length)],
+        conversionRate: parseFloat((Math.random() * 5 + 1).toFixed(1)),
+        retentionRate: parseFloat((Math.random() * 40 + 50).toFixed(1)),
+        revenue: sales * ticket,
+        additionalSeats: Math.floor(Math.random() * 15),
+      })
+    }
+  }
+  return data.sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+  )
+}
+
 export const googleSheetsService = {
   async checkConnection(): Promise<boolean> {
     try {
-      await delay(1500) // Simulate network check
-      // Simulate 90% success rate
+      await delay(1500)
       const isSuccess = Math.random() > 0.1
-
       if (!isSuccess) {
         throw new Error('Falha na conexão')
       }
@@ -77,20 +104,8 @@ export const googleSheetsService = {
   async fetchLivesData(): Promise<LiveData[]> {
     try {
       await delay(1200)
-      return [
-        {
-          date: '2023-10-27',
-          weekday: 'Sexta',
-          peakViewers: 1500,
-          retainedViewers: 1200,
-          sales: 45,
-          presenter: 'Ana',
-          conversionRate: 3.0,
-          retentionRate: 80.0,
-          revenue: 4500.0,
-          additionalSeats: 5,
-        },
-      ]
+      // Return generated mock data
+      return generateMockLivesData()
     } catch (error) {
       console.error('Error fetching lives data:', error)
       throw error

@@ -1,9 +1,18 @@
-import { useEffect, useState } from 'react'
-import { googleSheetsService } from '@/services/googleSheetsService'
+import { useEffect, useState, useMemo } from 'react'
+import { googleSheetsService, LiveData } from '@/services/googleSheetsService'
 import { useToast } from '@/hooks/use-toast'
 import { useConnectionStore } from '@/stores/connectionStore'
 import { Button } from '@/components/ui/button'
-import { AlertCircle, RefreshCw } from 'lucide-react'
+import { Plus, RefreshCw, AlertCircle } from 'lucide-react'
+import { LiveFilters, FilterState } from '@/components/lives/LiveFilters'
+import { LiveKPIs } from '@/components/lives/LiveKPIs'
+import { LiveChart } from '@/components/lives/LiveChart'
+import {
+  differenceInDays,
+  subDays,
+  startOfDay,
+  isWithinInterval,
+} from 'date-fns'
 
 export default function Lives() {
   const { toast } = useToast()
@@ -11,12 +20,117 @@ export default function Lives() {
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(false)
 
+  // Raw Data
+  const [allData, setAllData] = useState<LiveData[]>([])
+
+  // Filter State
+  const [activeFilters, setActiveFilters] = useState<FilterState>({
+    dateRange: {
+      from: subDays(new Date(), 30),
+      to: new Date(),
+    },
+    presenters: [],
+    weekdays: [],
+  })
+
+  // Derived Data (Filtered)
+  const { filteredData, previousPeriodData, uniquePresenters } = useMemo(() => {
+    if (!allData.length)
+      return { filteredData: [], previousPeriodData: [], uniquePresenters: [] }
+
+    // 1. Get Unique Presenters for Filter Dropdown
+    const presenters = Array.from(
+      new Set(allData.map((d) => d.presenter)),
+    ).sort()
+
+    // 2. Apply Filters
+    const filtered = allData.filter((item) => {
+      const itemDate = startOfDay(new Date(item.date))
+
+      // Date Range Filter
+      if (activeFilters.dateRange?.from && activeFilters.dateRange?.to) {
+        if (
+          !isWithinInterval(itemDate, {
+            start: startOfDay(activeFilters.dateRange.from),
+            end: startOfDay(activeFilters.dateRange.to),
+          })
+        ) {
+          return false
+        }
+      }
+
+      // Presenter Filter
+      if (
+        activeFilters.presenters.length > 0 &&
+        !activeFilters.presenters.includes(item.presenter)
+      ) {
+        return false
+      }
+
+      // Weekday Filter
+      // item.weekday is string (e.g. 'Segunda'), need to map to 0-6 or check date
+      // date-fns getDay: 0 = Sunday, 1 = Monday, ...
+      if (activeFilters.weekdays.length > 0) {
+        const dayOfWeek = itemDate.getDay() // 0-6
+        if (!activeFilters.weekdays.includes(dayOfWeek)) {
+          return false
+        }
+      }
+
+      return true
+    })
+
+    // 3. Get Previous Period Data for Comparison
+    // Calculate length of current period
+    let prevPeriodData: LiveData[] = []
+    if (activeFilters.dateRange?.from && activeFilters.dateRange?.to) {
+      const daysDiff = differenceInDays(
+        activeFilters.dateRange.to,
+        activeFilters.dateRange.from,
+      )
+      // Previous period is [from - daysDiff - 1, from - 1]
+      const prevEnd = subDays(activeFilters.dateRange.from, 1)
+      const prevStart = subDays(prevEnd, daysDiff)
+
+      prevPeriodData = allData.filter((item) => {
+        const itemDate = startOfDay(new Date(item.date))
+        return isWithinInterval(itemDate, {
+          start: startOfDay(prevStart),
+          end: startOfDay(prevEnd),
+        })
+      })
+
+      // Also apply other filters to prev period? usually yes for fair comparison
+      prevPeriodData = prevPeriodData.filter((item) => {
+        if (
+          activeFilters.presenters.length > 0 &&
+          !activeFilters.presenters.includes(item.presenter)
+        ) {
+          return false
+        }
+        if (activeFilters.weekdays.length > 0) {
+          const dayOfWeek = new Date(item.date).getDay()
+          if (!activeFilters.weekdays.includes(dayOfWeek)) {
+            return false
+          }
+        }
+        return true
+      })
+    }
+
+    return {
+      filteredData: filtered,
+      previousPeriodData: prevPeriodData,
+      uniquePresenters: presenters,
+    }
+  }, [allData, activeFilters])
+
   const loadData = async () => {
     setLoading(true)
     setError(false)
     try {
-      await googleSheetsService.fetchLivesData()
-      // Ensure connection status is updated if it was offline
+      const data = await googleSheetsService.fetchLivesData()
+      setAllData(data)
       if (status === 'offline') checkConnection()
     } catch (err) {
       console.error(err)
@@ -37,44 +151,92 @@ export default function Lives() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  const handleApplyFilters = async (filters: FilterState) => {
+    setLoading(true) // Simulate processing time
+    // In a real app with client-side filtering, this is instant, but user story asks for spinner
+    await new Promise((r) => setTimeout(r, 600))
+    setActiveFilters(filters)
+    setLoading(false)
+    toast({
+      title: 'Filtros aplicados',
+      description: 'Dados atualizados com sucesso.',
+      className: 'bg-[#10B981] text-white border-none',
+    })
+  }
+
+  const handleClearFilters = () => {
+    setActiveFilters({
+      dateRange: {
+        from: subDays(new Date(), 30),
+        to: new Date(),
+      },
+      presenters: [],
+      weekdays: [],
+    })
+    toast({
+      title: 'Filtros removidos',
+      description: 'Visualização padrão restaurada.',
+      className: 'bg-[#3B82F6] text-white border-none',
+    })
+  }
+
+  const handleAddLive = () => {
+    toast({
+      title: 'Em breve',
+      description: 'Modal será implementado na Fase 3',
+      className: 'bg-[#3B82F6] text-white border-none',
+    })
+  }
+
+  if (error) {
+    return (
+      <div className="flex h-screen flex-col items-center justify-center gap-4 bg-gray-50 p-4 text-center">
+        <AlertCircle className="h-12 w-12 text-[#F59E0B]" />
+        <h2 className="text-xl font-semibold text-gray-900">
+          Erro ao carregar dados
+        </h2>
+        <p className="text-gray-500">
+          Não foi possível conectar à planilha. Verifique sua conexão.
+        </p>
+        <Button onClick={loadData} className="bg-[#3B82F6] hover:bg-[#2563EB]">
+          <RefreshCw className="mr-2 h-4 w-4" />
+          Tentar Novamente
+        </Button>
+      </div>
+    )
+  }
+
   return (
-    <div className="flex min-h-full flex-col">
-      <header className="sticky top-0 z-10 flex items-center border-b bg-white px-8 py-6 shadow-[0_2px_4px_rgba(0,0,0,0.1)]">
-        <h1 className="text-2xl font-bold text-[#1F2937]">
+    <div className="flex min-h-full flex-col bg-[#F9FAFB]">
+      <header className="sticky top-0 z-10 flex items-center justify-between border-b bg-white px-4 py-4 shadow-sm md:px-8 md:py-6">
+        <h1 className="text-xl font-bold text-[#1F2937] md:text-2xl">
           📊 Dashboard de Lives
         </h1>
+        <Button
+          onClick={handleAddLive}
+          className="h-12 w-12 rounded-full bg-[#10B981] p-0 hover:bg-[#059669] md:h-10 md:w-auto md:rounded-md md:px-4"
+        >
+          <Plus className="h-6 w-6 md:mr-2 md:h-4 md:w-4" />
+          <span className="hidden md:inline">Adicionar Live Exponencial</span>
+        </Button>
       </header>
 
-      <div
-        className="flex flex-1 flex-col p-8"
-        style={{ backgroundColor: '#F9FAFB' }}
-      >
-        {loading ? (
-          <div className="flex flex-1 items-center justify-center">
-            <div className="h-10 w-10 animate-spin rounded-full border-4 border-[#3B82F6] border-t-transparent"></div>
-          </div>
-        ) : error ? (
-          <div className="flex flex-1 flex-col items-center justify-center gap-4 text-center">
-            <AlertCircle className="h-12 w-12 text-[#F59E0B]" />
-            <p className="text-lg font-medium text-[#1F2937]">
-              Erro ao carregar
-            </p>
-            <Button
-              onClick={loadData}
-              className="bg-[#3B82F6] hover:bg-[#2563EB]"
-            >
-              <RefreshCw className="mr-2 h-4 w-4" />
-              Recarregar
-            </Button>
-          </div>
-        ) : (
-          <div className="flex flex-1 items-center justify-center rounded-lg border border-dashed border-gray-300 p-12">
-            <span className="text-lg font-medium text-[#6B7280]">
-              Dashboard de Lives - Em Construção
-            </span>
-          </div>
-        )}
-      </div>
+      <main className="flex-1 space-y-6 p-4 md:p-8">
+        <LiveFilters
+          presenters={uniquePresenters}
+          onApply={handleApplyFilters}
+          onClear={handleClearFilters}
+          loading={loading}
+        />
+
+        <LiveKPIs
+          data={filteredData}
+          previousData={previousPeriodData}
+          loading={loading}
+        />
+
+        <LiveChart data={filteredData} loading={loading} />
+      </main>
     </div>
   )
 }
