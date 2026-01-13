@@ -23,7 +23,7 @@ const LoadingFallback = () => (
 )
 
 const App = () => (
-  <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+  <ThemeProvider attribute="class" defaultTheme="light" enableSystem={false}>
     <BrowserRouter
       future={{ v7_startTransition: false, v7_relativeSplatPath: false }}
     >

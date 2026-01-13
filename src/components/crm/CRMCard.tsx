@@ -1,10 +1,7 @@
-import { memo } from 'react'
+import React, { memo } from 'react'
 import { CRMLead } from '@/stores/crmStore'
 import { cn } from '@/lib/utils'
 import { differenceInHours, differenceInDays } from 'date-fns'
-import { Mail, Phone, Bell, User } from 'lucide-react'
-import { Card, CardContent } from '@/components/ui/card'
-import { Badge } from '@/components/ui/badge'
 
 interface CRMCardProps {
   lead: CRMLead
@@ -19,78 +16,138 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
   const daysSinceInteraction = differenceInDays(now, lastInteraction)
 
   // Border Color Logic
-  let borderColorClass = 'border-l-green-500'
+  let borderColor = '#34C759' // Green - recent
+  let statusBg = '#ECFDF5'
   if (hoursSinceInteraction > 72) {
-    borderColorClass = 'border-l-red-500'
+    borderColor = '#FF3B30' // Red - urgent
+    statusBg = '#FEF2F2'
   } else if (hoursSinceInteraction > 24) {
-    borderColorClass = 'border-l-yellow-500'
+    borderColor = '#FF9500' // Orange - warning
+    statusBg = '#FFF7ED'
   }
 
   const isInactive = daysSinceInteraction > 3
+
+  const potentialValue = lead.assentosAdicionais * 500
 
   return (
     <div
       draggable
       onDragStart={(e) => {
-        // Rotate -2deg during drag as per requirements
         e.currentTarget.style.transform = 'rotate(-2deg)'
+        e.currentTarget.style.opacity = '0.8'
         onDragStart(e, lead.id)
       }}
       onDragEnd={(e) => {
         e.currentTarget.style.transform = 'none'
+        e.currentTarget.style.opacity = '1'
       }}
       onClick={() => onClick?.(lead)}
-      className="cursor-grab active:cursor-grabbing touch-none select-none pb-3 transform transition-transform duration-200"
+      className="cursor-grab active:cursor-grabbing touch-none select-none pb-3 transform transition-all duration-200"
     >
-      <Card
+      <div
         className={cn(
-          'overflow-hidden border-l-4 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 active:scale-95 bg-white dark:bg-card',
-          borderColorClass,
+          'overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 active:scale-[0.98]',
         )}
+        style={{
+          backgroundColor: 'white',
+          borderRadius: '16px',
+          border: '1px solid #E5E5E7',
+          borderLeft: `4px solid ${borderColor}`,
+          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
+        }}
       >
-        <CardContent className="p-3">
-          <div className="mb-2 flex items-start justify-between">
+        <div className="p-4">
+          {/* Header */}
+          <div className="flex items-start justify-between mb-3">
             <div className="flex-1 overflow-hidden">
-              <h4 className="truncate text-sm font-semibold text-gray-900 dark:text-gray-100">
+              <h4
+                className="truncate text-[14px] font-semibold"
+                style={{ color: '#1D1D1F' }}
+              >
                 {lead.nomeCompleto}
               </h4>
             </div>
             {isInactive && (
-              <Bell className="h-4 w-4 shrink-0 text-red-500 animate-pulse" />
+              <span
+                className="material-symbols-outlined text-[18px] animate-pulse"
+                style={{ color: '#FF3B30' }}
+              >
+                notification_important
+              </span>
             )}
           </div>
 
-          <div className="space-y-1.5">
-            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-              <Mail className="h-3 w-3" />
-              <span className="truncate">{lead.email}</span>
+          {/* Contact Info */}
+          <div className="space-y-2 mb-3">
+            <div className="flex items-center gap-2">
+              <span
+                className="material-symbols-outlined text-[14px]"
+                style={{ color: '#86868B' }}
+              >
+                mail
+              </span>
+              <span
+                className="truncate text-[12px]"
+                style={{ color: '#86868B' }}
+              >
+                {lead.email}
+              </span>
             </div>
-            <div className="flex items-center gap-2 text-xs text-gray-500 dark:text-gray-400">
-              <Phone className="h-3 w-3" />
-              <span>{lead.telefone}</span>
-            </div>
-          </div>
-
-          <div className="mt-3 flex items-center justify-between">
-            <Badge
-              variant="outline"
-              className="text-[10px] font-normal bg-gray-50 dark:bg-gray-800 border-gray-200 dark:border-gray-700"
-            >
-              {lead.origem}
-            </Badge>
-            <div className="flex items-center gap-1">
-              <User className="h-3 w-3 text-gray-400" />
-              <span className="text-xs font-medium text-gray-600 dark:text-gray-300">
-                {lead.assentosAdicionais} assentos
+            <div className="flex items-center gap-2">
+              <span
+                className="material-symbols-outlined text-[14px]"
+                style={{ color: '#86868B' }}
+              >
+                phone
+              </span>
+              <span
+                className="text-[12px]"
+                style={{ color: '#86868B' }}
+              >
+                {lead.telefone}
               </span>
             </div>
           </div>
 
-          <div className="mt-2 text-[10px] text-gray-400 text-right">
-            {hoursSinceInteraction}h sem interação
+          {/* Footer */}
+          <div className="flex items-center justify-between pt-3" style={{ borderTop: '1px solid #F5F5F7' }}>
+            <div
+              className="px-2 py-1 rounded-md text-[10px] font-medium"
+              style={{
+                backgroundColor: 'rgba(0, 0, 0, 0.03)',
+                color: '#86868B'
+              }}
+            >
+              {lead.origem}
+            </div>
+            <div className="flex items-center gap-1">
+              <span
+                className="material-symbols-outlined text-[14px]"
+                style={{ color: '#34C759' }}
+              >
+                payments
+              </span>
+              <span
+                className="text-[12px] font-semibold"
+                style={{ color: '#34C759' }}
+              >
+                R$ {potentialValue.toLocaleString('pt-BR')}
+              </span>
+            </div>
           </div>
-        </CardContent>
-      </Card>
+
+          {/* Time indicator */}
+          <div
+            className="mt-2 text-right text-[10px]"
+            style={{ color: borderColor }}
+          >
+            {hoursSinceInteraction < 1 ? 'Agora mesmo' :
+              hoursSinceInteraction < 24 ? `${hoursSinceInteraction}h sem interação` :
+                `${daysSinceInteraction}d sem interação`}
+          </div>
+        </div>
+      </div>
     </div>
   )
 })

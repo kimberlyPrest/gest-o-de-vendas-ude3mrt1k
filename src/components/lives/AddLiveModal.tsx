@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { zodResolver } from '@hookform/resolvers/zod'
 import * as z from 'zod'
@@ -61,9 +61,10 @@ const formSchema = z
 interface AddLiveModalProps {
   presenters: string[]
   onSuccess: () => void
+  customTrigger?: React.ReactNode
 }
 
-export function AddLiveModal({ presenters, onSuccess }: AddLiveModalProps) {
+export function AddLiveModal({ presenters, onSuccess, customTrigger }: AddLiveModalProps) {
   const { toast } = useToast()
   const [open, setOpen] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -169,10 +170,12 @@ export function AddLiveModal({ presenters, onSuccess }: AddLiveModalProps) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="h-12 w-12 rounded-full bg-[#10B981] p-0 hover:bg-[#059669] md:h-10 md:w-auto md:rounded-md md:px-4">
-          <Plus className="h-6 w-6 md:mr-2 md:h-4 md:w-4" />
-          <span className="hidden md:inline">Adicionar Live Exponencial</span>
-        </Button>
+        {customTrigger || (
+          <Button className="h-12 w-12 rounded-full bg-[#10B981] p-0 hover:bg-[#059669] md:h-10 md:w-auto md:rounded-md md:px-4">
+            <Plus className="h-6 w-6 md:mr-2 md:h-4 md:w-4" />
+            <span className="hidden md:inline">Adicionar Live Exponencial</span>
+          </Button>
+        )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-[600px] max-h-[90vh] overflow-y-auto">
         <DialogHeader>

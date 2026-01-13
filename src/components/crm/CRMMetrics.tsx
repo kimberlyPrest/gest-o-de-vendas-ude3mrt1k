@@ -1,7 +1,4 @@
 import { useCRMStore } from '@/stores/crmStore'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Skeleton } from '@/components/ui/skeleton'
-import { Users, DollarSign, Activity, Clock, CheckCircle2 } from 'lucide-react'
 import { differenceInDays } from 'date-fns'
 
 export function CRMMetrics() {
@@ -17,8 +14,6 @@ export function CRMMetrics() {
     ['Comprou', 'Não Comprou'].includes(l.status),
   )
   const totalDays = finishedLeads.reduce((acc, lead) => {
-    // Assuming lastInteraction is the finish date for simplicity in this context
-    // Ideally we would have a 'finishedAt' timestamp
     return (
       acc +
       differenceInDays(
@@ -50,104 +45,117 @@ export function CRMMetrics() {
     .filter((l) => l.status === 'Comprou')
     .reduce((acc, l) => acc + l.assentosAdicionais * 500, 0)
 
-  const formatCurrency = (val: number) =>
-    new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL',
-    }).format(val)
+  const formatCurrency = (val: number) => {
+    if (val >= 1000) {
+      return `R$ ${(val / 1000).toFixed(1)}k`
+    }
+    return `R$ ${val.toLocaleString('pt-BR')}`
+  }
 
   if (loading) {
     return (
-      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-5 p-6 pb-0">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5 mb-8">
         {[...Array(5)].map((_, i) => (
-          <Skeleton key={i} className="h-28 w-full rounded-xl" />
+          <div key={i} className="apple-card p-6 animate-pulse">
+            <div className="flex justify-between items-start mb-4">
+              <div className="size-10 rounded-xl bg-gray-200"></div>
+              <div className="h-4 w-12 bg-gray-200 rounded"></div>
+            </div>
+            <div className="h-3 w-24 bg-gray-200 rounded mb-2"></div>
+            <div className="h-8 w-20 bg-gray-200 rounded"></div>
+          </div>
         ))}
       </div>
     )
   }
 
+  const metrics = [
+    {
+      title: 'Taxa de Conversão',
+      value: `${conversionRate.toFixed(1)}%`,
+      subtitle: `${boughtLeads} de ${totalLeads} leads`,
+      icon: 'trending_up',
+      iconBg: '#EFF6FF',
+      iconColor: '#0071E3',
+      trending: conversionRate >= 5 ? 'up' : conversionRate >= 3 ? 'neutral' : 'down',
+    },
+    {
+      title: 'Tempo Médio',
+      value: `${avgTime.toFixed(1)} dias`,
+      subtitle: 'Ciclo de vendas',
+      icon: 'schedule',
+      iconBg: '#FFF7ED',
+      iconColor: '#F97316',
+      trending: 'neutral',
+    },
+    {
+      title: 'Leads no Pipeline',
+      value: pipelineCount.toString(),
+      subtitle: 'Em andamento',
+      icon: 'groups',
+      iconBg: '#F5F3FF',
+      iconColor: '#9333EA',
+      trending: 'neutral',
+    },
+    {
+      title: 'Valor em Pipeline',
+      value: formatCurrency(pipelineValue),
+      subtitle: 'Potencial ativo',
+      icon: 'payments',
+      iconBg: '#FEF3C7',
+      iconColor: '#D97706',
+      trending: 'neutral',
+    },
+    {
+      title: 'Valor Convertido',
+      value: formatCurrency(convertedValue),
+      subtitle: 'Vendas realizadas',
+      icon: 'check_circle',
+      iconBg: '#ECFDF5',
+      iconColor: '#34C759',
+      trending: 'up',
+    },
+  ]
+
   return (
-    <div className="grid gap-4 p-4 md:grid-cols-2 lg:grid-cols-5 lg:p-6 lg:pb-0">
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Taxa de Conversão
-          </CardTitle>
-          <Activity className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
-            <span
-              className={
-                conversionRate >= 5
-                  ? 'text-green-600'
-                  : conversionRate >= 3
-                    ? 'text-yellow-600'
-                    : 'text-red-600'
-              }
+    <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5 mb-8">
+      {metrics.map((metric, index) => (
+        <div key={index} className="apple-card p-6">
+          <div className="flex justify-between items-start mb-4">
+            <div
+              className="size-10 rounded-xl flex items-center justify-center"
+              style={{ backgroundColor: metric.iconBg, color: metric.iconColor }}
             >
-              {conversionRate.toFixed(1)}%
-            </span>
+              <span className="material-symbols-outlined">{metric.icon}</span>
+            </div>
+            {metric.trending === 'up' && (
+              <span className="text-[12px] font-bold flex items-center" style={{ color: '#34C759' }}>
+                <span className="material-symbols-outlined text-[14px]">arrow_upward</span>
+              </span>
+            )}
+            {metric.trending === 'down' && (
+              <span className="text-[12px] font-bold flex items-center" style={{ color: '#FF3B30' }}>
+                <span className="material-symbols-outlined text-[14px]">arrow_downward</span>
+              </span>
+            )}
           </div>
-          <p className="text-xs text-muted-foreground">
-            {boughtLeads} de {totalLeads} leads
+          <p className="text-[12px] font-semibold uppercase tracking-wider" style={{ color: '#86868B' }}>
+            {metric.title}
           </p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">Tempo Médio</CardTitle>
-          <Clock className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{avgTime.toFixed(1)} dias</div>
-          <p className="text-xs text-muted-foreground">Ciclo de vendas</p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Leads no Pipeline
-          </CardTitle>
-          <Users className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">{pipelineCount}</div>
-          <p className="text-xs text-muted-foreground">Em andamento</p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Valor em Pipeline
-          </CardTitle>
-          <DollarSign className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold">
-            {formatCurrency(pipelineValue)}
-          </div>
-          <p className="text-xs text-muted-foreground">Potencial ativo</p>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-          <CardTitle className="text-sm font-medium">
-            Valor Convertido
-          </CardTitle>
-          <CheckCircle2 className="h-4 w-4 text-muted-foreground" />
-        </CardHeader>
-        <CardContent>
-          <div className="text-2xl font-bold text-green-600">
-            {formatCurrency(convertedValue)}
-          </div>
-          <p className="text-xs text-muted-foreground">Vendas realizadas</p>
-        </CardContent>
-      </Card>
+          <h3
+            className="text-[28px] font-bold tracking-tight mt-1"
+            style={{
+              color: metric.title === 'Valor Convertido' ? '#34C759' :
+                metric.title === 'Taxa de Conversão' && conversionRate < 3 ? '#FF3B30' :
+                  metric.title === 'Taxa de Conversão' && conversionRate < 5 ? '#FF9500' :
+                    '#1D1D1F'
+            }}
+          >
+            {metric.value}
+          </h3>
+          <p className="text-[12px] mt-1" style={{ color: '#86868B' }}>{metric.subtitle}</p>
+        </div>
+      ))}
     </div>
   )
 }
