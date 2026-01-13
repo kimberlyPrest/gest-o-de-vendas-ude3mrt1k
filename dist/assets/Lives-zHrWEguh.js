@@ -1,5 +1,5 @@
-import { C as format, _ as Popover, a as SelectValue, b as ptBR, c as Dialog, d as DialogDescription, f as DialogFooter, g as Calendar, h as DialogTrigger, i as SelectTrigger, m as DialogTitle, n as SelectContent, p as DialogHeader, r as SelectItem, s as Label, t as Select, u as DialogContent, v as PopoverContent, x as subDays, y as PopoverTrigger } from "./select-BY-D7Rud.js";
-import { G as cn, J as createLucideIcon, L as Slot, N as Input, P as Button, _t as __toESM, g as googleSheetsService, ht as require_react, i as differenceInDays, l as toDate, lt as require_jsx_runtime, o as startOfDay, pt as useToast, q as LoaderCircle, t as useLivesStore } from "./index-DX74J17E.js";
+import { S as subDays, _ as Popover, a as SelectValue, b as ptBR, c as Dialog, d as DialogDescription, f as DialogFooter, g as Calendar, h as DialogTrigger, i as SelectTrigger, m as DialogTitle, n as SelectContent, p as DialogHeader, r as SelectItem, s as Label, t as Select, u as DialogContent, v as PopoverContent, w as format, x as parseISO, y as PopoverTrigger } from "./select-BqHwx6mD.js";
+import { G as cn, J as createLucideIcon, L as Slot, N as Input, P as Button, _t as __toESM, g as googleSheetsService, ht as require_react, i as differenceInDays, l as toDate, lt as require_jsx_runtime, o as startOfDay, pt as useToast, q as LoaderCircle, t as useLivesStore } from "./index-D_Lq0BVb.js";
 var Calendar$1 = createLucideIcon("calendar", [
 	["path", {
 		d: "M8 2v4",
@@ -5681,6 +5681,9 @@ var appleStyles = `
   .top-performer-bg {
     background-color: #EBF9EE !important;
   }
+  .material-symbols-outlined {
+    font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+  }
 `;
 var WEEKDAYS = [
 	{
@@ -5722,52 +5725,42 @@ var WEEKDAYS = [
 function Lives() {
 	const { toast } = useToast();
 	const { allData, loading, error, fetchData } = useLivesStore();
-	const [activeFilters, setActiveFilters] = (0, import_react.useState)({
-		dateRange: {
-			from: subDays(/* @__PURE__ */ new Date(), 30),
-			to: /* @__PURE__ */ new Date()
-		},
-		presenters: [],
-		weekdays: []
+	const [dateRange, setDateRange] = (0, import_react.useState)({
+		from: subDays(/* @__PURE__ */ new Date(), 30),
+		to: /* @__PURE__ */ new Date()
 	});
-	const [selectedWeekdays, setSelectedWeekdays] = (0, import_react.useState)([]);
 	const [selectedPresenter, setSelectedPresenter] = (0, import_react.useState)("");
-	const { filteredData, previousPeriodData, uniquePresenters, presenterMetrics } = (0, import_react.useMemo)(() => {
-		if (!allData.length) return {
-			filteredData: [],
-			previousPeriodData: [],
-			uniquePresenters: [],
-			presenterMetrics: []
-		};
-		const presenters = Array.from(new Set(allData.map((d) => d.presenter))).sort();
-		const filtered = allData.filter((item) => {
-			const itemDate = startOfDay(new Date(item.date));
-			if (activeFilters.dateRange?.from && activeFilters.dateRange?.to) {
+	const [selectedWeekdays, setSelectedWeekdays] = (0, import_react.useState)([]);
+	const [analysisTab, setAnalysisTab] = (0, import_react.useState)("presenter");
+	const [datePickerOpen, setDatePickerOpen] = (0, import_react.useState)(false);
+	const filteredData = (0, import_react.useMemo)(() => {
+		if (!allData.length) return [];
+		return allData.filter((item) => {
+			const itemDate = startOfDay(parseISO(item.date));
+			if (dateRange.from && dateRange.to) {
 				if (!isWithinInterval(itemDate, {
-					start: startOfDay(activeFilters.dateRange.from),
-					end: startOfDay(activeFilters.dateRange.to)
+					start: startOfDay(dateRange.from),
+					end: startOfDay(dateRange.to)
 				})) return false;
 			}
-			if (activeFilters.presenters.length > 0 && !activeFilters.presenters.includes(item.presenter)) return false;
-			if (activeFilters.weekdays.length > 0) {
+			if (selectedPresenter && item.presenter !== selectedPresenter) return false;
+			if (selectedWeekdays.length > 0) {
 				const dayOfWeek = itemDate.getDay();
-				if (!activeFilters.weekdays.includes(dayOfWeek)) return false;
+				if (!selectedWeekdays.includes(dayOfWeek)) return false;
 			}
 			return true;
 		});
-		let prevPeriodData = [];
-		if (activeFilters.dateRange?.from && activeFilters.dateRange?.to) {
-			const daysDiff = differenceInDays(activeFilters.dateRange.to, activeFilters.dateRange.from);
-			const prevEnd = subDays(activeFilters.dateRange.from, 1);
-			const prevStart = subDays(prevEnd, daysDiff);
-			prevPeriodData = allData.filter((item) => {
-				return isWithinInterval(startOfDay(new Date(item.date)), {
-					start: startOfDay(prevStart),
-					end: startOfDay(prevEnd)
-				});
-			});
-		}
-		const grouped = filtered.reduce((acc, curr) => {
+	}, [
+		allData,
+		dateRange,
+		selectedPresenter,
+		selectedWeekdays
+	]);
+	const uniquePresenters = (0, import_react.useMemo)(() => {
+		return Array.from(new Set(allData.map((d) => d.presenter))).sort();
+	}, [allData]);
+	const presenterMetrics = (0, import_react.useMemo)(() => {
+		const grouped = filteredData.reduce((acc, curr) => {
 			if (!acc[curr.presenter]) acc[curr.presenter] = {
 				presenter: curr.presenter,
 				lives: 0,
@@ -5783,49 +5776,43 @@ function Lives() {
 			acc[curr.presenter].retention += curr.retentionRate;
 			return acc;
 		}, {});
-		const metrics = Object.values(grouped).map((p) => ({
+		return Object.values(grouped).map((p) => ({
 			...p,
 			conversion: p.lives ? p.conversion / p.lives : 0,
 			retention: p.lives ? p.retention / p.lives : 0
 		})).sort((a$1, b) => b.sales - a$1.sales);
-		return {
-			filteredData: filtered,
-			previousPeriodData: prevPeriodData,
-			uniquePresenters: presenters,
-			presenterMetrics: metrics
-		};
-	}, [allData, activeFilters]);
-	const kpis = (0, import_react.useMemo)(() => {
-		const sum = (dataset, key) => dataset.reduce((acc, curr) => acc + curr[key], 0);
-		const avg = (dataset, key) => dataset.length ? sum(dataset, key) / dataset.length : 0;
-		const currentSales = sum(filteredData, "sales");
-		const prevSales = sum(previousPeriodData, "sales");
-		const currentRevenue = sum(filteredData, "revenue");
-		const prevRevenue = sum(previousPeriodData, "revenue");
-		const currentConversion = avg(filteredData, "conversionRate");
-		const prevConversion = avg(previousPeriodData, "conversionRate");
-		const currentPeak = Math.max(...filteredData.map((d) => d.peakViewers), 0);
-		const prevPeak = Math.max(...previousPeriodData.map((d) => d.peakViewers), 0);
-		const calcTrend = (curr, prev) => prev ? (curr - prev) / prev * 100 : 0;
-		return {
-			sales: {
-				value: currentSales,
-				trend: calcTrend(currentSales, prevSales)
-			},
-			revenue: {
-				value: currentRevenue,
-				trend: calcTrend(currentRevenue, prevRevenue)
-			},
-			conversion: {
-				value: currentConversion,
-				trend: calcTrend(currentConversion, prevConversion)
-			},
-			peak: {
-				value: currentPeak,
-				trend: calcTrend(currentPeak, prevPeak)
-			}
-		};
-	}, [filteredData, previousPeriodData]);
+	}, [filteredData]);
+	const weekdayMetrics = (0, import_react.useMemo)(() => {
+		const dayNames = [
+			"Domingo",
+			"Segunda",
+			"Terça",
+			"Quarta",
+			"Quinta",
+			"Sexta",
+			"Sábado"
+		];
+		const grouped = filteredData.reduce((acc, curr) => {
+			const dayValue = new Date(curr.date).getDay();
+			if (!acc[dayValue]) acc[dayValue] = {
+				weekday: dayNames[dayValue],
+				dayValue,
+				lives: 0,
+				sales: 0,
+				revenue: 0,
+				avgConversion: 0
+			};
+			acc[dayValue].lives += 1;
+			acc[dayValue].sales += curr.sales;
+			acc[dayValue].revenue += curr.revenue;
+			acc[dayValue].avgConversion += curr.conversionRate;
+			return acc;
+		}, {});
+		return Object.values(grouped).map((d) => ({
+			...d,
+			avgConversion: d.lives ? d.avgConversion / d.lives : 0
+		})).sort((a$1, b) => b.sales - a$1.sales);
+	}, [filteredData]);
 	const topPerformers = (0, import_react.useMemo)(() => {
 		if (presenterMetrics.length === 0) return {
 			lives: "",
@@ -5847,6 +5834,20 @@ function Lives() {
 			retention: topRetention.presenter
 		};
 	}, [presenterMetrics]);
+	const kpis = (0, import_react.useMemo)(() => {
+		const sum = (dataset, key) => dataset.reduce((acc, curr) => acc + curr[key], 0);
+		const avg = (dataset, key) => dataset.length ? sum(dataset, key) / dataset.length : 0;
+		const currentSales = sum(filteredData, "sales");
+		const currentRevenue = sum(filteredData, "revenue");
+		const currentConversion = avg(filteredData, "conversionRate");
+		const currentPeak = Math.max(...filteredData.map((d) => d.peakViewers), 0);
+		return {
+			sales: { value: currentSales },
+			revenue: { value: currentRevenue },
+			conversion: { value: currentConversion },
+			peak: { value: currentPeak }
+		};
+	}, [filteredData]);
 	(0, import_react.useEffect)(() => {
 		if (allData.length === 0) fetchData();
 	}, []);
@@ -5854,14 +5855,8 @@ function Lives() {
 		fetchData();
 	};
 	const toggleWeekday = (value) => {
-		const newWeekdays = selectedWeekdays.includes(value) ? selectedWeekdays.filter((d) => d !== value) : [...selectedWeekdays, value];
-		setSelectedWeekdays(newWeekdays);
-		setActiveFilters((prev) => ({
-			...prev,
-			weekdays: newWeekdays
-		}));
+		setSelectedWeekdays((prev) => prev.includes(value) ? prev.filter((d) => d !== value) : [...prev, value]);
 	};
-	const dateRangeText = activeFilters.dateRange ? `${format(activeFilters.dateRange.from, "dd MMM, yyyy", { locale: ptBR })} - ${format(activeFilters.dateRange.to, "dd MMM, yyyy", { locale: ptBR })}` : "Selecione um período";
 	const formatCurrency = (value) => {
 		if (value >= 1e3) return `R$ ${Math.round(value / 1e3)}k`;
 		return `R$ ${value.toLocaleString("pt-BR")}`;
@@ -5872,29 +5867,37 @@ function Lives() {
 			maximumFractionDigits: 2
 		})}`;
 	};
-	if (error) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "flex h-screen flex-col items-center justify-center gap-4 p-4 text-center",
-		style: { backgroundColor: "#F5F5F7" },
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-				className: "material-symbols-outlined text-[48px] text-orange-500",
-				children: "error"
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-				className: "text-xl font-semibold",
-				style: { color: "#1D1D1F" },
-				children: "Erro ao carregar dados"
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-				onClick: fetchData,
-				className: "apple-btn-primary hover:opacity-90 text-white px-5 py-2.5 text-[14px] font-medium flex items-center gap-2 transition-all",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "material-symbols-outlined text-[20px]",
-					children: "refresh"
-				}), "Tentar Novamente"]
-			})
-		]
-	});
+	const dateRangeText = `${format(dateRange.from, "dd MMM, yyyy", { locale: ptBR })} - ${format(dateRange.to, "dd MMM, yyyy", { locale: ptBR })}`;
+	if (error) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", { children: appleStyles }),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("link", {
+			href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+			rel: "stylesheet"
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "flex h-screen flex-col items-center justify-center gap-4 p-4 text-center",
+			style: { backgroundColor: "#F5F5F7" },
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "material-symbols-outlined text-[48px] text-orange-500",
+					children: "error"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+					className: "text-xl font-semibold",
+					style: { color: "#1D1D1F" },
+					children: "Erro ao carregar dados"
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+					onClick: fetchData,
+					className: "apple-btn-primary hover:opacity-90 text-white px-5 py-2.5 text-[14px] font-medium flex items-center gap-2 transition-all",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "material-symbols-outlined text-[20px]",
+						children: "refresh"
+					}), "Tentar Novamente"]
+				})
+			]
+		})
+	] });
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", { children: appleStyles }),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("link", {
@@ -5906,7 +5909,7 @@ function Lives() {
 			rel: "stylesheet"
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "flex-1 p-10 max-w-[1400px] mx-auto w-full",
+			className: "flex-1 p-10 max-w-[1600px] mx-auto w-full",
 			style: {
 				backgroundColor: "#F5F5F7",
 				fontFamily: "\"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif"
@@ -5943,20 +5946,53 @@ function Lives() {
 								className: "text-[11px] font-semibold uppercase tracking-wider ml-1",
 								style: { color: "#86868B" },
 								children: "Período"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex items-center gap-3 px-3 py-1.5 border rounded-lg cursor-pointer",
-								style: {
-									backgroundColor: "rgba(0,0,0,0.03)",
-									borderColor: "#E5E5E7"
-								},
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-[13px] font-medium",
-									style: { color: "#1D1D1F" },
-									children: dateRangeText
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "material-symbols-outlined text-[18px]",
-									style: { color: "#86868B" },
-									children: "calendar_month"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, {
+								open: datePickerOpen,
+								onOpenChange: setDatePickerOpen,
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
+									asChild: true,
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+										className: "flex items-center gap-3 px-3 py-2 border rounded-lg cursor-pointer",
+										style: {
+											backgroundColor: "rgba(0,0,0,0.03)",
+											borderColor: "#E5E5E7"
+										},
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[13px] font-medium",
+											style: { color: "#1D1D1F" },
+											children: dateRangeText
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "material-symbols-outlined text-[18px]",
+											style: { color: "#86868B" },
+											children: "calendar_month"
+										})]
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
+									className: "w-auto p-0",
+									align: "start",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, {
+										initialFocus: true,
+										mode: "range",
+										defaultMonth: dateRange.from,
+										selected: {
+											from: dateRange.from,
+											to: dateRange.to
+										},
+										onSelect: (range) => {
+											if (range?.from && range?.to) {
+												setDateRange({
+													from: range.from,
+													to: range.to
+												});
+												setDatePickerOpen(false);
+											} else if (range?.from) setDateRange({
+												from: range.from,
+												to: range.from
+											});
+										},
+										numberOfMonths: 2,
+										locale: ptBR
+									})
 								})]
 							})]
 						}),
@@ -5967,20 +6003,14 @@ function Lives() {
 								style: { color: "#86868B" },
 								children: "Apresentador"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
-								className: "text-[13px] font-medium px-3 py-1.5 border rounded-lg focus:ring-0 min-w-[200px]",
+								className: "text-[13px] font-medium px-3 py-2 border rounded-lg focus:ring-0 min-w-[200px]",
 								style: {
 									backgroundColor: "rgba(0,0,0,0.03)",
 									borderColor: "#E5E5E7",
 									color: "#1D1D1F"
 								},
 								value: selectedPresenter,
-								onChange: (e) => {
-									setSelectedPresenter(e.target.value);
-									setActiveFilters((prev) => ({
-										...prev,
-										presenters: e.target.value ? [e.target.value] : []
-									}));
-								},
+								onChange: (e) => setSelectedPresenter(e.target.value),
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
 									value: "",
 									children: "Todos os Apresentadores"
@@ -6017,6 +6047,21 @@ function Lives() {
 									}, day.value);
 								})
 							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex flex-col gap-1.5",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+								className: "text-[11px] font-semibold uppercase tracking-wider ml-1",
+								style: { color: "#86868B" },
+								children: "Resultados"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "px-4 py-2 rounded-xl text-[13px] font-semibold",
+								style: {
+									backgroundColor: "rgba(0, 113, 227, 0.08)",
+									color: "#0071E3"
+								},
+								children: [filteredData.length, " Lives"]
+							})]
 						})
 					]
 				}),
@@ -6026,9 +6071,9 @@ function Lives() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "apple-card p-6",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 									className: "flex justify-between items-start mb-4",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "size-10 rounded-xl flex items-center justify-center",
 										style: {
 											backgroundColor: "#EFF6FF",
@@ -6038,18 +6083,7 @@ function Lives() {
 											className: "material-symbols-outlined",
 											children: "shopping_cart"
 										})
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "text-[12px] font-bold flex items-center",
-										style: { color: kpis.sales.trend >= 0 ? "#34C759" : "#FF3B30" },
-										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "material-symbols-outlined text-[14px]",
-												children: kpis.sales.trend >= 0 ? "arrow_upward" : "arrow_downward"
-											}),
-											Math.abs(kpis.sales.trend).toFixed(0),
-											"%"
-										]
-									})]
+									})
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-[12px] font-semibold uppercase tracking-wider",
@@ -6066,9 +6100,9 @@ function Lives() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "apple-card p-6",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 									className: "flex justify-between items-start mb-4",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "size-10 rounded-xl flex items-center justify-center",
 										style: {
 											backgroundColor: "#ECFDF5",
@@ -6078,18 +6112,7 @@ function Lives() {
 											className: "material-symbols-outlined",
 											children: "payments"
 										})
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "text-[12px] font-bold flex items-center",
-										style: { color: kpis.revenue.trend >= 0 ? "#34C759" : "#FF3B30" },
-										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "material-symbols-outlined text-[14px]",
-												children: kpis.revenue.trend >= 0 ? "arrow_upward" : "arrow_downward"
-											}),
-											Math.abs(kpis.revenue.trend).toFixed(1),
-											"%"
-										]
-									})]
+									})
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-[12px] font-semibold uppercase tracking-wider",
@@ -6106,9 +6129,9 @@ function Lives() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "apple-card p-6",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 									className: "flex justify-between items-start mb-4",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "size-10 rounded-xl flex items-center justify-center",
 										style: {
 											backgroundColor: "#FFF7ED",
@@ -6118,23 +6141,12 @@ function Lives() {
 											className: "material-symbols-outlined",
 											children: "percent"
 										})
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "text-[12px] font-bold flex items-center",
-										style: { color: kpis.conversion.trend >= 0 ? "#34C759" : "#FF3B30" },
-										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "material-symbols-outlined text-[14px]",
-												children: kpis.conversion.trend >= 0 ? "arrow_upward" : "arrow_downward"
-											}),
-											Math.abs(kpis.conversion.trend).toFixed(1),
-											"%"
-										]
-									})]
+									})
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-[12px] font-semibold uppercase tracking-wider",
 									style: { color: "#86868B" },
-									children: "Conversão"
+									children: "Conversão Média"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
 									className: "text-[28px] font-bold tracking-tight mt-1",
@@ -6146,9 +6158,9 @@ function Lives() {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "apple-card p-6",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 									className: "flex justify-between items-start mb-4",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 										className: "size-10 rounded-xl flex items-center justify-center",
 										style: {
 											backgroundColor: "#F5F3FF",
@@ -6158,23 +6170,12 @@ function Lives() {
 											className: "material-symbols-outlined",
 											children: "groups"
 										})
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-										className: "text-[12px] font-bold flex items-center",
-										style: { color: kpis.peak.trend >= 0 ? "#34C759" : "#FF3B30" },
-										children: [
-											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-												className: "material-symbols-outlined text-[14px]",
-												children: kpis.peak.trend >= 0 ? "arrow_upward" : "arrow_downward"
-											}),
-											Math.abs(kpis.peak.trend).toFixed(0),
-											"%"
-										]
-									})]
+									})
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 									className: "text-[12px] font-semibold uppercase tracking-wider",
 									style: { color: "#86868B" },
-									children: "Pico Views"
+									children: "Pico Máximo"
 								}),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
 									className: "text-[28px] font-bold tracking-tight mt-1",
@@ -6290,35 +6291,22 @@ function Lives() {
 								]
 							})]
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex justify-between mt-6 px-1",
-							children: activeFilters.dateRange && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-[11px] font-semibold uppercase",
-									style: { color: "#86868B" },
-									children: format(activeFilters.dateRange.from, "dd MMM", { locale: ptBR })
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-[11px] font-semibold uppercase",
-									style: { color: "#86868B" },
-									children: format(/* @__PURE__ */ new Date((activeFilters.dateRange.from.getTime() + activeFilters.dateRange.to.getTime()) / 3), "dd MMM", { locale: ptBR })
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-[11px] font-semibold uppercase",
-									style: { color: "#86868B" },
-									children: format(/* @__PURE__ */ new Date((activeFilters.dateRange.from.getTime() + activeFilters.dateRange.to.getTime()) * 2 / 3), "dd MMM", { locale: ptBR })
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-[11px] font-semibold uppercase",
-									style: { color: "#86868B" },
-									children: format(activeFilters.dateRange.to, "dd MMM", { locale: ptBR })
-								})
-							] })
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-[11px] font-semibold uppercase",
+								style: { color: "#86868B" },
+								children: format(dateRange.from, "dd MMM", { locale: ptBR })
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-[11px] font-semibold uppercase",
+								style: { color: "#86868B" },
+								children: format(dateRange.to, "dd MMM", { locale: ptBR })
+							})]
 						})
 					]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-					className: "apple-card overflow-hidden",
+					className: "apple-card overflow-hidden mb-8",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "px-8 pt-8 pb-4",
@@ -6331,27 +6319,36 @@ function Lives() {
 								style: { borderColor: "#E5E5E7" },
 								children: [
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+										onClick: () => setAnalysisTab("presenter"),
 										className: "pb-3 border-b-2 text-[14px] font-semibold transition-all",
 										style: {
-											borderColor: "#0071E3",
-											color: "#1D1D1F"
+											borderColor: analysisTab === "presenter" ? "#0071E3" : "transparent",
+											color: analysisTab === "presenter" ? "#1D1D1F" : "#86868B"
 										},
 										children: "Por Palestrante"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-										className: "pb-3 border-b-2 border-transparent text-[14px] font-medium transition-all hover:opacity-80",
-										style: { color: "#86868B" },
+										onClick: () => setAnalysisTab("weekday"),
+										className: "pb-3 border-b-2 text-[14px] font-medium transition-all",
+										style: {
+											borderColor: analysisTab === "weekday" ? "#0071E3" : "transparent",
+											color: analysisTab === "weekday" ? "#1D1D1F" : "#86868B"
+										},
 										children: "Por Dia"
 									}),
 									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-										className: "pb-3 border-b-2 border-transparent text-[14px] font-medium transition-all hover:opacity-80",
-										style: { color: "#86868B" },
+										onClick: () => setAnalysisTab("period"),
+										className: "pb-3 border-b-2 text-[14px] font-medium transition-all",
+										style: {
+											borderColor: analysisTab === "period" ? "#0071E3" : "transparent",
+											color: analysisTab === "period" ? "#1D1D1F" : "#86868B"
+										},
 										children: "Por Período"
 									})
 								]
 							})]
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						analysisTab === "presenter" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							className: "p-0 overflow-x-auto",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", {
 								className: "w-full text-left zebra-table",
@@ -6424,8 +6421,8 @@ function Lives() {
 										className: "px-8 py-12 text-center",
 										style: { color: "#86868B" },
 										children: "Nenhum dado disponível para o período selecionado"
-									}) }) : presenterMetrics.slice(0, 5).map((row, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
-										className: "hover:bg-black/[0.01] transition-colors group",
+									}) }) : presenterMetrics.map((row) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+										className: "hover:bg-black/[0.01] transition-colors",
 										style: { borderColor: "#E5E5E7" },
 										children: [
 											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
@@ -6495,43 +6492,347 @@ function Lives() {
 								})]
 							})
 						}),
+						analysisTab === "weekday" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "p-0 overflow-x-auto",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", {
+								className: "w-full text-left zebra-table",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+									className: "text-[11px] font-semibold uppercase tracking-widest border-b",
+									style: {
+										color: "#86868B",
+										borderColor: "#E5E5E7",
+										backgroundColor: "rgba(251,251,253,0.5)"
+									},
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-8 py-5",
+											children: "Dia da Semana"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-6 py-5",
+											children: "Lives"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-6 py-5",
+											children: "Vendas"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-6 py-5",
+											children: "Faturamento"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-8 py-5 text-right",
+											children: "Conversão Média"
+										})
+									]
+								}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", {
+									className: "divide-y",
+									style: { borderColor: "#E5E5E7" },
+									children: weekdayMetrics.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+										colSpan: 5,
+										className: "px-8 py-12 text-center",
+										style: { color: "#86868B" },
+										children: "Nenhum dado disponível"
+									}) }) : weekdayMetrics.map((row, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+										className: "hover:bg-black/[0.01] transition-colors",
+										style: { borderColor: "#E5E5E7" },
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-8 py-4",
+												children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+													className: "flex items-center gap-3",
+													children: [
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+															className: "size-9 rounded-full flex items-center justify-center",
+															style: {
+																backgroundColor: idx === 0 ? "#ECFDF5" : "#F5F5F7",
+																color: idx === 0 ? "#34C759" : "#86868B"
+															},
+															children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+																className: "material-symbols-outlined text-[18px]",
+																children: "calendar_today"
+															})
+														}),
+														/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															className: "text-[14px] font-medium",
+															style: { color: "#1D1D1F" },
+															children: row.weekday
+														}),
+														idx === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+															className: "text-[10px] px-2 py-0.5 rounded-full font-semibold",
+															style: {
+																backgroundColor: "#ECFDF5",
+																color: "#34C759"
+															},
+															children: "Melhor dia"
+														})
+													]
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-6 py-4 text-[14px]",
+												style: { color: "#1D1D1F" },
+												children: row.lives
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-6 py-4 text-[14px]",
+												style: { color: "#1D1D1F" },
+												children: row.sales
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-6 py-4 text-[14px]",
+												style: { color: "#1D1D1F" },
+												children: formatFullCurrency(row.revenue)
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("td", {
+												className: "px-8 py-4 text-[14px] text-right",
+												style: { color: "#1D1D1F" },
+												children: [row.avgConversion.toFixed(1), "%"]
+											})
+										]
+									}, row.dayValue))
+								})]
+							})
+						}),
+						analysisTab === "period" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "p-8",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "grid grid-cols-1 md:grid-cols-3 gap-6",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "p-6 rounded-2xl",
+										style: { backgroundColor: "#F5F5F7" },
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-[12px] font-semibold uppercase tracking-wider mb-2",
+												style: { color: "#86868B" },
+												children: "Período Selecionado"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-[16px] font-semibold",
+												style: { color: "#1D1D1F" },
+												children: dateRangeText
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+												className: "text-[13px] mt-1",
+												style: { color: "#86868B" },
+												children: [differenceInDays(dateRange.to, dateRange.from) + 1, " dias"]
+											})
+										]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "p-6 rounded-2xl",
+										style: { backgroundColor: "#F5F5F7" },
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-[12px] font-semibold uppercase tracking-wider mb-2",
+												style: { color: "#86868B" },
+												children: "Total de Lives"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-[28px] font-bold",
+												style: { color: "#1D1D1F" },
+												children: filteredData.length
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+												className: "text-[13px] mt-1",
+												style: { color: "#86868B" },
+												children: [
+													(filteredData.length / (differenceInDays(dateRange.to, dateRange.from) + 1)).toFixed(1),
+													" ",
+													"lives/dia"
+												]
+											})
+										]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "p-6 rounded-2xl",
+										style: { backgroundColor: "#F5F5F7" },
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-[12px] font-semibold uppercase tracking-wider mb-2",
+												style: { color: "#86868B" },
+												children: "Receita por Live"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-[28px] font-bold",
+												style: { color: "#34C759" },
+												children: filteredData.length > 0 ? formatFullCurrency(kpis.revenue.value / filteredData.length) : "R$ 0,00"
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+												className: "text-[13px] mt-1",
+												style: { color: "#86868B" },
+												children: "Média de faturamento"
+											})
+										]
+									})
+								]
+							})
+						})
+					]
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+					className: "apple-card overflow-hidden",
+					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "px-8 pt-8 pb-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+								className: "text-[18px] font-semibold tracking-tight mb-2",
+								style: { color: "#1D1D1F" },
+								children: "Lista Completa de Lives"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-[14px]",
+								style: { color: "#86868B" },
+								children: "Todas as lives do período selecionado com métricas detalhadas"
+							})]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "overflow-x-auto",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("table", {
+								className: "w-full text-left zebra-table",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+									className: "text-[11px] font-semibold uppercase tracking-widest border-b",
+									style: {
+										color: "#86868B",
+										borderColor: "#E5E5E7",
+										backgroundColor: "rgba(251,251,253,0.5)"
+									},
+									children: [
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-6 py-4",
+											children: "Data"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-4 py-4",
+											children: "Dia da Semana"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-4 py-4",
+											children: "Apresentador"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-4 py-4 text-right",
+											children: "Pico"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-4 py-4 text-right",
+											children: "Retidos"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-4 py-4 text-right",
+											children: "Vendas"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-4 py-4 text-right",
+											children: "Conversão"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-4 py-4 text-right",
+											children: "Retenção"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-4 py-4 text-right",
+											children: "Faturamento"
+										}),
+										/* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
+											className: "px-6 py-4 text-right",
+											children: "Assentos Adic."
+										})
+									]
+								}) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", {
+									className: "divide-y",
+									style: { borderColor: "#E5E5E7" },
+									children: loading ? [...Array(10)].map((_, i$2) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", {
+										className: "animate-pulse",
+										children: [...Array(10)].map((_$1, j) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+											className: "px-4 py-3",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-4 bg-gray-200 rounded w-16" })
+										}, j))
+									}, i$2)) : filteredData.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+										colSpan: 10,
+										className: "px-8 py-12 text-center",
+										style: { color: "#86868B" },
+										children: "Nenhuma live encontrada para o período selecionado"
+									}) }) : [...filteredData].reverse().map((live$1, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("tr", {
+										className: "hover:bg-black/[0.01] transition-colors",
+										style: { borderColor: "#E5E5E7" },
+										children: [
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-6 py-3 text-[13px] font-medium",
+												style: { color: "#1D1D1F" },
+												children: format(parseISO(live$1.date), "dd/MM/yyyy")
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-4 py-3 text-[13px]",
+												style: { color: "#86868B" },
+												children: live$1.weekday
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-4 py-3",
+												children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+													className: "text-[12px] px-2 py-1 rounded-full font-medium",
+													style: {
+														backgroundColor: "rgba(0, 113, 227, 0.08)",
+														color: "#0071E3"
+													},
+													children: live$1.presenter
+												})
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-4 py-3 text-[13px] text-right",
+												style: { color: "#1D1D1F" },
+												children: live$1.peakViewers.toLocaleString("pt-BR")
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-4 py-3 text-[13px] text-right",
+												style: { color: "#1D1D1F" },
+												children: live$1.retainedViewers.toLocaleString("pt-BR")
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-4 py-3 text-[13px] text-right font-semibold",
+												style: { color: "#1D1D1F" },
+												children: live$1.sales
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("td", {
+												className: "px-4 py-3 text-[13px] text-right",
+												style: { color: live$1.conversionRate >= 3 ? "#34C759" : "#FF9500" },
+												children: [live$1.conversionRate.toFixed(1), "%"]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("td", {
+												className: "px-4 py-3 text-[13px] text-right",
+												style: { color: live$1.retentionRate >= 60 ? "#34C759" : "#FF9500" },
+												children: [live$1.retentionRate.toFixed(1), "%"]
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-4 py-3 text-[13px] text-right font-semibold",
+												style: { color: "#34C759" },
+												children: formatFullCurrency(live$1.revenue)
+											}),
+											/* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
+												className: "px-6 py-3 text-[13px] text-right",
+												style: { color: "#1D1D1F" },
+												children: live$1.additionalSeats
+											})
+										]
+									}, `${live$1.date}-${idx}`))
+								})]
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							className: "px-8 py-5 border-t flex justify-between items-center",
 							style: {
 								backgroundColor: "#FBFBFD",
 								borderColor: "#E5E5E7"
 							},
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 								className: "text-[12px] font-medium",
 								style: { color: "#86868B" },
 								children: [
 									"Mostrando ",
-									Math.min(5, presenterMetrics.length),
-									" de",
-									" ",
-									presenterMetrics.length,
-									" apresentadores"
+									filteredData.length,
+									" lives"
 								]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex gap-2",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-									className: "p-1.5 rounded-lg border bg-white hover:bg-gray-50 disabled:opacity-30",
-									style: { borderColor: "#E5E5E7" },
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "material-symbols-outlined text-[18px]",
-										style: { color: "#1D1D1F" },
-										children: "chevron_left"
-									})
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-									className: "p-1.5 rounded-lg border bg-white hover:bg-gray-50",
-									style: { borderColor: "#E5E5E7" },
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "material-symbols-outlined text-[18px]",
-										style: { color: "#1D1D1F" },
-										children: "chevron_right"
-									})
-								})]
-							})]
+							})
 						})
 					]
 				})
@@ -6541,4 +6842,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-DSFVNSbY.js.map
+//# sourceMappingURL=Lives-zHrWEguh.js.map
