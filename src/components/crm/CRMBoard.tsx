@@ -3,7 +3,6 @@ import { useCRMStore, COLUMNS, CRMColumnId, CRMLead } from '@/stores/crmStore'
 import { CRMColumn } from './CRMColumn'
 import { LeadDetailsModal } from './LeadDetailsModal'
 import { toast } from 'sonner'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
 import { useIsMobile } from '@/hooks/use-mobile'
 
 export function CRMBoard() {
@@ -11,6 +10,7 @@ export function CRMBoard() {
   const isMobile = useIsMobile()
   const [selectedLead, setSelectedLead] = useState<CRMLead | null>(null)
   const [modalOpen, setModalOpen] = useState(false)
+  const [activeTab, setActiveTab] = useState(COLUMNS[0].id)
 
   const handleDropLead = (leadId: string, newStatus: CRMColumnId) => {
     try {
@@ -33,40 +33,54 @@ export function CRMBoard() {
   return (
     <>
       {isMobile ? (
-        <div className="flex-1 p-4">
-          <Tabs defaultValue={COLUMNS[0].id} className="h-full flex flex-col">
-            <TabsList className="w-full flex overflow-x-auto justify-start no-scrollbar mb-4 bg-transparent p-0 gap-2">
-              {COLUMNS.map((col) => (
-                <TabsTrigger
+        <div className="flex-1 pb-4">
+          {/* Mobile Tabs */}
+          <div className="flex gap-2 overflow-x-auto no-scrollbar mb-4 pb-2">
+            {COLUMNS.map((col) => {
+              const count = filteredLeads.filter((l) => l.status === col.id).length
+              const isActive = activeTab === col.id
+              return (
+                <button
                   key={col.id}
-                  value={col.id}
-                  className="rounded-full border bg-white px-4 data-[state=active]:bg-primary data-[state=active]:text-white whitespace-nowrap"
+                  onClick={() => setActiveTab(col.id)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all text-[13px] font-medium"
+                  style={{
+                    backgroundColor: isActive ? '#0071E3' : 'white',
+                    color: isActive ? 'white' : '#1D1D1F',
+                    border: isActive ? 'none' : '1px solid #E5E5E7',
+                  }}
                 >
                   {col.label}
-                  <span className="ml-2 text-xs opacity-70">
-                    ({filteredLeads.filter((l) => l.status === col.id).length})
+                  <span
+                    className="text-[11px] px-1.5 py-0.5 rounded-full"
+                    style={{
+                      backgroundColor: isActive ? 'rgba(255,255,255,0.2)' : 'rgba(0,0,0,0.05)',
+                    }}
+                  >
+                    {count}
                   </span>
-                </TabsTrigger>
-              ))}
-            </TabsList>
-            {COLUMNS.map((col) => (
-              <TabsContent key={col.id} value={col.id} className="flex-1 mt-0">
-                <div className="h-[calc(100vh-280px)]">
-                  <CRMColumn
-                    id={col.id}
-                    label={col.label}
-                    color={col.color}
-                    leads={filteredLeads.filter((l) => l.status === col.id)}
-                    onDropLead={handleDropLead}
-                    onCardClick={handleCardClick}
-                  />
-                </div>
-              </TabsContent>
+                </button>
+              )
+            })}
+          </div>
+
+          {/* Mobile Content */}
+          <div className="h-[calc(100vh-380px)]">
+            {COLUMNS.filter(col => col.id === activeTab).map((col) => (
+              <CRMColumn
+                key={col.id}
+                id={col.id}
+                label={col.label}
+                color={col.color}
+                leads={filteredLeads.filter((l) => l.status === col.id)}
+                onDropLead={handleDropLead}
+                onCardClick={handleCardClick}
+              />
             ))}
-          </Tabs>
+          </div>
         </div>
       ) : (
-        <div className="flex h-full flex-1 gap-4 overflow-x-auto p-6 pb-2">
+        <div className="flex h-full flex-1 gap-4 overflow-x-auto pb-4">
           {COLUMNS.map((col) => (
             <CRMColumn
               key={col.id}
