@@ -115,6 +115,16 @@
   }
 }
 
+@layer components {
+  .ios-group-container {
+    @apply bg-white rounded-xl border border-gray-200/60 shadow-sm overflow-hidden;
+  }
+
+  .timeline-connector {
+    @apply absolute left-[15.5px] top-[32px] bottom-[-24px] w-[1px] bg-[#E5E5EA];
+  }
+}
+
 @layer base {
   * {
     @apply border-border;

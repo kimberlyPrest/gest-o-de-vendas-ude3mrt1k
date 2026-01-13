@@ -1,4 +1,4 @@
-import { $ as useDirection, A as enUS$1, At as createPopperScope, B as startOfWeek, D as format, Dt as Arrow, Et as Anchor, F as isDate, H as toDate, Ht as ChevronRight, I as differenceInCalendarDays, J as DropdownMenuItem, K as DropdownMenu, L as startOfDay, M as endOfMonth, Nt as cn, O as getWeek, Ot as Content$1, P as differenceInCalendarMonths, Q as createRovingFocusGroupScope, Qt as Portal, R as normalizeDates, U as constructFrom, Ut as ChevronDown, V as getDefaultOptions, X as Item, Xt as useControllableState, Y as DropdownMenuTrigger, Z as Root$1, Zt as Presence, an as createContextScope, bt as buttonVariants, cn as composeEventHandlers, en as DismissableLayer, fn as __export, gt as FocusScope, ht as useFocusGuards, j as startOfYear, jt as useId, k as getISOWeek, kt as Root2$2, mt as Combination_default, nn as Primitive, on as require_jsx_runtime, pn as __toESM, pt as hideOthers, q as DropdownMenuContent, qt as createLucideIcon, rn as createSlot, sn as useComposedRefs, un as require_react, yt as Button, z as startOfISOWeek } from "./index-C2sUKBF4.js";
+import { $ as createRovingFocusGroupScope, $t as Portal, A as enUS$1, At as Root2$2, B as startOfISOWeek, D as format, Dt as Anchor, F as isDate, H as getDefaultOptions, J as DropdownMenuContent, Jt as createLucideIcon, L as differenceInCalendarDays, M as endOfMonth, Mt as useId, O as getWeek, Ot as Arrow, P as differenceInCalendarMonths, Pt as cn, Q as Root$1, Qt as Presence, R as startOfDay, U as toDate, Ut as ChevronRight, V as startOfWeek, W as constructFrom, Wt as ChevronDown, X as DropdownMenuTrigger, Y as DropdownMenuItem, Z as Item, Zt as useControllableState, _t as FocusScope, bt as Button, cn as useComposedRefs, dn as require_react, et as useDirection, gt as useFocusGuards, ht as Combination_default, in as createSlot, j as startOfYear, jt as createPopperScope, k as getISOWeek, kt as Content$1, ln as composeEventHandlers, mn as __toESM, mt as hideOthers, on as createContextScope, pn as __export, q as DropdownMenu, rn as Primitive, sn as require_jsx_runtime, tn as DismissableLayer, xt as buttonVariants, z as normalizeDates } from "./index-Vt2pe5IC.js";
 var Activity = createLucideIcon("activity", [["path", {
 	d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
 	key: "169zse"
@@ -226,6 +226,9 @@ function isSameMonth(laterDate, earlierDate, options) {
 function isSameYear(laterDate, earlierDate, options) {
 	const [laterDate_, earlierDate_] = normalizeDates(options?.in, laterDate, earlierDate);
 	return laterDate_.getFullYear() === earlierDate_.getFullYear();
+}
+function subDays(date, amount, options) {
+	return addDays(date, -amount, options);
 }
 function setMonth(date, month, options) {
 	const _date = toDate(date, options?.in);
@@ -3016,6 +3019,6 @@ function ExportButton({ data, filename = "export", label = "Exportar", formatDat
 		})]
 	})] });
 }
-export { ArrowUp as C, ChevronLeft as S, differenceInDays as _, TabsContent as a, Users as b, Card as c, CardTitle as d, Calendar as f, isBefore as g, PopoverTrigger as h, Tabs as i, CardContent as l, PopoverContent as m, formatLeadsForExport as n, TabsList as o, Popover as p, formatLiveForExport as r, TabsTrigger as s, ExportButton as t, CardHeader as u, addMonths as v, Activity as w, DollarSign as x, addDays as y };
+export { ChevronLeft as C, DollarSign as S, Activity as T, isBefore as _, TabsContent as a, addMonths as b, Card as c, CardTitle as d, Calendar as f, subDays as g, PopoverTrigger as h, Tabs as i, CardContent as l, PopoverContent as m, formatLeadsForExport as n, TabsList as o, Popover as p, formatLiveForExport as r, TabsTrigger as s, ExportButton as t, CardHeader as u, differenceInDays as v, ArrowUp as w, Users as x, isSameDay as y };
 
-//# sourceMappingURL=ExportButton-DFN73wSx.js.map
+//# sourceMappingURL=ExportButton-od0MJEwa.js.map

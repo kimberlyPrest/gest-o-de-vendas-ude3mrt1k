@@ -1,5 +1,5 @@
-import { C as ArrowUp, S as ChevronLeft, _ as differenceInDays, a as TabsContent, b as Users, c as Card, d as CardTitle, f as Calendar$1, g as isBefore, h as PopoverTrigger, i as Tabs, l as CardContent, m as PopoverContent, n as formatLeadsForExport, o as TabsList, p as Popover, s as TabsTrigger, t as ExportButton, u as CardHeader, w as Activity, x as DollarSign } from "./ExportButton-DFN73wSx.js";
-import { $t as useLayoutEffect2, Bt as CircleAlert, C as DialogTitle, D as format, E as formatDistanceToNow, Ft as User, G as millisecondsInMinute, Gt as Calendar, H as toDate, It as Search, Jt as cva, Kt as Bell, Lt as RefreshCw, Mt as toast, N as getRoundingMethod, Nt as cn, Pt as X, R as normalizeDates, Rt as LoaderCircle, S as DialogHeader, T as ptBR, U as constructFrom, W as millisecondsInHour, _ as Dialog, _t as Primitive, a as SelectValue, an as createContextScope, at as Description, bt as buttonVariants, c as COLUMNS, cn as composeEventHandlers, ct as Root$1, dt as WarningProvider, ft as createDialogScope, i as SelectTrigger, in as createSlottable, it as Content, l as useCRMStore, lt as Title, n as SelectContent, nt as Skeleton, o as Label, on as require_jsx_runtime, ot as Overlay, pn as __toESM, qt as createLucideIcon, r as SelectItem, rt as Close, sn as useComposedRefs, st as Portal, t as Select, tn as useCallbackRef, tt as require_shim, un as require_react, ut as Trigger, v as DialogClose, vt as Input, x as DialogFooter, xt as useIsMobile, y as DialogContent, yt as Button, zt as Clock } from "./index-C2sUKBF4.js";
+import { C as ChevronLeft, S as DollarSign, T as Activity, _ as isBefore, a as TabsContent, c as Card, d as CardTitle, f as Calendar$1, g as subDays, h as PopoverTrigger, i as Tabs, l as CardContent, m as PopoverContent, n as formatLeadsForExport, o as TabsList, p as Popover, s as TabsTrigger, t as ExportButton, u as CardHeader, v as differenceInDays, w as ArrowUp, x as Users, y as isSameDay } from "./ExportButton-od0MJEwa.js";
+import { Bt as Clock, C as DialogTitle, D as format, E as formatDistanceToNow, Ft as X, G as millisecondsInHour, I as constructNow, It as User, Jt as createLucideIcon, K as millisecondsInMinute, Kt as Calendar, Lt as Search, N as getRoundingMethod, Nt as toast, Pt as cn, Rt as RefreshCw, S as DialogHeader, St as useIsMobile, T as ptBR, U as toDate, Vt as CircleAlert, W as constructFrom, Yt as cva, _ as Dialog, a as SelectValue, an as createSlottable, at as Content, bt as Button, c as COLUMNS, cn as useComposedRefs, ct as Portal, dn as require_react, dt as Trigger, en as useLayoutEffect2, ft as WarningProvider, i as SelectTrigger, it as Close, l as useCRMStore, ln as composeEventHandlers, lt as Root$1, mn as __toESM, n as SelectContent, nn as useCallbackRef, nt as require_shim, o as Label, on as createContextScope, ot as Description, pt as createDialogScope, qt as Bell, r as SelectItem, rt as Skeleton, sn as require_jsx_runtime, st as Overlay, t as Select, ut as Title, v as DialogClose, vt as Primitive, x as DialogFooter, xt as buttonVariants, y as DialogContent, yt as Input, z as normalizeDates, zt as LoaderCircle } from "./index-Vt2pe5IC.js";
 var ArrowRightLeft = createLucideIcon("arrow-right-left", [
 	["path", {
 		d: "m16 3 4 4-4 4",
@@ -179,6 +179,12 @@ function differenceInHours(laterDate, earlierDate, options) {
 	const [laterDate_, earlierDate_] = normalizeDates(options?.in, laterDate, earlierDate);
 	const diff = (+laterDate_ - +earlierDate_) / millisecondsInHour;
 	return getRoundingMethod(options?.roundingMethod)(diff);
+}
+function isToday(date, options) {
+	return isSameDay(constructFrom(options?.in || date, date), constructNow(options?.in || date));
+}
+function isYesterday(date, options) {
+	return isSameDay(constructFrom(options?.in || date, date), subDays(constructNow(options?.in || date), 1));
 }
 function parseISO(argument, options) {
 	const invalidDate = () => constructFrom(options?.in, NaN);
@@ -1192,59 +1198,110 @@ function InfoRow({ icon, label, value, isLast }) {
 }
 function LeadTimeline({ lead }) {
 	const history = [...lead.history || []].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
-	const getIcon = (type) => {
-		switch (type) {
-			case "interaction": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageSquare, { className: "h-4 w-4 text-blue-600" });
-			case "status_change": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRightLeft, { className: "h-4 w-4 text-orange-600" });
-			case "follow_up_set": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CalendarClock, { className: "h-4 w-4 text-purple-600" });
-			case "note_added": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(StickyNote, { className: "h-4 w-4 text-yellow-600" });
-			default: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { className: "h-4 w-4 text-gray-600" });
-		}
+	const formatTimestamp = (dateStr) => {
+		const date = new Date(dateStr);
+		if (isToday(date)) return `Hoje, ${format(date, "HH:mm")}`;
+		if (isYesterday(date)) return `Ontem, ${format(date, "HH:mm")}`;
+		return format(date, "d 'de' MMM, HH:mm", { locale: ptBR });
 	};
-	const getBgColor = (type) => {
-		switch (type) {
-			case "interaction": return "bg-blue-100";
-			case "status_change": return "bg-orange-100";
-			case "follow_up_set": return "bg-purple-100";
-			case "note_added": return "bg-yellow-100";
-			default: return "bg-gray-100";
+	const getEventDetails = (item) => {
+		const desc = item.description || "";
+		if (item.type === "status_change") {
+			const match = desc.match(/para (.+)$/);
+			return {
+				title: match ? `Movido para ${match[1]}` : "Alteração de Status",
+				description: desc,
+				icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRightLeft, { className: "h-4 w-4" }),
+				colorClass: "bg-[#8E8E93]/10 text-[#8E8E93]"
+			};
 		}
+		if (item.type === "interaction") {
+			const type = desc.split(/[-:]/).map((p) => p.trim()).find((p) => [
+				"WhatsApp",
+				"Ligação",
+				"Email",
+				"Reunião"
+			].some((t) => p.includes(t))) || "Interação";
+			return {
+				title: type,
+				description: desc.replace(`Interação registrada: ${type} - `, "").replace(`Interação registrada: ${type}`, ""),
+				icon: type.includes("Ligação") ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-4 w-4" }) : type.includes("Email") ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-4 w-4" }) : type.includes("WhatsApp") ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageSquare, { className: "h-4 w-4" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "h-4 w-4" }),
+				colorClass: "bg-[#34C759]/10 text-[#34C759]"
+			};
+		}
+		if (item.type === "follow_up_set") {
+			const dateMatch = desc.match(/para (.+)$/);
+			return {
+				title: "Follow-up Agendado",
+				description: dateMatch ? dateMatch[1] : desc,
+				icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CalendarClock, { className: "h-4 w-4" }),
+				colorClass: "bg-[#007AFF]/10 text-[#007AFF]"
+			};
+		}
+		if (item.type === "note_added") return {
+			title: "Nota Adicionada",
+			description: "Nota interna registrada",
+			icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(StickyNote, { className: "h-4 w-4" }),
+			colorClass: "bg-[#FF9500]/10 text-[#FF9500]"
+		};
+		return {
+			title: desc.includes("capturado") ? "Lead Capturado" : "Evento do Sistema",
+			description: desc,
+			icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { className: "h-4 w-4" }),
+			colorClass: "bg-[#8E8E93]/10 text-[#8E8E93]"
+		};
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "space-y-4",
+		className: "space-y-3",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-			className: "pl-4 text-xs font-semibold uppercase tracking-wider text-gray-400",
+			className: "pl-4 text-[13px] font-medium uppercase tracking-wider text-[#8E8E93]",
 			children: "Histórico de Atividade"
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "rounded-xl border border-gray-200/60 bg-white p-6 shadow-sm",
+			className: "ios-group-container",
 			children: history.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "py-8 text-center text-sm text-gray-400",
+				className: "py-8 text-center text-[13px] text-[#8E8E93]",
 				children: "Nenhuma atividade registrada"
-			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "relative space-y-8 pl-1",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-2 left-[20px] top-2 w-px -translate-x-1/2 bg-gray-200" }), history.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "relative flex gap-4",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: cn("relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white shadow-sm ring-4 ring-white", getBgColor(item.type)),
-						children: getIcon(item.type)
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex-1 space-y-1 py-1",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-sm font-medium leading-none text-gray-900",
-							children: item.description
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center gap-2 text-xs text-gray-500",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: format(new Date(item.date), "d 'de' MMMM 'às' HH:mm", { locale: ptBR }) }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "•" }),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-medium text-gray-600",
-									children: item.author
-								})
-							]
-						})]
-					})]
-				}, item.id))]
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "flex flex-col",
+				children: history.map((item, index) => {
+					const details = getEventDetails(item);
+					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "group relative flex gap-4 p-4 transition-colors hover:bg-gray-50/50",
+						children: [
+							!(index === history.length - 1) && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "timeline-connector" }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: cn("relative z-10 flex h-8 w-8 shrink-0 items-center justify-center rounded-full transition-transform group-hover:scale-105", details.colorClass),
+								children: details.icon
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex min-w-0 flex-1 flex-col gap-1 pt-0.5",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "flex items-center justify-between gap-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[14px] font-bold text-gray-900 truncate",
+											children: details.title
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "shrink-0 text-[11px] text-[#8E8E93]",
+											children: formatTimestamp(item.date)
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+										className: "text-[13px] leading-relaxed text-[#8E8E93] line-clamp-2",
+										children: details.description
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "pt-1",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+											className: "text-[11px] font-medium text-[#007AFF]",
+											children: item.author === "Sistema" ? "Sistema (Auto)" : `@${item.author.toLowerCase().replace(" ", ".")}`
+										})
+									})
+								]
+							})
+						]
+					}, item.id);
+				})
 			})
 		})]
 	});
@@ -1874,4 +1931,4 @@ function CRM() {
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-D85zsXed.js.map
+//# sourceMappingURL=CRM-Cdqb_1gy.js.map
