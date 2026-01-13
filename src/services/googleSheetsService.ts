@@ -164,7 +164,15 @@ export const googleSheetsService = {
         .map((o) => {
           const peak = Number(findValue(o, ['pico', 'espectadores']) || 0)
           const sales = Number(findValue(o, ['vendas']) || 0)
-          const retained = Number(findValue(o, ['retidos', 'retenção']) || 0)
+          const retained = Number(
+            findValue(o, [
+              'retidos',
+              'retenção',
+              'retencao',
+              'pessoas retidas',
+              'retidas',
+            ]) || 0,
+          )
           const revenue = parseCurrency(
             findValue(o, ['faturamento', 'receita']) || 0,
           )

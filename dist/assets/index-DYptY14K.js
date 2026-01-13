@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-zHrWEguh.js","assets/select-BqHwx6mD.js","assets/CRM-5oYkGF5i.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-BxfOQrg2.js","assets/select-BYVnkVlq.js","assets/CRM-C9qWb-17.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -18761,6 +18761,7 @@ function clsx() {
 	for (var e, t, f = 0, n = "", o = arguments.length; f < o; f++) (e = arguments[f]) && (t = r(e)) && (n && (n += " "), n += t);
 	return n;
 }
+var clsx_default = clsx;
 var falsyToString = (value) => typeof value === "boolean" ? `${value}` : value === 0 ? "0" : value;
 const cx = clsx;
 const cva = (base, config) => (props) => {
@@ -25907,7 +25908,13 @@ const googleSheetsService = {
 			return mapRowsToObjects(await fetchSheetData(LIVES_SHEET_ID, `${LIVES_TAB}!A:Z`)).filter((o) => findValue(o, ["data"])).map((o) => {
 				const peak = Number(findValue(o, ["pico", "espectadores"]) || 0);
 				const sales = Number(findValue(o, ["vendas"]) || 0);
-				const retained = Number(findValue(o, ["retidos", "retenção"]) || 0);
+				const retained = Number(findValue(o, [
+					"retidos",
+					"retenção",
+					"retencao",
+					"pessoas retidas",
+					"retidas"
+				]) || 0);
 				const revenue = parseCurrency(findValue(o, ["faturamento", "receita"]) || 0);
 				let conversion = findValue(o, ["conversão", "conversion"]);
 				if (typeof conversion === "string") conversion = Number(conversion.replace("%", "").replace(",", "."));
@@ -26894,8 +26901,8 @@ var NotFound = () => {
 	});
 };
 var NotFound_default = NotFound;
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-zHrWEguh.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-5oYkGF5i.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-BxfOQrg2.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-C9qWb-17.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -26946,6 +26953,6 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(J, {
 });
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
-export { Portal as $, useFocusGuards as A, Content$1 as B, Root as C, createDialogScope as D, WarningProvider as E, buttonVariants as F, cn as G, createPopperScope as H, useIsMobile as I, createLucideIcon as J, X as K, Slot as L, Primitive$1 as M, Input as N, hideOthers as O, Button as P, Presence as Q, Anchor as R, Portal$1 as S, Trigger as T, useId as U, Root2 as V, toast as W, VISUALLY_HIDDEN_STYLES as X, cva as Y, useControllableState as Z, require_shim as _, __toESM as _t, differenceInCalendarDays as a, createCollection as at, Description as b, getTimezoneOffsetInMilliseconds as c, createContextScope as ct, millisecondsInHour as d, useComposedRefs as dt, useLayoutEffect2 as et, millisecondsInMinute as f, composeEventHandlers as ft, googleSheetsService as g, __export as gt, minutesInMonth as h, require_react as ht, differenceInDays as i, dispatchDiscreteCustomEvent as it, FocusScope as j, Combination_default as k, toDate as l, require_jsx_runtime as lt, minutesInDay as m, require_react_dom as mt, COLUMNS as n, useCallbackRef$1 as nt, startOfDay as o, createSlot as ot, millisecondsInWeek as p, useToast as pt, LoaderCircle as q, useCRMStore as r, Primitive as rt, normalizeDates as s, createSlottable as st, useLivesStore as t, DismissableLayer as tt, constructFrom as u, composeRefs as ut, Close as v, Title as w, Overlay as x, Content as y, Arrow as z };
+export { useControllableState as $, Combination_default as A, Arrow as B, Portal$1 as C, WarningProvider as D, Trigger as E, Button as F, toast as G, Root2 as H, buttonVariants as I, LoaderCircle as J, cn as K, useIsMobile as L, FocusScope as M, Primitive$1 as N, createDialogScope as O, Input as P, VISUALLY_HIDDEN_STYLES as Q, Slot as R, Overlay as S, Title as T, createPopperScope as U, Content$1 as V, useId as W, cva as X, createLucideIcon as Y, clsx_default as Z, require_shim as _, require_react as _t, differenceInCalendarDays as a, Primitive as at, Content as b, __toESM as bt, getTimezoneOffsetInMilliseconds as c, createSlot as ct, millisecondsInHour as d, require_jsx_runtime as dt, Presence as et, millisecondsInMinute as f, composeRefs as ft, googleSheetsService as g, require_react_dom as gt, minutesInMonth as h, useToast as ht, differenceInDays as i, useCallbackRef$1 as it, useFocusGuards as j, hideOthers as k, toDate as l, createSlottable as lt, minutesInDay as m, composeEventHandlers as mt, COLUMNS as n, useLayoutEffect2 as nt, startOfDay as o, dispatchDiscreteCustomEvent as ot, millisecondsInWeek as p, useComposedRefs as pt, X as q, useCRMStore as r, DismissableLayer as rt, normalizeDates as s, createCollection as st, useLivesStore as t, Portal as tt, constructFrom as u, createContextScope as ut, Skeleton as v, __commonJSMin as vt, Root as w, Description as x, Close as y, __export as yt, Anchor as z };
 
-//# sourceMappingURL=index-D_Lq0BVb.js.map
+//# sourceMappingURL=index-DYptY14K.js.map

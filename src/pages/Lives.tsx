@@ -3,6 +3,7 @@ import { LiveData } from '@/services/googleSheetsService'
 import { useToast } from '@/hooks/use-toast'
 import { useLivesStore } from '@/stores/livesStore'
 import { AddLiveModal } from '@/components/lives/AddLiveModal'
+import { LiveChart } from '@/components/lives/LiveChart'
 import {
   differenceInDays,
   subDays,
@@ -83,14 +84,17 @@ interface WeekdayMetrics {
   avgConversion: number
 }
 
-type AnalysisTab = 'presenter' | 'weekday' | 'period'
+type AnalysisTab = 'presenter' | 'weekday'
 
 export default function Lives() {
   const { toast } = useToast()
   const { allData, loading, error, fetchData } = useLivesStore()
 
   // Filter state
-  const [dateRange, setDateRange] = useState<{ from: Date; to: Date }>({
+  const [dateRange, setDateRange] = useState<{
+    from: Date | undefined
+    to: Date | undefined
+  }>({
     from: subDays(new Date(), 30),
     to: new Date(),
   })
@@ -107,12 +111,18 @@ export default function Lives() {
       const itemDate = startOfDay(parseISO(item.date))
 
       // Date Range Filter
-      if (dateRange.from && dateRange.to) {
-        if (
-          !isWithinInterval(itemDate, {
-            start: startOfDay(dateRange.from),
-            end: startOfDay(dateRange.to),
-          })
+      if (dateRange.from) {
+        if (dateRange.to) {
+          if (
+            !isWithinInterval(itemDate, {
+              start: startOfDay(dateRange.from),
+              end: startOfDay(dateRange.to),
+            })
+          ) {
+            return false
+          }
+        } else if (
+          itemDate.getTime() !== startOfDay(dateRange.from).getTime()
         ) {
           return false
         }
@@ -302,7 +312,12 @@ export default function Lives() {
     return `R$ ${value.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`
   }
 
-  const dateRangeText = `${format(dateRange.from, 'dd MMM, yyyy', { locale: ptBR })} - ${format(dateRange.to, 'dd MMM, yyyy', { locale: ptBR })}`
+  const dateRangeText =
+    dateRange.from && dateRange.to
+      ? `${format(dateRange.from, 'dd MMM, yyyy', { locale: ptBR })} - ${format(dateRange.to, 'dd MMM, yyyy', { locale: ptBR })}`
+      : dateRange.from
+        ? format(dateRange.from, 'dd MMM, yyyy', { locale: ptBR })
+        : 'Selecione a data'
 
   if (error) {
     return (
@@ -421,13 +436,18 @@ export default function Lives() {
                   initialFocus
                   mode="range"
                   defaultMonth={dateRange.from}
-                  selected={{ from: dateRange.from, to: dateRange.to }}
+                  selected={{
+                    from: dateRange.from,
+                    to: dateRange.to,
+                  }}
                   onSelect={(range) => {
                     if (range?.from && range?.to) {
                       setDateRange({ from: range.from, to: range.to })
                       setDatePickerOpen(false)
                     } else if (range?.from) {
                       setDateRange({ from: range.from, to: range.from })
+                    } else {
+                      // Handle reset or empty selection if needed
                     }
                   }}
                   numberOfMonths={2}
@@ -623,123 +643,42 @@ export default function Lives() {
 
         {/* Chart Section */}
         <section className="apple-card p-8 mb-8">
-          <div className="flex justify-between items-center mb-10">
+          <div className="flex justify-between items-center mb-6">
             <div>
               <h3
                 className="text-[20px] font-semibold tracking-tight"
                 style={{ color: '#1D1D1F' }}
               >
-                Evolução de Performance
+                Performance
               </h3>
               <p className="text-[14px]" style={{ color: '#86868B' }}>
                 Vendas e Faturamento por dia
               </p>
             </div>
             <div className="flex gap-6">
-              <div className="flex items-center gap-2">
-                <div
-                  className="size-2 rounded-full"
-                  style={{ backgroundColor: '#0071E3' }}
-                ></div>
-                <span
-                  className="text-[12px] font-medium"
-                  style={{ color: '#86868B' }}
-                >
-                  Vendas
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <div
-                  className="size-2 rounded-full"
-                  style={{ backgroundColor: '#34C759' }}
-                ></div>
-                <span
-                  className="text-[12px] font-medium"
-                  style={{ color: '#86868B' }}
-                >
-                  Faturamento
-                </span>
-              </div>
+              {/* Legend moved to LiveChart or kept minimal here if needed, but LiveChart has legend */}
             </div>
           </div>
 
-          <div className="h-[320px] w-full relative">
-            <div className="absolute inset-0 flex flex-col justify-between pointer-events-none opacity-50">
-              {[...Array(5)].map((_, i) => (
-                <div
-                  key={i}
-                  className="border-b w-full h-0"
-                  style={{ borderColor: '#E5E5E7' }}
-                ></div>
-              ))}
-            </div>
-            <svg
-              className="absolute inset-0 w-full h-full overflow-visible"
-              preserveAspectRatio="none"
-              viewBox="0 0 1000 300"
-            >
-              <defs>
-                <linearGradient id="blueGradient" x1="0" x2="0" y1="0" y2="1">
-                  <stop
-                    offset="0%"
-                    stopColor="#0071E3"
-                    stopOpacity="0.15"
-                  ></stop>
-                  <stop
-                    offset="100%"
-                    stopColor="#0071E3"
-                    stopOpacity="0"
-                  ></stop>
-                </linearGradient>
-                <linearGradient id="greenGradient" x1="0" x2="0" y1="0" y2="1">
-                  <stop
-                    offset="0%"
-                    stopColor="#34C759"
-                    stopOpacity="0.15"
-                  ></stop>
-                  <stop
-                    offset="100%"
-                    stopColor="#34C759"
-                    stopOpacity="0"
-                  ></stop>
-                </linearGradient>
-              </defs>
-              <path
-                d="M0 250 Q 150 120, 300 180 T 600 80 T 1000 100 V 300 H 0 Z"
-                fill="url(#blueGradient)"
-              ></path>
-              <path
-                d="M0 280 Q 150 200, 300 240 T 600 140 T 1000 160 V 300 H 0 Z"
-                fill="url(#greenGradient)"
-              ></path>
-              <path
-                d="M0 250 Q 150 120, 300 180 T 600 80 T 1000 100"
-                fill="none"
-                stroke="#0071E3"
-                strokeWidth="1.5"
-              ></path>
-              <path
-                d="M0 280 Q 150 200, 300 240 T 600 140 T 1000 160"
-                fill="none"
-                stroke="#34C759"
-                strokeWidth="1.5"
-              ></path>
-            </svg>
-          </div>
+          <LiveChart data={filteredData} loading={loading} />
 
           <div className="flex justify-between mt-6 px-1">
-            <span
-              className="text-[11px] font-semibold uppercase"
-              style={{ color: '#86868B' }}
-            >
-              {format(dateRange.from, 'dd MMM', { locale: ptBR })}
-            </span>
-            <span
-              className="text-[11px] font-semibold uppercase"
-              style={{ color: '#86868B' }}
-            >
-              {format(dateRange.to, 'dd MMM', { locale: ptBR })}
-            </span>
+            {dateRange.from && (
+              <span
+                className="text-[11px] font-semibold uppercase"
+                style={{ color: '#86868B' }}
+              >
+                {format(dateRange.from, 'dd MMM', { locale: ptBR })}
+              </span>
+            )}
+            {dateRange.to && (
+              <span
+                className="text-[11px] font-semibold uppercase"
+                style={{ color: '#86868B' }}
+              >
+                {format(dateRange.to, 'dd MMM', { locale: ptBR })}
+              </span>
+            )}
           </div>
         </section>
 
@@ -777,17 +716,6 @@ export default function Lives() {
                 }}
               >
                 Por Dia
-              </button>
-              <button
-                onClick={() => setAnalysisTab('period')}
-                className="pb-3 border-b-2 text-[14px] font-medium transition-all"
-                style={{
-                  borderColor:
-                    analysisTab === 'period' ? '#0071E3' : 'transparent',
-                  color: analysisTab === 'period' ? '#1D1D1F' : '#86868B',
-                }}
-              >
-                Por Período
               </button>
             </div>
           </div>
@@ -1054,82 +982,6 @@ export default function Lives() {
                   )}
                 </tbody>
               </table>
-            </div>
-          )}
-
-          {/* Period Tab */}
-          {analysisTab === 'period' && (
-            <div className="p-8">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                <div
-                  className="p-6 rounded-2xl"
-                  style={{ backgroundColor: '#F5F5F7' }}
-                >
-                  <p
-                    className="text-[12px] font-semibold uppercase tracking-wider mb-2"
-                    style={{ color: '#86868B' }}
-                  >
-                    Período Selecionado
-                  </p>
-                  <p
-                    className="text-[16px] font-semibold"
-                    style={{ color: '#1D1D1F' }}
-                  >
-                    {dateRangeText}
-                  </p>
-                  <p className="text-[13px] mt-1" style={{ color: '#86868B' }}>
-                    {differenceInDays(dateRange.to, dateRange.from) + 1} dias
-                  </p>
-                </div>
-                <div
-                  className="p-6 rounded-2xl"
-                  style={{ backgroundColor: '#F5F5F7' }}
-                >
-                  <p
-                    className="text-[12px] font-semibold uppercase tracking-wider mb-2"
-                    style={{ color: '#86868B' }}
-                  >
-                    Total de Lives
-                  </p>
-                  <p
-                    className="text-[28px] font-bold"
-                    style={{ color: '#1D1D1F' }}
-                  >
-                    {filteredData.length}
-                  </p>
-                  <p className="text-[13px] mt-1" style={{ color: '#86868B' }}>
-                    {(
-                      filteredData.length /
-                      (differenceInDays(dateRange.to, dateRange.from) + 1)
-                    ).toFixed(1)}{' '}
-                    lives/dia
-                  </p>
-                </div>
-                <div
-                  className="p-6 rounded-2xl"
-                  style={{ backgroundColor: '#F5F5F7' }}
-                >
-                  <p
-                    className="text-[12px] font-semibold uppercase tracking-wider mb-2"
-                    style={{ color: '#86868B' }}
-                  >
-                    Receita por Live
-                  </p>
-                  <p
-                    className="text-[28px] font-bold"
-                    style={{ color: '#34C759' }}
-                  >
-                    {filteredData.length > 0
-                      ? formatFullCurrency(
-                          kpis.revenue.value / filteredData.length,
-                        )
-                      : 'R$ 0,00'}
-                  </p>
-                  <p className="text-[13px] mt-1" style={{ color: '#86868B' }}>
-                    Média de faturamento
-                  </p>
-                </div>
-              </div>
             </div>
           )}
         </section>
