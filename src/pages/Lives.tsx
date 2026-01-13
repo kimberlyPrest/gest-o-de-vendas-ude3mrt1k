@@ -3,10 +3,12 @@ import { googleSheetsService, LiveData } from '@/services/googleSheetsService'
 import { useToast } from '@/hooks/use-toast'
 import { useConnectionStore } from '@/stores/connectionStore'
 import { Button } from '@/components/ui/button'
-import { Plus, RefreshCw, AlertCircle } from 'lucide-react'
+import { RefreshCw, AlertCircle } from 'lucide-react'
 import { LiveFilters, FilterState } from '@/components/lives/LiveFilters'
 import { LiveKPIs } from '@/components/lives/LiveKPIs'
 import { LiveChart } from '@/components/lives/LiveChart'
+import { LiveComparative } from '@/components/lives/LiveComparative'
+import { AddLiveModal } from '@/components/lives/AddLiveModal'
 import {
   differenceInDays,
   subDays,
@@ -68,8 +70,6 @@ export default function Lives() {
       }
 
       // Weekday Filter
-      // item.weekday is string (e.g. 'Segunda'), need to map to 0-6 or check date
-      // date-fns getDay: 0 = Sunday, 1 = Monday, ...
       if (activeFilters.weekdays.length > 0) {
         const dayOfWeek = itemDate.getDay() // 0-6
         if (!activeFilters.weekdays.includes(dayOfWeek)) {
@@ -81,14 +81,12 @@ export default function Lives() {
     })
 
     // 3. Get Previous Period Data for Comparison
-    // Calculate length of current period
     let prevPeriodData: LiveData[] = []
     if (activeFilters.dateRange?.from && activeFilters.dateRange?.to) {
       const daysDiff = differenceInDays(
         activeFilters.dateRange.to,
         activeFilters.dateRange.from,
       )
-      // Previous period is [from - daysDiff - 1, from - 1]
       const prevEnd = subDays(activeFilters.dateRange.from, 1)
       const prevStart = subDays(prevEnd, daysDiff)
 
@@ -100,7 +98,7 @@ export default function Lives() {
         })
       })
 
-      // Also apply other filters to prev period? usually yes for fair comparison
+      // Apply other filters to prev period
       prevPeriodData = prevPeriodData.filter((item) => {
         if (
           activeFilters.presenters.length > 0 &&
@@ -152,8 +150,7 @@ export default function Lives() {
   }, [])
 
   const handleApplyFilters = async (filters: FilterState) => {
-    setLoading(true) // Simulate processing time
-    // In a real app with client-side filtering, this is instant, but user story asks for spinner
+    setLoading(true)
     await new Promise((r) => setTimeout(r, 600))
     setActiveFilters(filters)
     setLoading(false)
@@ -180,12 +177,8 @@ export default function Lives() {
     })
   }
 
-  const handleAddLive = () => {
-    toast({
-      title: 'Em breve',
-      description: 'Modal será implementado na Fase 3',
-      className: 'bg-[#3B82F6] text-white border-none',
-    })
+  const handleLiveAdded = () => {
+    loadData()
   }
 
   if (error) {
@@ -212,13 +205,10 @@ export default function Lives() {
         <h1 className="text-xl font-bold text-[#1F2937] md:text-2xl">
           📊 Dashboard de Lives
         </h1>
-        <Button
-          onClick={handleAddLive}
-          className="h-12 w-12 rounded-full bg-[#10B981] p-0 hover:bg-[#059669] md:h-10 md:w-auto md:rounded-md md:px-4"
-        >
-          <Plus className="h-6 w-6 md:mr-2 md:h-4 md:w-4" />
-          <span className="hidden md:inline">Adicionar Live Exponencial</span>
-        </Button>
+        <AddLiveModal
+          presenters={uniquePresenters}
+          onSuccess={handleLiveAdded}
+        />
       </header>
 
       <main className="flex-1 space-y-6 p-4 md:p-8">
@@ -236,6 +226,12 @@ export default function Lives() {
         />
 
         <LiveChart data={filteredData} loading={loading} />
+
+        <LiveComparative
+          data={filteredData}
+          allData={allData}
+          loading={loading}
+        />
       </main>
     </div>
   )
