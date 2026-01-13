@@ -1,7 +1,14 @@
-import { $ as createRovingFocusGroupScope, $t as Presence, A as getISOWeek, At as Root2$2, B as startOfISOWeek, Dt as Anchor, F as differenceInCalendarMonths, Gt as ChevronDown, H as getDefaultOptions, I as isDate, J as DropdownMenuContent, L as differenceInCalendarDays, M as startOfYear, Mt as useId, N as endOfMonth, O as format, Ot as Arrow, Pt as cn, Q as Root$1, Qt as useControllableState, R as startOfDay, U as toDate, V as startOfWeek, W as constructFrom, Wt as ChevronRight, X as DropdownMenuTrigger, Y as DropdownMenuItem, Yt as createLucideIcon, Z as Item, _t as FocusScope, an as createSlot, bt as Button, cn as require_jsx_runtime, en as Portal, et as useDirection, fn as require_react, gt as useFocusGuards, hn as __toESM, ht as Combination_default, in as Primitive, j as enUS$1, jt as createPopperScope, k as getWeek, kt as Content$1, ln as useComposedRefs, mn as __export, mt as hideOthers, nn as DismissableLayer, q as DropdownMenu, sn as createContextScope, un as composeEventHandlers, xt as buttonVariants, z as normalizeDates } from "./index-CTW2hi8H.js";
+import { $ as useDirection, A as enUS$1, At as createPopperScope, B as startOfWeek, D as format, Dt as Arrow, Et as Anchor, F as isDate, H as toDate, Ht as ChevronRight, I as differenceInCalendarDays, J as DropdownMenuItem, K as DropdownMenu, L as startOfDay, M as endOfMonth, Nt as cn, O as getWeek, Ot as Content$1, P as differenceInCalendarMonths, Q as createRovingFocusGroupScope, Qt as Portal, R as normalizeDates, U as constructFrom, Ut as ChevronDown, V as getDefaultOptions, X as Item, Xt as useControllableState, Y as DropdownMenuTrigger, Z as Root$1, Zt as Presence, an as createContextScope, bt as buttonVariants, cn as composeEventHandlers, en as DismissableLayer, fn as __export, gt as FocusScope, ht as useFocusGuards, j as startOfYear, jt as useId, k as getISOWeek, kt as Root2$2, mt as Combination_default, nn as Primitive, on as require_jsx_runtime, pn as __toESM, pt as hideOthers, q as DropdownMenuContent, qt as createLucideIcon, rn as createSlot, sn as useComposedRefs, un as require_react, yt as Button, z as startOfISOWeek } from "./index-C2sUKBF4.js";
 var Activity = createLucideIcon("activity", [["path", {
 	d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
 	key: "169zse"
+}]]);
+var ArrowUp = createLucideIcon("arrow-up", [["path", {
+	d: "m5 12 7-7 7 7",
+	key: "hav0vg"
+}], ["path", {
+	d: "M12 19V5",
+	key: "x0mq9r"
 }]]);
 var ChevronLeft = createLucideIcon("chevron-left", [["path", {
 	d: "m15 18-6-6 6-6",
@@ -3009,6 +3016,6 @@ function ExportButton({ data, filename = "export", label = "Exportar", formatDat
 		})]
 	})] });
 }
-export { Activity as S, differenceInDays as _, TabsContent as a, Users as b, Card as c, CardTitle as d, Calendar as f, isBefore as g, PopoverTrigger as h, Tabs as i, CardContent as l, PopoverContent as m, formatLeadsForExport as n, TabsList as o, Popover as p, formatLiveForExport as r, TabsTrigger as s, ExportButton as t, CardHeader as u, addMonths as v, DollarSign as x, addDays as y };
+export { ArrowUp as C, ChevronLeft as S, differenceInDays as _, TabsContent as a, Users as b, Card as c, CardTitle as d, Calendar as f, isBefore as g, PopoverTrigger as h, Tabs as i, CardContent as l, PopoverContent as m, formatLeadsForExport as n, TabsList as o, Popover as p, formatLiveForExport as r, TabsTrigger as s, ExportButton as t, CardHeader as u, addMonths as v, Activity as w, DollarSign as x, addDays as y };
 
-//# sourceMappingURL=ExportButton-D32Z-lXA.js.map
+//# sourceMappingURL=ExportButton-DFN73wSx.js.map

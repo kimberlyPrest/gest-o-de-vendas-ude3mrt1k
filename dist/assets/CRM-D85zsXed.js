@@ -1,5 +1,5 @@
-import { S as Activity, _ as differenceInDays, a as TabsContent, b as Users, c as Card, d as CardTitle, f as Calendar$1, g as isBefore, h as PopoverTrigger, i as Tabs, l as CardContent, m as PopoverContent, n as formatLeadsForExport, o as TabsList, p as Popover, s as TabsTrigger, t as ExportButton, u as CardHeader, x as DollarSign } from "./ExportButton-D32Z-lXA.js";
-import { $t as Presence, Bt as Clock, C as DialogHeader, D as formatDistanceToNow, E as ptBR, Ft as X, G as millisecondsInHour, Ht as CircleAlert, It as User, Jt as Bell, K as millisecondsInMinute, Lt as Search, Nt as toast, O as format, P as getRoundingMethod, Pt as cn, Rt as RefreshCw, S as DialogFooter, St as useIsMobile, U as toDate, Vt as Circle, W as constructFrom, Xt as cva, Yt as createLucideIcon, a as SelectValue, at as Content, b as DialogContent, bt as Button, cn as require_jsx_runtime, ct as Portal, dt as Trigger, et as useDirection, fn as require_react, ft as WarningProvider, hn as __toESM, i as SelectTrigger, in as Primitive, it as Close, l as COLUMNS, ln as useComposedRefs, lt as Root$2, n as SelectContent, nt as require_shim, o as clamp, on as createSlottable, ot as Description, pt as createDialogScope, qt as Calendar, r as SelectItem, rn as useCallbackRef, rt as Skeleton, s as Label, sn as createContextScope, st as Overlay, t as Select, tn as useLayoutEffect2, u as useCRMStore, un as composeEventHandlers, ut as Title, v as Dialog, vt as Primitive$1, w as DialogTitle, xt as buttonVariants, y as DialogClose, yt as Input, z as normalizeDates, zt as LoaderCircle } from "./index-CTW2hi8H.js";
+import { C as ArrowUp, S as ChevronLeft, _ as differenceInDays, a as TabsContent, b as Users, c as Card, d as CardTitle, f as Calendar$1, g as isBefore, h as PopoverTrigger, i as Tabs, l as CardContent, m as PopoverContent, n as formatLeadsForExport, o as TabsList, p as Popover, s as TabsTrigger, t as ExportButton, u as CardHeader, w as Activity, x as DollarSign } from "./ExportButton-DFN73wSx.js";
+import { $t as useLayoutEffect2, Bt as CircleAlert, C as DialogTitle, D as format, E as formatDistanceToNow, Ft as User, G as millisecondsInMinute, Gt as Calendar, H as toDate, It as Search, Jt as cva, Kt as Bell, Lt as RefreshCw, Mt as toast, N as getRoundingMethod, Nt as cn, Pt as X, R as normalizeDates, Rt as LoaderCircle, S as DialogHeader, T as ptBR, U as constructFrom, W as millisecondsInHour, _ as Dialog, _t as Primitive, a as SelectValue, an as createContextScope, at as Description, bt as buttonVariants, c as COLUMNS, cn as composeEventHandlers, ct as Root$1, dt as WarningProvider, ft as createDialogScope, i as SelectTrigger, in as createSlottable, it as Content, l as useCRMStore, lt as Title, n as SelectContent, nt as Skeleton, o as Label, on as require_jsx_runtime, ot as Overlay, pn as __toESM, qt as createLucideIcon, r as SelectItem, rt as Close, sn as useComposedRefs, st as Portal, t as Select, tn as useCallbackRef, tt as require_shim, un as require_react, ut as Trigger, v as DialogClose, vt as Input, x as DialogFooter, xt as useIsMobile, y as DialogContent, yt as Button, zt as Clock } from "./index-C2sUKBF4.js";
 var ArrowRightLeft = createLucideIcon("arrow-right-left", [
 	["path", {
 		d: "m16 3 4 4-4 4",
@@ -63,6 +63,52 @@ var Funnel = createLucideIcon("funnel", [["path", {
 	d: "M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z",
 	key: "sc7q7i"
 }]]);
+var Globe = createLucideIcon("globe", [
+	["circle", {
+		cx: "12",
+		cy: "12",
+		r: "10",
+		key: "1mglay"
+	}],
+	["path", {
+		d: "M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20",
+		key: "13o1zl"
+	}],
+	["path", {
+		d: "M2 12h20",
+		key: "9i4pu4"
+	}]
+]);
+var Hash = createLucideIcon("hash", [
+	["line", {
+		x1: "4",
+		x2: "20",
+		y1: "9",
+		y2: "9",
+		key: "4lhtct"
+	}],
+	["line", {
+		x1: "4",
+		x2: "20",
+		y1: "15",
+		y2: "15",
+		key: "vyu0kd"
+	}],
+	["line", {
+		x1: "10",
+		x2: "8",
+		y1: "3",
+		y2: "21",
+		key: "1ggp8o"
+	}],
+	["line", {
+		x1: "16",
+		x2: "14",
+		y1: "3",
+		y2: "21",
+		key: "weycgp"
+	}]
+]);
 var Mail = createLucideIcon("mail", [["path", {
 	d: "m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7",
 	key: "132q7q"
@@ -73,6 +119,10 @@ var Mail = createLucideIcon("mail", [["path", {
 	height: "16",
 	rx: "2",
 	key: "izxlao"
+}]]);
+var MessageCircle = createLucideIcon("message-circle", [["path", {
+	d: "M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719",
+	key: "1sd12s"
 }]]);
 var MessageSquarePlus = createLucideIcon("message-square-plus", [
 	["path", {
@@ -96,12 +146,12 @@ var Phone = createLucideIcon("phone", [["path", {
 	d: "M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384",
 	key: "9njp5v"
 }]]);
-var Send = createLucideIcon("send", [["path", {
-	d: "M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z",
-	key: "1ffxy3"
+var StickyNote = createLucideIcon("sticky-note", [["path", {
+	d: "M21 9a2.4 2.4 0 0 0-.706-1.706l-3.588-3.588A2.4 2.4 0 0 0 15 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2z",
+	key: "1dfntj"
 }], ["path", {
-	d: "m21.854 2.147-10.94 10.939",
-	key: "12cjpa"
+	d: "M15 3v5a1 1 0 0 0 1 1h5",
+	key: "6s6qgf"
 }]]);
 var Trash2 = createLucideIcon("trash-2", [
 	["path", {
@@ -854,7 +904,7 @@ var Avatar$1 = import_react.forwardRef((props, forwardedRef) => {
 		scope: __scopeAvatar,
 		imageLoadingStatus,
 		onImageLoadingStatusChange: setImageLoadingStatus,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
 			...avatarProps,
 			ref: forwardedRef
 		})
@@ -873,7 +923,7 @@ var AvatarImage$1 = import_react.forwardRef((props, forwardedRef) => {
 	useLayoutEffect2(() => {
 		if (imageLoadingStatus !== "idle") handleLoadingStatusChange(imageLoadingStatus);
 	}, [imageLoadingStatus, handleLoadingStatusChange]);
-	return imageLoadingStatus === "loaded" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.img, {
+	return imageLoadingStatus === "loaded" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.img, {
 		...imageProps,
 		ref: forwardedRef,
 		src
@@ -891,7 +941,7 @@ var AvatarFallback$1 = import_react.forwardRef((props, forwardedRef) => {
 			return () => window.clearTimeout(timerId);
 		}
 	}, [delayMs]);
-	return canRender && context.imageLoadingStatus !== "loaded" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
+	return canRender && context.imageLoadingStatus !== "loaded" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
 		...fallbackProps,
 		ref: forwardedRef
 	}) : null;
@@ -937,15 +987,15 @@ function useImageLoadingStatus(src, { referrerPolicy, crossOrigin }) {
 	]);
 	return loadingStatus;
 }
-var Root$1 = Avatar$1;
+var Root = Avatar$1;
 var Image = AvatarImage$1;
 var Fallback = AvatarFallback$1;
-var Avatar = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$1, {
+var Avatar = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
 	ref,
 	className: cn("relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full", className),
 	...props
 }));
-Avatar.displayName = Root$1.displayName;
+Avatar.displayName = Root.displayName;
 var AvatarImage = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Image, {
 	ref,
 	className: cn("aspect-square h-full w-full", className),
@@ -959,870 +1009,253 @@ var AvatarFallback = import_react.forwardRef(({ className, ...props }, ref) => /
 }));
 AvatarFallback.displayName = Fallback.displayName;
 function LeadInfo({ lead }) {
+	const initials = lead.nomeCompleto.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase();
 	const potentialValue = lead.assentosAdicionais * 500;
 	const statusColor = COLUMNS.find((c) => c.id === lead.status)?.color || "#6B7280";
-	const initials = lead.nomeCompleto.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase();
-	const lastInteractionDate = new Date(lead.lastInteraction);
-	const now = /* @__PURE__ */ new Date();
-	const hoursDiff = differenceInHours(now, lastInteractionDate);
-	const daysDiff = differenceInDays(now, lastInteractionDate);
-	let statusStatus = "success";
-	let statusText = `Última interação: Há ${hoursDiff} horas`;
-	if (hoursDiff > 72) {
-		statusStatus = "urgent";
-		statusText = `Urgente - Sem interação há: ${daysDiff} dias`;
-	} else if (hoursDiff > 24) {
-		statusStatus = "warning";
-		statusText = `Atenção - Última interação: Há ${daysDiff} dias`;
-	}
+	const role = "Estrategista de Marketing";
+	const location = "São Paulo, BR";
+	const probability = 92;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "flex flex-col gap-6",
-		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex items-start gap-4",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Avatar, {
-					className: "h-16 w-16 border-2 border-white shadow-lg",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarImage, { src: `https://img.usecurling.com/ppl/medium?seed=${lead.id}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarFallback, {
-						className: "bg-primary text-primary-foreground text-xl",
-						children: initials
-					})]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex-1 space-y-1",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-						className: "text-2xl font-bold text-gray-900",
-						children: lead.nomeCompleto
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-wrap items-center gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Badge, {
-							className: "px-2 py-0.5 text-xs font-medium text-white",
-							style: { backgroundColor: statusColor },
-							children: lead.status
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-							className: "text-xs text-muted-foreground flex items-center gap-1",
+		className: "flex flex-col gap-8",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "flex flex-col items-center space-y-4 pt-2 text-center",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "relative",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Avatar, {
+						className: "h-24 w-24 border-4 border-white shadow-sm",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarImage, { src: `https://img.usecurling.com/ppl/medium?seed=${lead.id}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarFallback, {
+							className: "bg-gray-200 text-2xl text-gray-500",
+							children: initials
+						})]
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "space-y-1",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center justify-center gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+							className: "text-2xl font-bold text-gray-900",
+							children: lead.nomeCompleto
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
+							className: "rounded-full border-0 bg-orange-50 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-orange-600 hover:bg-orange-100",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "h-3 w-3" }),
-								"Capturado em: ",
-								format(new Date(lead.dataCaptacao), "dd/MM/yyyy")
+								"HOT LEAD (",
+								probability,
+								"%)"
 							]
 						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+						className: "flex items-center justify-center gap-1.5 text-sm text-gray-500",
+						children: [
+							role,
+							" ",
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-gray-300",
+								children: "•"
+							}),
+							" ",
+							location
+						]
 					})]
-				})]
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Card, {
-				className: cn("border-l-4 shadow-sm", statusStatus === "success" && "border-l-green-500 bg-green-50/50", statusStatus === "warning" && "border-l-yellow-500 bg-yellow-50/50", statusStatus === "urgent" && "border-l-red-500 bg-red-50/50"),
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-					className: "flex items-center gap-3 p-4",
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex w-full max-w-xs items-center justify-center gap-6 pt-2",
 					children: [
-						statusStatus === "success" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { className: "h-5 w-5 text-green-600" }),
-						statusStatus === "warning" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Clock, { className: "h-5 w-5 text-yellow-600" }),
-						statusStatus === "urgent" && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bell, { className: "h-5 w-5 text-red-600 animate-pulse" }),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: cn("text-sm font-medium", statusStatus === "success" && "text-green-700", statusStatus === "warning" && "text-yellow-700", statusStatus === "urgent" && "text-red-700"),
-							children: statusText
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-6 w-6" }),
+							label: "Ligar",
+							color: "bg-[#007AFF]",
+							onClick: () => window.open(`tel:${lead.telefone}`)
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-6 w-6" }),
+							label: "E-mail",
+							color: "bg-[#5856D6]",
+							onClick: () => window.open(`mailto:${lead.email}`)
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageCircle, { className: "h-6 w-6" }),
+							label: "WhatsApp",
+							color: "bg-[#34C759]",
+							onClick: () => window.open(`https://wa.me/55${lead.telefone.replace(/\D/g, "")}`)
 						})
 					]
 				})
-			}),
-			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "grid grid-cols-1 gap-4 md:grid-cols-2",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "space-y-4 rounded-lg border bg-gray-50 p-4",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
-						className: "font-semibold text-gray-900 flex items-center gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(User, { className: "h-4 w-4" }), " Contato"]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "space-y-3",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-							href: `mailto:${lead.email}`,
-							className: "flex items-center gap-2 text-sm text-blue-600 hover:underline",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-4 w-4 text-gray-500" }), lead.email]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("a", {
-							href: `tel:${lead.telefone}`,
-							className: "flex items-center gap-2 text-sm text-blue-600 hover:underline",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-4 w-4 text-gray-500" }), lead.telefone]
-						})]
-					})]
+			]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "space-y-6",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "space-y-2",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+					className: "pl-4 text-xs font-semibold uppercase tracking-wider text-gray-400",
+					children: "Informações Pessoais"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "space-y-4 rounded-lg border bg-gray-50 p-4",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("h3", {
-						className: "font-semibold text-gray-900 flex items-center gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, { className: "h-4 w-4" }), " Negócio"]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "grid grid-cols-2 gap-4",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-xs text-gray-500",
-								children: "Valor Potencial"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "font-medium text-green-700",
-								children: new Intl.NumberFormat("pt-BR", {
-									style: "currency",
-									currency: "BRL"
-								}).format(potentialValue)
-							})] }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-xs text-gray-500",
-								children: "Assentos"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "font-medium text-gray-900",
-								children: lead.assentosAdicionais
-							})] }),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-xs text-gray-500",
-								children: "Origem"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-sm font-medium text-gray-900",
-								children: lead.origem
-							})] })
-						]
-					})]
+					className: "overflow-hidden rounded-xl border border-gray-200/60 bg-white shadow-sm",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-5 w-5 text-gray-400" }),
+							label: "E-mail",
+							value: lead.email
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-5 w-5 text-gray-400" }),
+							label: "Telefone",
+							value: lead.telefone
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Activity, { className: "h-5 w-5 text-gray-400" }),
+							label: "Status",
+							value: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex items-center gap-2",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "h-2 w-2 rounded-full",
+									style: { backgroundColor: statusColor }
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									style: { color: "#007AFF" },
+									children: lead.status
+								})]
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Globe, { className: "h-5 w-5 text-gray-400" }),
+							label: "Origem",
+							value: lead.origem,
+							isLast: true
+						})
+					]
 				})]
-			})
-		]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "space-y-2",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+					className: "pl-4 text-xs font-semibold uppercase tracking-wider text-gray-400",
+					children: "Dados da Venda"
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "overflow-hidden rounded-xl border border-gray-200/60 bg-white shadow-sm",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "h-5 w-5 text-gray-400" }),
+							label: "Assentos Adicionais",
+							value: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
+								variant: "secondary",
+								className: "bg-gray-100 font-normal text-gray-700",
+								children: [lead.assentosAdicionais, " Unidades"]
+							})
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, { className: "h-5 w-5 text-gray-400" }),
+							label: "Valor Estimado",
+							value: new Intl.NumberFormat("pt-BR", {
+								style: "currency",
+								currency: "BRL"
+							}).format(potentialValue)
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
+							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Hash, { className: "h-5 w-5 text-gray-400" }),
+							label: "Probabilidade",
+							value: `${probability}%`,
+							isLast: true
+						})
+					]
+				})]
+			})]
+		})]
 	});
 }
-function useStateMachine(initialState, machine) {
-	return import_react.useReducer((state, event) => {
-		return machine[state][event] ?? state;
-	}, initialState);
+function ActionButton({ icon, label, color, onClick }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "group flex cursor-pointer flex-col items-center gap-2",
+		onClick,
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: cn("flex h-12 w-12 items-center justify-center rounded-full text-white shadow-md transition-transform active:scale-95", color),
+			children: icon
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+			className: "text-[10px] font-medium uppercase tracking-tight text-blue-600 group-hover:opacity-80",
+			children: label
+		})]
+	});
 }
-var SCROLL_AREA_NAME = "ScrollArea";
-var [createScrollAreaContext, createScrollAreaScope] = createContextScope(SCROLL_AREA_NAME);
-var [ScrollAreaProvider, useScrollAreaContext] = createScrollAreaContext(SCROLL_AREA_NAME);
-var ScrollArea$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeScrollArea, type = "hover", dir, scrollHideDelay = 600, ...scrollAreaProps } = props;
-	const [scrollArea, setScrollArea] = import_react.useState(null);
-	const [viewport, setViewport] = import_react.useState(null);
-	const [content, setContent] = import_react.useState(null);
-	const [scrollbarX, setScrollbarX] = import_react.useState(null);
-	const [scrollbarY, setScrollbarY] = import_react.useState(null);
-	const [cornerWidth, setCornerWidth] = import_react.useState(0);
-	const [cornerHeight, setCornerHeight] = import_react.useState(0);
-	const [scrollbarXEnabled, setScrollbarXEnabled] = import_react.useState(false);
-	const [scrollbarYEnabled, setScrollbarYEnabled] = import_react.useState(false);
-	const composedRefs = useComposedRefs(forwardedRef, (node) => setScrollArea(node));
-	const direction = useDirection(dir);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaProvider, {
-		scope: __scopeScrollArea,
-		type,
-		dir: direction,
-		scrollHideDelay,
-		scrollArea,
-		viewport,
-		onViewportChange: setViewport,
-		content,
-		onContentChange: setContent,
-		scrollbarX,
-		onScrollbarXChange: setScrollbarX,
-		scrollbarXEnabled,
-		onScrollbarXEnabledChange: setScrollbarXEnabled,
-		scrollbarY,
-		onScrollbarYChange: setScrollbarY,
-		scrollbarYEnabled,
-		onScrollbarYEnabledChange: setScrollbarYEnabled,
-		onCornerWidthChange: setCornerWidth,
-		onCornerHeightChange: setCornerHeight,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-			dir: direction,
-			...scrollAreaProps,
-			ref: composedRefs,
-			style: {
-				position: "relative",
-				["--radix-scroll-area-corner-width"]: cornerWidth + "px",
-				["--radix-scroll-area-corner-height"]: cornerHeight + "px",
-				...props.style
-			}
-		})
+function InfoRow({ icon, label, value, isLast }) {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: cn("flex items-center justify-between bg-white p-4", !isLast && "border-b border-gray-100"),
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "flex items-center gap-3",
+			children: [icon, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "text-sm font-medium text-gray-900",
+				children: label
+			})]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "text-sm font-normal text-gray-500",
+			children: value
+		})]
 	});
-});
-ScrollArea$1.displayName = SCROLL_AREA_NAME;
-var VIEWPORT_NAME = "ScrollAreaViewport";
-var ScrollAreaViewport = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeScrollArea, children, nonce, ...viewportProps } = props;
-	const context = useScrollAreaContext(VIEWPORT_NAME, __scopeScrollArea);
-	const composedRefs = useComposedRefs(forwardedRef, import_react.useRef(null), context.onViewportChange);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", {
-		dangerouslySetInnerHTML: { __html: `[data-radix-scroll-area-viewport]{scrollbar-width:none;-ms-overflow-style:none;-webkit-overflow-scrolling:touch;}[data-radix-scroll-area-viewport]::-webkit-scrollbar{display:none}` },
-		nonce
-	}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-		"data-radix-scroll-area-viewport": "",
-		...viewportProps,
-		ref: composedRefs,
-		style: {
-			overflowX: context.scrollbarXEnabled ? "scroll" : "hidden",
-			overflowY: context.scrollbarYEnabled ? "scroll" : "hidden",
-			...props.style
-		},
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			ref: context.onContentChange,
-			style: {
-				minWidth: "100%",
-				display: "table"
-			},
-			children
-		})
-	})] });
-});
-ScrollAreaViewport.displayName = VIEWPORT_NAME;
-var SCROLLBAR_NAME = "ScrollAreaScrollbar";
-var ScrollAreaScrollbar = import_react.forwardRef((props, forwardedRef) => {
-	const { forceMount, ...scrollbarProps } = props;
-	const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-	const { onScrollbarXEnabledChange, onScrollbarYEnabledChange } = context;
-	const isHorizontal = props.orientation === "horizontal";
-	import_react.useEffect(() => {
-		isHorizontal ? onScrollbarXEnabledChange(true) : onScrollbarYEnabledChange(true);
-		return () => {
-			isHorizontal ? onScrollbarXEnabledChange(false) : onScrollbarYEnabledChange(false);
-		};
-	}, [
-		isHorizontal,
-		onScrollbarXEnabledChange,
-		onScrollbarYEnabledChange
-	]);
-	return context.type === "hover" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarHover, {
-		...scrollbarProps,
-		ref: forwardedRef,
-		forceMount
-	}) : context.type === "scroll" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarScroll, {
-		...scrollbarProps,
-		ref: forwardedRef,
-		forceMount
-	}) : context.type === "auto" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarAuto, {
-		...scrollbarProps,
-		ref: forwardedRef,
-		forceMount
-	}) : context.type === "always" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarVisible, {
-		...scrollbarProps,
-		ref: forwardedRef
-	}) : null;
-});
-ScrollAreaScrollbar.displayName = SCROLLBAR_NAME;
-var ScrollAreaScrollbarHover = import_react.forwardRef((props, forwardedRef) => {
-	const { forceMount, ...scrollbarProps } = props;
-	const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-	const [visible, setVisible] = import_react.useState(false);
-	import_react.useEffect(() => {
-		const scrollArea = context.scrollArea;
-		let hideTimer = 0;
-		if (scrollArea) {
-			const handlePointerEnter = () => {
-				window.clearTimeout(hideTimer);
-				setVisible(true);
-			};
-			const handlePointerLeave = () => {
-				hideTimer = window.setTimeout(() => setVisible(false), context.scrollHideDelay);
-			};
-			scrollArea.addEventListener("pointerenter", handlePointerEnter);
-			scrollArea.addEventListener("pointerleave", handlePointerLeave);
-			return () => {
-				window.clearTimeout(hideTimer);
-				scrollArea.removeEventListener("pointerenter", handlePointerEnter);
-				scrollArea.removeEventListener("pointerleave", handlePointerLeave);
-			};
-		}
-	}, [context.scrollArea, context.scrollHideDelay]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
-		present: forceMount || visible,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarAuto, {
-			"data-state": visible ? "visible" : "hidden",
-			...scrollbarProps,
-			ref: forwardedRef
-		})
-	});
-});
-var ScrollAreaScrollbarScroll = import_react.forwardRef((props, forwardedRef) => {
-	const { forceMount, ...scrollbarProps } = props;
-	const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-	const isHorizontal = props.orientation === "horizontal";
-	const debounceScrollEnd = useDebounceCallback(() => send("SCROLL_END"), 100);
-	const [state, send] = useStateMachine("hidden", {
-		hidden: { SCROLL: "scrolling" },
-		scrolling: {
-			SCROLL_END: "idle",
-			POINTER_ENTER: "interacting"
-		},
-		interacting: {
-			SCROLL: "interacting",
-			POINTER_LEAVE: "idle"
-		},
-		idle: {
-			HIDE: "hidden",
-			SCROLL: "scrolling",
-			POINTER_ENTER: "interacting"
-		}
-	});
-	import_react.useEffect(() => {
-		if (state === "idle") {
-			const hideTimer = window.setTimeout(() => send("HIDE"), context.scrollHideDelay);
-			return () => window.clearTimeout(hideTimer);
-		}
-	}, [
-		state,
-		context.scrollHideDelay,
-		send
-	]);
-	import_react.useEffect(() => {
-		const viewport = context.viewport;
-		const scrollDirection = isHorizontal ? "scrollLeft" : "scrollTop";
-		if (viewport) {
-			let prevScrollPos = viewport[scrollDirection];
-			const handleScroll = () => {
-				const scrollPos = viewport[scrollDirection];
-				if (prevScrollPos !== scrollPos) {
-					send("SCROLL");
-					debounceScrollEnd();
-				}
-				prevScrollPos = scrollPos;
-			};
-			viewport.addEventListener("scroll", handleScroll);
-			return () => viewport.removeEventListener("scroll", handleScroll);
-		}
-	}, [
-		context.viewport,
-		isHorizontal,
-		send,
-		debounceScrollEnd
-	]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
-		present: forceMount || state !== "hidden",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarVisible, {
-			"data-state": state === "hidden" ? "hidden" : "visible",
-			...scrollbarProps,
-			ref: forwardedRef,
-			onPointerEnter: composeEventHandlers(props.onPointerEnter, () => send("POINTER_ENTER")),
-			onPointerLeave: composeEventHandlers(props.onPointerLeave, () => send("POINTER_LEAVE"))
-		})
-	});
-});
-var ScrollAreaScrollbarAuto = import_react.forwardRef((props, forwardedRef) => {
-	const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-	const { forceMount, ...scrollbarProps } = props;
-	const [visible, setVisible] = import_react.useState(false);
-	const isHorizontal = props.orientation === "horizontal";
-	const handleResize = useDebounceCallback(() => {
-		if (context.viewport) {
-			const isOverflowX = context.viewport.offsetWidth < context.viewport.scrollWidth;
-			const isOverflowY = context.viewport.offsetHeight < context.viewport.scrollHeight;
-			setVisible(isHorizontal ? isOverflowX : isOverflowY);
-		}
-	}, 10);
-	useResizeObserver(context.viewport, handleResize);
-	useResizeObserver(context.content, handleResize);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
-		present: forceMount || visible,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarVisible, {
-			"data-state": visible ? "visible" : "hidden",
-			...scrollbarProps,
-			ref: forwardedRef
-		})
-	});
-});
-var ScrollAreaScrollbarVisible = import_react.forwardRef((props, forwardedRef) => {
-	const { orientation = "vertical", ...scrollbarProps } = props;
-	const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-	const thumbRef = import_react.useRef(null);
-	const pointerOffsetRef = import_react.useRef(0);
-	const [sizes, setSizes] = import_react.useState({
-		content: 0,
-		viewport: 0,
-		scrollbar: {
-			size: 0,
-			paddingStart: 0,
-			paddingEnd: 0
-		}
-	});
-	const thumbRatio = getThumbRatio(sizes.viewport, sizes.content);
-	const commonProps = {
-		...scrollbarProps,
-		sizes,
-		onSizesChange: setSizes,
-		hasThumb: Boolean(thumbRatio > 0 && thumbRatio < 1),
-		onThumbChange: (thumb) => thumbRef.current = thumb,
-		onThumbPointerUp: () => pointerOffsetRef.current = 0,
-		onThumbPointerDown: (pointerPos) => pointerOffsetRef.current = pointerPos
-	};
-	function getScrollPosition(pointerPos, dir) {
-		return getScrollPositionFromPointer(pointerPos, pointerOffsetRef.current, sizes, dir);
-	}
-	if (orientation === "horizontal") return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarX, {
-		...commonProps,
-		ref: forwardedRef,
-		onThumbPositionChange: () => {
-			if (context.viewport && thumbRef.current) {
-				const scrollPos = context.viewport.scrollLeft;
-				const offset = getThumbOffsetFromScroll(scrollPos, sizes, context.dir);
-				thumbRef.current.style.transform = `translate3d(${offset}px, 0, 0)`;
-			}
-		},
-		onWheelScroll: (scrollPos) => {
-			if (context.viewport) context.viewport.scrollLeft = scrollPos;
-		},
-		onDragScroll: (pointerPos) => {
-			if (context.viewport) context.viewport.scrollLeft = getScrollPosition(pointerPos, context.dir);
-		}
-	});
-	if (orientation === "vertical") return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarY, {
-		...commonProps,
-		ref: forwardedRef,
-		onThumbPositionChange: () => {
-			if (context.viewport && thumbRef.current) {
-				const scrollPos = context.viewport.scrollTop;
-				const offset = getThumbOffsetFromScroll(scrollPos, sizes);
-				thumbRef.current.style.transform = `translate3d(0, ${offset}px, 0)`;
-			}
-		},
-		onWheelScroll: (scrollPos) => {
-			if (context.viewport) context.viewport.scrollTop = scrollPos;
-		},
-		onDragScroll: (pointerPos) => {
-			if (context.viewport) context.viewport.scrollTop = getScrollPosition(pointerPos);
-		}
-	});
-	return null;
-});
-var ScrollAreaScrollbarX = import_react.forwardRef((props, forwardedRef) => {
-	const { sizes, onSizesChange, ...scrollbarProps } = props;
-	const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-	const [computedStyle, setComputedStyle] = import_react.useState();
-	const ref = import_react.useRef(null);
-	const composeRefs = useComposedRefs(forwardedRef, ref, context.onScrollbarXChange);
-	import_react.useEffect(() => {
-		if (ref.current) setComputedStyle(getComputedStyle(ref.current));
-	}, [ref]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarImpl, {
-		"data-orientation": "horizontal",
-		...scrollbarProps,
-		ref: composeRefs,
-		sizes,
-		style: {
-			bottom: 0,
-			left: context.dir === "rtl" ? "var(--radix-scroll-area-corner-width)" : 0,
-			right: context.dir === "ltr" ? "var(--radix-scroll-area-corner-width)" : 0,
-			["--radix-scroll-area-thumb-width"]: getThumbSize(sizes) + "px",
-			...props.style
-		},
-		onThumbPointerDown: (pointerPos) => props.onThumbPointerDown(pointerPos.x),
-		onDragScroll: (pointerPos) => props.onDragScroll(pointerPos.x),
-		onWheelScroll: (event, maxScrollPos) => {
-			if (context.viewport) {
-				const scrollPos = context.viewport.scrollLeft + event.deltaX;
-				props.onWheelScroll(scrollPos);
-				if (isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos)) event.preventDefault();
-			}
-		},
-		onResize: () => {
-			if (ref.current && context.viewport && computedStyle) onSizesChange({
-				content: context.viewport.scrollWidth,
-				viewport: context.viewport.offsetWidth,
-				scrollbar: {
-					size: ref.current.clientWidth,
-					paddingStart: toInt(computedStyle.paddingLeft),
-					paddingEnd: toInt(computedStyle.paddingRight)
-				}
-			});
-		}
-	});
-});
-var ScrollAreaScrollbarY = import_react.forwardRef((props, forwardedRef) => {
-	const { sizes, onSizesChange, ...scrollbarProps } = props;
-	const context = useScrollAreaContext(SCROLLBAR_NAME, props.__scopeScrollArea);
-	const [computedStyle, setComputedStyle] = import_react.useState();
-	const ref = import_react.useRef(null);
-	const composeRefs = useComposedRefs(forwardedRef, ref, context.onScrollbarYChange);
-	import_react.useEffect(() => {
-		if (ref.current) setComputedStyle(getComputedStyle(ref.current));
-	}, [ref]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbarImpl, {
-		"data-orientation": "vertical",
-		...scrollbarProps,
-		ref: composeRefs,
-		sizes,
-		style: {
-			top: 0,
-			right: context.dir === "ltr" ? 0 : void 0,
-			left: context.dir === "rtl" ? 0 : void 0,
-			bottom: "var(--radix-scroll-area-corner-height)",
-			["--radix-scroll-area-thumb-height"]: getThumbSize(sizes) + "px",
-			...props.style
-		},
-		onThumbPointerDown: (pointerPos) => props.onThumbPointerDown(pointerPos.y),
-		onDragScroll: (pointerPos) => props.onDragScroll(pointerPos.y),
-		onWheelScroll: (event, maxScrollPos) => {
-			if (context.viewport) {
-				const scrollPos = context.viewport.scrollTop + event.deltaY;
-				props.onWheelScroll(scrollPos);
-				if (isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos)) event.preventDefault();
-			}
-		},
-		onResize: () => {
-			if (ref.current && context.viewport && computedStyle) onSizesChange({
-				content: context.viewport.scrollHeight,
-				viewport: context.viewport.offsetHeight,
-				scrollbar: {
-					size: ref.current.clientHeight,
-					paddingStart: toInt(computedStyle.paddingTop),
-					paddingEnd: toInt(computedStyle.paddingBottom)
-				}
-			});
-		}
-	});
-});
-var [ScrollbarProvider, useScrollbarContext] = createScrollAreaContext(SCROLLBAR_NAME);
-var ScrollAreaScrollbarImpl = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeScrollArea, sizes, hasThumb, onThumbChange, onThumbPointerUp, onThumbPointerDown, onThumbPositionChange, onDragScroll, onWheelScroll, onResize, ...scrollbarProps } = props;
-	const context = useScrollAreaContext(SCROLLBAR_NAME, __scopeScrollArea);
-	const [scrollbar, setScrollbar] = import_react.useState(null);
-	const composeRefs = useComposedRefs(forwardedRef, (node) => setScrollbar(node));
-	const rectRef = import_react.useRef(null);
-	const prevWebkitUserSelectRef = import_react.useRef("");
-	const viewport = context.viewport;
-	const maxScrollPos = sizes.content - sizes.viewport;
-	const handleWheelScroll = useCallbackRef(onWheelScroll);
-	const handleThumbPositionChange = useCallbackRef(onThumbPositionChange);
-	const handleResize = useDebounceCallback(onResize, 10);
-	function handleDragScroll(event) {
-		if (rectRef.current) onDragScroll({
-			x: event.clientX - rectRef.current.left,
-			y: event.clientY - rectRef.current.top
-		});
-	}
-	import_react.useEffect(() => {
-		const handleWheel = (event) => {
-			const element = event.target;
-			if (scrollbar?.contains(element)) handleWheelScroll(event, maxScrollPos);
-		};
-		document.addEventListener("wheel", handleWheel, { passive: false });
-		return () => document.removeEventListener("wheel", handleWheel, { passive: false });
-	}, [
-		viewport,
-		scrollbar,
-		maxScrollPos,
-		handleWheelScroll
-	]);
-	import_react.useEffect(handleThumbPositionChange, [sizes, handleThumbPositionChange]);
-	useResizeObserver(scrollbar, handleResize);
-	useResizeObserver(context.content, handleResize);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollbarProvider, {
-		scope: __scopeScrollArea,
-		scrollbar,
-		hasThumb,
-		onThumbChange: useCallbackRef(onThumbChange),
-		onThumbPointerUp: useCallbackRef(onThumbPointerUp),
-		onThumbPositionChange: handleThumbPositionChange,
-		onThumbPointerDown: useCallbackRef(onThumbPointerDown),
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-			...scrollbarProps,
-			ref: composeRefs,
-			style: {
-				position: "absolute",
-				...scrollbarProps.style
-			},
-			onPointerDown: composeEventHandlers(props.onPointerDown, (event) => {
-				if (event.button === 0) {
-					event.target.setPointerCapture(event.pointerId);
-					rectRef.current = scrollbar.getBoundingClientRect();
-					prevWebkitUserSelectRef.current = document.body.style.webkitUserSelect;
-					document.body.style.webkitUserSelect = "none";
-					if (context.viewport) context.viewport.style.scrollBehavior = "auto";
-					handleDragScroll(event);
-				}
-			}),
-			onPointerMove: composeEventHandlers(props.onPointerMove, handleDragScroll),
-			onPointerUp: composeEventHandlers(props.onPointerUp, (event) => {
-				const element = event.target;
-				if (element.hasPointerCapture(event.pointerId)) element.releasePointerCapture(event.pointerId);
-				document.body.style.webkitUserSelect = prevWebkitUserSelectRef.current;
-				if (context.viewport) context.viewport.style.scrollBehavior = "";
-				rectRef.current = null;
-			})
-		})
-	});
-});
-var THUMB_NAME = "ScrollAreaThumb";
-var ScrollAreaThumb = import_react.forwardRef((props, forwardedRef) => {
-	const { forceMount, ...thumbProps } = props;
-	const scrollbarContext = useScrollbarContext(THUMB_NAME, props.__scopeScrollArea);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Presence, {
-		present: forceMount || scrollbarContext.hasThumb,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaThumbImpl, {
-			ref: forwardedRef,
-			...thumbProps
-		})
-	});
-});
-var ScrollAreaThumbImpl = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeScrollArea, style, ...thumbProps } = props;
-	const scrollAreaContext = useScrollAreaContext(THUMB_NAME, __scopeScrollArea);
-	const scrollbarContext = useScrollbarContext(THUMB_NAME, __scopeScrollArea);
-	const { onThumbPositionChange } = scrollbarContext;
-	const composedRef = useComposedRefs(forwardedRef, (node) => scrollbarContext.onThumbChange(node));
-	const removeUnlinkedScrollListenerRef = import_react.useRef(void 0);
-	const debounceScrollEnd = useDebounceCallback(() => {
-		if (removeUnlinkedScrollListenerRef.current) {
-			removeUnlinkedScrollListenerRef.current();
-			removeUnlinkedScrollListenerRef.current = void 0;
-		}
-	}, 100);
-	import_react.useEffect(() => {
-		const viewport = scrollAreaContext.viewport;
-		if (viewport) {
-			const handleScroll = () => {
-				debounceScrollEnd();
-				if (!removeUnlinkedScrollListenerRef.current) {
-					removeUnlinkedScrollListenerRef.current = addUnlinkedScrollListener(viewport, onThumbPositionChange);
-					onThumbPositionChange();
-				}
-			};
-			onThumbPositionChange();
-			viewport.addEventListener("scroll", handleScroll);
-			return () => viewport.removeEventListener("scroll", handleScroll);
-		}
-	}, [
-		scrollAreaContext.viewport,
-		debounceScrollEnd,
-		onThumbPositionChange
-	]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-		"data-state": scrollbarContext.hasThumb ? "visible" : "hidden",
-		...thumbProps,
-		ref: composedRef,
-		style: {
-			width: "var(--radix-scroll-area-thumb-width)",
-			height: "var(--radix-scroll-area-thumb-height)",
-			...style
-		},
-		onPointerDownCapture: composeEventHandlers(props.onPointerDownCapture, (event) => {
-			const thumbRect = event.target.getBoundingClientRect();
-			const x = event.clientX - thumbRect.left;
-			const y = event.clientY - thumbRect.top;
-			scrollbarContext.onThumbPointerDown({
-				x,
-				y
-			});
-		}),
-		onPointerUp: composeEventHandlers(props.onPointerUp, scrollbarContext.onThumbPointerUp)
-	});
-});
-ScrollAreaThumb.displayName = THUMB_NAME;
-var CORNER_NAME = "ScrollAreaCorner";
-var ScrollAreaCorner = import_react.forwardRef((props, forwardedRef) => {
-	const context = useScrollAreaContext(CORNER_NAME, props.__scopeScrollArea);
-	const hasBothScrollbarsVisible = Boolean(context.scrollbarX && context.scrollbarY);
-	return context.type !== "scroll" && hasBothScrollbarsVisible ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaCornerImpl, {
-		...props,
-		ref: forwardedRef
-	}) : null;
-});
-ScrollAreaCorner.displayName = CORNER_NAME;
-var ScrollAreaCornerImpl = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeScrollArea, ...cornerProps } = props;
-	const context = useScrollAreaContext(CORNER_NAME, __scopeScrollArea);
-	const [width, setWidth] = import_react.useState(0);
-	const [height, setHeight] = import_react.useState(0);
-	const hasSize = Boolean(width && height);
-	useResizeObserver(context.scrollbarX, () => {
-		const height2 = context.scrollbarX?.offsetHeight || 0;
-		context.onCornerHeightChange(height2);
-		setHeight(height2);
-	});
-	useResizeObserver(context.scrollbarY, () => {
-		const width2 = context.scrollbarY?.offsetWidth || 0;
-		context.onCornerWidthChange(width2);
-		setWidth(width2);
-	});
-	return hasSize ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-		...cornerProps,
-		ref: forwardedRef,
-		style: {
-			width,
-			height,
-			position: "absolute",
-			right: context.dir === "ltr" ? 0 : void 0,
-			left: context.dir === "rtl" ? 0 : void 0,
-			bottom: 0,
-			...props.style
-		}
-	}) : null;
-});
-function toInt(value) {
-	return value ? parseInt(value, 10) : 0;
 }
-function getThumbRatio(viewportSize, contentSize) {
-	const ratio = viewportSize / contentSize;
-	return isNaN(ratio) ? 0 : ratio;
-}
-function getThumbSize(sizes) {
-	const ratio = getThumbRatio(sizes.viewport, sizes.content);
-	const scrollbarPadding = sizes.scrollbar.paddingStart + sizes.scrollbar.paddingEnd;
-	const thumbSize = (sizes.scrollbar.size - scrollbarPadding) * ratio;
-	return Math.max(thumbSize, 18);
-}
-function getScrollPositionFromPointer(pointerPos, pointerOffset, sizes, dir = "ltr") {
-	const thumbSizePx = getThumbSize(sizes);
-	const thumbCenter = thumbSizePx / 2;
-	const offset = pointerOffset || thumbCenter;
-	const thumbOffsetFromEnd = thumbSizePx - offset;
-	const minPointerPos = sizes.scrollbar.paddingStart + offset;
-	const maxPointerPos = sizes.scrollbar.size - sizes.scrollbar.paddingEnd - thumbOffsetFromEnd;
-	const maxScrollPos = sizes.content - sizes.viewport;
-	const scrollRange = dir === "ltr" ? [0, maxScrollPos] : [maxScrollPos * -1, 0];
-	return linearScale([minPointerPos, maxPointerPos], scrollRange)(pointerPos);
-}
-function getThumbOffsetFromScroll(scrollPos, sizes, dir = "ltr") {
-	const thumbSizePx = getThumbSize(sizes);
-	const scrollbarPadding = sizes.scrollbar.paddingStart + sizes.scrollbar.paddingEnd;
-	const scrollbar = sizes.scrollbar.size - scrollbarPadding;
-	const maxScrollPos = sizes.content - sizes.viewport;
-	const maxThumbPos = scrollbar - thumbSizePx;
-	const scrollWithoutMomentum = clamp(scrollPos, dir === "ltr" ? [0, maxScrollPos] : [maxScrollPos * -1, 0]);
-	return linearScale([0, maxScrollPos], [0, maxThumbPos])(scrollWithoutMomentum);
-}
-function linearScale(input, output) {
-	return (value) => {
-		if (input[0] === input[1] || output[0] === output[1]) return output[0];
-		const ratio = (output[1] - output[0]) / (input[1] - input[0]);
-		return output[0] + ratio * (value - input[0]);
-	};
-}
-function isScrollingWithinScrollbarBounds(scrollPos, maxScrollPos) {
-	return scrollPos > 0 && scrollPos < maxScrollPos;
-}
-var addUnlinkedScrollListener = (node, handler = () => {}) => {
-	let prevPosition = {
-		left: node.scrollLeft,
-		top: node.scrollTop
-	};
-	let rAF = 0;
-	(function loop() {
-		const position = {
-			left: node.scrollLeft,
-			top: node.scrollTop
-		};
-		const isHorizontalScroll = prevPosition.left !== position.left;
-		const isVerticalScroll = prevPosition.top !== position.top;
-		if (isHorizontalScroll || isVerticalScroll) handler();
-		prevPosition = position;
-		rAF = window.requestAnimationFrame(loop);
-	})();
-	return () => window.cancelAnimationFrame(rAF);
-};
-function useDebounceCallback(callback, delay) {
-	const handleCallback = useCallbackRef(callback);
-	const debounceTimerRef = import_react.useRef(0);
-	import_react.useEffect(() => () => window.clearTimeout(debounceTimerRef.current), []);
-	return import_react.useCallback(() => {
-		window.clearTimeout(debounceTimerRef.current);
-		debounceTimerRef.current = window.setTimeout(handleCallback, delay);
-	}, [handleCallback, delay]);
-}
-function useResizeObserver(element, onResize) {
-	const handleResize = useCallbackRef(onResize);
-	useLayoutEffect2(() => {
-		let rAF = 0;
-		if (element) {
-			const resizeObserver = new ResizeObserver(() => {
-				cancelAnimationFrame(rAF);
-				rAF = window.requestAnimationFrame(handleResize);
-			});
-			resizeObserver.observe(element);
-			return () => {
-				window.cancelAnimationFrame(rAF);
-				resizeObserver.unobserve(element);
-			};
-		}
-	}, [element, handleResize]);
-}
-var Root = ScrollArea$1;
-var Viewport = ScrollAreaViewport;
-var Corner = ScrollAreaCorner;
-var ScrollArea = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Root, {
-	ref,
-	className: cn("relative overflow-hidden", className),
-	...props,
-	children: [
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Viewport, {
-			className: "h-full w-full rounded-[inherit]",
-			children
-		}),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollBar, {}),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Corner, {})
-	]
-}));
-ScrollArea.displayName = Root.displayName;
-var ScrollBar = import_react.forwardRef(({ className, orientation = "vertical", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaScrollbar, {
-	ref,
-	orientation,
-	className: cn("flex touch-none select-none transition-colors", orientation === "vertical" && "h-full w-2.5 border-l border-l-transparent p-[1px]", orientation === "horizontal" && "h-2.5 flex-col border-t border-t-transparent p-[1px]", className),
-	...props,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollAreaThumb, { className: "relative flex-1 rounded-full bg-border" })
-}));
-ScrollBar.displayName = ScrollAreaScrollbar.displayName;
 function LeadTimeline({ lead }) {
-	const history = lead.history || [];
+	const history = [...lead.history || []].sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 	const getIcon = (type) => {
 		switch (type) {
-			case "interaction": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageSquare, { className: "h-4 w-4 text-blue-500" });
-			case "status_change": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRightLeft, { className: "h-4 w-4 text-purple-500" });
-			case "follow_up_set": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CalendarClock, { className: "h-4 w-4 text-orange-500" });
-			case "note_added": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Circle, { className: "h-4 w-4 text-gray-500" });
-			default: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { className: "h-4 w-4 text-green-500" });
+			case "interaction": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageSquare, { className: "h-4 w-4 text-blue-600" });
+			case "status_change": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRightLeft, { className: "h-4 w-4 text-orange-600" });
+			case "follow_up_set": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CalendarClock, { className: "h-4 w-4 text-purple-600" });
+			case "note_added": return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(StickyNote, { className: "h-4 w-4 text-yellow-600" });
+			default: return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleCheck, { className: "h-4 w-4 text-gray-600" });
+		}
+	};
+	const getBgColor = (type) => {
+		switch (type) {
+			case "interaction": return "bg-blue-100";
+			case "status_change": return "bg-orange-100";
+			case "follow_up_set": return "bg-purple-100";
+			case "note_added": return "bg-yellow-100";
+			default: return "bg-gray-100";
 		}
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "flex flex-col h-full max-h-[500px]",
+		className: "space-y-4",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-			className: "mb-4 font-semibold text-gray-900",
-			children: "Histórico de Atividades"
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ScrollArea, {
-			className: "flex-1 pr-4",
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "space-y-6 border-l-2 border-gray-100 ml-2 pl-6 pb-2",
-				children: [history.length === 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "text-sm text-gray-400 italic",
-					children: "Nenhuma atividade registrada."
-				}), history.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "relative",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-						className: "absolute -left-[33px] top-1 flex h-8 w-8 items-center justify-center rounded-full bg-white border border-gray-200 shadow-sm",
+			className: "pl-4 text-xs font-semibold uppercase tracking-wider text-gray-400",
+			children: "Histórico de Atividade"
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "rounded-xl border border-gray-200/60 bg-white p-6 shadow-sm",
+			children: history.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "py-8 text-center text-sm text-gray-400",
+				children: "Nenhuma atividade registrada"
+			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "relative space-y-8 pl-1",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute bottom-2 left-[20px] top-2 w-px -translate-x-1/2 bg-gray-200" }), history.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "relative flex gap-4",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: cn("relative z-10 flex h-10 w-10 shrink-0 items-center justify-center rounded-full border border-white shadow-sm ring-4 ring-white", getBgColor(item.type)),
 						children: getIcon(item.type)
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-col gap-1",
-						children: [
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-xs text-gray-500",
-								children: format(new Date(item.date), "d 'de' MMM, HH:mm", { locale: ptBR })
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-sm text-gray-700",
-								children: item.description
-							}),
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-[10px] font-medium text-gray-400",
-								children: item.author
-							})
-						]
+						className: "flex-1 space-y-1 py-1",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-sm font-medium leading-none text-gray-900",
+							children: item.description
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center gap-2 text-xs text-gray-500",
+							children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: format(new Date(item.date), "d 'de' MMMM 'às' HH:mm", { locale: ptBR }) }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "•" }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "font-medium text-gray-600",
+									children: item.author
+								})
+							]
+						})]
 					})]
 				}, item.id))]
 			})
 		})]
 	});
 }
-var Textarea = import_react.forwardRef(({ className, ...props }, ref) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
-		className: cn("flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
-		ref,
-		...props
-	});
-});
-Textarea.displayName = "Textarea";
 var ROOT_NAME = "AlertDialog";
 var [createAlertDialogContext, createAlertDialogScope] = createContextScope(ROOT_NAME, [createDialogScope]);
 var useDialogScope = createDialogScope();
 var AlertDialog$1 = (props) => {
 	const { __scopeAlertDialog, ...alertDialogProps } = props;
 	const dialogScope = useDialogScope(__scopeAlertDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$1, {
 		...dialogScope,
 		...alertDialogProps,
 		modal: true
@@ -2014,93 +1447,99 @@ AlertDialogCancel.displayName = Cancel.displayName;
 function LeadNotes({ lead }) {
 	const { addNote } = useCRMStore();
 	const [noteContent, setNoteContent] = (0, import_react.useState)("");
-	const [isSubmitting, setIsSubmitting] = (0, import_react.useState)(false);
 	const handleAddNote = () => {
 		if (!noteContent.trim()) return;
-		setIsSubmitting(true);
-		try {
-			addNote(lead.id, noteContent);
-			setNoteContent("");
-			toast.success("Nota adicionada com sucesso");
-		} catch (error) {
-			toast.error("Erro ao adicionar nota");
-		} finally {
-			setIsSubmitting(false);
-		}
+		addNote(lead.id, noteContent);
+		setNoteContent("");
+		toast.success("Nota adicionada");
 	};
 	const handleDeleteMock = () => {
-		toast.success("Nota removida com sucesso");
+		toast.success("Nota removida");
 	};
+	const notes = [...lead.notes || []].sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "flex flex-col h-full gap-4",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: "flex-1 space-y-4 overflow-y-auto max-h-[300px] pr-2",
-			children: lead.notes?.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				className: "text-center text-sm text-gray-500 py-8",
-				children: "Nenhuma nota adicionada."
-			}) : lead.notes?.map((note) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "group flex gap-3 rounded-lg border bg-gray-50 p-3 transition-colors hover:bg-gray-100",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Avatar, {
-						className: "h-8 w-8",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarImage, { src: `https://img.usecurling.com/ppl/thumbnail?seed=${note.author}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarFallback, { children: "U" })]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex-1 space-y-1",
+		className: "space-y-4",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+				className: "pl-4 text-xs font-semibold uppercase tracking-wider text-gray-400",
+				children: "Notas Recentes"
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "space-y-3",
+				children: notes.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "rounded-xl border border-gray-200/60 bg-white p-8 text-center text-sm italic text-gray-400",
+					children: "Sem notas recentes."
+				}) : notes.map((note) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "group rounded-xl border border-gray-200/60 bg-white p-4 shadow-sm transition-all hover:shadow-md",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-start justify-between gap-3",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center justify-between",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-sm font-medium text-gray-900",
-								children: note.author
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-xs text-gray-500",
-								children: formatDistanceToNow(new Date(note.createdAt), {
-									addSuffix: true,
-									locale: ptBR
-								})
+							className: "flex w-full items-start gap-3",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Avatar, {
+								className: "mt-1 h-8 w-8",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarImage, { src: `https://img.usecurling.com/ppl/thumbnail?seed=${note.author}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarFallback, { children: "U" })]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex-1 space-y-1",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+									className: "flex items-center justify-between",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-xs font-semibold text-gray-900",
+										children: note.author
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-[10px] text-gray-400",
+										children: formatDistanceToNow(new Date(note.createdAt), {
+											addSuffix: true,
+											locale: ptBR
+										})
+									})]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-sm leading-relaxed text-gray-600",
+									children: note.content
+								})]
 							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-sm text-gray-700 whitespace-pre-wrap",
-							children: note.content
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialog, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogTrigger, {
-						asChild: true,
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-							variant: "ghost",
-							size: "icon",
-							className: "h-6 w-6 opacity-0 group-hover:opacity-100 text-red-500 hover:text-red-700 hover:bg-red-50",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash2, { className: "h-3 w-3" })
-						})
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogContent, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogHeader, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogTitle, { children: "Excluir nota?" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogDescription, { children: "Esta ação não pode ser desfeita." })] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogFooter, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogCancel, { children: "Cancelar" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogAction, {
-						onClick: handleDeleteMock,
-						className: "bg-red-600 hover:bg-red-700",
-						children: "Excluir"
-					})] })] })] })
-				]
-			}, note.id))
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "space-y-2",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "relative",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Textarea, {
-					placeholder: "Digite sua nota...",
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialog, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogTrigger, {
+							asChild: true,
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+								variant: "ghost",
+								size: "icon",
+								className: "-mr-1 -mt-1 h-6 w-6 text-gray-400 opacity-0 transition-opacity hover:text-red-500 group-hover:opacity-100",
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trash2, { className: "h-3 w-3" })
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogContent, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogHeader, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogTitle, { children: "Excluir nota?" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogDescription, { children: "Esta ação é irreversível." })] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(AlertDialogFooter, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogCancel, { children: "Cancelar" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AlertDialogAction, {
+							onClick: handleDeleteMock,
+							className: "bg-red-600 hover:bg-red-700",
+							children: "Excluir"
+						})] })] })] })]
+					})
+				}, note.id))
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "mt-2 flex items-center gap-2 rounded-full border border-gray-300 bg-white p-2 shadow-sm transition-all focus-within:ring-2 focus-within:ring-blue-500/20",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+					className: "h-10 flex-1 border-0 bg-transparent px-4 text-sm shadow-none focus-visible:ring-0",
+					placeholder: "Adicionar uma nota...",
 					value: noteContent,
-					onChange: (e) => setNoteContent(e.target.value.slice(0, 1e3)),
-					className: "min-h-[100px] resize-none pr-12"
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-					className: "absolute bottom-2 right-2 text-xs text-gray-400",
-					children: [noteContent.length, "/1000"]
+					onChange: (e) => setNoteContent(e.target.value),
+					onKeyDown: (e) => e.key === "Enter" && handleAddNote()
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+					size: "icon",
+					className: cn("h-8 w-8 shrink-0 rounded-full transition-all", noteContent.trim() ? "bg-[#007AFF] hover:bg-blue-600" : "cursor-not-allowed bg-gray-200 text-gray-400"),
+					onClick: handleAddNote,
+					disabled: !noteContent.trim(),
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUp, { className: "h-4 w-4" })
 				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-				onClick: handleAddNote,
-				disabled: !noteContent.trim() || isSubmitting,
-				className: "w-full",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Send, { className: "mr-2 h-4 w-4" }), "Adicionar Nota"]
-			})]
-		})]
+			})
+		]
 	});
 }
+var Textarea = import_react.forwardRef(({ className, ...props }, ref) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("textarea", {
+		className: cn("flex min-h-[80px] w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
+		ref,
+		...props
+	});
+});
+Textarea.displayName = "Textarea";
 function LeadInteractionModal({ leadId, open, onOpenChange }) {
 	const { addInteraction } = useCRMStore();
 	const [type, setType] = (0, import_react.useState)("");
@@ -2237,77 +1676,69 @@ function LeadDetailsModal({ lead, open, onOpenChange }) {
 	const [interactionOpen, setInteractionOpen] = (0, import_react.useState)(false);
 	const [followUpOpen, setFollowUpOpen] = (0, import_react.useState)(false);
 	if (!lead) return null;
-	const hasFutureFollowUp = lead.followUp && new Date(lead.followUp) > /* @__PURE__ */ new Date();
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
 			open,
 			onOpenChange,
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
-				className: "max-w-4xl h-[90vh] md:h-auto md:max-h-[90vh] flex flex-col p-0 gap-0 overflow-hidden",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, {
-					className: "px-6 py-4 border-b flex flex-row items-center justify-between space-y-0",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-3",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, { children: "Detalhes do Lead" }), hasFutureFollowUp && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
-							variant: "outline",
-							className: "bg-blue-50 text-blue-700 border-blue-200 gap-1",
+				className: "flex h-[100dvh] max-w-[800px] flex-col gap-0 overflow-hidden border-0 bg-[#F2F2F7] p-0 shadow-2xl outline-none focus:outline-none md:h-[90vh] md:max-h-[850px] md:rounded-[24px] [&>button]:hidden",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "supports-[backdrop-filter]:bg-white/60 sticky top-0 z-20 flex items-center justify-between border-b border-gray-200/50 bg-white/80 px-4 py-3 backdrop-blur-xl",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+								variant: "ghost",
+								className: "h-auto gap-1 p-0 pl-1 text-base font-normal text-[#007AFF] hover:bg-transparent hover:opacity-70",
+								onClick: () => onOpenChange(false),
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, { className: "-ml-2 h-6 w-6" }), "Voltar"]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, {
+								className: "text-base font-semibold text-gray-900",
+								children: "Perfil do Lead"
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+								variant: "ghost",
+								className: "h-auto p-0 pr-1 text-base font-normal text-[#007AFF] hover:bg-transparent hover:opacity-70",
+								onClick: () => {},
+								children: "Editar"
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "flex-1 overflow-y-auto overflow-x-hidden",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "mx-auto flex w-full max-w-3xl flex-col gap-8 p-4 pb-24 md:p-8 md:pb-32",
 							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CalendarClock, { className: "h-3 w-3" }),
-								"Follow-up:",
-								" ",
-								format(new Date(lead.followUp), "d MMM, HH:mm", { locale: ptBR })
-							]
-						})]
-					})
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex-1 overflow-y-auto bg-gray-50/50",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "p-6 pb-0",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadInfo, { lead }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex gap-2 mt-6",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-								className: "flex-1",
-								onClick: () => setInteractionOpen(true),
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageSquarePlus, { className: "mr-2 h-4 w-4" }), "Registrar Interação"]
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-								variant: "outline",
-								className: "flex-1",
-								onClick: () => setFollowUpOpen(true),
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CalendarClock, { className: "mr-2 h-4 w-4" }), "Agendar Follow-up"]
-							})]
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "p-6",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Tabs, {
-							defaultValue: "history",
-							className: "w-full",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TabsList, {
-									className: "w-full justify-start border-b rounded-none h-auto p-0 bg-transparent gap-6",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-										value: "history",
-										className: "rounded-none border-b-2 border-transparent px-0 py-2 data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none",
-										children: "Histórico"
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsTrigger, {
-										value: "notes",
-										className: "rounded-none border-b-2 border-transparent px-0 py-2 data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none",
-										children: "Notas e Observações"
-									})]
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsContent, {
-									value: "history",
-									className: "mt-6",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadTimeline, { lead })
-								}),
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TabsContent, {
-									value: "notes",
-									className: "mt-6",
-									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadNotes, { lead })
-								})
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadInfo, { lead }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadTimeline, { lead }),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadNotes, { lead })
 							]
 						})
-					})]
-				})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "supports-[backdrop-filter]:bg-white/80 absolute bottom-0 left-0 right-0 z-20 border-t border-gray-200/50 bg-white/80 p-4 pb-6 backdrop-blur-xl md:pb-4",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "mx-auto flex w-full max-w-3xl flex-col gap-4",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "grid grid-cols-2 gap-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+									variant: "outline",
+									className: "h-12 rounded-xl border-gray-200 bg-white font-semibold text-gray-900 shadow-sm hover:bg-gray-50",
+									onClick: () => setFollowUpOpen(true),
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CalendarClock, { className: "mr-2 h-5 w-5" }), "Agendar Follow-up"]
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+									className: "h-12 rounded-xl bg-[#007AFF] font-semibold text-white shadow-sm hover:bg-[#0062CC]",
+									onClick: () => setInteractionOpen(true),
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageSquarePlus, { className: "mr-2 h-5 w-5" }), "Registrar Interação"]
+								})]
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+								className: "text-center text-sm text-gray-400 transition-colors hover:text-gray-600",
+								onClick: () => onOpenChange(false),
+								children: "Fechar Perfil"
+							})]
+						})
+					})
+				]
 			})
 		}),
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadInteractionModal, {
@@ -2443,4 +1874,4 @@ function CRM() {
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-D0DYghR5.js.map
+//# sourceMappingURL=CRM-D85zsXed.js.map

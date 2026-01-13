@@ -1,22 +1,13 @@
 import { useState } from 'react'
-import {
-  Dialog,
-  DialogContent,
-  DialogHeader,
-  DialogTitle,
-} from '@/components/ui/dialog'
+import { Dialog, DialogContent, DialogTitle } from '@/components/ui/dialog'
 import { Button } from '@/components/ui/button'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { CalendarClock, MessageSquarePlus } from 'lucide-react'
+import { ChevronLeft, CalendarClock, MessageSquarePlus } from 'lucide-react'
 import { CRMLead } from '@/stores/crmStore'
 import { LeadInfo } from './LeadInfo'
 import { LeadTimeline } from './LeadTimeline'
 import { LeadNotes } from './LeadNotes'
 import { LeadInteractionModal } from './LeadInteractionModal'
 import { LeadFollowUpModal } from './LeadFollowUpModal'
-import { Badge } from '@/components/ui/badge'
-import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 
 interface LeadDetailsModalProps {
   lead: CRMLead | null
@@ -34,77 +25,69 @@ export function LeadDetailsModal({
 
   if (!lead) return null
 
-  const hasFutureFollowUp =
-    lead.followUp && new Date(lead.followUp) > new Date()
-
   return (
     <>
       <Dialog open={open} onOpenChange={onOpenChange}>
-        <DialogContent className="max-w-4xl h-[90vh] md:h-auto md:max-h-[90vh] flex flex-col p-0 gap-0 overflow-hidden">
-          <DialogHeader className="px-6 py-4 border-b flex flex-row items-center justify-between space-y-0">
-            <div className="flex items-center gap-3">
-              <DialogTitle>Detalhes do Lead</DialogTitle>
-              {hasFutureFollowUp && (
-                <Badge
-                  variant="outline"
-                  className="bg-blue-50 text-blue-700 border-blue-200 gap-1"
-                >
-                  <CalendarClock className="h-3 w-3" />
-                  Follow-up:{' '}
-                  {format(new Date(lead.followUp!), 'd MMM, HH:mm', {
-                    locale: ptBR,
-                  })}
-                </Badge>
-              )}
-            </div>
-          </DialogHeader>
+        <DialogContent className="flex h-[100dvh] max-w-[800px] flex-col gap-0 overflow-hidden border-0 bg-[#F2F2F7] p-0 shadow-2xl outline-none focus:outline-none md:h-[90vh] md:max-h-[850px] md:rounded-[24px] [&>button]:hidden">
+          {/* Sticky Header */}
+          <div className="supports-[backdrop-filter]:bg-white/60 sticky top-0 z-20 flex items-center justify-between border-b border-gray-200/50 bg-white/80 px-4 py-3 backdrop-blur-xl">
+            <Button
+              variant="ghost"
+              className="h-auto gap-1 p-0 pl-1 text-base font-normal text-[#007AFF] hover:bg-transparent hover:opacity-70"
+              onClick={() => onOpenChange(false)}
+            >
+              <ChevronLeft className="-ml-2 h-6 w-6" />
+              Voltar
+            </Button>
 
-          <div className="flex-1 overflow-y-auto bg-gray-50/50">
-            <div className="p-6 pb-0">
+            <DialogTitle className="text-base font-semibold text-gray-900">
+              Perfil do Lead
+            </DialogTitle>
+
+            <Button
+              variant="ghost"
+              className="h-auto p-0 pr-1 text-base font-normal text-[#007AFF] hover:bg-transparent hover:opacity-70"
+              onClick={() => {}}
+            >
+              Editar
+            </Button>
+          </div>
+
+          {/* Scrollable Body */}
+          <div className="flex-1 overflow-y-auto overflow-x-hidden">
+            <div className="mx-auto flex w-full max-w-3xl flex-col gap-8 p-4 pb-24 md:p-8 md:pb-32">
               <LeadInfo lead={lead} />
+              <LeadTimeline lead={lead} />
+              <LeadNotes lead={lead} />
+            </div>
+          </div>
 
-              <div className="flex gap-2 mt-6">
-                <Button
-                  className="flex-1"
-                  onClick={() => setInteractionOpen(true)}
-                >
-                  <MessageSquarePlus className="mr-2 h-4 w-4" />
-                  Registrar Interação
-                </Button>
+          {/* Sticky Footer */}
+          <div className="supports-[backdrop-filter]:bg-white/80 absolute bottom-0 left-0 right-0 z-20 border-t border-gray-200/50 bg-white/80 p-4 pb-6 backdrop-blur-xl md:pb-4">
+            <div className="mx-auto flex w-full max-w-3xl flex-col gap-4">
+              <div className="grid grid-cols-2 gap-3">
                 <Button
                   variant="outline"
-                  className="flex-1"
+                  className="h-12 rounded-xl border-gray-200 bg-white font-semibold text-gray-900 shadow-sm hover:bg-gray-50"
                   onClick={() => setFollowUpOpen(true)}
                 >
-                  <CalendarClock className="mr-2 h-4 w-4" />
+                  <CalendarClock className="mr-2 h-5 w-5" />
                   Agendar Follow-up
                 </Button>
+                <Button
+                  className="h-12 rounded-xl bg-[#007AFF] font-semibold text-white shadow-sm hover:bg-[#0062CC]"
+                  onClick={() => setInteractionOpen(true)}
+                >
+                  <MessageSquarePlus className="mr-2 h-5 w-5" />
+                  Registrar Interação
+                </Button>
               </div>
-            </div>
-
-            <div className="p-6">
-              <Tabs defaultValue="history" className="w-full">
-                <TabsList className="w-full justify-start border-b rounded-none h-auto p-0 bg-transparent gap-6">
-                  <TabsTrigger
-                    value="history"
-                    className="rounded-none border-b-2 border-transparent px-0 py-2 data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none"
-                  >
-                    Histórico
-                  </TabsTrigger>
-                  <TabsTrigger
-                    value="notes"
-                    className="rounded-none border-b-2 border-transparent px-0 py-2 data-[state=active]:border-primary data-[state=active]:bg-transparent data-[state=active]:shadow-none"
-                  >
-                    Notas e Observações
-                  </TabsTrigger>
-                </TabsList>
-                <TabsContent value="history" className="mt-6">
-                  <LeadTimeline lead={lead} />
-                </TabsContent>
-                <TabsContent value="notes" className="mt-6">
-                  <LeadNotes lead={lead} />
-                </TabsContent>
-              </Tabs>
+              <button
+                className="text-center text-sm text-gray-400 transition-colors hover:text-gray-600"
+                onClick={() => onOpenChange(false)}
+              >
+                Fechar Perfil
+              </button>
             </div>
           </div>
         </DialogContent>
