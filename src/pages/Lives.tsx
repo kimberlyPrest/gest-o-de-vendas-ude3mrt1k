@@ -3,9 +3,6 @@ import { useLivesStore } from '@/stores/livesStore'
 import { AddLiveModal } from '@/components/lives/AddLiveModal'
 import { LiveFilters, FilterState } from '@/components/lives/LiveFilters'
 import { LiveKPIs } from '@/components/lives/LiveKPIs'
-import { RevenueAreaChart } from '@/components/lives/RevenueAreaChart'
-import { PresenterTable } from '@/components/lives/PresenterTable'
-import { WeekdayChart } from '@/components/lives/WeekdayChart'
 import { EmptyState } from '@/components/ui/empty-state'
 import {
   subDays,
@@ -14,17 +11,17 @@ import {
   isWithinInterval,
   parseISO,
   differenceInDays,
-  addDays,
 } from 'date-fns'
 import { Video, RefreshCw, AlertTriangle } from 'lucide-react'
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CardDescription,
-} from '@/components/ui/card'
 import { Button } from '@/components/ui/button'
+
+// New Charts
+import { HostPerformanceChart } from '@/components/lives/HostPerformanceChart'
+import { WeekdayEfficiencyChart } from '@/components/lives/WeekdayEfficiencyChart'
+import { RevenueEvolutionChart } from '@/components/lives/RevenueEvolutionChart'
+import { AudienceScatterChart } from '@/components/lives/AudienceScatterChart'
+import { HostComparison } from '@/components/lives/HostComparison'
+import { StreamTable } from '@/components/lives/StreamTable'
 
 export default function Lives() {
   const { allData, loading, error, fetchData } = useLivesStore()
@@ -76,7 +73,7 @@ export default function Lives() {
     const end = endOfDay(range.to)
 
     return data.filter((item) => {
-      const itemDate = parseISO(item.date) // API returns YYYY-MM-DD
+      const itemDate = parseISO(item.date)
 
       // Date Check
       if (!isWithinInterval(itemDate, { start, end })) return false
@@ -90,9 +87,6 @@ export default function Lives() {
 
       // Weekday Check (Normalized)
       if (filters.weekdays.length > 0) {
-        // item.weekday comes as "Segunda-feira" or "Segunda".
-        // filters.weekdays has "Segunda-feira".
-        // We normalize to check containment
         const normalizedItemDay = item.weekday.toLowerCase().split('-')[0] // "segunda"
         const match = filters.weekdays.some((w) =>
           w.toLowerCase().includes(normalizedItemDay),
@@ -123,7 +117,6 @@ export default function Lives() {
     fetchData()
   }
 
-  // Apple-style CSS (kept for consistency with context, but using Tailwind mostly)
   const containerStyle = {
     fontFamily:
       '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
@@ -189,6 +182,12 @@ export default function Lives() {
         />
       </section>
 
+      {/* Host Comparison (Conditionally Rendered) */}
+      <HostComparison
+        data={currentData}
+        presenters={filters.presenters}
+      />
+
       {/* Main Content Area */}
       {currentData.length === 0 && !loading ? (
         <EmptyState
@@ -197,51 +196,23 @@ export default function Lives() {
           description="Tente ajustar os filtros ou selecionar um período diferente."
         />
       ) : (
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-          {/* Revenue Chart */}
-          <Card className="col-span-1 lg:col-span-2 xl:col-span-1 border shadow-sm">
-            <CardHeader>
-              <CardTitle>Evolução de Faturamento</CardTitle>
-              <CardDescription>
-                Comparativo de performance financeira no período selecionado.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <RevenueAreaChart
-                currentData={currentData}
-                previousData={previousData}
-                comparisonEnabled={filters.comparisonEnabled}
-                dateRange={filters.dateRange as { from: Date; to: Date }}
-                loading={loading}
-              />
-            </CardContent>
-          </Card>
+        <div className="space-y-8">
+          {/* Charts Grid - 2 Col on Desktop */}
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <HostPerformanceChart data={currentData} loading={loading} />
+            <WeekdayEfficiencyChart data={currentData} loading={loading} />
+            <RevenueEvolutionChart
+              currentData={currentData}
+              previousData={previousData}
+              comparisonEnabled={filters.comparisonEnabled}
+              dateRange={filters.dateRange as { from: Date; to: Date }}
+              loading={loading}
+            />
+            <AudienceScatterChart data={currentData} loading={loading} />
+          </div>
 
-          {/* Weekday Analysis */}
-          <Card className="col-span-1 lg:col-span-2 xl:col-span-1 border shadow-sm">
-            <CardHeader>
-              <CardTitle>Performance por Dia da Semana</CardTitle>
-              <CardDescription>
-                Média de vendas e faturamento agrupados por dia.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <WeekdayChart data={currentData} loading={loading} />
-            </CardContent>
-          </Card>
-
-          {/* Presenter Leaderboard - Full Width */}
-          <Card className="col-span-1 lg:col-span-2 border shadow-sm">
-            <CardHeader>
-              <CardTitle>Ranking de Apresentadores</CardTitle>
-              <CardDescription>
-                Detalhamento de métricas por especialista.
-              </CardDescription>
-            </CardHeader>
-            <CardContent>
-              <PresenterTable data={currentData} loading={loading} />
-            </CardContent>
-          </Card>
+          {/* History Table */}
+          <StreamTable data={currentData} />
         </div>
       )}
     </div>

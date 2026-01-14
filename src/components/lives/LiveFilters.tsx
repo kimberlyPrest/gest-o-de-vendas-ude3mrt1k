@@ -1,4 +1,9 @@
-import { format, subMonths, startOfMonth, endOfMonth, subDays } from 'date-fns'
+import {
+  format,
+  subMonths,
+  startOfMonth,
+  subDays,
+} from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import {
   Calendar as CalendarIcon,
@@ -96,7 +101,7 @@ export function LiveFilters({
         break
       case 'currentMonth':
         from = startOfMonth(today)
-        to = endOfMonth(today)
+        to = today
         break
       default:
         return

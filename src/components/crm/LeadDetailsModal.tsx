@@ -13,6 +13,7 @@ import { LeadTimeline } from './LeadTimeline'
 import { LeadNotes } from './LeadNotes'
 import { LeadInteractionModal } from './LeadInteractionModal'
 import { LeadFollowUpModal } from './LeadFollowUpModal'
+import { LeadEditModal } from './LeadEditModal'
 
 interface LeadDetailsModalProps {
   lead: CRMLead | null
@@ -27,6 +28,7 @@ export function LeadDetailsModal({
 }: LeadDetailsModalProps) {
   const [interactionOpen, setInteractionOpen] = useState(false)
   const [followUpOpen, setFollowUpOpen] = useState(false)
+  const [editOpen, setEditOpen] = useState(false)
 
   if (!lead) return null
 
@@ -52,7 +54,7 @@ export function LeadDetailsModal({
             <Button
               variant="ghost"
               className="h-auto p-0 pr-1 text-base font-normal text-[#007AFF] hover:bg-transparent hover:opacity-70"
-              onClick={() => {}}
+              onClick={() => setEditOpen(true)}
             >
               Editar
             </Button>
@@ -106,6 +108,12 @@ export function LeadDetailsModal({
         leadId={lead.id}
         open={followUpOpen}
         onOpenChange={setFollowUpOpen}
+      />
+
+      <LeadEditModal
+        lead={lead}
+        open={editOpen}
+        onOpenChange={setEditOpen}
       />
     </>
   )

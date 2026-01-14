@@ -25,6 +25,7 @@ export interface CRMLead extends Lead {
   notes: Note[]
   history: HistoryItem[]
   followUp?: string
+  valorEstimado?: number
 }
 
 export type CRMColumnId =
@@ -67,6 +68,7 @@ interface CRMStore {
   addNote: (leadId: string, noteContent: string) => void
   addInteraction: (leadId: string, type: string, details: string) => void
   scheduleFollowUp: (leadId: string, date: string) => void
+  updateLead: (leadId: string, updates: Partial<CRMLead>) => void
 }
 
 const STORAGE_KEY = 'crm_leads_data_v2'
@@ -80,6 +82,7 @@ const saveToStorage = (leads: CRMLead[]) => {
         notes: lead.notes,
         history: lead.history,
         followUp: lead.followUp,
+        valorEstimado: lead.valorEstimado,
       }
       return acc
     },
@@ -161,6 +164,11 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
             },
           ],
           followUp: local.followUp,
+          valorEstimado: local.valorEstimado !== undefined
+            ? local.valorEstimado
+            : (lead.origem === 'Planilha'
+              ? 2999 + ((lead.assentosAdicionais || 0) * 699)
+              : (lead.assentosAdicionais || 0) * 500)
         }
       })
 
@@ -341,6 +349,29 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
       return { leads: updatedLeads, filteredLeads: filtered }
     })
   },
+
+  updateLead: (leadId, updates) => {
+    set((state) => {
+      const updatedLeads = state.leads.map((lead) => {
+        if (lead.id === leadId) {
+          const historyItem = createHistoryItem(
+            'interaction',
+            'Dados do lead atualizados manualmente'
+          )
+          return {
+            ...lead,
+            ...updates,
+            history: [historyItem, ...lead.history],
+            lastInteraction: new Date().toISOString(),
+          }
+        }
+        return lead
+      })
+      saveToStorage(updatedLeads)
+      const filtered = applyFilters(updatedLeads, state.filters)
+      return { leads: updatedLeads, filteredLeads: filtered }
+    })
+  }
 }))
 
 function applyFilters(leads: CRMLead[], filters: FilterState): CRMLead[] {

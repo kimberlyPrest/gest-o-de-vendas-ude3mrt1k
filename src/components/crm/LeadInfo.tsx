@@ -10,7 +10,6 @@ import {
   Hash,
   MessageCircle,
 } from 'lucide-react'
-import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
 import { Badge } from '@/components/ui/badge'
 import { cn } from '@/lib/utils'
 
@@ -19,49 +18,23 @@ interface LeadInfoProps {
 }
 
 export function LeadInfo({ lead }: LeadInfoProps) {
-  const initials = lead.nomeCompleto
-    .split(' ')
-    .map((n) => n[0])
-    .join('')
-    .substring(0, 2)
-    .toUpperCase()
-
-  const potentialValue = lead.assentosAdicionais * 500
   const statusColor =
     COLUMNS.find((c) => c.id === lead.status)?.color || '#6B7280'
 
-  // Mock data for display purposes
-  const role = 'Estrategista de Marketing'
-  const location = 'São Paulo, BR'
-  const probability = 92
+  // Calculate value for display
+  const potentialValue = lead.valorEstimado ?? (lead.origem === 'Planilha'
+    ? 2999 + (lead.assentosAdicionais * 699)
+    : lead.assentosAdicionais * 500)
 
   return (
     <div className="flex flex-col gap-8 animate-fade-in">
-      {/* Profile Header */}
       <div className="flex flex-col items-center space-y-4 pt-2 text-center">
-        <div className="relative">
-          <Avatar className="h-24 w-24 border-4 border-white shadow-lg">
-            <AvatarImage
-              src={`https://img.usecurling.com/ppl/medium?seed=${lead.id}`}
-            />
-            <AvatarFallback className="bg-gray-200 text-2xl text-gray-500">
-              {initials}
-            </AvatarFallback>
-          </Avatar>
-        </div>
-
         <div className="space-y-1">
           <div className="flex items-center justify-center gap-2">
             <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
               {lead.nomeCompleto}
             </h2>
-            <Badge className="rounded-full border-0 bg-orange-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-orange-600 hover:bg-orange-200">
-              HOT LEAD ({probability}%)
-            </Badge>
           </div>
-          <p className="flex items-center justify-center gap-1.5 text-sm text-gray-500">
-            {role} <span className="text-gray-300">•</span> {location}
-          </p>
         </div>
 
         {/* Quick Actions */}
@@ -156,11 +129,6 @@ export function LeadInfo({ lead }: LeadInfoProps) {
                 style: 'currency',
                 currency: 'BRL',
               }).format(potentialValue)}
-            />
-            <InfoRow
-              icon={<Hash className="h-5 w-5 text-gray-500" />}
-              label="Probabilidade"
-              value={`${probability}%`}
               isLast
             />
           </div>
