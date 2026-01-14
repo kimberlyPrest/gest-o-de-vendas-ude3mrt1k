@@ -5,7 +5,6 @@ import { useLivesStore } from '@/stores/livesStore'
 import { AddLiveModal } from '@/components/lives/AddLiveModal'
 import { LiveChart } from '@/components/lives/LiveChart'
 import {
-  differenceInDays,
   subDays,
   startOfDay,
   isWithinInterval,
@@ -108,6 +107,7 @@ export default function Lives() {
     if (!allData.length) return []
 
     return allData.filter((item) => {
+      // Safely parse date from service which now returns ISO strings
       const itemDate = startOfDay(parseISO(item.date))
 
       // Date Range Filter
@@ -196,7 +196,7 @@ export default function Lives() {
     ]
     const grouped = filteredData.reduce<Record<number, WeekdayMetrics>>(
       (acc, curr) => {
-        const dayValue = new Date(curr.date).getDay()
+        const dayValue = parseISO(curr.date).getDay()
         if (!acc[dayValue]) {
           acc[dayValue] = {
             weekday: dayNames[dayValue],

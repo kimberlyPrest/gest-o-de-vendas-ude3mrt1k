@@ -37,8 +37,9 @@ const parseCurrency = (value: string | number): number => {
 }
 
 // Helper to parse dates (e.g. "25/12/2023" -> "2023-12-25")
-const parseDate = (value: string): string => {
-  if (!value) return new Date().toISOString()
+// Returns null if date is invalid to help filtering
+const parseDate = (value: string): string | null => {
+  if (!value) return null
   if (value.match(/^\d{4}-\d{2}-\d{2}/)) return value // Already ISO
 
   // Handle DD/MM/YYYY
@@ -47,11 +48,15 @@ const parseDate = (value: string): string => {
     const day = parts[0].padStart(2, '0')
     const month = parts[1].padStart(2, '0')
     const year = parts[2].split(' ')[0] // Remove time if present
-    if (year.length === 4) {
-      return `${year}-${month}-${day}`
+
+    // Handle 2-digit years (assume 20xx) or 4-digit years
+    const fullYear = year.length === 2 ? `20${year}` : year
+
+    if (fullYear.length === 4) {
+      return `${fullYear}-${month}-${day}`
     }
   }
-  return new Date().toISOString()
+  return null
 }
 
 // Generate a stable ID based on email or content
@@ -103,7 +108,8 @@ const mapRowsToObjects = (rows: any[][]): any[] => {
   return dataRows.map((row) => {
     const obj: any = {}
     headers.forEach((header: string, index: number) => {
-      obj[header] = row[index]
+      // Safely handle undefined cells in row
+      obj[header] = row[index] !== undefined ? row[index] : ''
     })
     return obj
   })
@@ -142,6 +148,7 @@ export const googleSheetsService = {
         .map((o) => {
           const nome = findValue(o, ['nome', 'lead']) || 'Sem Nome'
           const email = findValue(o, ['email', 'e-mail']) || ''
+          const dateStr = findValue(o, ['data', 'criado'])
           return {
             id: generateId({ nome, email }),
             nomeCompleto: nome,
@@ -153,9 +160,7 @@ export const googleSheetsService = {
             ),
             origem: findValue(o, ['origem', 'fonte']) || 'Planilha',
             status: findValue(o, ['status', 'fase', 'etapa']) || 'Capturado',
-            dataCaptacao: parseDate(
-              findValue(o, ['data', 'criado']) || new Date().toISOString(),
-            ),
+            dataCaptacao: parseDate(dateStr) || new Date().toISOString(),
           }
         })
     } catch (error) {
@@ -169,9 +174,16 @@ export const googleSheetsService = {
       const rows = await fetchSheetData('lives')
       const rawObjects = mapRowsToObjects(rows)
 
-      return rawObjects
-        .filter((o) => findValue(o, ['data']))
-        .map((o) => {
+      const processedData = rawObjects
+        .map((o): LiveData | null => {
+          // Parse date strictly
+          const dateValue = findValue(o, ['data'])
+          const date = parseDate(dateValue)
+
+          if (!date) {
+            return null // Skip rows with invalid or missing date
+          }
+
           const peak = Number(findValue(o, ['pico', 'espectadores']) || 0)
           const sales = Number(findValue(o, ['vendas']) || 0)
           const retained = Number(
@@ -186,6 +198,12 @@ export const googleSheetsService = {
           const revenue = parseCurrency(
             findValue(o, ['faturamento', 'receita']) || 0,
           )
+          const additionalSeats = Number(findValue(o, ['assentos']) || 0)
+
+          // Presenter
+          const presenter =
+            findValue(o, ['apresentador', 'expert', 'responsável']) ||
+            'Desconhecido'
 
           // Calculate rates if not explicitly provided or if provided as strings
           let conversion = findValue(o, ['conversão', 'conversion'])
@@ -194,32 +212,47 @@ export const googleSheetsService = {
           }
           if (!conversion && peak > 0) conversion = (sales / peak) * 100
 
-          // Retention calculation / mapping
-          // Matches: "retenção", "retencao", "retention"
-          // This will pick up "Taxa de Retenção" or just "Retenção"
           let retention = findValue(o, ['retenção', 'retencao', 'retention'])
           if (typeof retention === 'string') {
             retention = Number(retention.replace('%', '').replace(',', '.'))
           }
-          // Fallback to calculation if not provided
           if (!retention && peak > 0) retention = (retained / peak) * 100
 
           return {
-            date: parseDate(findValue(o, ['data'])),
+            date: date,
             weekday: findValue(o, ['dia', 'semana']) || '',
             peakViewers: peak,
             retainedViewers: retained,
             sales: sales,
-            presenter:
-              findValue(o, ['apresentador', 'expert', 'responsável']) ||
-              'Desconhecido',
+            presenter: presenter,
             conversionRate: Number(conversion?.toFixed(2) || 0),
             retentionRate: Number(retention?.toFixed(2) || 0),
             revenue: revenue,
-            additionalSeats: Number(findValue(o, ['assentos']) || 0),
+            additionalSeats: additionalSeats,
           }
         })
+        .filter((item): item is LiveData => item !== null) // Remove nulls (invalid dates)
+        .filter((live) => {
+          // Strict filtering to remove empty/invalid rows or "Sunday gaps"
+          // A valid live must have at least one indicator of activity:
+          // 1. Revenue > 0
+          // 2. Sales > 0
+          // 3. Peak Viewers > 0
+          // 4. A valid presenter name (not empty, not 'Desconhecido')
+
+          const hasRevenue = live.revenue > 0
+          const hasSales = live.sales > 0
+          const hasViewers = live.peakViewers > 0
+          const hasValidPresenter =
+            live.presenter &&
+            live.presenter !== 'Desconhecido' &&
+            live.presenter.trim() !== ''
+
+          return hasRevenue || hasSales || hasViewers || hasValidPresenter
+        })
         .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+
+      return processedData
     } catch (error) {
       console.error('Error fetching lives data:', error)
       throw error

@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-BBvzieMD.js","assets/select-0e4LTvRK.js","assets/CRM-DCEK0VEF.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-pEj_l_v6.js","assets/select-DvSwqWAO.js","assets/CRM-DYDVh0jE.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -33802,16 +33802,17 @@ var parseCurrency = (value) => {
 	return Number(cleanStr.replace(".", "").replace(",", "."));
 };
 var parseDate = (value) => {
-	if (!value) return (/* @__PURE__ */ new Date()).toISOString();
+	if (!value) return null;
 	if (value.match(/^\d{4}-\d{2}-\d{2}/)) return value;
 	const parts = value.split("/");
 	if (parts.length === 3) {
 		const day = parts[0].padStart(2, "0");
 		const month = parts[1].padStart(2, "0");
 		const year = parts[2].split(" ")[0];
-		if (year.length === 4) return `${year}-${month}-${day}`;
+		const fullYear = year.length === 2 ? `20${year}` : year;
+		if (fullYear.length === 4) return `${fullYear}-${month}-${day}`;
 	}
-	return (/* @__PURE__ */ new Date()).toISOString();
+	return null;
 };
 var generateId = (item) => {
 	const seed = item.email || item.nomeCompleto || JSON.stringify(item);
@@ -33840,7 +33841,7 @@ var mapRowsToObjects = (rows) => {
 	return rows.slice(1).map((row) => {
 		const obj = {};
 		headers.forEach((header, index$1) => {
-			obj[header] = row[index$1];
+			obj[header] = row[index$1] !== void 0 ? row[index$1] : "";
 		});
 		return obj;
 	});
@@ -33866,6 +33867,7 @@ const googleSheetsService = {
 			return mapRowsToObjects(await fetchSheetData("crm")).filter((o) => findValue(o, ["nome", "lead"]) || findValue(o, ["email"])).map((o) => {
 				const nome = findValue(o, ["nome", "lead"]) || "Sem Nome";
 				const email = findValue(o, ["email", "e-mail"]) || "";
+				const dateStr = findValue(o, ["data", "criado"]);
 				return {
 					id: generateId({
 						nome,
@@ -33886,7 +33888,7 @@ const googleSheetsService = {
 						"fase",
 						"etapa"
 					]) || "Capturado",
-					dataCaptacao: parseDate(findValue(o, ["data", "criado"]) || (/* @__PURE__ */ new Date()).toISOString())
+					dataCaptacao: parseDate(dateStr) || (/* @__PURE__ */ new Date()).toISOString()
 				};
 			});
 		} catch (error) {
@@ -33896,7 +33898,9 @@ const googleSheetsService = {
 	},
 	async fetchLivesData() {
 		try {
-			return mapRowsToObjects(await fetchSheetData("lives")).filter((o) => findValue(o, ["data"])).map((o) => {
+			return mapRowsToObjects(await fetchSheetData("lives")).map((o) => {
+				const date = parseDate(findValue(o, ["data"]));
+				if (!date) return null;
 				const peak = Number(findValue(o, ["pico", "espectadores"]) || 0);
 				const sales = Number(findValue(o, ["vendas"]) || 0);
 				const retained = Number(findValue(o, [
@@ -33907,6 +33911,12 @@ const googleSheetsService = {
 					"retidas"
 				]) || 0);
 				const revenue = parseCurrency(findValue(o, ["faturamento", "receita"]) || 0);
+				const additionalSeats = Number(findValue(o, ["assentos"]) || 0);
+				const presenter = findValue(o, [
+					"apresentador",
+					"expert",
+					"responsável"
+				]) || "Desconhecido";
 				let conversion = findValue(o, ["conversão", "conversion"]);
 				if (typeof conversion === "string") conversion = Number(conversion.replace("%", "").replace(",", "."));
 				if (!conversion && peak > 0) conversion = sales / peak * 100;
@@ -33918,21 +33928,23 @@ const googleSheetsService = {
 				if (typeof retention === "string") retention = Number(retention.replace("%", "").replace(",", "."));
 				if (!retention && peak > 0) retention = retained / peak * 100;
 				return {
-					date: parseDate(findValue(o, ["data"])),
+					date,
 					weekday: findValue(o, ["dia", "semana"]) || "",
 					peakViewers: peak,
 					retainedViewers: retained,
 					sales,
-					presenter: findValue(o, [
-						"apresentador",
-						"expert",
-						"responsável"
-					]) || "Desconhecido",
+					presenter,
 					conversionRate: Number(conversion?.toFixed(2) || 0),
 					retentionRate: Number(retention?.toFixed(2) || 0),
 					revenue,
-					additionalSeats: Number(findValue(o, ["assentos"]) || 0)
+					additionalSeats
 				};
+			}).filter((item) => item !== null).filter((live) => {
+				const hasRevenue = live.revenue > 0;
+				const hasSales = live.sales > 0;
+				const hasViewers = live.peakViewers > 0;
+				const hasValidPresenter = live.presenter && live.presenter !== "Desconhecido" && live.presenter.trim() !== "";
+				return hasRevenue || hasSales || hasViewers || hasValidPresenter;
 			}).sort((a, b$1) => new Date(a.date).getTime() - new Date(b$1.date).getTime());
 		} catch (error) {
 			console.error("Error fetching lives data:", error);
@@ -35068,8 +35080,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-BBvzieMD.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-DCEK0VEF.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-pEj_l_v6.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-DYDVh0jE.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -35129,4 +35141,4 @@ var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 export { VISUALLY_HIDDEN_STYLES as $, hideOthers as A, Anchor as B, Overlay as C, Trigger as D, Title as E, Input as F, useId as G, Content$1 as H, Button as I, X as J, toast as K, buttonVariants as L, useFocusGuards as M, FocusScope as N, WarningProvider as O, Primitive as P, clsx_default as Q, useIsMobile as R, Description as S, Root$1 as T, Root2 as U, Arrow as V, createPopperScope as W, createLucideIcon as X, LoaderCircle as Y, cva as Z, googleSheetsService as _, require_react_dom as _t, differenceInDays as a, useCallbackRef$1 as at, Close as b, __export as bt, normalizeDates as c, createCollection as ct, constructFrom as d, createContextScope as dt, useControllableState as et, millisecondsInHour as f, require_jsx_runtime as ft, minutesInMonth as g, useToast as gt, minutesInDay as h, composeEventHandlers as ht, useCRMStore as i, DismissableLayer as it, Combination_default as j, createDialogScope as k, getTimezoneOffsetInMilliseconds as l, createSlot as lt, millisecondsInWeek as m, useComposedRefs as mt, useLivesStore as n, Portal as nt, differenceInCalendarDays as o, Primitive$1 as ot, millisecondsInMinute as p, composeRefs as pt, cn as q, COLUMNS as r, useLayoutEffect2 as rt, startOfDay as s, dispatchDiscreteCustomEvent as st, Label as t, Presence as tt, toDate as u, createSlottable as ut, require_shim as v, require_react as vt, Portal$1 as w, Content as x, __toESM as xt, Skeleton as y, __commonJSMin as yt, Slot as z };
 
-//# sourceMappingURL=index-Ctr70Z9f.js.map
+//# sourceMappingURL=index-CXv06xj4.js.map

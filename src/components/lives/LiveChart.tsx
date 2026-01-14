@@ -70,13 +70,19 @@ export function LiveChart({ data, loading }: LiveChartProps) {
   const CustomTooltip = ({ active, payload }: TooltipProps<number, string>) => {
     if (active && payload && payload.length) {
       const item = payload[0].payload as LiveData
+      // Handle potential date parsing errors safely
+      let dateLabel = ''
+      try {
+        dateLabel = format(new Date(item.date), "dd 'de' MMMM, yyyy", {
+          locale: ptBR,
+        })
+      } catch {
+        dateLabel = item.date
+      }
+
       return (
-        <div className="rounded-lg border bg-white/95 backdrop-blur-md p-3 shadow-xl text-sm border-gray-100">
-          <p className="font-semibold mb-2 text-gray-900">
-            {format(new Date(item.date), "dd 'de' MMMM, yyyy", {
-              locale: ptBR,
-            })}
-          </p>
+        <div className="rounded-lg border bg-white/95 backdrop-blur-md p-3 shadow-xl text-sm border-gray-100 z-50">
+          <p className="font-semibold mb-2 text-gray-900">{dateLabel}</p>
           <div className="grid grid-cols-2 gap-x-4 gap-y-1.5">
             <span className="text-gray-500">Dia:</span>
             <span className="font-medium text-gray-900">{item.weekday}</span>
@@ -157,10 +163,17 @@ export function LiveChart({ data, loading }: LiveChartProps) {
               />
               <XAxis
                 dataKey="date"
-                tickFormatter={(val) => format(new Date(val), 'dd/MM')}
-                domain={[left, right]}
+                // Category type ensures only days present in data are shown
                 type="category"
                 allowDataOverflow
+                domain={[left, right]}
+                tickFormatter={(val) => {
+                  try {
+                    return format(new Date(val), 'dd/MM')
+                  } catch {
+                    return val
+                  }
+                }}
                 tick={{ fill: '#86868B', fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}

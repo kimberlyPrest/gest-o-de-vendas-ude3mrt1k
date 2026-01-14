@@ -1,5 +1,5 @@
-import { C as format, _ as PopoverContent, a as SelectValue, b as parseISO, d as DialogFooter, f as DialogHeader, g as Popover, h as Calendar, i as SelectTrigger, l as DialogContent, m as DialogTrigger, n as SelectContent, p as DialogTitle, r as SelectItem, s as Dialog, t as Select, u as DialogDescription, v as PopoverTrigger, x as subDays, y as ptBR } from "./select-0e4LTvRK.js";
-import { F as Input, I as Button, Q as clsx_default, X as createLucideIcon, Y as LoaderCircle, _ as googleSheetsService, bt as __export, ft as require_jsx_runtime, gt as useToast, n as useLivesStore, q as cn, s as startOfDay, t as Label$1, u as toDate, vt as require_react, xt as __toESM, y as Skeleton, yt as __commonJSMin, z as Slot } from "./index-Ctr70Z9f.js";
+import { C as format, _ as PopoverContent, a as SelectValue, b as parseISO, d as DialogFooter, f as DialogHeader, g as Popover, h as Calendar, i as SelectTrigger, l as DialogContent, m as DialogTrigger, n as SelectContent, p as DialogTitle, r as SelectItem, s as Dialog, t as Select, u as DialogDescription, v as PopoverTrigger, x as subDays, y as ptBR } from "./select-DvSwqWAO.js";
+import { F as Input, I as Button, Q as clsx_default, X as createLucideIcon, Y as LoaderCircle, _ as googleSheetsService, bt as __export, ft as require_jsx_runtime, gt as useToast, n as useLivesStore, q as cn, s as startOfDay, t as Label$1, u as toDate, vt as require_react, xt as __toESM, y as Skeleton, yt as __commonJSMin, z as Slot } from "./index-CXv06xj4.js";
 var Calendar$1 = createLucideIcon("calendar", [
 	["path", {
 		d: "M8 2v4",
@@ -27870,11 +27870,17 @@ function LiveChart({ data, loading }) {
 	const CustomTooltip = ({ active, payload }) => {
 		if (active && payload && payload.length) {
 			const item = payload[0].payload;
+			let dateLabel = "";
+			try {
+				dateLabel = format(new Date(item.date), "dd 'de' MMMM, yyyy", { locale: ptBR });
+			} catch {
+				dateLabel = item.date;
+			}
 			return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "rounded-lg border bg-white/95 backdrop-blur-md p-3 shadow-xl text-sm border-gray-100",
+				className: "rounded-lg border bg-white/95 backdrop-blur-md p-3 shadow-xl text-sm border-gray-100 z-50",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 					className: "font-semibold mb-2 text-gray-900",
-					children: format(new Date(item.date), "dd 'de' MMMM, yyyy", { locale: ptBR })
+					children: dateLabel
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "grid grid-cols-2 gap-x-4 gap-y-1.5",
 					children: [
@@ -27988,10 +27994,16 @@ function LiveChart({ data, loading }) {
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
 								dataKey: "date",
-								tickFormatter: (val) => format(new Date(val), "dd/MM"),
-								domain: [left, right],
 								type: "category",
 								allowDataOverflow: true,
+								domain: [left, right],
+								tickFormatter: (val) => {
+									try {
+										return format(new Date(val), "dd/MM");
+									} catch {
+										return val;
+									}
+								},
 								tick: {
 									fill: "#86868B",
 									fontSize: 11
@@ -28240,7 +28252,7 @@ function Lives() {
 			"Sábado"
 		];
 		const grouped = filteredData.reduce((acc, curr) => {
-			const dayValue = new Date(curr.date).getDay();
+			const dayValue = parseISO(curr.date).getDay();
 			if (!acc[dayValue]) acc[dayValue] = {
 				weekday: dayNames[dayValue],
 				dayValue,
@@ -29116,4 +29128,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-BBvzieMD.js.map
+//# sourceMappingURL=Lives-pEj_l_v6.js.map
