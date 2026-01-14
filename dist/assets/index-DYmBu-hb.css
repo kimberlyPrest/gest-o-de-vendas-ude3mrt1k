@@ -731,9 +731,6 @@ body{
 .m-0{
   margin: 0px;
 }
-.m-4{
-  margin: 1rem;
-}
 .-mx-1{
   margin-left: -0.25rem;
   margin-right: -0.25rem;
@@ -907,9 +904,6 @@ body{
 .h-12{
   height: 3rem;
 }
-.h-14{
-  height: 3.5rem;
-}
 .h-16{
   height: 4rem;
 }
@@ -1044,9 +1038,6 @@ body{
 }
 .w-12{
   width: 3rem;
-}
-.w-14{
-  width: 3.5rem;
 }
 .w-16{
   width: 4rem;
@@ -1197,11 +1188,11 @@ body{
 .max-w-\[--skeleton-width\]{
   max-width: var(--skeleton-width);
 }
+.max-w-\[140px\]{
+  max-width: 140px;
+}
 .max-w-\[1600px\]{
   max-width: 1600px;
-}
-.max-w-\[180px\]{
-  max-width: 180px;
 }
 .max-w-\[300px\]{
   max-width: 300px;
@@ -1572,9 +1563,6 @@ body{
 .border-b{
   border-bottom-width: 1px;
 }
-.border-b-2{
-  border-bottom-width: 2px;
-}
 .border-l{
   border-left-width: 1px;
 }
@@ -1596,9 +1584,6 @@ body{
 .border-\[\#E5E5E7\]{
   --tw-border-opacity: 1;
   border-color: rgb(229 229 231 / var(--tw-border-opacity, 1));
-}
-.border-\[\#E5E5E7\]\/50{
-  border-color: rgb(229 229 231 / 0.5);
 }
 .border-\[--color-border\]{
   border-color: var(--color-border);
@@ -1664,10 +1649,6 @@ body{
 }
 .border-transparent{
   border-color: transparent;
-}
-.border-white{
-  --tw-border-opacity: 1;
-  border-color: rgb(255 255 255 / var(--tw-border-opacity, 1));
 }
 .border-l-red-500{
   --tw-border-opacity: 1;
@@ -1749,10 +1730,6 @@ body{
 }
 .bg-\[\#F5F5F7\]\/50{
   background-color: rgb(245 245 247 / 0.5);
-}
-.bg-\[\#FBFBFD\]{
-  --tw-bg-opacity: 1;
-  background-color: rgb(251 251 253 / var(--tw-bg-opacity, 1));
 }
 .bg-\[\#FF9500\]\/10{
   background-color: rgb(255 149 0 / 0.1);
@@ -1950,10 +1927,6 @@ body{
 .p-\[1px\]{
   padding: 1px;
 }
-.px-0{
-  padding-left: 0px;
-  padding-right: 0px;
-}
 .px-1{
   padding-left: 0.25rem;
   padding-right: 0.25rem;
@@ -2009,10 +1982,6 @@ body{
 .py-1\.5{
   padding-top: 0.375rem;
   padding-bottom: 0.375rem;
-}
-.py-12{
-  padding-top: 3rem;
-  padding-bottom: 3rem;
 }
 .py-2{
   padding-top: 0.5rem;
@@ -2124,8 +2093,8 @@ body{
 .pt-4{
   padding-top: 1rem;
 }
-.pt-8{
-  padding-top: 2rem;
+.pt-6{
+  padding-top: 1.5rem;
 }
 .text-left{
   text-align: left;
@@ -2511,11 +2480,6 @@ body{
 .shadow-sm{
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
   --tw-shadow-colored: 0 1px 2px 0 var(--tw-shadow-color);
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
-}
-.shadow-subtle{
-  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03);
-  --tw-shadow-colored: 0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px 0 var(--tw-shadow-color);
   box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .shadow-xl{
@@ -3046,10 +3010,6 @@ body{
   --tw-bg-opacity: 1;
   background-color: rgb(255 255 255 / var(--tw-bg-opacity, 1));
 }
-.hover\:text-\[\#1D1D1F\]:hover{
-  --tw-text-opacity: 1;
-  color: rgb(29 29 31 / var(--tw-text-opacity, 1));
-}
 .hover\:text-accent-foreground:hover{
   color: hsl(var(--accent-foreground));
 }
@@ -3373,10 +3333,6 @@ body{
 .data-\[selected\=true\]\:rounded-none[data-selected="true"]{
   border-radius: 0px;
 }
-.data-\[state\=active\]\:border-\[\#0071E3\][data-state="active"]{
-  --tw-border-opacity: 1;
-  border-color: rgb(0 113 227 / var(--tw-border-opacity, 1));
-}
 .data-\[active\=true\]\:bg-sidebar-accent[data-active="true"]{
   background-color: hsl(var(--sidebar-accent));
 }
@@ -3443,10 +3399,6 @@ body{
 .data-\[selected\=true\]\:text-accent-foreground[data-selected="true"]{
   color: hsl(var(--accent-foreground));
 }
-.data-\[state\=active\]\:text-\[\#1D1D1F\][data-state="active"]{
-  --tw-text-opacity: 1;
-  color: rgb(29 29 31 / var(--tw-text-opacity, 1));
-}
 .data-\[state\=active\]\:text-foreground[data-state="active"]{
   color: hsl(var(--foreground));
 }
@@ -3470,11 +3422,6 @@ body{
 }
 .data-\[state\=open\]\:opacity-100[data-state="open"]{
   opacity: 1;
-}
-.data-\[state\=active\]\:shadow-none[data-state="active"]{
-  --tw-shadow: 0 0 #0000;
-  --tw-shadow-colored: 0 0 #0000;
-  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
 }
 .data-\[state\=active\]\:shadow-sm[data-state="active"]{
   --tw-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
@@ -3989,10 +3936,6 @@ body{
   .md\:px-6{
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-  }
-  .md\:px-8{
-    padding-left: 2rem;
-    padding-right: 2rem;
   }
   .md\:pb-32{
     padding-bottom: 8rem;
