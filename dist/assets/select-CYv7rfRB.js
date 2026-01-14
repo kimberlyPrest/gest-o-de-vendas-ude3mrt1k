@@ -1,4 +1,4 @@
-import { $ as useControllableState, A as Combination_default, B as Arrow, C as Portal$3, E as Trigger$2, F as Button, H as Root2$2, I as buttonVariants, K as cn, M as FocusScope, N as Primitive$1, Q as VISUALLY_HIDDEN_STYLES, S as Overlay, T as Title, U as createPopperScope, V as Content, W as useId, X as cva, Y as createLucideIcon, _t as require_react, a as differenceInCalendarDays, at as Primitive, b as Content$1, bt as __toESM, ct as createSlot, d as millisecondsInHour, dt as require_jsx_runtime, et as Presence, f as millisecondsInMinute, gt as require_react_dom, it as useCallbackRef, j as useFocusGuards, k as hideOthers, l as toDate, mt as composeEventHandlers, nt as useLayoutEffect2, o as startOfDay, p as millisecondsInWeek, pt as useComposedRefs, q as X, rt as DismissableLayer, s as normalizeDates, st as createCollection, tt as Portal, u as constructFrom, ut as createContextScope, w as Root$2, x as Description, y as Close, yt as __export, z as Anchor } from "./index-C2ECae2a.js";
+import { $ as VISUALLY_HIDDEN_STYLES, A as hideOthers, B as Anchor, C as Overlay, D as Trigger$2, E as Title, G as useId, H as Content, I as Button, J as X, L as buttonVariants, M as useFocusGuards, N as FocusScope, S as Description, T as Root$1, U as Root2$2, V as Arrow, W as createPopperScope, X as createLucideIcon, _t as require_react_dom, at as useCallbackRef, b as Close, bt as __export, c as normalizeDates, ct as createCollection, d as constructFrom, dt as createContextScope, et as useControllableState, f as millisecondsInHour, ft as require_jsx_runtime, ht as composeEventHandlers, it as DismissableLayer, j as Combination_default, lt as createSlot, m as millisecondsInWeek, mt as useComposedRefs, nt as Portal, o as differenceInCalendarDays, ot as Primitive, p as millisecondsInMinute, q as cn, rt as useLayoutEffect2, s as startOfDay, tt as Presence, u as toDate, vt as require_react, w as Portal$3, x as Content$1, xt as __toESM } from "./index-DX5goG9l.js";
 var Check = createLucideIcon("check", [["path", {
 	d: "M20 6 9 17l-5-5",
 	key: "1gmf2c"
@@ -2931,7 +2931,7 @@ function PreviousMonthButton(props) {
 	const { components } = useDayPicker();
 	return import_react.createElement(components.Button, { ...props });
 }
-function Root$1(props) {
+function Root(props) {
 	const { rootRef, ...rest } = props;
 	return import_react.createElement("div", {
 		...rest,
@@ -2983,7 +2983,7 @@ var custom_components_exports = /* @__PURE__ */ __export({
 	NextMonthButton: () => NextMonthButton,
 	Option: () => Option,
 	PreviousMonthButton: () => PreviousMonthButton,
-	Root: () => Root$1,
+	Root: () => Root,
 	Select: () => Select$2,
 	Week: () => Week,
 	WeekNumber: () => WeekNumber,
@@ -4550,7 +4550,7 @@ function CalendarDayButton({ className, day, modifiers, ...props }) {
 		...props
 	});
 }
-var Dialog = Root$2;
+var Dialog = Root$1;
 var DialogTrigger = Trigger$2;
 var DialogPortal = Portal$3;
 var DialogClose = Close;
@@ -4595,27 +4595,6 @@ var DialogDescription = import_react.forwardRef(({ className, ...props }, ref) =
 	...props
 }));
 DialogDescription.displayName = Description.displayName;
-var NAME = "Label";
-var Label$2 = import_react.forwardRef((props, forwardedRef) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.label, {
-		...props,
-		ref: forwardedRef,
-		onMouseDown: (event) => {
-			if (event.target.closest("button, input, select, textarea")) return;
-			props.onMouseDown?.(event);
-			if (!event.defaultPrevented && event.detail > 1) event.preventDefault();
-		}
-	});
-});
-Label$2.displayName = NAME;
-var Root = Label$2;
-var labelVariants = cva("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70");
-var Label$1 = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
-	ref,
-	className: cn(labelVariants(), className),
-	...props
-}));
-Label$1.displayName = Root.displayName;
 function clamp(value, [min$1, max$1]) {
 	return Math.min(max$1, Math.max(min$1, value));
 }
@@ -5650,6 +5629,6 @@ var SelectSeparator = import_react.forwardRef(({ className, ...props }, ref) => 
 	...props
 }));
 SelectSeparator.displayName = Separator.displayName;
-export { ChevronRight as A, isBefore as C, differenceInCalendarMonths as D, endOfMonth as E, Check as M, isSameDay as O, subDays as S, enUS$1 as T, Popover as _, SelectValue as a, ptBR as b, Dialog as c, DialogDescription as d, DialogFooter as f, Calendar as g, DialogTrigger as h, SelectTrigger as i, ChevronLeft as j, getDefaultOptions as k, DialogClose as l, DialogTitle as m, SelectContent as n, useDirection as o, DialogHeader as p, SelectItem as r, Label$1 as s, Select as t, DialogContent as u, PopoverContent as v, format as w, parseISO as x, PopoverTrigger as y };
+export { ChevronLeft as A, format as C, isSameDay as D, differenceInCalendarMonths as E, getDefaultOptions as O, isBefore as S, endOfMonth as T, PopoverContent as _, SelectValue as a, parseISO as b, DialogClose as c, DialogFooter as d, DialogHeader as f, Popover as g, Calendar as h, SelectTrigger as i, Check as j, ChevronRight as k, DialogContent as l, DialogTrigger as m, SelectContent as n, useDirection as o, DialogTitle as p, SelectItem as r, Dialog as s, Select as t, DialogDescription as u, PopoverTrigger as v, enUS$1 as w, subDays as x, ptBR as y };
 
-//# sourceMappingURL=select-9tDeNhRr.js.map
+//# sourceMappingURL=select-CYv7rfRB.js.map

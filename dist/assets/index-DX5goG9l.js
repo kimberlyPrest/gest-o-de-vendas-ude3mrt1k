@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-DX3LpYk1.js","assets/select-9tDeNhRr.js","assets/CRM-D0LZdvdS.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-D7tLSHrE.js","assets/select-CYv7rfRB.js","assets/CRM-BiNpjiaY.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -16316,6 +16316,30 @@ import_react.memo(DataRoutes);
 function DataRoutes({ routes, future, state, onError }) {
 	return useRoutesImpl(routes, void 0, state, onError, future);
 }
+function Navigate({ to, replace: replace2, state, relative }) {
+	invariant(useInRouterContext(), `<Navigate> may be used only in the context of a <Router> component.`);
+	let { static: isStatic } = import_react.useContext(NavigationContext);
+	warning(!isStatic, `<Navigate> must not be used on the initial render in a <StaticRouter>. This is a no-op, but you should modify your code so the <Navigate> is only ever rendered in response to some user interaction or state change.`);
+	let { matches } = import_react.useContext(RouteContext);
+	let { pathname: locationPathname } = useLocation();
+	let navigate = useNavigate();
+	let path = resolveTo(to, getResolveToMatches(matches), locationPathname, relative === "path");
+	let jsonPath = JSON.stringify(path);
+	import_react.useEffect(() => {
+		navigate(JSON.parse(jsonPath), {
+			replace: replace2,
+			state,
+			relative
+		});
+	}, [
+		navigate,
+		jsonPath,
+		relative,
+		replace2,
+		state
+	]);
+	return null;
+}
 function Outlet(props) {
 	return useOutlet(props.context);
 }
@@ -17796,7 +17820,7 @@ function createCollection(name) {
 		createCollectionScope$1
 	];
 }
-var Primitive = [
+var Primitive$1 = [
 	"a",
 	"button",
 	"div",
@@ -17930,7 +17954,7 @@ var DismissableLayer = import_react.forwardRef((props, forwardedRef) => {
 		document.addEventListener(CONTEXT_UPDATE, handleUpdate);
 		return () => document.removeEventListener(CONTEXT_UPDATE, handleUpdate);
 	}, []);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 		...layerProps,
 		ref: composedRefs,
 		style: {
@@ -17957,7 +17981,7 @@ var DismissableLayerBranch = import_react.forwardRef((props, forwardedRef) => {
 			};
 		}
 	}, [context.branches]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 		...props,
 		ref: composedRefs
 	});
@@ -18023,7 +18047,7 @@ function handleAndDispatchCustomEvent$1(name, handler, detail, { discrete }) {
 	if (discrete) dispatchDiscreteCustomEvent(target, event);
 	else target.dispatchEvent(event);
 }
-var Root$4 = DismissableLayer;
+var Root$5 = DismissableLayer;
 var Branch = DismissableLayerBranch;
 var useLayoutEffect2 = globalThis?.document ? import_react.useLayoutEffect : () => {};
 var import_react_dom$4 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
@@ -18033,7 +18057,7 @@ var Portal = import_react.forwardRef((props, forwardedRef) => {
 	const [mounted, setMounted] = import_react.useState(false);
 	useLayoutEffect2(() => setMounted(true), []);
 	const container = containerProp || mounted && globalThis?.document?.body;
-	return container ? import_react_dom$4.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+	return container ? import_react_dom$4.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 		...portalProps,
 		ref: forwardedRef
 	}), container) : null;
@@ -18202,9 +18226,9 @@ var VISUALLY_HIDDEN_STYLES = Object.freeze({
 	whiteSpace: "nowrap",
 	wordWrap: "normal"
 });
-var NAME$2 = "VisuallyHidden";
+var NAME$3 = "VisuallyHidden";
 var VisuallyHidden = import_react.forwardRef((props, forwardedRef) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.span, {
 		...props,
 		ref: forwardedRef,
 		style: {
@@ -18213,8 +18237,8 @@ var VisuallyHidden = import_react.forwardRef((props, forwardedRef) => {
 		}
 	});
 });
-VisuallyHidden.displayName = NAME$2;
-var Root$3 = VisuallyHidden;
+VisuallyHidden.displayName = NAME$3;
+var Root$4 = VisuallyHidden;
 var import_react_dom$3 = /* @__PURE__ */ __toESM(require_react_dom(), 1);
 var PROVIDER_NAME$1 = "ToastProvider";
 var [Collection, useCollection, createCollectionScope] = createCollection("Toast");
@@ -18354,7 +18378,7 @@ var ToastViewport$1 = import_react.forwardRef((props, forwardedRef) => {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.Slot, {
 				scope: __scopeToast,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.ol, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.ol, {
 					tabIndex: -1,
 					...viewportProps,
 					ref: composedRefs
@@ -18513,13 +18537,13 @@ var ToastImpl = import_react.forwardRef((props, forwardedRef) => {
 		onClose: handleClose,
 		children: import_react_dom$3.createPortal(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Collection.ItemSlot, {
 			scope: __scopeToast,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$5, {
 				asChild: true,
 				onEscapeKeyDown: composeEventHandlers(onEscapeKeyDown, () => {
 					if (!context.isFocusedToastEscapeKeyDownRef.current) handleClose();
 					context.isFocusedToastEscapeKeyDownRef.current = false;
 				}),
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.li, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.li, {
 					tabIndex: 0,
 					"data-state": open ? "open" : "closed",
 					"data-swipe-direction": context.swipeDirection,
@@ -18619,7 +18643,7 @@ var ToastAnnounce = (props) => {
 var TITLE_NAME$1 = "ToastTitle";
 var ToastTitle$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, ...titleProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 		...titleProps,
 		ref: forwardedRef
 	});
@@ -18628,7 +18652,7 @@ ToastTitle$1.displayName = TITLE_NAME$1;
 var DESCRIPTION_NAME$1 = "ToastDescription";
 var ToastDescription$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, ...descriptionProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 		...descriptionProps,
 		ref: forwardedRef
 	});
@@ -18657,7 +18681,7 @@ var ToastClose$1 = import_react.forwardRef((props, forwardedRef) => {
 	const interactiveContext = useToastInteractiveContext(CLOSE_NAME$1, __scopeToast);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ToastAnnounceExclude, {
 		asChild: true,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.button, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
 			type: "button",
 			...closeProps,
 			ref: forwardedRef,
@@ -18668,7 +18692,7 @@ var ToastClose$1 = import_react.forwardRef((props, forwardedRef) => {
 ToastClose$1.displayName = CLOSE_NAME$1;
 var ToastAnnounceExclude = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeToast, altText, ...announceExcludeProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 		"data-radix-toast-announce-exclude": "",
 		"data-radix-toast-announce-alt": altText || void 0,
 		...announceExcludeProps,
@@ -18871,6 +18895,32 @@ var LoaderCircle = createLucideIcon("loader-circle", [["path", {
 	d: "M21 12a9 9 0 1 1-6.219-8.56",
 	key: "13zald"
 }]]);
+var Lock = createLucideIcon("lock", [["rect", {
+	width: "18",
+	height: "11",
+	x: "3",
+	y: "11",
+	rx: "2",
+	ry: "2",
+	key: "1w4ew1"
+}], ["path", {
+	d: "M7 11V7a5 5 0 0 1 10 0v4",
+	key: "fwvmzm"
+}]]);
+var LogOut = createLucideIcon("log-out", [
+	["path", {
+		d: "m16 17 5-5-5-5",
+		key: "1bji2h"
+	}],
+	["path", {
+		d: "M21 12H9",
+		key: "dn1m92"
+	}],
+	["path", {
+		d: "M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4",
+		key: "1uf3rs"
+	}]
+]);
 var PanelLeft = createLucideIcon("panel-left", [["rect", {
 	width: "18",
 	height: "18",
@@ -20770,10 +20820,10 @@ var Observer = class {
 			if (typeof id !== "string" && typeof id !== "number") return { unwrap };
 			else return Object.assign(id, { unwrap });
 		};
-		this.custom = (jsx$16, data) => {
+		this.custom = (jsx$17, data) => {
 			const id = (data == null ? void 0 : data.id) || toastsCounter++;
 			this.create({
-				jsx: jsx$16(id),
+				jsx: jsx$17(id),
 				id,
 				...data
 			});
@@ -22895,10 +22945,10 @@ var arrow = (options$1, deps) => ({
 	...arrow$1$1(options$1),
 	options: [options$1, deps]
 });
-var NAME$1 = "Arrow";
+var NAME$2 = "Arrow";
 var Arrow$1 = import_react.forwardRef((props, forwardedRef) => {
 	const { children, width = 10, height = 5, ...arrowProps } = props;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.svg, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.svg, {
 		...arrowProps,
 		ref: forwardedRef,
 		width,
@@ -22908,8 +22958,8 @@ var Arrow$1 = import_react.forwardRef((props, forwardedRef) => {
 		children: props.asChild ? children : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("polygon", { points: "0,0 30,0 15,10" })
 	});
 });
-Arrow$1.displayName = NAME$1;
-var Root$2 = Arrow$1;
+Arrow$1.displayName = NAME$2;
+var Root$3 = Arrow$1;
 function useSize(element) {
 	const [size$3, setSize] = import_react.useState(void 0);
 	useLayoutEffect2(() => {
@@ -22970,7 +23020,7 @@ var PopperAnchor = import_react.forwardRef((props, forwardedRef) => {
 		anchorRef.current = virtualRef?.current || ref.current;
 		if (previousAnchor !== anchorRef.current) context.onAnchorChange(anchorRef.current);
 	});
-	return virtualRef ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+	return virtualRef ? null : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 		...anchorProps,
 		ref: composedRefs
 	});
@@ -23080,7 +23130,7 @@ var PopperContent = import_react.forwardRef((props, forwardedRef) => {
 			arrowX,
 			arrowY,
 			shouldHideArrow: cannotCenterArrow,
-			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 				"data-side": placedSide,
 				"data-align": placedAlign,
 				...contentProps,
@@ -23126,7 +23176,7 @@ var PopperArrow = import_react.forwardRef(function PopperArrow2(props, forwarded
 			}[contentContext.placedSide],
 			visibility: contentContext.shouldHideArrow ? "hidden" : void 0
 		},
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$3, {
 			...arrowProps,
 			ref: forwardedRef,
 			style: {
@@ -23323,7 +23373,7 @@ var TooltipTrigger$1 = import_react.forwardRef((props, forwardedRef) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Anchor, {
 		asChild: true,
 		...popperScope,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.button, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
 			"aria-describedby": context.open ? context.contentId : void 0,
 			"data-state": context.stateAttribute,
 			...triggerProps,
@@ -23508,7 +23558,7 @@ var TooltipContentImpl = import_react.forwardRef((props, forwardedRef) => {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Slottable, { children }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VisuallyHiddenContentContextProvider, {
 				scope: __scopeTooltip,
 				isInside: true,
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$3, {
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$4, {
 					id: context.contentId,
 					role: "tooltip",
 					children: ariaLabel || children
@@ -23823,7 +23873,7 @@ var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
 });
 Input.displayName = "Input";
 require_react_dom();
-var Primitive$1 = [
+var Primitive = [
 	"a",
 	"button",
 	"div",
@@ -23858,7 +23908,7 @@ var Primitive$1 = [
 		[node]: Node$1
 	};
 }, {});
-var NAME = "Separator";
+var NAME$1 = "Separator";
 var DEFAULT_ORIENTATION = "horizontal";
 var ORIENTATIONS = ["horizontal", "vertical"];
 var Separator$1 = import_react.forwardRef((props, forwardedRef) => {
@@ -23869,26 +23919,26 @@ var Separator$1 = import_react.forwardRef((props, forwardedRef) => {
 		"aria-orientation": ariaOrientation,
 		role: "separator"
 	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
 		"data-orientation": orientation,
 		...semanticProps,
 		...domProps,
 		ref: forwardedRef
 	});
 });
-Separator$1.displayName = NAME;
+Separator$1.displayName = NAME$1;
 function isValidOrientation(orientation) {
 	return ORIENTATIONS.includes(orientation);
 }
-var Root$1 = Separator$1;
-var Separator = import_react.forwardRef(({ className, orientation = "horizontal", decorative = true, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$1, {
+var Root$2 = Separator$1;
+var Separator = import_react.forwardRef(({ className, orientation = "horizontal", decorative = true, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$2, {
 	ref,
 	decorative,
 	orientation,
 	className: cn("shrink-0 bg-border", orientation === "horizontal" ? "h-[1px] w-full" : "h-full w-[1px]", className),
 	...props
 }));
-Separator.displayName = Root$1.displayName;
+Separator.displayName = Root$2.displayName;
 var AUTOFOCUS_ON_MOUNT = "focusScope.autoFocusOnMount";
 var AUTOFOCUS_ON_UNMOUNT = "focusScope.autoFocusOnUnmount";
 var EVENT_OPTIONS = {
@@ -24000,7 +24050,7 @@ var FocusScope = import_react.forwardRef((props, forwardedRef) => {
 		trapped,
 		focusScope.paused
 	]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 		tabIndex: -1,
 		...scopeProps,
 		ref: composedRefs,
@@ -24851,7 +24901,7 @@ var DialogTrigger = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...triggerProps } = props;
 	const context = useDialogContext(TRIGGER_NAME, __scopeDialog);
 	const composedTriggerRef = useComposedRefs(forwardedRef, context.triggerRef);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.button, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
 		type: "button",
 		"aria-haspopup": "dialog",
 		"aria-expanded": context.open,
@@ -24904,7 +24954,7 @@ var DialogOverlayImpl = import_react.forwardRef((props, forwardedRef) => {
 		as: Slot$1,
 		allowPinchZoom: true,
 		shards: [context.contentRef],
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.div, {
 			"data-state": getState(context.open),
 			...overlayProps,
 			ref: forwardedRef,
@@ -25018,7 +25068,7 @@ var TITLE_NAME = "DialogTitle";
 var DialogTitle = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...titleProps } = props;
 	const context = useDialogContext(TITLE_NAME, __scopeDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.h2, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.h2, {
 		id: context.titleId,
 		...titleProps,
 		ref: forwardedRef
@@ -25029,7 +25079,7 @@ var DESCRIPTION_NAME = "DialogDescription";
 var DialogDescription = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...descriptionProps } = props;
 	const context = useDialogContext(DESCRIPTION_NAME, __scopeDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.p, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.p, {
 		id: context.descriptionId,
 		...descriptionProps,
 		ref: forwardedRef
@@ -25040,7 +25090,7 @@ var CLOSE_NAME = "DialogClose";
 var DialogClose = import_react.forwardRef((props, forwardedRef) => {
 	const { __scopeDialog, ...closeProps } = props;
 	const context = useDialogContext(CLOSE_NAME, __scopeDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.button, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive$1.button, {
 		type: "button",
 		...closeProps,
 		ref: forwardedRef,
@@ -25086,7 +25136,7 @@ var DescriptionWarning = ({ contentRef, descriptionId }) => {
 	]);
 	return null;
 };
-var Root = Dialog;
+var Root$1 = Dialog;
 var Trigger = DialogTrigger;
 var Portal$1 = DialogPortal;
 var Overlay = DialogOverlay;
@@ -25094,7 +25144,7 @@ var Content = DialogContent;
 var Title = DialogTitle;
 var Description = DialogDescription;
 var Close = DialogClose;
-var Sheet = Root;
+var Sheet = Root$1;
 var SheetPortal = Portal$1;
 var SheetOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Overlay, {
 	className: cn("fixed inset-0 z-50 bg-black/80  data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0", className),
@@ -25513,321 +25563,6 @@ var SidebarMenuSubButton = import_react.forwardRef(({ asChild = false, size: siz
 	});
 });
 SidebarMenuSubButton.displayName = "SidebarMenuSubButton";
-function AppSidebar() {
-	const pathname = useLocation().pathname;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("link", {
-			href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
-			rel: "stylesheet"
-		}),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", { children: `
-        .material-symbols-outlined {
-          font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
-        }
-        .glass-sidebar {
-          background: rgba(255, 255, 255, 0.7) !important;
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-          border-right: 1px solid #E5E5E7 !important;
-        }
-        .nav-item-active {
-          background: rgba(0, 113, 227, 0.08);
-          color: #0071E3 !important;
-        }
-      ` }),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Sidebar, {
-			className: "glass-sidebar border-r-0",
-			collapsible: "offcanvas",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarHeader, {
-					className: "p-8",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-3",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "size-9 rounded-xl flex items-center justify-center shadow-lg",
-							style: {
-								background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
-								boxShadow: "0 4px 14px rgba(59, 130, 246, 0.3)"
-							},
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "material-symbols-outlined text-white text-[20px]",
-								children: "analytics"
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-							className: "text-[15px] font-semibold tracking-tight",
-							style: { color: "#1D1D1F" },
-							children: "Performance"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-[10px] font-medium uppercase tracking-wider",
-							style: { color: "#86868B" },
-							children: "Analytics Suite"
-						})] })]
-					})
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarContent, {
-					className: "px-4 py-2",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenu, {
-						className: "space-y-1",
-						children: [
-							{
-								title: "Lives",
-								url: "/lives",
-								icon: "live_tv"
-							},
-							{
-								title: "CRM",
-								url: "/crm",
-								icon: "group"
-							},
-							{
-								title: "Ajustes",
-								url: "/settings",
-								icon: "settings"
-							}
-						].map((item) => {
-							const isActive = pathname === item.url || item.url === "/lives" && pathname === "/";
-							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuButton, {
-								asChild: true,
-								tooltip: item.title,
-								className: cn("w-full justify-start rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200", isActive ? "nav-item-active" : "hover:bg-black/5"),
-								style: { color: isActive ? "#0071E3" : "#86868B" },
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-									to: item.url,
-									className: "flex items-center gap-3",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "material-symbols-outlined text-[20px]",
-										children: item.icon
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-[14px]",
-										children: item.title
-									})]
-								})
-							}) }, item.title);
-						})
-					})
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarFooter, {
-					className: "p-6 border-t",
-					style: { borderColor: "#E5E5E7" },
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-3 p-2 rounded-xl hover:bg-black/5 cursor-pointer transition-colors",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "size-8 rounded-full flex items-center justify-center",
-							style: {
-								backgroundColor: "#E5E5E7",
-								color: "#86868B"
-							},
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "material-symbols-outlined text-[18px]",
-								children: "person"
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex flex-col min-w-0",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-[13px] font-medium truncate",
-								style: { color: "#1D1D1F" },
-								children: "Admin User"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-[11px] truncate",
-								style: { color: "#86868B" },
-								children: "admin@icloud.com"
-							})]
-						})]
-					})
-				})
-			]
-		})
-	] });
-}
-var createStoreImpl = (createState) => {
-	let state;
-	const listeners$1 = /* @__PURE__ */ new Set();
-	const setState = (partial, replace) => {
-		const nextState = typeof partial === "function" ? partial(state) : partial;
-		if (!Object.is(nextState, state)) {
-			const previousState = state;
-			state = (replace != null ? replace : typeof nextState !== "object" || nextState === null) ? nextState : Object.assign({}, state, nextState);
-			listeners$1.forEach((listener) => listener(state, previousState));
-		}
-	};
-	const getState$1 = () => state;
-	const getInitialState = () => initialState;
-	const subscribe = (listener) => {
-		listeners$1.add(listener);
-		return () => listeners$1.delete(listener);
-	};
-	const destroy = () => {
-		console.warn("[DEPRECATED] The `destroy` method will be unsupported in a future version. Instead use unsubscribe function returned by subscribe. Everything will be garbage-collected if store is garbage-collected.");
-		listeners$1.clear();
-	};
-	const api = {
-		setState,
-		getState: getState$1,
-		getInitialState,
-		subscribe,
-		destroy
-	};
-	const initialState = state = createState(setState, getState$1, api);
-	return api;
-};
-var createStore = (createState) => createState ? createStoreImpl(createState) : createStoreImpl;
-/**
-* @license React
-* use-sync-external-store-shim.development.js
-*
-* Copyright (c) Meta Platforms, Inc. and affiliates.
-*
-* This source code is licensed under the MIT license found in the
-* LICENSE file in the root directory of this source tree.
-*/
-var require_use_sync_external_store_shim_development = /* @__PURE__ */ __commonJSMin(((exports) => {
-	(function() {
-		function is(x$1, y) {
-			return x$1 === y && (0 !== x$1 || 1 / x$1 === 1 / y) || x$1 !== x$1 && y !== y;
-		}
-		function useSyncExternalStore$2(subscribe, getSnapshot) {
-			didWarnOld18Alpha || void 0 === React$3.startTransition || (didWarnOld18Alpha = !0, console.error("You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."));
-			var value = getSnapshot();
-			if (!didWarnUncachedGetSnapshot) {
-				var cachedValue = getSnapshot();
-				objectIs(value, cachedValue) || (console.error("The result of getSnapshot should be cached to avoid an infinite loop"), didWarnUncachedGetSnapshot = !0);
-			}
-			cachedValue = useState$1({ inst: {
-				value,
-				getSnapshot
-			} });
-			var inst = cachedValue[0].inst, forceUpdate = cachedValue[1];
-			useLayoutEffect$1(function() {
-				inst.value = value;
-				inst.getSnapshot = getSnapshot;
-				checkIfSnapshotChanged(inst) && forceUpdate({ inst });
-			}, [
-				subscribe,
-				value,
-				getSnapshot
-			]);
-			useEffect$4(function() {
-				checkIfSnapshotChanged(inst) && forceUpdate({ inst });
-				return subscribe(function() {
-					checkIfSnapshotChanged(inst) && forceUpdate({ inst });
-				});
-			}, [subscribe]);
-			useDebugValue$1(value);
-			return value;
-		}
-		function checkIfSnapshotChanged(inst) {
-			var latestGetSnapshot = inst.getSnapshot;
-			inst = inst.value;
-			try {
-				var nextValue = latestGetSnapshot();
-				return !objectIs(inst, nextValue);
-			} catch (error) {
-				return !0;
-			}
-		}
-		function useSyncExternalStore$1(subscribe, getSnapshot) {
-			return getSnapshot();
-		}
-		"undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-		var React$3 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is, useState$1 = React$3.useState, useEffect$4 = React$3.useEffect, useLayoutEffect$1 = React$3.useLayoutEffect, useDebugValue$1 = React$3.useDebugValue, didWarnOld18Alpha = !1, didWarnUncachedGetSnapshot = !1, shim = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
-		exports.useSyncExternalStore = void 0 !== React$3.useSyncExternalStore ? React$3.useSyncExternalStore : shim;
-		"undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
-	})();
-}));
-var require_shim = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	module.exports = require_use_sync_external_store_shim_development();
-}));
-/**
-* @license React
-* use-sync-external-store-shim/with-selector.development.js
-*
-* Copyright (c) Meta Platforms, Inc. and affiliates.
-*
-* This source code is licensed under the MIT license found in the
-* LICENSE file in the root directory of this source tree.
-*/
-var require_with_selector_development = /* @__PURE__ */ __commonJSMin(((exports) => {
-	(function() {
-		function is(x$1, y) {
-			return x$1 === y && (0 !== x$1 || 1 / x$1 === 1 / y) || x$1 !== x$1 && y !== y;
-		}
-		"undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
-		var React$3 = require_react(), shim = require_shim(), objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = shim.useSyncExternalStore, useRef = React$3.useRef, useEffect$4 = React$3.useEffect, useMemo = React$3.useMemo, useDebugValue$1 = React$3.useDebugValue;
-		exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual) {
-			var instRef = useRef(null);
-			if (null === instRef.current) {
-				var inst = {
-					hasValue: !1,
-					value: null
-				};
-				instRef.current = inst;
-			} else inst = instRef.current;
-			instRef = useMemo(function() {
-				function memoizedSelector(nextSnapshot) {
-					if (!hasMemo) {
-						hasMemo = !0;
-						memoizedSnapshot = nextSnapshot;
-						nextSnapshot = selector(nextSnapshot);
-						if (void 0 !== isEqual && inst.hasValue) {
-							var currentSelection = inst.value;
-							if (isEqual(currentSelection, nextSnapshot)) return memoizedSelection = currentSelection;
-						}
-						return memoizedSelection = nextSnapshot;
-					}
-					currentSelection = memoizedSelection;
-					if (objectIs(memoizedSnapshot, nextSnapshot)) return currentSelection;
-					var nextSelection = selector(nextSnapshot);
-					if (void 0 !== isEqual && isEqual(currentSelection, nextSelection)) return memoizedSnapshot = nextSnapshot, currentSelection;
-					memoizedSnapshot = nextSnapshot;
-					return memoizedSelection = nextSelection;
-				}
-				var hasMemo = !1, memoizedSnapshot, memoizedSelection, maybeGetServerSnapshot = void 0 === getServerSnapshot ? null : getServerSnapshot;
-				return [function() {
-					return memoizedSelector(getSnapshot());
-				}, null === maybeGetServerSnapshot ? void 0 : function() {
-					return memoizedSelector(maybeGetServerSnapshot());
-				}];
-			}, [
-				getSnapshot,
-				getServerSnapshot,
-				selector,
-				isEqual
-			]);
-			var value = useSyncExternalStore(subscribe, instRef[0], instRef[1]);
-			useEffect$4(function() {
-				inst.hasValue = !0;
-				inst.value = value;
-			}, [value]);
-			useDebugValue$1(value);
-			return value;
-		};
-		"undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
-	})();
-}));
-var import_with_selector = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
-	module.exports = require_with_selector_development();
-})))(), 1);
-var { useDebugValue } = import_react.default;
-var { useSyncExternalStoreWithSelector } = import_with_selector.default;
-var didWarnAboutEqualityFn = false;
-var identity = (arg) => arg;
-function useStore(api, selector = identity, equalityFn) {
-	if (equalityFn && !didWarnAboutEqualityFn) {
-		console.warn("[DEPRECATED] Use `createWithEqualityFn` instead of `create` or use `useStoreWithEqualityFn` instead of `useStore`. They can be imported from 'zustand/traditional'. https://github.com/pmndrs/zustand/discussions/1937");
-		didWarnAboutEqualityFn = true;
-	}
-	const slice = useSyncExternalStoreWithSelector(api.subscribe, api.getState, api.getServerState || api.getInitialState, selector, equalityFn);
-	useDebugValue(slice);
-	return slice;
-}
-var createImpl = (createState) => {
-	if (typeof createState !== "function") console.warn("[DEPRECATED] Passing a vanilla store will be unsupported in a future version. Instead use `import { useStore } from 'zustand'`.");
-	const api = typeof createState === "function" ? createStore(createState) : createState;
-	const useBoundStore = (selector, equalityFn) => useStore(api, selector, equalityFn);
-	Object.assign(useBoundStore, api);
-	return useBoundStore;
-};
-var create = (createState) => createState ? createImpl(createState) : createImpl;
 const resolveFetch$3 = (customFetch) => {
 	if (customFetch) return (...args) => customFetch(...args);
 	return (...args) => fetch(...args);
@@ -33679,6 +33414,387 @@ const supabase = createClient("https://askqkuhotxfwrwtidlmn.supabase.co", "eyJhb
 	persistSession: true,
 	autoRefreshToken: true
 } });
+var AuthContext = (0, import_react.createContext)(void 0);
+const useAuth = () => {
+	const context = (0, import_react.useContext)(AuthContext);
+	if (context === void 0) throw new Error("useAuth must be used within an AuthProvider");
+	return context;
+};
+const AuthProvider = ({ children }) => {
+	const [user, setUser] = (0, import_react.useState)(null);
+	const [session, setSession] = (0, import_react.useState)(null);
+	const [loading, setLoading] = (0, import_react.useState)(true);
+	(0, import_react.useEffect)(() => {
+		const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session$1) => {
+			setSession(session$1);
+			setUser(session$1?.user ?? null);
+			setLoading(false);
+		});
+		supabase.auth.getSession().then(({ data: { session: session$1 } }) => {
+			setSession(session$1);
+			setUser(session$1?.user ?? null);
+			setLoading(false);
+		});
+		return () => subscription.unsubscribe();
+	}, []);
+	const signIn = async (email, password) => {
+		const { error } = await supabase.auth.signInWithPassword({
+			email,
+			password
+		});
+		return { error };
+	};
+	const signOut = async () => {
+		const { error } = await supabase.auth.signOut();
+		return { error };
+	};
+	const value = {
+		user,
+		session,
+		signIn,
+		signOut,
+		loading
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthContext.Provider, {
+		value,
+		children
+	});
+};
+function AppSidebar() {
+	const pathname = useLocation().pathname;
+	const { user, signOut } = useAuth();
+	const navigate = useNavigate();
+	const items = [
+		{
+			title: "Lives",
+			url: "/lives",
+			icon: "live_tv"
+		},
+		{
+			title: "CRM",
+			url: "/crm",
+			icon: "group"
+		},
+		{
+			title: "Ajustes",
+			url: "/settings",
+			icon: "settings"
+		}
+	];
+	const handleLogout = async () => {
+		try {
+			await signOut();
+			toast.success("Você saiu do sistema");
+			navigate("/login");
+		} catch (error) {
+			console.error("Logout error:", error);
+			toast.error("Erro ao sair");
+		}
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("link", {
+			href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
+			rel: "stylesheet"
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", { children: `
+        .material-symbols-outlined {
+          font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
+        }
+        .glass-sidebar {
+          background: rgba(255, 255, 255, 0.7) !important;
+          backdrop-filter: blur(20px);
+          -webkit-backdrop-filter: blur(20px);
+          border-right: 1px solid #E5E5E7 !important;
+        }
+        .nav-item-active {
+          background: rgba(0, 113, 227, 0.08);
+          color: #0071E3 !important;
+        }
+      ` }),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Sidebar, {
+			className: "glass-sidebar border-r-0",
+			collapsible: "offcanvas",
+			children: [
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarHeader, {
+					className: "p-8",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-3",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "size-9 rounded-xl flex items-center justify-center shadow-lg",
+							style: {
+								background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
+								boxShadow: "0 4px 14px rgba(59, 130, 246, 0.3)"
+							},
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "material-symbols-outlined text-white text-[20px]",
+								children: "analytics"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+							className: "text-[15px] font-semibold tracking-tight",
+							style: { color: "#1D1D1F" },
+							children: "Performance"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+							className: "text-[10px] font-medium uppercase tracking-wider",
+							style: { color: "#86868B" },
+							children: "Analytics Suite"
+						})] })]
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarContent, {
+					className: "px-4 py-2",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenu, {
+						className: "space-y-1",
+						children: items.map((item) => {
+							const isActive = pathname === item.url || item.url === "/lives" && pathname === "/";
+							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuButton, {
+								asChild: true,
+								tooltip: item.title,
+								className: cn("w-full justify-start rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200", isActive ? "nav-item-active" : "hover:bg-black/5"),
+								style: { color: isActive ? "#0071E3" : "#86868B" },
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+									to: item.url,
+									className: "flex items-center gap-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "material-symbols-outlined text-[20px]",
+										children: item.icon
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-[14px]",
+										children: item.title
+									})]
+								})
+							}) }, item.title);
+						})
+					})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarFooter, {
+					className: "p-6 border-t",
+					style: { borderColor: "#E5E5E7" },
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex flex-col gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex items-center gap-3 p-2 rounded-xl transition-colors",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: "size-8 rounded-full flex items-center justify-center",
+								style: {
+									backgroundColor: "#E5E5E7",
+									color: "#86868B"
+								},
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "material-symbols-outlined text-[18px]",
+									children: "person"
+								})
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "flex flex-col min-w-0",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[13px] font-medium truncate",
+									style: { color: "#1D1D1F" },
+									children: "Usuário"
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+									className: "text-[11px] truncate",
+									style: { color: "#86868B" },
+									children: user?.email || "Carregando..."
+								})]
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+							onClick: handleLogout,
+							className: "flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-red-500 hover:bg-red-50 transition-colors w-full",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, { size: 14 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Sair do sistema" })]
+						})]
+					})
+				})
+			]
+		})
+	] });
+}
+var createStoreImpl = (createState) => {
+	let state;
+	const listeners$1 = /* @__PURE__ */ new Set();
+	const setState = (partial, replace) => {
+		const nextState = typeof partial === "function" ? partial(state) : partial;
+		if (!Object.is(nextState, state)) {
+			const previousState = state;
+			state = (replace != null ? replace : typeof nextState !== "object" || nextState === null) ? nextState : Object.assign({}, state, nextState);
+			listeners$1.forEach((listener) => listener(state, previousState));
+		}
+	};
+	const getState$1 = () => state;
+	const getInitialState = () => initialState;
+	const subscribe = (listener) => {
+		listeners$1.add(listener);
+		return () => listeners$1.delete(listener);
+	};
+	const destroy = () => {
+		console.warn("[DEPRECATED] The `destroy` method will be unsupported in a future version. Instead use unsubscribe function returned by subscribe. Everything will be garbage-collected if store is garbage-collected.");
+		listeners$1.clear();
+	};
+	const api = {
+		setState,
+		getState: getState$1,
+		getInitialState,
+		subscribe,
+		destroy
+	};
+	const initialState = state = createState(setState, getState$1, api);
+	return api;
+};
+var createStore = (createState) => createState ? createStoreImpl(createState) : createStoreImpl;
+/**
+* @license React
+* use-sync-external-store-shim.development.js
+*
+* Copyright (c) Meta Platforms, Inc. and affiliates.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+var require_use_sync_external_store_shim_development = /* @__PURE__ */ __commonJSMin(((exports) => {
+	(function() {
+		function is(x$1, y) {
+			return x$1 === y && (0 !== x$1 || 1 / x$1 === 1 / y) || x$1 !== x$1 && y !== y;
+		}
+		function useSyncExternalStore$2(subscribe, getSnapshot) {
+			didWarnOld18Alpha || void 0 === React$3.startTransition || (didWarnOld18Alpha = !0, console.error("You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."));
+			var value = getSnapshot();
+			if (!didWarnUncachedGetSnapshot) {
+				var cachedValue = getSnapshot();
+				objectIs(value, cachedValue) || (console.error("The result of getSnapshot should be cached to avoid an infinite loop"), didWarnUncachedGetSnapshot = !0);
+			}
+			cachedValue = useState$3({ inst: {
+				value,
+				getSnapshot
+			} });
+			var inst = cachedValue[0].inst, forceUpdate = cachedValue[1];
+			useLayoutEffect$1(function() {
+				inst.value = value;
+				inst.getSnapshot = getSnapshot;
+				checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+			}, [
+				subscribe,
+				value,
+				getSnapshot
+			]);
+			useEffect$5(function() {
+				checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+				return subscribe(function() {
+					checkIfSnapshotChanged(inst) && forceUpdate({ inst });
+				});
+			}, [subscribe]);
+			useDebugValue$1(value);
+			return value;
+		}
+		function checkIfSnapshotChanged(inst) {
+			var latestGetSnapshot = inst.getSnapshot;
+			inst = inst.value;
+			try {
+				var nextValue = latestGetSnapshot();
+				return !objectIs(inst, nextValue);
+			} catch (error) {
+				return !0;
+			}
+		}
+		function useSyncExternalStore$1(subscribe, getSnapshot) {
+			return getSnapshot();
+		}
+		"undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
+		var React$3 = require_react(), objectIs = "function" === typeof Object.is ? Object.is : is, useState$3 = React$3.useState, useEffect$5 = React$3.useEffect, useLayoutEffect$1 = React$3.useLayoutEffect, useDebugValue$1 = React$3.useDebugValue, didWarnOld18Alpha = !1, didWarnUncachedGetSnapshot = !1, shim = "undefined" === typeof window || "undefined" === typeof window.document || "undefined" === typeof window.document.createElement ? useSyncExternalStore$1 : useSyncExternalStore$2;
+		exports.useSyncExternalStore = void 0 !== React$3.useSyncExternalStore ? React$3.useSyncExternalStore : shim;
+		"undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
+	})();
+}));
+var require_shim = /* @__PURE__ */ __commonJSMin(((exports, module) => {
+	module.exports = require_use_sync_external_store_shim_development();
+}));
+/**
+* @license React
+* use-sync-external-store-shim/with-selector.development.js
+*
+* Copyright (c) Meta Platforms, Inc. and affiliates.
+*
+* This source code is licensed under the MIT license found in the
+* LICENSE file in the root directory of this source tree.
+*/
+var require_with_selector_development = /* @__PURE__ */ __commonJSMin(((exports) => {
+	(function() {
+		function is(x$1, y) {
+			return x$1 === y && (0 !== x$1 || 1 / x$1 === 1 / y) || x$1 !== x$1 && y !== y;
+		}
+		"undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStart(Error());
+		var React$3 = require_react(), shim = require_shim(), objectIs = "function" === typeof Object.is ? Object.is : is, useSyncExternalStore = shim.useSyncExternalStore, useRef = React$3.useRef, useEffect$5 = React$3.useEffect, useMemo = React$3.useMemo, useDebugValue$1 = React$3.useDebugValue;
+		exports.useSyncExternalStoreWithSelector = function(subscribe, getSnapshot, getServerSnapshot, selector, isEqual) {
+			var instRef = useRef(null);
+			if (null === instRef.current) {
+				var inst = {
+					hasValue: !1,
+					value: null
+				};
+				instRef.current = inst;
+			} else inst = instRef.current;
+			instRef = useMemo(function() {
+				function memoizedSelector(nextSnapshot) {
+					if (!hasMemo) {
+						hasMemo = !0;
+						memoizedSnapshot = nextSnapshot;
+						nextSnapshot = selector(nextSnapshot);
+						if (void 0 !== isEqual && inst.hasValue) {
+							var currentSelection = inst.value;
+							if (isEqual(currentSelection, nextSnapshot)) return memoizedSelection = currentSelection;
+						}
+						return memoizedSelection = nextSnapshot;
+					}
+					currentSelection = memoizedSelection;
+					if (objectIs(memoizedSnapshot, nextSnapshot)) return currentSelection;
+					var nextSelection = selector(nextSnapshot);
+					if (void 0 !== isEqual && isEqual(currentSelection, nextSelection)) return memoizedSnapshot = nextSnapshot, currentSelection;
+					memoizedSnapshot = nextSnapshot;
+					return memoizedSelection = nextSelection;
+				}
+				var hasMemo = !1, memoizedSnapshot, memoizedSelection, maybeGetServerSnapshot = void 0 === getServerSnapshot ? null : getServerSnapshot;
+				return [function() {
+					return memoizedSelector(getSnapshot());
+				}, null === maybeGetServerSnapshot ? void 0 : function() {
+					return memoizedSelector(maybeGetServerSnapshot());
+				}];
+			}, [
+				getSnapshot,
+				getServerSnapshot,
+				selector,
+				isEqual
+			]);
+			var value = useSyncExternalStore(subscribe, instRef[0], instRef[1]);
+			useEffect$5(function() {
+				inst.hasValue = !0;
+				inst.value = value;
+			}, [value]);
+			useDebugValue$1(value);
+			return value;
+		};
+		"undefined" !== typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ && "function" === typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(Error());
+	})();
+}));
+var import_with_selector = /* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((exports, module) => {
+	module.exports = require_with_selector_development();
+})))(), 1);
+var { useDebugValue } = import_react.default;
+var { useSyncExternalStoreWithSelector } = import_with_selector.default;
+var didWarnAboutEqualityFn = false;
+var identity = (arg) => arg;
+function useStore(api, selector = identity, equalityFn) {
+	if (equalityFn && !didWarnAboutEqualityFn) {
+		console.warn("[DEPRECATED] Use `createWithEqualityFn` instead of `create` or use `useStoreWithEqualityFn` instead of `useStore`. They can be imported from 'zustand/traditional'. https://github.com/pmndrs/zustand/discussions/1937");
+		didWarnAboutEqualityFn = true;
+	}
+	const slice = useSyncExternalStoreWithSelector(api.subscribe, api.getState, api.getServerState || api.getInitialState, selector, equalityFn);
+	useDebugValue(slice);
+	return slice;
+}
+var createImpl = (createState) => {
+	if (typeof createState !== "function") console.warn("[DEPRECATED] Passing a vanilla store will be unsupported in a future version. Instead use `import { useStore } from 'zustand'`.");
+	const api = typeof createState === "function" ? createStore(createState) : createState;
+	const useBoundStore = (selector, equalityFn) => useStore(api, selector, equalityFn);
+	Object.assign(useBoundStore, api);
+	return useBoundStore;
+};
+var create = (createState) => createState ? createImpl(createState) : createImpl;
 var parseCurrency = (value) => {
 	if (typeof value === "number") return value;
 	if (!value) return 0;
@@ -34748,6 +34864,158 @@ var Index = () => {
 	return null;
 };
 var Index_default = Index;
+var NAME = "Label";
+var Label$1 = import_react.forwardRef((props, forwardedRef) => {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.label, {
+		...props,
+		ref: forwardedRef,
+		onMouseDown: (event) => {
+			if (event.target.closest("button, input, select, textarea")) return;
+			props.onMouseDown?.(event);
+			if (!event.defaultPrevented && event.detail > 1) event.preventDefault();
+		}
+	});
+});
+Label$1.displayName = NAME;
+var Root = Label$1;
+var labelVariants = cva("text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70");
+var Label = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
+	ref,
+	className: cn(labelVariants(), className),
+	...props
+}));
+Label.displayName = Root.displayName;
+var Card = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("rounded-lg border bg-card text-card-foreground shadow-sm", className),
+	...props
+}));
+Card.displayName = "Card";
+var CardHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("flex flex-col space-y-1.5 p-6", className),
+	...props
+}));
+CardHeader.displayName = "CardHeader";
+var CardTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("text-2xl font-semibold leading-none tracking-tight", className),
+	...props
+}));
+CardTitle.displayName = "CardTitle";
+var CardDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("text-sm text-muted-foreground", className),
+	...props
+}));
+CardDescription.displayName = "CardDescription";
+var CardContent = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("p-6 pt-0", className),
+	...props
+}));
+CardContent.displayName = "CardContent";
+var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("flex items-center p-6 pt-0", className),
+	...props
+}));
+CardFooter.displayName = "CardFooter";
+function Login() {
+	const [email, setEmail] = (0, import_react.useState)("");
+	const [password, setPassword] = (0, import_react.useState)("");
+	const [isLoading, setIsLoading] = (0, import_react.useState)(false);
+	const { signIn } = useAuth();
+	const navigate = useNavigate();
+	const from = useLocation().state?.from?.pathname || "/";
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setIsLoading(true);
+		try {
+			const { error } = await signIn(email, password);
+			if (error) toast.error("Erro ao fazer login", { description: "Verifique suas credenciais e tente novamente." });
+			else {
+				toast.success("Login realizado com sucesso");
+				navigate(from, { replace: true });
+			}
+		} catch (error) {
+			toast.error("Erro inesperado", { description: "Ocorreu um erro ao tentar fazer login." });
+			console.error(error);
+		} finally {
+			setIsLoading(false);
+		}
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "min-h-screen flex items-center justify-center bg-[#F5F5F7] p-4 dark:bg-background",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "w-full max-w-sm animate-fade-in-up",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
+				className: "border-border/40 shadow-elevation",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
+					className: "space-y-1 text-center pb-8",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg",
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lock, { className: "h-6 w-6 text-white" })
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+							className: "text-2xl font-semibold tracking-tight",
+							children: "Bem-vindo de volta"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, { children: "Entre com suas credenciais para acessar o sistema" })
+					]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+					onSubmit: handleSubmit,
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
+						className: "space-y-4",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "space-y-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+								htmlFor: "email",
+								children: "Email"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+								id: "email",
+								type: "email",
+								placeholder: "nome@exemplo.com",
+								value: email,
+								onChange: (e) => setEmail(e.target.value),
+								required: true,
+								className: "h-11 bg-gray-50/50 dark:bg-muted/50",
+								disabled: isLoading
+							})]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "space-y-2",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+								htmlFor: "password",
+								children: "Senha"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+								id: "password",
+								type: "password",
+								placeholder: "••••••••",
+								value: password,
+								onChange: (e) => setPassword(e.target.value),
+								required: true,
+								className: "h-11 bg-gray-50/50 dark:bg-muted/50",
+								disabled: isLoading
+							})]
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardFooter, {
+						className: "flex flex-col gap-4 pt-4",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+							type: "submit",
+							className: "w-full h-11 text-[15px] font-medium bg-[#0071E3] hover:bg-[#0077ED] transition-all shadow-sm",
+							disabled: isLoading,
+							children: isLoading ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "mr-2 h-4 w-4 animate-spin" }), "Entrando..."] }) : "Entrar"
+						})
+					})]
+				})]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+				className: "mt-6 text-center text-sm text-muted-foreground",
+				children: ["Gestão de Vendas © ", (/* @__PURE__ */ new Date()).getFullYear()]
+			})]
+		})
+	});
+}
 var NotFound = () => {
 	const location = useLocation();
 	(0, import_react.useEffect)(() => {
@@ -34776,8 +35044,28 @@ var NotFound = () => {
 	});
 };
 var NotFound_default = NotFound;
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-DX3LpYk1.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-D0LZdvdS.js"), __vite__mapDeps([2,1])));
+const AuthGuard = ({ children }) => {
+	const { user, loading } = useAuth();
+	const location = useLocation();
+	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "flex flex-col items-center gap-4",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-10 w-10 animate-spin text-primary" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+				className: "text-muted-foreground animate-pulse",
+				children: "Verificando credenciais..."
+			})]
+		})
+	});
+	if (!user) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Navigate, {
+		to: "/login",
+		state: { from: location },
+		replace: true
+	});
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
+};
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-D7tLSHrE.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-BiNpjiaY.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -34797,37 +35085,44 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(J, {
 			v7_startTransition: false,
 			v7_relativeSplatPath: false
 		},
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, { children: [
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TooltipProvider, { children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster, {}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Toaster$1, {}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_react.Suspense, {
 				fallback: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoadingFallback, {}),
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Route, {
-					element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layout, {}),
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-							path: "/",
-							element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Index_default, {})
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-							path: "/lives",
-							element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lives, {})
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-							path: "/crm",
-							element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CRM, {})
-						})
-					]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
-					path: "*",
-					element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotFound_default, {})
-				})] })
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Routes, { children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+						path: "/login",
+						element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Login, {})
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Route, {
+						element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AuthGuard, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Layout, {}) }),
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+								path: "/",
+								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Index_default, {})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+								path: "/lives",
+								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lives, {})
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+								path: "/crm",
+								element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CRM, {})
+							})
+						]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Route, {
+						path: "*",
+						element: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(NotFound_default, {})
+					})
+				] })
 			})
-		] })
+		] }) })
 	})
 });
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
-export { useControllableState as $, Combination_default as A, Arrow as B, Portal$1 as C, WarningProvider as D, Trigger as E, Button as F, toast as G, Root2 as H, buttonVariants as I, LoaderCircle as J, cn as K, useIsMobile as L, FocusScope as M, Primitive$1 as N, createDialogScope as O, Input as P, VISUALLY_HIDDEN_STYLES as Q, Slot as R, Overlay as S, Title as T, createPopperScope as U, Content$1 as V, useId as W, cva as X, createLucideIcon as Y, clsx_default as Z, require_shim as _, require_react as _t, differenceInCalendarDays as a, Primitive as at, Content as b, __toESM as bt, getTimezoneOffsetInMilliseconds as c, createSlot as ct, millisecondsInHour as d, require_jsx_runtime as dt, Presence as et, millisecondsInMinute as f, composeRefs as ft, googleSheetsService as g, require_react_dom as gt, minutesInMonth as h, useToast as ht, differenceInDays as i, useCallbackRef$1 as it, useFocusGuards as j, hideOthers as k, toDate as l, createSlottable as lt, minutesInDay as m, composeEventHandlers as mt, COLUMNS as n, useLayoutEffect2 as nt, startOfDay as o, dispatchDiscreteCustomEvent as ot, millisecondsInWeek as p, useComposedRefs as pt, X as q, useCRMStore as r, DismissableLayer as rt, normalizeDates as s, createCollection as st, useLivesStore as t, Portal as tt, constructFrom as u, createContextScope as ut, Skeleton as v, __commonJSMin as vt, Root as w, Description as x, Close as y, __export as yt, Anchor as z };
+export { VISUALLY_HIDDEN_STYLES as $, hideOthers as A, Anchor as B, Overlay as C, Trigger as D, Title as E, Input as F, useId as G, Content$1 as H, Button as I, X as J, toast as K, buttonVariants as L, useFocusGuards as M, FocusScope as N, WarningProvider as O, Primitive as P, clsx_default as Q, useIsMobile as R, Description as S, Root$1 as T, Root2 as U, Arrow as V, createPopperScope as W, createLucideIcon as X, LoaderCircle as Y, cva as Z, googleSheetsService as _, require_react_dom as _t, differenceInDays as a, useCallbackRef$1 as at, Close as b, __export as bt, normalizeDates as c, createCollection as ct, constructFrom as d, createContextScope as dt, useControllableState as et, millisecondsInHour as f, require_jsx_runtime as ft, minutesInMonth as g, useToast as gt, minutesInDay as h, composeEventHandlers as ht, useCRMStore as i, DismissableLayer as it, Combination_default as j, createDialogScope as k, getTimezoneOffsetInMilliseconds as l, createSlot as lt, millisecondsInWeek as m, useComposedRefs as mt, useLivesStore as n, Portal as nt, differenceInCalendarDays as o, Primitive$1 as ot, millisecondsInMinute as p, composeRefs as pt, cn as q, COLUMNS as r, useLayoutEffect2 as rt, startOfDay as s, dispatchDiscreteCustomEvent as st, Label as t, Presence as tt, toDate as u, createSlottable as ut, require_shim as v, require_react as vt, Portal$1 as w, Content as x, __toESM as xt, Skeleton as y, __commonJSMin as yt, Slot as z };
 
-//# sourceMappingURL=index-C2ECae2a.js.map
+//# sourceMappingURL=index-DX5goG9l.js.map

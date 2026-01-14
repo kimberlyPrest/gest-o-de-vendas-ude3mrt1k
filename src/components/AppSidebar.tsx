@@ -1,4 +1,4 @@
-import { useLocation, Link } from 'react-router-dom'
+import { useLocation, Link, useNavigate } from 'react-router-dom'
 import {
   Sidebar,
   SidebarContent,
@@ -9,10 +9,15 @@ import {
   SidebarFooter,
 } from '@/components/ui/sidebar'
 import { cn } from '@/lib/utils'
+import { useAuth } from '@/hooks/use-auth'
+import { LogOut } from 'lucide-react'
+import { toast } from 'sonner'
 
 export function AppSidebar() {
   const location = useLocation()
   const pathname = location.pathname
+  const { user, signOut } = useAuth()
+  const navigate = useNavigate()
 
   const items = [
     {
@@ -31,6 +36,17 @@ export function AppSidebar() {
       icon: 'settings',
     },
   ]
+
+  const handleLogout = async () => {
+    try {
+      await signOut()
+      toast.success('Você saiu do sistema')
+      navigate('/login')
+    } catch (error) {
+      console.error('Logout error:', error)
+      toast.error('Erro ao sair')
+    }
+  }
 
   return (
     <>
@@ -118,26 +134,39 @@ export function AppSidebar() {
           className="p-6 border-t"
           style={{ borderColor: '#E5E5E7' }}
         >
-          <div className="flex items-center gap-3 p-2 rounded-xl hover:bg-black/5 cursor-pointer transition-colors">
-            <div
-              className="size-8 rounded-full flex items-center justify-center"
-              style={{ backgroundColor: '#E5E5E7', color: '#86868B' }}
-            >
-              <span className="material-symbols-outlined text-[18px]">
-                person
-              </span>
-            </div>
-            <div className="flex flex-col min-w-0">
-              <p
-                className="text-[13px] font-medium truncate"
-                style={{ color: '#1D1D1F' }}
+          <div className="flex flex-col gap-2">
+            <div className="flex items-center gap-3 p-2 rounded-xl transition-colors">
+              <div
+                className="size-8 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: '#E5E5E7', color: '#86868B' }}
               >
-                Admin User
-              </p>
-              <p className="text-[11px] truncate" style={{ color: '#86868B' }}>
-                admin@icloud.com
-              </p>
+                <span className="material-symbols-outlined text-[18px]">
+                  person
+                </span>
+              </div>
+              <div className="flex flex-col min-w-0">
+                <p
+                  className="text-[13px] font-medium truncate"
+                  style={{ color: '#1D1D1F' }}
+                >
+                  Usuário
+                </p>
+                <p
+                  className="text-[11px] truncate"
+                  style={{ color: '#86868B' }}
+                >
+                  {user?.email || 'Carregando...'}
+                </p>
+              </div>
             </div>
+
+            <button
+              onClick={handleLogout}
+              className="flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-red-500 hover:bg-red-50 transition-colors w-full"
+            >
+              <LogOut size={14} />
+              <span>Sair do sistema</span>
+            </button>
           </div>
         </SidebarFooter>
       </Sidebar>

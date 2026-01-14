@@ -6,8 +6,11 @@ import { TooltipProvider } from '@/components/ui/tooltip'
 import { ThemeProvider } from 'next-themes'
 import Layout from './components/Layout'
 import Index from './pages/Index'
+import Login from './pages/Login'
 import NotFound from './pages/NotFound'
 import { Loader2 } from 'lucide-react'
+import { AuthProvider } from '@/hooks/use-auth'
+import { AuthGuard } from '@/components/auth/AuthGuard'
 
 // Lazy Loading
 const Lives = React.lazy(() => import('./pages/Lives'))
@@ -27,20 +30,29 @@ const App = () => (
     <BrowserRouter
       future={{ v7_startTransition: false, v7_relativeSplatPath: false }}
     >
-      <TooltipProvider>
-        <Toaster />
-        <Sonner />
-        <Suspense fallback={<LoadingFallback />}>
-          <Routes>
-            <Route element={<Layout />}>
-              <Route path="/" element={<Index />} />
-              <Route path="/lives" element={<Lives />} />
-              <Route path="/crm" element={<CRM />} />
-            </Route>
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </Suspense>
-      </TooltipProvider>
+      <AuthProvider>
+        <TooltipProvider>
+          <Toaster />
+          <Sonner />
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              <Route path="/login" element={<Login />} />
+              <Route
+                element={
+                  <AuthGuard>
+                    <Layout />
+                  </AuthGuard>
+                }
+              >
+                <Route path="/" element={<Index />} />
+                <Route path="/lives" element={<Lives />} />
+                <Route path="/crm" element={<CRM />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </Suspense>
+        </TooltipProvider>
+      </AuthProvider>
     </BrowserRouter>
   </ThemeProvider>
 )
