@@ -5,7 +5,6 @@ import {
   Check,
   ChevronsUpDown,
   FilterX,
-  Search,
   ArrowRightLeft,
   Filter,
 } from 'lucide-react'
@@ -22,7 +21,6 @@ import {
   Command,
   CommandEmpty,
   CommandGroup,
-  CommandInput,
   CommandItem,
   CommandList,
   CommandSeparator,
@@ -35,7 +33,6 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
-import { Separator } from '@/components/ui/separator'
 import { useState } from 'react'
 
 export interface FilterState {
@@ -223,7 +220,6 @@ export function LiveFilters({
         </PopoverTrigger>
         <PopoverContent className="w-[220px] p-0">
           <Command>
-            <CommandInput placeholder="Buscar apresentador..." />
             <CommandList>
               <CommandEmpty>Nenhum apresentador.</CommandEmpty>
               <CommandGroup>

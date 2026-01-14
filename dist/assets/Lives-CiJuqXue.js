@@ -1,5 +1,5 @@
-import { a as parseISO, c as startOfMonth, d as addDays, f as Download, g as ArrowRightLeft, h as ArrowUp, i as PopoverTrigger, m as ChevronLeft, n as Popover, o as subDays, p as DollarSign, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-Xv-qQ9vk.js";
-import { At as TooltipProvider, Bt as Video, C as DialogFooter, Ct as Input, D as ptBR, Dt as Slot, E as DialogTrigger, G as differenceInDays, Gt as ChevronRight, Ht as TrendingUp, Jt as Calendar, L as format, M as useLivesStore, Ot as Tooltip$1, S as DialogDescription, T as DialogTitle, U as endOfDay, Ut as RefreshCw, Vt as Users, Wt as LoaderCircle, X as startOfDay, Yt as createLucideIcon, Zt as clsx_default, _ as CommandList, a as Select, at as googleSheetsService, c as SelectTrigger, cn as require_jsx_runtime, d as Label$1, dn as useToast, f as Command, fn as require_react, g as CommandItem, h as CommandInput, hn as __toESM, i as CardTitle, jt as TooltipTrigger, kt as TooltipContent, l as SelectValue, m as CommandGroup, mn as __export, n as CardContent, o as SelectContent, p as CommandEmpty, pn as __commonJSMin, qt as Check, r as CardHeader, s as SelectItem, st as Skeleton, t as Card, tt as toDate, u as Switch, v as CommandSeparator, w as DialogHeader, wt as Button, x as DialogContent, y as Dialog, zt as cn } from "./index-CxpIw5iv.js";
+import { a as parseISO, c as startOfMonth, d as addDays, f as Download, g as ArrowRightLeft, h as ArrowUp, i as PopoverTrigger, m as ChevronLeft, n as Popover, o as subDays, p as DollarSign, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-ZqnhQV0v.js";
+import { At as TooltipTrigger, Bt as Users, C as DialogHeader, Ct as Button, Dt as Tooltip$1, E as ptBR, Et as Slot, H as endOfDay, Ht as RefreshCw, I as format, Jt as createLucideIcon, Kt as Check, Ot as TooltipContent, Rt as cn, S as DialogFooter, St as Input, T as DialogTrigger, Ut as LoaderCircle, Vt as TrendingUp, W as differenceInDays, Wt as ChevronRight, Xt as clsx_default, Y as startOfDay, _ as CommandSeparator, a as Select, b as DialogContent, c as SelectTrigger, d as Label$1, dn as require_react, et as toDate, f as Command, fn as __commonJSMin, g as CommandList, h as CommandItem, i as CardTitle, it as googleSheetsService, j as useLivesStore, kt as TooltipProvider, l as SelectValue, m as CommandGroup, mn as __toESM, n as CardContent, o as SelectContent, ot as Skeleton, p as CommandEmpty, pn as __export, qt as Calendar, r as CardHeader, s as SelectItem, sn as require_jsx_runtime, t as Card, u as Switch, un as useToast, v as Dialog, w as DialogTitle, x as DialogDescription, zt as Video } from "./index-DHzT6Z6x.js";
 var ArrowDown = createLucideIcon("arrow-down", [["path", {
 	d: "M12 5v14",
 	key: "s699le"
@@ -5713,7 +5713,7 @@ function AddLiveModal({ presenters, onSuccess, customTrigger }) {
 				className: "h-12 w-12 rounded-full bg-[#10B981] p-0 hover:bg-[#059669] md:h-10 md:w-auto md:rounded-md md:px-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Plus, { className: "h-6 w-6 md:mr-2 md:h-4 md:w-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 					className: "hidden md:inline",
-					children: "Adicionar Live Exponencial"
+					children: "Adicionar Live"
 				})]
 			})
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
@@ -6088,7 +6088,7 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
 					className: "w-[220px] p-0",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Command, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandInput, { placeholder: "Buscar apresentador..." }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandList, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandEmpty, { children: "Nenhum apresentador." }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandGroup, { children: [
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Command, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandList, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandEmpty, { children: "Nenhum apresentador." }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandGroup, { children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
 							onSelect: () => {
 								if (filters.presenters.length === presenters.length) onFilterChange({
@@ -6114,7 +6114,7 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: presenter })]
 						}, presenter))
-					] })] })] })
+					] })] }) })
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
@@ -29073,4 +29073,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-aycndpr4.js.map
+//# sourceMappingURL=Lives-CiJuqXue.js.map
