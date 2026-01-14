@@ -174,12 +174,9 @@ export default function Lives() {
       {/* Filters */}
       <LiveFilters
         presenters={uniquePresenters}
-        onApply={setFilters}
-        onClear={() =>
-          setFilters((prev) => ({ ...prev, comparisonEnabled: false }))
-        }
+        filters={filters}
+        onFilterChange={setFilters}
         loading={loading}
-        initialFilters={filters}
       />
 
       {/* KPI Dashboard */}

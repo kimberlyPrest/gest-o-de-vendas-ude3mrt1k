@@ -1,12 +1,9 @@
-import { useState, useEffect } from 'react'
 import {
   format,
   subMonths,
   startOfMonth,
   endOfMonth,
   subDays,
-  startOfDay,
-  endOfDay,
 } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import {
@@ -16,6 +13,7 @@ import {
   FilterX,
   Search,
   ArrowRightLeft,
+  Filter,
 } from 'lucide-react'
 import { DateRange } from 'react-day-picker'
 import { cn } from '@/lib/utils'
@@ -43,8 +41,8 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import { Switch } from '@/components/ui/switch'
-import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
+import { useState } from 'react'
 
 export interface FilterState {
   dateRange: DateRange | undefined
@@ -55,10 +53,9 @@ export interface FilterState {
 
 interface LiveFiltersProps {
   presenters: string[]
-  onApply: (filters: FilterState) => void
-  onClear: () => void
+  filters: FilterState
+  onFilterChange: (filters: FilterState) => void
   loading: boolean
-  initialFilters?: FilterState
 }
 
 const WEEKDAYS = [
@@ -80,32 +77,12 @@ const DATE_PRESETS = [
 
 export function LiveFilters({
   presenters,
-  onApply,
-  onClear,
+  filters,
+  onFilterChange,
   loading,
-  initialFilters,
 }: LiveFiltersProps) {
-  const [date, setDate] = useState<DateRange | undefined>(
-    initialFilters?.dateRange,
-  )
-  const [selectedPresenters, setSelectedPresenters] = useState<string[]>(
-    initialFilters?.presenters || [],
-  )
-  const [selectedWeekdays, setSelectedWeekdays] = useState<string[]>(
-    initialFilters?.weekdays || [],
-  )
-  const [comparisonEnabled, setComparisonEnabled] = useState(
-    initialFilters?.comparisonEnabled || false,
-  )
   const [openPresenters, setOpenPresenters] = useState(false)
   const [selectedPreset, setSelectedPreset] = useState<string>('30days')
-
-  // Apply default preset on mount if no initial filters
-  useEffect(() => {
-    if (!initialFilters) {
-      handlePresetChange('30days')
-    }
-  }, [])
 
   const handlePresetChange = (value: string) => {
     setSelectedPreset(value)
@@ -132,269 +109,248 @@ export function LiveFilters({
     }
 
     if (from && to) {
-      setDate({ from, to })
+      onFilterChange({ ...filters, dateRange: { from, to } })
     }
   }
 
-  const handleApply = () => {
-    onApply({
-      dateRange: date,
-      presenters: selectedPresenters,
-      weekdays: selectedWeekdays,
-      comparisonEnabled: comparisonEnabled && !!date?.from && !!date?.to,
+  const handleClear = () => {
+    setSelectedPreset('30days')
+    onFilterChange({
+      dateRange: { from: subDays(new Date(), 30), to: new Date() },
+      presenters: [],
+      weekdays: [],
+      comparisonEnabled: false,
     })
   }
 
-  const handleClear = () => {
-    handlePresetChange('30days')
-    setSelectedPresenters([])
-    setSelectedWeekdays([])
-    setComparisonEnabled(false)
-    onClear()
-  }
-
   const togglePresenter = (presenter: string) => {
-    setSelectedPresenters((prev) =>
-      prev.includes(presenter)
-        ? prev.filter((p) => p !== presenter)
-        : [...prev, presenter],
-    )
+    const current = filters.presenters
+    const newPresenters = current.includes(presenter)
+      ? current.filter((p) => p !== presenter)
+      : [...current, presenter]
+
+    onFilterChange({ ...filters, presenters: newPresenters })
   }
 
   const toggleWeekday = (value: string) => {
-    setSelectedWeekdays((prev) =>
-      prev.includes(value) ? prev.filter((d) => d !== value) : [...prev, value],
-    )
+    const current = filters.weekdays
+    const newWeekdays = current.includes(value)
+      ? current.filter((d) => d !== value)
+      : [...current, value]
+
+    onFilterChange({ ...filters, weekdays: newWeekdays })
   }
 
+  const hasActiveFilters =
+    filters.presenters.length > 0 ||
+    filters.weekdays.length > 0 ||
+    filters.comparisonEnabled
+
   return (
-    <div className="mb-6 space-y-4 rounded-xl border bg-card p-5 shadow-sm">
-      <div className="flex flex-col gap-6 md:flex-row md:items-start">
-        {/* Main Filters Section */}
-        <div className="grid flex-1 gap-4 md:grid-cols-2 lg:grid-cols-4">
-          {/* Preset Selector */}
-          <div className="flex flex-col gap-2">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">
-              Período Rápido
-            </label>
-            <Select value={selectedPreset} onValueChange={handlePresetChange}>
-              <SelectTrigger>
-                <SelectValue placeholder="Selecione..." />
-              </SelectTrigger>
-              <SelectContent>
-                {DATE_PRESETS.map((preset) => (
-                  <SelectItem key={preset.value} value={preset.value}>
-                    {preset.label}
-                  </SelectItem>
-                ))}
-                <SelectItem value="custom">Personalizado</SelectItem>
-              </SelectContent>
-            </Select>
-          </div>
+    <section className="bg-white border rounded-xl p-2 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar shadow-sm">
+      <div className="flex items-center gap-2 px-3 text-muted-foreground shrink-0 border-r pr-4 mr-2">
+        <Filter className="w-5 h-5" />
+        <span className="text-sm font-medium">Filtros:</span>
+      </div>
 
-          {/* Date Range Picker */}
-          <div className="flex flex-col gap-2">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">
-              Intervalo de Datas
-            </label>
-            <Popover>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className={cn(
-                    'w-full justify-start text-left font-normal truncate',
-                    !date && 'text-muted-foreground',
-                  )}
-                  onClick={() => setSelectedPreset('custom')}
-                >
-                  <CalendarIcon className="mr-2 h-4 w-4 shrink-0" />
-                  {date?.from ? (
-                    date.to ? (
-                      <span className="truncate">
-                        {format(date.from, 'dd/MM/yy')} -{' '}
-                        {format(date.to, 'dd/MM/yy')}
-                      </span>
-                    ) : (
-                      format(date.from, 'dd/MM/yy')
-                    )
-                  ) : (
-                    <span>Selecione datas</span>
-                  )}
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-auto p-0" align="start">
-                <Calendar
-                  initialFocus
-                  mode="range"
-                  defaultMonth={date?.from}
-                  selected={date}
-                  onSelect={(range) => {
-                    setDate(range)
-                    setSelectedPreset('custom')
-                  }}
-                  numberOfMonths={2}
-                  locale={ptBR}
-                />
-              </PopoverContent>
-            </Popover>
-          </div>
+      {/* Preset Selector */}
+      <Select value={selectedPreset} onValueChange={handlePresetChange}>
+        <SelectTrigger className="h-10 w-[140px] border-input shrink-0">
+          <SelectValue placeholder="Período" />
+        </SelectTrigger>
+        <SelectContent>
+          {DATE_PRESETS.map((preset) => (
+            <SelectItem key={preset.value} value={preset.value}>
+              {preset.label}
+            </SelectItem>
+          ))}
+          <SelectItem value="custom">Personalizado</SelectItem>
+        </SelectContent>
+      </Select>
 
-          {/* Presenter Multi-Select */}
-          <div className="flex flex-col gap-2">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">
-              Apresentadores
-            </label>
-            <Popover open={openPresenters} onOpenChange={setOpenPresenters}>
-              <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  role="combobox"
-                  aria-expanded={openPresenters}
-                  className="w-full justify-between"
-                >
-                  <span className="truncate">
-                    {selectedPresenters.length === 0
-                      ? 'Todos'
-                      : `${selectedPresenters.length} selecionado(s)`}
-                  </span>
-                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
-                </Button>
-              </PopoverTrigger>
-              <PopoverContent className="w-[220px] p-0">
-                <Command>
-                  <CommandInput placeholder="Buscar apresentador..." />
-                  <CommandList>
-                    <CommandEmpty>Nenhum apresentador.</CommandEmpty>
-                    <CommandGroup>
-                      <CommandItem
-                        onSelect={() => {
-                          if (selectedPresenters.length === presenters.length) {
-                            setSelectedPresenters([])
-                          } else {
-                            setSelectedPresenters([...presenters])
-                          }
-                        }}
-                      >
-                        <div
-                          className={cn(
-                            'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
-                            selectedPresenters.length === presenters.length &&
-                              presenters.length > 0
-                              ? 'bg-primary text-primary-foreground'
-                              : 'opacity-50 [&_svg]:invisible',
-                          )}
-                        >
-                          <Check className={cn('h-4 w-4')} />
-                        </div>
-                        <span>Selecionar Todos</span>
-                      </CommandItem>
-                      <CommandSeparator className="my-1" />
-                      {presenters.map((presenter) => (
-                        <CommandItem
-                          key={presenter}
-                          value={presenter}
-                          onSelect={() => togglePresenter(presenter)}
-                        >
-                          <div
-                            className={cn(
-                              'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
-                              selectedPresenters.includes(presenter)
-                                ? 'bg-primary text-primary-foreground'
-                                : 'opacity-50 [&_svg]:invisible',
-                            )}
-                          >
-                            <Check className={cn('h-4 w-4')} />
-                          </div>
-                          <span>{presenter}</span>
-                        </CommandItem>
-                      ))}
-                    </CommandGroup>
-                  </CommandList>
-                </Command>
-              </PopoverContent>
-            </Popover>
-          </div>
-
-          {/* Weekdays Filter */}
-          <div className="flex flex-col gap-2">
-            <label className="text-xs font-semibold text-muted-foreground uppercase">
-              Dias da Semana
-            </label>
-            <div className="flex flex-wrap gap-1">
-              {WEEKDAYS.map((day) => (
-                <button
-                  key={day.value}
-                  onClick={() => toggleWeekday(day.value)}
-                  className={cn(
-                    'px-2 py-1 rounded text-[10px] font-medium transition-all border',
-                    selectedWeekdays.includes(day.value)
-                      ? 'bg-primary text-primary-foreground border-primary'
-                      : 'bg-background hover:bg-muted text-muted-foreground border-border',
-                  )}
-                >
-                  {day.label}
-                </button>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        {/* Actions & Comparison Toggle */}
-        <div className="flex flex-col gap-4 border-l pl-6 md:w-[240px]">
-          <div className="flex items-center justify-between gap-2">
-            <label className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70">
-              Comparar Período
-            </label>
-            <Switch
-              checked={comparisonEnabled}
-              onCheckedChange={setComparisonEnabled}
-              disabled={!date?.from || !date?.to}
-            />
-          </div>
-
-          <Separator />
-
-          <div className="flex flex-col gap-2">
-            <Button
-              onClick={handleApply}
-              disabled={
-                loading || (date?.from && date?.to && date.from > date.to)
-              }
-              className="w-full"
-            >
-              {loading ? (
-                <Search className="mr-2 h-4 w-4 animate-spin" />
+      {/* Date Range Picker */}
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            className={cn(
+              'h-10 justify-start text-left font-normal shrink-0',
+              !filters.dateRange && 'text-muted-foreground'
+            )}
+            onClick={() => setSelectedPreset('custom')}
+          >
+            <CalendarIcon className="mr-2 h-4 w-4" />
+            {filters.dateRange?.from ? (
+              filters.dateRange.to ? (
+                <>
+                  {format(filters.dateRange.from, 'dd/MM/yy')} -{' '}
+                  {format(filters.dateRange.to, 'dd/MM/yy')}
+                </>
               ) : (
-                <Search className="mr-2 h-4 w-4" />
-              )}
-              Aplicar Filtros
-            </Button>
-            <Button
-              onClick={handleClear}
-              variant="ghost"
-              disabled={loading}
-              className="w-full"
-            >
-              <FilterX className="mr-2 h-4 w-4" />
-              Limpar Filtros
-            </Button>
-          </div>
+                format(filters.dateRange.from, 'dd/MM/yy')
+              )
+            ) : (
+              <span>Selecione datas</span>
+            )}
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-auto p-0" align="start">
+          <Calendar
+            initialFocus
+            mode="range"
+            defaultMonth={filters.dateRange?.from}
+            selected={filters.dateRange}
+            onSelect={(range) => {
+              onFilterChange({ ...filters, dateRange: range })
+              setSelectedPreset('custom')
+            }}
+            numberOfMonths={2}
+            locale={ptBR}
+          />
+        </PopoverContent>
+      </Popover>
+
+      {/* Presenters */}
+      <Popover open={openPresenters} onOpenChange={setOpenPresenters}>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            aria-expanded={openPresenters}
+            className="h-10 justify-between shrink-0 min-w-[150px]"
+          >
+            <span className="truncate">
+              {filters.presenters.length === 0
+                ? 'Todos os Hosts'
+                : `${filters.presenters.length} selecionado(s)`}
+            </span>
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-[220px] p-0">
+          <Command>
+            <CommandInput placeholder="Buscar apresentador..." />
+            <CommandList>
+              <CommandEmpty>Nenhum apresentador.</CommandEmpty>
+              <CommandGroup>
+                <CommandItem
+                  onSelect={() => {
+                    if (filters.presenters.length === presenters.length) {
+                      onFilterChange({ ...filters, presenters: [] })
+                    } else {
+                      onFilterChange({ ...filters, presenters: [...presenters] })
+                    }
+                  }}
+                >
+                  <div
+                    className={cn(
+                      'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                      filters.presenters.length === presenters.length &&
+                        presenters.length > 0
+                        ? 'bg-primary text-primary-foreground'
+                        : 'opacity-50 [&_svg]:invisible'
+                    )}
+                  >
+                    <Check className={cn('h-4 w-4')} />
+                  </div>
+                  <span>Selecionar Todos</span>
+                </CommandItem>
+                <CommandSeparator className="my-1" />
+                {presenters.map((presenter) => (
+                  <CommandItem
+                    key={presenter}
+                    value={presenter}
+                    onSelect={() => togglePresenter(presenter)}
+                  >
+                    <div
+                      className={cn(
+                        'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                        filters.presenters.includes(presenter)
+                          ? 'bg-primary text-primary-foreground'
+                          : 'opacity-50 [&_svg]:invisible'
+                      )}
+                    >
+                      <Check className={cn('h-4 w-4')} />
+                    </div>
+                    <span>{presenter}</span>
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+
+      {/* Weekdays - Dropdown */}
+      <Popover>
+        <PopoverTrigger asChild>
+          <Button
+            variant="outline"
+            role="combobox"
+            className="h-10 justify-between shrink-0 min-w-[150px]"
+          >
+            <span className="truncate">
+              {filters.weekdays.length === 0
+                ? 'Dia da Semana'
+                : `${filters.weekdays.length} dia(s)`}
+            </span>
+            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+          </Button>
+        </PopoverTrigger>
+        <PopoverContent className="w-[200px] p-0">
+          <Command>
+            <CommandList>
+              <CommandGroup>
+                {WEEKDAYS.map((day) => (
+                  <CommandItem
+                    key={day.value}
+                    value={day.value}
+                    onSelect={() => toggleWeekday(day.value)}
+                  >
+                    <div
+                      className={cn(
+                        'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
+                        filters.weekdays.includes(day.value)
+                          ? 'bg-primary text-primary-foreground'
+                          : 'opacity-50 [&_svg]:invisible'
+                      )}
+                    >
+                      <Check className={cn('h-4 w-4')} />
+                    </div>
+                    <span>{day.value}</span>
+                  </CommandItem>
+                ))}
+              </CommandGroup>
+            </CommandList>
+          </Command>
+        </PopoverContent>
+      </Popover>
+
+      {/* Comparison Toggle */}
+      <div className="flex items-center gap-3 shrink-0 cursor-pointer group px-2" onClick={() => onFilterChange({ ...filters, comparisonEnabled: !filters.comparisonEnabled })}>
+        <Switch
+          checked={filters.comparisonEnabled}
+          onCheckedChange={(checked) => onFilterChange({ ...filters, comparisonEnabled: checked })}
+          disabled={!filters.dateRange?.from || !filters.dateRange?.to}
+        />
+        <div className="flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors">
+          <ArrowRightLeft className="w-4 h-4" />
+          <span className="text-xs font-medium">Comparar</span>
         </div>
       </div>
 
-      {/* Comparison Badge Info */}
-      {comparisonEnabled && date?.from && date?.to && (
-        <div className="flex items-center gap-2 rounded-lg bg-blue-50 p-2 text-sm text-blue-700">
-          <ArrowRightLeft className="h-4 w-4" />
-          <span>
-            Comparando{' '}
-            <strong>
-              {format(date.from, 'dd/MM')} - {format(date.to, 'dd/MM')}
-            </strong>{' '}
-            com período anterior equivalente
-          </span>
-        </div>
+      <div className="flex-1"></div>
+
+      {/* Clear Filters - Conditional */}
+      {hasActiveFilters && (
+        <button
+          onClick={handleClear}
+          className="flex items-center gap-1.5 px-3 py-1.5 text-muted-foreground hover:text-red-500 hover:bg-red-50 rounded-lg transition-all shrink-0"
+        >
+          <FilterX className="w-4 h-4" />
+          <span className="text-xs font-medium">Limpar Filtros</span>
+        </button>
       )}
-    </div>
+    </section>
   )
 }
