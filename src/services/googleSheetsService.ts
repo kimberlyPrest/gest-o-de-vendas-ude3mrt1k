@@ -35,25 +35,57 @@ const parseCurrency = (value: string | number): number => {
   return Number(cleanStr.replace('.', '').replace(',', '.'))
 }
 
-// Helper to parse dates
+// Helper to parse dates strictly to YYYY-MM-DD
 const parseDate = (value: string): string | null => {
   if (!value) return null
-  if (value.match(/^\d{4}-\d{2}-\d{2}/)) return value
+  const cleanValue = value.toString().trim()
 
-  const parts = value.split('/')
-  if (parts.length === 3) {
-    const day = parts[0].padStart(2, '0')
-    const month = parts[1].padStart(2, '0')
-    const year = parts[2].split(' ')[0]
-    const fullYear = year.length === 2 ? `20${year}` : year
-    if (fullYear.length === 4) {
-      return `${fullYear}-${month}-${day}`
+  // Already in YYYY-MM-DD
+  if (/^\d{4}-\d{2}-\d{2}$/.test(cleanValue)) return cleanValue
+
+  // Handle DD/MM/YYYY or DD/MM/YY
+  const parts = cleanValue.split(/[/\-\s]/)
+  if (parts.length >= 3) {
+    let day = parts[0]
+    let month = parts[1]
+    let year = parts[2]
+
+    // Handle time part if present
+    year = year.split(' ')[0]
+
+    if (day.length === 1) day = `0${day}`
+    if (month.length === 1) month = `0${month}`
+
+    // Handle 2-digit year
+    if (year.length === 2) {
+      year = `20${year}`
+    }
+
+    if (
+      year.length === 4 &&
+      !isNaN(Number(year)) &&
+      !isNaN(Number(month)) &&
+      !isNaN(Number(day))
+    ) {
+      return `${year}-${month}-${day}`
     }
   }
   return null
 }
 
+// Helper to deduplicate items by ID, prioritizing the last occurrence
+const deduplicateById = <T extends { id?: string }>(items: T[]): T[] => {
+  const uniqueMap = new Map<string, T>()
+  items.forEach((item) => {
+    if (item.id) {
+      uniqueMap.set(item.id, item)
+    }
+  })
+  return Array.from(uniqueMap.values())
+}
+
 // Generate a stable ID based on unique attributes for Leads
+// Note: We keep this hash-based to maintain backward compatibility with existing leads in DB
 const generateId = (item: any): string => {
   const seed = (item.email || item.nomeCompleto || JSON.stringify(item))
     .trim()
@@ -67,23 +99,17 @@ const generateId = (item: any): string => {
   return Math.abs(hash).toString(16)
 }
 
-// Generate a stable ID based on Date and Presenter for Lives (Full Mirror Upsert)
+// Generate a robust, readable ID for Lives
+// Format: live-YYYYMMDD-presenterSlug
 const generateLiveId = (item: LiveData): string => {
-  // We use only Date and Presenter as the unique key.
-  // This allows updating metrics (revenue, sales) without creating duplicates.
-  const normalizedPresenter = (item.presenter || 'Desconhecido')
-    .trim()
+  const normalizedDate = item.date.replace(/-/g, '')
+  const presenterSlug = (item.presenter || 'unknown')
     .toLowerCase()
-  const normalizedDate = item.date
-  const seed = `${normalizedDate}-${normalizedPresenter}`
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '') // Remove accents
+    .replace(/[^a-z0-9]/g, '') // Remove non-alphanumeric
 
-  let hash = 0
-  for (let i = 0; i < seed.length; i++) {
-    const char = seed.charCodeAt(i)
-    hash = (hash << 5) - hash + char
-    hash = hash & hash
-  }
-  return Math.abs(hash).toString(16)
+  return `live-${normalizedDate}-${presenterSlug}`
 }
 
 const fetchSheetData = async (type: 'crm' | 'lives'): Promise<any[]> => {
@@ -142,10 +168,7 @@ export const googleSheetsService = {
   },
 
   async addLiveToSheet(live: Partial<LiveData>): Promise<void> {
-    // This is a mock implementation since we don't have write access to Sheets API via the proxy yet
-    // In a real scenario, this would call an edge function to append the row
     console.log('Adding live to sheet (mock):', live)
-    // We can simulate an optimistic update by inserting into DB directly
     if (!live.date || !live.presenter) throw new Error('Dados incompletos')
 
     const liveData = live as LiveData
@@ -176,7 +199,7 @@ export const googleSheetsService = {
       const rows = await fetchSheetData('crm')
       const rawObjects = mapRowsToObjects(rows)
 
-      const sheetLeads = rawObjects
+      const rawLeads = rawObjects
         .filter(
           (o) => findValue(o, ['nome', 'lead']) || findValue(o, ['email']),
         )
@@ -200,6 +223,10 @@ export const googleSheetsService = {
           }
         })
 
+      // Deduplicate Leads locally before interacting with DB
+      // This ensures we only process the last occurrence of a lead from the sheet
+      const sheetLeads = deduplicateById(rawLeads)
+
       // 2. Fetch existing IDs from Supabase to optimize updates
       const { data: existingLeads, error: fetchError } = await supabase
         .from('leads')
@@ -213,8 +240,7 @@ export const googleSheetsService = {
 
       for (const lead of sheetLeads) {
         if (existingIds.has(lead.id)) {
-          // Prepare update payload (snake_case for DB)
-          // Exclude status and tracking dates to preserve CRM state
+          // Prepare update payload
           leadsToUpdate.push({
             id: lead.id,
             nome_completo: lead.nomeCompleto,
@@ -225,7 +251,7 @@ export const googleSheetsService = {
             updated_at: new Date().toISOString(),
           })
         } else {
-          // Prepare insert payload (snake_case for DB)
+          // Prepare insert payload
           newLeads.push({
             id: lead.id,
             nome_completo: lead.nomeCompleto,
@@ -253,7 +279,7 @@ export const googleSheetsService = {
         }
       }
 
-      // 4. Perform Updates
+      // 4. Perform Updates (Upsert to handle potential race conditions)
       if (leadsToUpdate.length > 0) {
         const { error: updateError } = await supabase
           .from('leads')
@@ -282,7 +308,7 @@ export const googleSheetsService = {
       const rawObjects = mapRowsToObjects(rows)
 
       // 2. Parse and Prepare Data
-      const sheetLives = rawObjects
+      const rawLives = rawObjects
         .map((o): LiveData | null => {
           const dateValue = findValue(o, ['data'])
           const date = parseDate(dateValue)
@@ -325,6 +351,12 @@ export const googleSheetsService = {
         .filter((item): item is LiveData => item !== null)
         .filter((l) => l.revenue > 0 || l.sales > 0 || l.peakViewers > 0)
 
+      // Deduplicate Lives locally
+      // This prevents "ON CONFLICT" batch errors by ensuring unique IDs in the payload
+      const sheetLives = deduplicateById(
+        rawLives as (LiveData & { id: string })[],
+      )
+
       const dbLives = sheetLives.map((l) => ({
         id: l.id!,
         date: l.date,
@@ -345,7 +377,10 @@ export const googleSheetsService = {
         const { error } = await supabase
           .from('lives')
           .upsert(dbLives, { onConflict: 'id' })
-        if (error) throw error
+        if (error) {
+          console.error('Supabase Upsert Error for Lives:', error)
+          throw error
+        }
       }
 
       // 4. Delete Missing (Cleanup) - "Full Mirror" Delete Part
@@ -372,12 +407,9 @@ export const googleSheetsService = {
         removed = idsToDelete.length
       }
 
-      return { added: dbLives.length, updated: 0, removed } // We don't distinguish added/updated in upsert easily without checking before
+      return { added: dbLives.length, updated: 0, removed }
     } catch (error) {
       console.error('Error syncing lives:', error)
-      toast.error('Erro na sincronização de Lives', {
-        description: 'Verifique a conexão com a planilha.',
-      })
       throw error
     }
   },

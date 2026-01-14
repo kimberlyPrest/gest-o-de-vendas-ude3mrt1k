@@ -143,22 +143,31 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
           description: 'Buscando dados da planilha e atualizando base.',
         })
 
-        const { added, updated } = await googleSheetsService.syncLeads()
+        try {
+          const { added, updated } = await googleSheetsService.syncLeads()
 
-        if (added > 0 || updated > 0) {
-          useNotificationStore.getState().addNotification({
-            type: 'new_lead',
-            title: 'Sincronização Concluída',
-            message: `${added} novos leads, ${updated} atualizados.`,
-            actionUrl: '/crm',
+          if (added > 0 || updated > 0) {
+            useNotificationStore.getState().addNotification({
+              type: 'new_lead',
+              title: 'Sincronização Concluída',
+              message: `${added} novos leads, ${updated} atualizados.`,
+              actionUrl: '/crm',
+            })
+            toast.success('Sincronização finalizada', {
+              description: `${added} novos leads importados.`,
+            })
+          } else {
+            toast.info('Tudo atualizado', {
+              description: 'Nenhum novo dado encontrado.',
+            })
+          }
+        } catch (syncError: any) {
+          console.error('Sync Error:', syncError)
+          toast.error('Erro na sincronização', {
+            description:
+              'Verifique se a planilha está acessível e formatada corretamente.',
           })
-          toast.success('Sincronização finalizada', {
-            description: `${added} novos leads importados.`,
-          })
-        } else {
-          toast.info('Tudo atualizado', {
-            description: 'Nenhum novo dado encontrado.',
-          })
+          // We don't abort the local fetch, we still try to get what we have in DB
         }
       }
 

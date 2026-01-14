@@ -18,11 +18,20 @@ export const useLivesStore = create<LivesState>((set, get) => ({
     set({ loading: true, error: false })
     try {
       // Sync first
-      const stats = await googleSheetsService.syncLives()
+      try {
+        const stats = await googleSheetsService.syncLives()
 
-      if (stats.removed > 0) {
-        toast.info('Sincronização de Lives', {
-          description: `${stats.removed} registros antigos/inválidos removidos.`,
+        if (stats.removed > 0) {
+          toast.info('Sincronização de Lives', {
+            description: `${stats.removed} registros antigos/inválidos removidos.`,
+          })
+        }
+      } catch (syncError) {
+        // Log error but continue to fetch local data
+        console.error('Lives Sync Warning:', syncError)
+        toast.warning('Sincronização Indisponível', {
+          description:
+            'Não foi possível atualizar com a planilha. Mostrando dados locais.',
         })
       }
 
@@ -33,7 +42,7 @@ export const useLivesStore = create<LivesState>((set, get) => ({
       console.error(error)
       set({ error: true })
       toast.error('Erro ao carregar Lives', {
-        description: 'Não foi possível sincronizar com a base de dados.',
+        description: 'Não foi possível carregar os dados da base de dados.',
       })
     } finally {
       set({ loading: false })

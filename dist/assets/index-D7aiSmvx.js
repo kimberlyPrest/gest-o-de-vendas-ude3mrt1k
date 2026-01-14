@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-UydpXXeA.js","assets/calendar-Cft_V2TF.js","assets/CRM-C7zbsbaa.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-DZIuMOii.js","assets/calendar-DVqdHTJL.js","assets/CRM-yDitP_rC.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -34122,16 +34122,27 @@ var parseCurrency = (value) => {
 };
 var parseDate = (value) => {
 	if (!value) return null;
-	if (value.match(/^\d{4}-\d{2}-\d{2}/)) return value;
-	const parts = value.split("/");
-	if (parts.length === 3) {
-		const day = parts[0].padStart(2, "0");
-		const month = parts[1].padStart(2, "0");
-		const year = parts[2].split(" ")[0];
-		const fullYear = year.length === 2 ? `20${year}` : year;
-		if (fullYear.length === 4) return `${fullYear}-${month}-${day}`;
+	const cleanValue = value.toString().trim();
+	if (/^\d{4}-\d{2}-\d{2}$/.test(cleanValue)) return cleanValue;
+	const parts = cleanValue.split(/[/\-\s]/);
+	if (parts.length >= 3) {
+		let day = parts[0];
+		let month = parts[1];
+		let year = parts[2];
+		year = year.split(" ")[0];
+		if (day.length === 1) day = `0${day}`;
+		if (month.length === 1) month = `0${month}`;
+		if (year.length === 2) year = `20${year}`;
+		if (year.length === 4 && !isNaN(Number(year)) && !isNaN(Number(month)) && !isNaN(Number(day))) return `${year}-${month}-${day}`;
 	}
 	return null;
+};
+var deduplicateById = (items) => {
+	const uniqueMap = /* @__PURE__ */ new Map();
+	items.forEach((item) => {
+		if (item.id) uniqueMap.set(item.id, item);
+	});
+	return Array.from(uniqueMap.values());
 };
 var generateId = (item) => {
 	const seed = (item.email || item.nomeCompleto || JSON.stringify(item)).trim().toLowerCase();
@@ -34144,15 +34155,7 @@ var generateId = (item) => {
 	return Math.abs(hash).toString(16);
 };
 var generateLiveId = (item) => {
-	const normalizedPresenter = (item.presenter || "Desconhecido").trim().toLowerCase();
-	const seed = `${item.date}-${normalizedPresenter}`;
-	let hash = 0;
-	for (let i = 0; i < seed.length; i++) {
-		const char = seed.charCodeAt(i);
-		hash = (hash << 5) - hash + char;
-		hash = hash & hash;
-	}
-	return Math.abs(hash).toString(16);
+	return `live-${item.date.replace(/-/g, "")}-${(item.presenter || "unknown").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[^a-z0-9]/g, "")}`;
 };
 var fetchSheetData = async (type) => {
 	try {
@@ -34216,7 +34219,7 @@ const googleSheetsService = {
 	},
 	async syncLeads() {
 		try {
-			const sheetLeads = mapRowsToObjects(await fetchSheetData("crm")).filter((o) => findValue(o, ["nome", "lead"]) || findValue(o, ["email"])).map((o) => {
+			const sheetLeads = deduplicateById(mapRowsToObjects(await fetchSheetData("crm")).filter((o) => findValue(o, ["nome", "lead"]) || findValue(o, ["email"])).map((o) => {
 				const nome = findValue(o, ["nome", "lead"]) || "Sem Nome";
 				const email = findValue(o, ["email", "e-mail"]) || "";
 				const dateStr = findValue(o, ["data", "criado"]);
@@ -34242,7 +34245,7 @@ const googleSheetsService = {
 					]) || "Capturado",
 					dataCaptacao: parseDate(dateStr)
 				};
-			});
+			}));
 			const { data: existingLeads, error: fetchError } = await supabase.from("leads").select("id");
 			if (fetchError) throw fetchError;
 			const existingIds = new Set(existingLeads?.map((l) => l.id));
@@ -34295,7 +34298,7 @@ const googleSheetsService = {
 	},
 	async syncLives() {
 		try {
-			const dbLives = mapRowsToObjects(await fetchSheetData("lives")).map((o) => {
+			const dbLives = deduplicateById(mapRowsToObjects(await fetchSheetData("lives")).map((o) => {
 				const date = parseDate(findValue(o, ["data"]));
 				if (!date) return null;
 				const peak = Number(findValue(o, ["pico", "espectadores"]) || 0);
@@ -34331,7 +34334,7 @@ const googleSheetsService = {
 					...liveObj,
 					id: generateLiveId(liveObj)
 				};
-			}).filter((item) => item !== null).filter((l) => l.revenue > 0 || l.sales > 0 || l.peakViewers > 0).map((l) => ({
+			}).filter((item) => item !== null).filter((l) => l.revenue > 0 || l.sales > 0 || l.peakViewers > 0)).map((l) => ({
 				id: l.id,
 				date: l.date,
 				weekday: l.weekday,
@@ -34347,7 +34350,10 @@ const googleSheetsService = {
 			}));
 			if (dbLives.length > 0) {
 				const { error } = await supabase.from("lives").upsert(dbLives, { onConflict: "id" });
-				if (error) throw error;
+				if (error) {
+					console.error("Supabase Upsert Error for Lives:", error);
+					throw error;
+				}
 			}
 			const { data: allDbLives, error: fetchError } = await supabase.from("lives").select("id");
 			if (fetchError) throw fetchError;
@@ -34366,7 +34372,6 @@ const googleSheetsService = {
 			};
 		} catch (error) {
 			console.error("Error syncing lives:", error);
-			toast.error("Erro na sincronização de Lives", { description: "Verifique a conexão com a planilha." });
 			throw error;
 		}
 	},
@@ -36257,16 +36262,21 @@ const useCRMStore = create((set, get$1) => ({
 		try {
 			if (forceSync) {
 				toast.info("Iniciando sincronização...", { description: "Buscando dados da planilha e atualizando base." });
-				const { added, updated } = await googleSheetsService.syncLeads();
-				if (added > 0 || updated > 0) {
-					useNotificationStore.getState().addNotification({
-						type: "new_lead",
-						title: "Sincronização Concluída",
-						message: `${added} novos leads, ${updated} atualizados.`,
-						actionUrl: "/crm"
-					});
-					toast.success("Sincronização finalizada", { description: `${added} novos leads importados.` });
-				} else toast.info("Tudo atualizado", { description: "Nenhum novo dado encontrado." });
+				try {
+					const { added, updated } = await googleSheetsService.syncLeads();
+					if (added > 0 || updated > 0) {
+						useNotificationStore.getState().addNotification({
+							type: "new_lead",
+							title: "Sincronização Concluída",
+							message: `${added} novos leads, ${updated} atualizados.`,
+							actionUrl: "/crm"
+						});
+						toast.success("Sincronização finalizada", { description: `${added} novos leads importados.` });
+					} else toast.info("Tudo atualizado", { description: "Nenhum novo dado encontrado." });
+				} catch (syncError) {
+					console.error("Sync Error:", syncError);
+					toast.error("Erro na sincronização", { description: "Verifique se a planilha está acessível e formatada corretamente." });
+				}
 			}
 			set({ leads: (await googleSheetsService.fetchLeadsFromDB()).map((l) => ({
 				...l,
@@ -36513,13 +36523,18 @@ const useLivesStore = create((set, get$1) => ({
 			error: false
 		});
 		try {
-			const stats = await googleSheetsService.syncLives();
-			if (stats.removed > 0) toast.info("Sincronização de Lives", { description: `${stats.removed} registros antigos/inválidos removidos.` });
+			try {
+				const stats = await googleSheetsService.syncLives();
+				if (stats.removed > 0) toast.info("Sincronização de Lives", { description: `${stats.removed} registros antigos/inválidos removidos.` });
+			} catch (syncError) {
+				console.error("Lives Sync Warning:", syncError);
+				toast.warning("Sincronização Indisponível", { description: "Não foi possível atualizar com a planilha. Mostrando dados locais." });
+			}
 			set({ allData: await googleSheetsService.fetchLivesFromDB() });
 		} catch (error) {
 			console.error(error);
 			set({ error: true });
-			toast.error("Erro ao carregar Lives", { description: "Não foi possível sincronizar com a base de dados." });
+			toast.error("Erro ao carregar Lives", { description: "Não foi possível carregar os dados da base de dados." });
 		} finally {
 			set({ loading: false });
 		}
@@ -40699,8 +40714,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-UydpXXeA.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-C7zbsbaa.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-DZIuMOii.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-yDitP_rC.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -40760,4 +40775,4 @@ var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 export { millisecondsInHour as $, Presence as $t, calculateLeadValue as A, Content$1 as At, getRoundingMethod as B, Search as Bt, ptBR as C, Slot$2 as Ct, DropdownMenuTrigger as D, TooltipTrigger as Dt, DropdownMenuItem as E, TooltipProvider as Et, getISOWeek as F, cn as Ft, differenceInCalendarDays as G, ChevronRight as Gt, differenceInCalendarMonths as H, LoaderCircle as Ht, enUS as I, X as It, startOfISOWeek as J, Calendar as Jt, startOfDay as K, ChevronDown as Kt, startOfYear as L, Video as Lt, formatDistanceToNow as M, createPopperScope as Mt, format as N, useId as Nt, useLivesStore as O, Anchor as Ot, getWeek as P, toast as Pt, constructFrom as Q, useControllableState as Qt, endOfMonth as R, Users as Rt, DialogTrigger as S, useIsMobile as St, DropdownMenuContent as T, TooltipContent as Tt, isDate as U, Clock as Ut, differenceInDays as V, RefreshCw as Vt, constructNow as W, CircleAlert as Wt, getDefaultOptions as X, cva as Xt, startOfWeek as Y, createLucideIcon as Yt, toDate as Z, clsx_default as Zt, DialogContent as _, FocusScope as _t, SelectValue as a, createSlot as an, Content as at, DialogHeader as b, Button as bt, Command as c, require_jsx_runtime as cn, Portal$3 as ct, CommandInput as d, useToast as dn, Trigger$2 as dt, Portal as en, millisecondsInMinute as et, CommandItem as f, require_react as fn, WarningProvider as ft, DialogClose as g, useFocusGuards as gt, Dialog as h, __toESM as hn, Combination_default as ht, SelectTrigger as i, Primitive as in, Close as it, useCRMStore as j, Root2$2 as jt, COLUMNS as k, Arrow as kt, CommandEmpty as l, useComposedRefs as ln, Root$3 as lt, CommandSeparator as m, __export as mn, hideOthers as mt, SelectContent as n, DismissableLayer as nn, require_shim as nt, Switch as o, createSlottable as on, Description as ot, CommandList as p, __commonJSMin as pn, createDialogScope as pt, normalizeDates as q, Check as qt, SelectItem as r, useCallbackRef as rn, Skeleton as rt, Label as s, createContextScope as sn, Overlay as st, Select as t, useLayoutEffect2 as tn, googleSheetsService as tt, CommandGroup as u, composeEventHandlers as un, Title as ut, DialogDescription as v, Primitive$1 as vt, DropdownMenu as w, Tooltip as wt, DialogTitle as x, buttonVariants as xt, DialogFooter as y, Input as yt, endOfDay as z, TrendingUp as zt };
 
-//# sourceMappingURL=index-c46Ny26c.js.map
+//# sourceMappingURL=index-D7aiSmvx.js.map
