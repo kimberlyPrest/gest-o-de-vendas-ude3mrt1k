@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-1ejjt-Tu.js","assets/select-7owOFWoF.js","assets/CRM-BoWluyah.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-DX3LpYk1.js","assets/select-9tDeNhRr.js","assets/CRM-D0LZdvdS.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -33679,8 +33679,6 @@ const supabase = createClient("https://askqkuhotxfwrwtidlmn.supabase.co", "eyJhb
 	persistSession: true,
 	autoRefreshToken: true
 } });
-var CRM_TAB = "Adapta Elite";
-var LIVES_TAB = "🟢 Onboarding";
 var parseCurrency = (value) => {
 	if (typeof value === "number") return value;
 	if (!value) return 0;
@@ -33709,12 +33707,9 @@ var generateId = (item) => {
 	}
 	return Math.abs(hash).toString(16);
 };
-var fetchSheetData = async (type, range) => {
+var fetchSheetData = async (type) => {
 	try {
-		const { data, error } = await supabase.functions.invoke("google-sheets-proxy", { body: {
-			type,
-			range
-		} });
+		const { data, error } = await supabase.functions.invoke("google-sheets-proxy", { body: { type } });
 		if (error) throw new Error(error.message || "Falha ao conectar com o serviço de planilhas");
 		if (data?.error) throw new Error(data.error);
 		return data.values || [];
@@ -33743,7 +33738,7 @@ var findValue = (obj, keys) => {
 const googleSheetsService = {
 	async checkConnection() {
 		try {
-			await fetchSheetData("lives", `${LIVES_TAB}!A1`);
+			await fetchSheetData("lives");
 			return true;
 		} catch (error) {
 			console.error("Connection check failed:", error);
@@ -33752,7 +33747,7 @@ const googleSheetsService = {
 	},
 	async fetchLeads() {
 		try {
-			return mapRowsToObjects(await fetchSheetData("crm", `${CRM_TAB}!A:Z`)).filter((o) => findValue(o, ["nome", "lead"]) || findValue(o, ["email"])).map((o) => {
+			return mapRowsToObjects(await fetchSheetData("crm")).filter((o) => findValue(o, ["nome", "lead"]) || findValue(o, ["email"])).map((o) => {
 				const nome = findValue(o, ["nome", "lead"]) || "Sem Nome";
 				const email = findValue(o, ["email", "e-mail"]) || "";
 				return {
@@ -33785,7 +33780,7 @@ const googleSheetsService = {
 	},
 	async fetchLivesData() {
 		try {
-			return mapRowsToObjects(await fetchSheetData("lives", `${LIVES_TAB}!A:Z`)).filter((o) => findValue(o, ["data"])).map((o) => {
+			return mapRowsToObjects(await fetchSheetData("lives")).filter((o) => findValue(o, ["data"])).map((o) => {
 				const peak = Number(findValue(o, ["pico", "espectadores"]) || 0);
 				const sales = Number(findValue(o, ["vendas"]) || 0);
 				const retained = Number(findValue(o, [
@@ -34781,8 +34776,8 @@ var NotFound = () => {
 	});
 };
 var NotFound_default = NotFound;
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-1ejjt-Tu.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-BoWluyah.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-DX3LpYk1.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-D0LZdvdS.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -34835,4 +34830,4 @@ var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 export { useControllableState as $, Combination_default as A, Arrow as B, Portal$1 as C, WarningProvider as D, Trigger as E, Button as F, toast as G, Root2 as H, buttonVariants as I, LoaderCircle as J, cn as K, useIsMobile as L, FocusScope as M, Primitive$1 as N, createDialogScope as O, Input as P, VISUALLY_HIDDEN_STYLES as Q, Slot as R, Overlay as S, Title as T, createPopperScope as U, Content$1 as V, useId as W, cva as X, createLucideIcon as Y, clsx_default as Z, require_shim as _, require_react as _t, differenceInCalendarDays as a, Primitive as at, Content as b, __toESM as bt, getTimezoneOffsetInMilliseconds as c, createSlot as ct, millisecondsInHour as d, require_jsx_runtime as dt, Presence as et, millisecondsInMinute as f, composeRefs as ft, googleSheetsService as g, require_react_dom as gt, minutesInMonth as h, useToast as ht, differenceInDays as i, useCallbackRef$1 as it, useFocusGuards as j, hideOthers as k, toDate as l, createSlottable as lt, minutesInDay as m, composeEventHandlers as mt, COLUMNS as n, useLayoutEffect2 as nt, startOfDay as o, dispatchDiscreteCustomEvent as ot, millisecondsInWeek as p, useComposedRefs as pt, X as q, useCRMStore as r, DismissableLayer as rt, normalizeDates as s, createCollection as st, useLivesStore as t, Portal as tt, constructFrom as u, createContextScope as ut, Skeleton as v, __commonJSMin as vt, Root as w, Description as x, Close as y, __export as yt, Anchor as z };
 
-//# sourceMappingURL=index-DfglhTVz.js.map
+//# sourceMappingURL=index-C2ECae2a.js.map

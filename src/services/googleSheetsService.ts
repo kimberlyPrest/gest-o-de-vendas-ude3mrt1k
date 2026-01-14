@@ -25,10 +25,8 @@ export interface LiveData {
   additionalSeats: number
 }
 
-// NOTE: IDs have been moved to Supabase Secrets (CRM_SPREADSHEET_ID, LIVES_SPREADSHEET_ID)
-// and are accessed via the 'google-sheets-proxy' Edge Function.
-const CRM_TAB = 'Adapta Elite'
-const LIVES_TAB = '🟢 Onboarding'
+// NOTE: Spreadsheet IDs and Sheet Names are now managed in the 'spreadsheet_configs' table in Supabase.
+// The 'google-sheets-proxy' Edge Function handles the configuration lookup.
 
 // Helper to clean and parse currency strings (e.g. "R$ 1.500,00" -> 1500.00)
 const parseCurrency = (value: string | number): number => {
@@ -68,15 +66,12 @@ const generateId = (item: any): string => {
   return Math.abs(hash).toString(16)
 }
 
-const fetchSheetData = async (
-  type: 'crm' | 'lives',
-  range: string,
-): Promise<any[]> => {
+const fetchSheetData = async (type: 'crm' | 'lives'): Promise<any[]> => {
   try {
     const { data, error } = await supabase.functions.invoke(
       'google-sheets-proxy',
       {
-        body: { type, range },
+        body: { type },
       },
     )
 
@@ -126,8 +121,8 @@ const findValue = (obj: any, keys: string[]): any => {
 export const googleSheetsService = {
   async checkConnection(): Promise<boolean> {
     try {
-      // Try to fetch just 1 cell from Lives sheet to verify connection
-      await fetchSheetData('lives', `${LIVES_TAB}!A1`)
+      // Try to fetch 'lives' data to verify connection
+      await fetchSheetData('lives')
       return true
     } catch (error) {
       console.error('Connection check failed:', error)
@@ -137,7 +132,7 @@ export const googleSheetsService = {
 
   async fetchLeads(): Promise<Lead[]> {
     try {
-      const rows = await fetchSheetData('crm', `${CRM_TAB}!A:Z`)
+      const rows = await fetchSheetData('crm')
       const rawObjects = mapRowsToObjects(rows)
 
       return rawObjects
@@ -171,7 +166,7 @@ export const googleSheetsService = {
 
   async fetchLivesData(): Promise<LiveData[]> {
     try {
-      const rows = await fetchSheetData('lives', `${LIVES_TAB}!A:Z`)
+      const rows = await fetchSheetData('lives')
       const rawObjects = mapRowsToObjects(rows)
 
       return rawObjects

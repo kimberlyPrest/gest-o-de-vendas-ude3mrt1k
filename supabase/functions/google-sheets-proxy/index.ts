@@ -9,12 +9,13 @@ Deno.serve(async (req) => {
   }
 
   try {
-    // 1. Validate Auth
+    // 1. Validate Auth (User must be logged in to access this function)
     const authHeader = req.headers.get('Authorization')
     if (!authHeader) {
       throw new Error('Missing Authorization header')
     }
 
+    // Client for Auth validation
     const supabaseClient = createClient(
       Deno.env.get('SUPABASE_URL') ?? '',
       Deno.env.get('SUPABASE_ANON_KEY') ?? '',
@@ -37,12 +38,12 @@ Deno.serve(async (req) => {
     }
 
     // 2. Parse Request Body
-    const { type, range } = await req.json()
+    const { type } = await req.json()
 
-    if (!type || !range) {
+    if (!type) {
       return new Response(
         JSON.stringify({
-          error: 'Missing required parameters: type and range',
+          error: 'Missing required parameter: type',
         }),
         {
           status: 400,
@@ -51,38 +52,33 @@ Deno.serve(async (req) => {
       )
     }
 
-    // 3. Resolve Spreadsheet ID based on type
-    let spreadsheetId = ''
-    if (type === 'crm') {
-      spreadsheetId = Deno.env.get('CRM_SPREADSHEET_ID') ?? ''
-    } else if (type === 'lives') {
-      spreadsheetId = Deno.env.get('LIVES_SPREADSHEET_ID') ?? ''
-    } else {
-      return new Response(
-        JSON.stringify({
-          error: 'Invalid spreadsheet type. Allowed values: crm, lives',
-        }),
-        {
-          status: 400,
-          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
-        },
-      )
-    }
+    // 3. Fetch Configuration from Database (Using Service Role to access private table)
+    const adminClient = createClient(
+      Deno.env.get('SUPABASE_URL') ?? '',
+      Deno.env.get('SUPABASE_SERVICE_ROLE_KEY') ?? '',
+    )
 
-    if (!spreadsheetId) {
+    const { data: config, error: configError } = await adminClient
+      .from('spreadsheet_configs')
+      .select('spreadsheet_id, sheet_name, range')
+      .eq('type', type)
+      .single()
+
+    if (configError || !config) {
+      console.error('Config fetch error:', configError)
       return new Response(
         JSON.stringify({
-          error: `Server configuration error: Spreadsheet ID for ${type} not found`,
+          error: `Configuration for type '${type}' not found`,
         }),
         {
-          status: 500,
+          status: 404,
           headers: { ...corsHeaders, 'Content-Type': 'application/json' },
         },
       )
     }
 
     // 4. Get API Key from Secrets
-    const apiKey = Deno.env.get('GOOGLE_SHEETS_API_KEY')
+    const apiKey = Deno.env.get('sheets')
     if (!apiKey) {
       return new Response(
         JSON.stringify({
@@ -96,7 +92,14 @@ Deno.serve(async (req) => {
     }
 
     // 5. Fetch Data from Google Sheets API
-    const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`
+    // Construct range: Use config.range if available, otherwise default to SheetName (entire sheet)
+    // If range is "A:Z", combined it becomes "SheetName!A:Z"
+    const rangeParam = config.range
+      ? `${config.sheet_name}!${config.range}`
+      : config.sheet_name
+
+    const url = `https://sheets.googleapis.com/v4/spreadsheets/${config.spreadsheet_id}/values/${encodeURIComponent(rangeParam)}?key=${apiKey}`
+
     const response = await fetch(url)
     const data = await response.json()
 
