@@ -78,7 +78,8 @@ Deno.serve(async (req) => {
     }
 
     // 4. Get API Key from Secrets
-    const apiKey = Deno.env.get('sheets')
+    // Using 'Sheets' as per the corrected environment variable name in the user story
+    const apiKey = Deno.env.get('Sheets')
     if (!apiKey) {
       return new Response(
         JSON.stringify({
