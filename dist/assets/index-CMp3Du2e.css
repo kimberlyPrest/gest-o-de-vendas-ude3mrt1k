@@ -836,9 +836,6 @@ body{
 .mt-6{
   margin-top: 1.5rem;
 }
-.mt-8{
-  margin-top: 2rem;
-}
 .mt-auto{
   margin-top: auto;
 }
@@ -1188,6 +1185,9 @@ body{
 .max-w-\[--skeleton-width\]{
   max-width: var(--skeleton-width);
 }
+.max-w-\[120px\]{
+  max-width: 120px;
+}
 .max-w-\[1600px\]{
   max-width: 1600px;
 }
@@ -1501,6 +1501,9 @@ body{
 .rounded-2xl{
   border-radius: 1rem;
 }
+.rounded-\[20px\]{
+  border-radius: 20px;
+}
 .rounded-\[2px\]{
   border-radius: 2px;
 }
@@ -1786,10 +1789,6 @@ body{
   --tw-bg-opacity: 1;
   background-color: rgb(229 231 235 / var(--tw-bg-opacity, 1));
 }
-.bg-gray-400{
-  --tw-bg-opacity: 1;
-  background-color: rgb(156 163 175 / var(--tw-bg-opacity, 1));
-}
 .bg-gray-50{
   --tw-bg-opacity: 1;
   background-color: rgb(249 250 251 / var(--tw-bg-opacity, 1));
@@ -1800,6 +1799,10 @@ body{
 .bg-green-100{
   --tw-bg-opacity: 1;
   background-color: rgb(220 252 231 / var(--tw-bg-opacity, 1));
+}
+.bg-indigo-50{
+  --tw-bg-opacity: 1;
+  background-color: rgb(238 242 255 / var(--tw-bg-opacity, 1));
 }
 .bg-muted{
   background-color: hsl(var(--muted));
@@ -1874,10 +1877,6 @@ body{
   --tw-bg-opacity: 1;
   background-color: rgb(254 252 232 / var(--tw-bg-opacity, 1));
 }
-.bg-yellow-500{
-  --tw-bg-opacity: 1;
-  background-color: rgb(234 179 8 / var(--tw-bg-opacity, 1));
-}
 .bg-gradient-to-br{
   background-image: linear-gradient(to bottom right, var(--tw-gradient-stops));
 }
@@ -1902,9 +1901,6 @@ body{
 }
 .fill-current{
   fill: currentColor;
-}
-.fill-yellow-500{
-  fill: #eab308;
 }
 .p-0{
   padding: 0px;
@@ -2098,6 +2094,9 @@ body{
 }
 .pt-4{
   padding-top: 1rem;
+}
+.pt-8{
+  padding-top: 2rem;
 }
 .text-left{
   text-align: left;
@@ -2356,6 +2355,10 @@ body{
 .text-indigo-500{
   --tw-text-opacity: 1;
   color: rgb(99 102 241 / var(--tw-text-opacity, 1));
+}
+.text-indigo-600{
+  --tw-text-opacity: 1;
+  color: rgb(79 70 229 / var(--tw-text-opacity, 1));
 }
 .text-indigo-900{
   --tw-text-opacity: 1;
@@ -2876,9 +2879,6 @@ body{
 }
 .first\:border-l:first-child{
   border-left-width: 1px;
-}
-.last\:mb-0:last-child{
-  margin-bottom: 0px;
 }
 .last\:rounded-r-md:last-child{
   border-top-right-radius: calc(var(--radius) - 2px);

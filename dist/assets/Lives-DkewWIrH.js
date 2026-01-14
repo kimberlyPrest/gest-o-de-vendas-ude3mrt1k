@@ -1,5 +1,5 @@
-import { a as parseISO, c as startOfMonth, d as addDays, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, m as ArrowUp, n as Popover, o as subDays, p as ChevronLeft, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-DpdnfeCa.js";
-import { At as TooltipTrigger, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, Dt as Tooltip$1, E as DialogTrigger, Et as Slot, H as endOfDay, Ht as RefreshCw, I as format, Jt as createLucideIcon, Kt as Check, M as useLivesStore, Ot as TooltipContent, Rt as cn$1, S as DialogDescription, St as Input, T as DialogTitle, Ut as LoaderCircle, Vt as TrendingUp, W as differenceInDays, Wt as ChevronRight, Xt as clsx_default, Y as startOfDay, _ as CommandList, a as Select, c as SelectTrigger, d as Label$1, dn as require_react, et as toDate, f as Command, fn as __commonJSMin, g as CommandItem, h as CommandInput, i as CardTitle$1, it as googleSheetsService, kt as TooltipProvider, l as SelectValue, m as CommandGroup, mn as __toESM, n as CardContent$1, o as SelectContent, ot as Skeleton, p as CommandEmpty, pn as __export, qt as Calendar, r as CardHeader$1, s as SelectItem, sn as require_jsx_runtime, t as Card$1, u as Switch, un as useToast, v as CommandSeparator, w as DialogHeader, x as DialogContent, y as Dialog, zt as Video } from "./index-l2fWeBwY.js";
+import { a as parseISO, c as startOfMonth, d as addDays, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, m as ArrowUp, n as Popover, o as subDays, p as ChevronLeft, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-B4JTLvrm.js";
+import { At as TooltipTrigger, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, Dt as Tooltip$1, E as DialogTrigger, Et as Slot, Gt as ChevronRight, H as endOfDay, Ht as TrendingUp, I as format, Jt as Calendar, M as useLivesStore, Ot as TooltipContent, Rt as cn, S as DialogDescription, St as Input, T as DialogTitle, Ut as RefreshCw, Vt as User, W as differenceInDays, Wt as LoaderCircle, Y as startOfDay, Yt as createLucideIcon, Zt as clsx_default, _ as CommandList, a as Select, c as SelectTrigger, cn as require_jsx_runtime, d as Label$1, dn as useToast, et as toDate, f as Command, fn as require_react, g as CommandItem, h as CommandInput, hn as __toESM, i as CardTitle$1, it as googleSheetsService, kt as TooltipProvider, l as SelectValue, m as CommandGroup, mn as __export, n as CardContent$1, o as SelectContent, ot as Skeleton, p as CommandEmpty, pn as __commonJSMin, qt as Check, r as CardHeader, s as SelectItem, t as Card$1, u as Switch, v as CommandSeparator, w as DialogHeader, x as DialogContent, y as Dialog, zt as Video } from "./index-DatUaPos.js";
 var ArrowDown = createLucideIcon("arrow-down", [["path", {
 	d: "M12 5v14",
 	key: "s699le"
@@ -140,6 +140,28 @@ var Plus = createLucideIcon("plus", [["path", {
 	d: "M12 5v14",
 	key: "s699le"
 }]]);
+var Scale = createLucideIcon("scale", [
+	["path", {
+		d: "M12 3v18",
+		key: "108xh3"
+	}],
+	["path", {
+		d: "m19 8 3 8a5 5 0 0 1-6 0zV7",
+		key: "zcdpyk"
+	}],
+	["path", {
+		d: "M3 7h1a17 17 0 0 0 8-2 17 17 0 0 0 8 2h1",
+		key: "1yorad"
+	}],
+	["path", {
+		d: "m5 8 3 8a5 5 0 0 1-6 0zV7",
+		key: "eua70x"
+	}],
+	["path", {
+		d: "M7 21h10",
+		key: "1b0cd5"
+	}]
+]);
 var SearchX = createLucideIcon("search-x", [
 	["path", {
 		d: "m13.5 8.5-5 5",
@@ -5501,7 +5523,7 @@ var FormItem = import_react.forwardRef(({ className, ...props }, ref) => {
 		value: { id },
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 			ref,
-			className: cn$1("space-y-2", className),
+			className: cn("space-y-2", className),
 			...props
 		})
 	});
@@ -5511,7 +5533,7 @@ var FormLabel = import_react.forwardRef(({ className, ...props }, ref) => {
 	const { error, formItemId } = useFormField();
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 		ref,
-		className: cn$1(error && "text-destructive", className),
+		className: cn(error && "text-destructive", className),
 		htmlFor: formItemId,
 		...props
 	});
@@ -5533,7 +5555,7 @@ var FormDescription = import_react.forwardRef(({ className, ...props }, ref) => 
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 		ref,
 		id: formDescriptionId,
-		className: cn$1("text-sm text-muted-foreground", className),
+		className: cn("text-sm text-muted-foreground", className),
 		...props
 	});
 });
@@ -5545,7 +5567,7 @@ var FormMessage = import_react.forwardRef(({ className, children, ...props }, re
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 		ref,
 		id: formMessageId,
-		className: cn$1("text-sm font-medium text-destructive", className),
+		className: cn("text-sm font-medium text-destructive", className),
 		...props,
 		children: body
 	});
@@ -5681,7 +5703,7 @@ function AddLiveModal({ presenters, onSuccess, customTrigger }) {
 											asChild: true,
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 												variant: "outline",
-												className: cn$1("w-full pl-3 text-left font-normal", !field.value && "text-muted-foreground"),
+												className: cn("w-full pl-3 text-left font-normal", !field.value && "text-muted-foreground"),
 												children: [field.value ? format(field.value, "dd/MM/yyyy") : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecione a data" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "ml-auto h-4 w-4 opacity-50" })]
 											}) })
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
@@ -5987,7 +6009,7 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 				asChild: true,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 					variant: "outline",
-					className: cn$1("h-10 justify-start text-left font-normal shrink-0", !filters.dateRange && "text-muted-foreground"),
+					className: cn("h-10 justify-start text-left font-normal shrink-0", !filters.dateRange && "text-muted-foreground"),
 					onClick: () => setSelectedPreset("custom"),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "mr-2 h-4 w-4" }), filters.dateRange?.from ? filters.dateRange.to ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 						format(filters.dateRange.from, "dd/MM/yy"),
@@ -6045,8 +6067,8 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 								});
 							},
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: cn$1("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.length === presenters.length && presenters.length > 0 ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn$1("h-4 w-4") })
+								className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.length === presenters.length && presenters.length > 0 ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecionar Todos" })]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandSeparator, { className: "my-1" }),
@@ -6054,8 +6076,8 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 							value: presenter,
 							onSelect: () => togglePresenter(presenter),
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: cn$1("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.includes(presenter) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn$1("h-4 w-4") })
+								className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.includes(presenter) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: presenter })]
 						}, presenter))
 					] })] })] })
@@ -6078,8 +6100,8 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 					value: day.value,
 					onSelect: () => toggleWeekday(day.value),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: cn$1("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.weekdays.includes(day.value) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn$1("h-4 w-4") })
+						className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.weekdays.includes(day.value) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: day.value })]
 				}, day.value)) }) }) })
 			})] }),
@@ -6239,14 +6261,14 @@ function LiveKPIs({ currentData, previousData, comparisonEnabled, loading }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5",
 		children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card$1, {
-			className: cn$1("overflow-hidden transition-all hover:shadow-md relative", item.variant === "primary" && "border-blue-200 bg-blue-50/50 dark:bg-blue-950/20", item.variant === "accent" && "border-amber-200 bg-amber-50/50 dark:bg-amber-950/20"),
+			className: cn("overflow-hidden transition-all hover:shadow-md relative", item.variant === "primary" && "border-blue-200 bg-blue-50/50 dark:bg-blue-950/20", item.variant === "accent" && "border-amber-200 bg-amber-50/50 dark:bg-amber-950/20"),
 			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader$1, {
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
 					className: "flex flex-row items-center justify-between space-y-0 pb-2 p-4",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle$1, {
 						className: "text-xs font-medium text-muted-foreground uppercase tracking-wider",
 						children: item.title
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, { className: cn$1("h-4 w-4", item.variant === "primary" ? "text-blue-600" : item.variant === "accent" ? "text-amber-600" : "text-gray-500") })]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, { className: cn("h-4 w-4", item.variant === "primary" ? "text-blue-600" : item.variant === "accent" ? "text-amber-600" : "text-gray-500") })]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent$1, {
 					className: "p-4 pt-0",
@@ -6266,7 +6288,7 @@ function LiveKPIs({ currentData, previousData, comparisonEnabled, loading }) {
 						item.trend !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center mt-1",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: cn$1("flex items-center text-xs font-medium", item.trend > 0 ? "text-emerald-600" : item.trend < 0 ? "text-red-600" : "text-gray-500"),
+								className: cn("flex items-center text-xs font-medium", item.trend > 0 ? "text-emerald-600" : item.trend < 0 ? "text-red-600" : "text-gray-500"),
 								children: [
 									item.trend > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUp, { className: "mr-0.5 h-3 w-3" }) : item.trend < 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowDown, { className: "mr-0.5 h-3 w-3" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minus, { className: "mr-0.5 h-3 w-3" }),
 									Math.abs(item.trend).toFixed(1),
@@ -6292,7 +6314,7 @@ function LiveKPIs({ currentData, previousData, comparisonEnabled, loading }) {
 }
 function EmptyState({ icon: Icon, title, description, className, action }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: cn$1("flex flex-col items-center justify-center p-8 text-center animate-fade-in", className),
+		className: cn("flex flex-col items-center justify-center p-8 text-center animate-fade-in", className),
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "flex h-16 w-16 items-center justify-center rounded-full bg-muted/50 mb-4",
@@ -28122,7 +28144,7 @@ var ChartContainer = import_react.forwardRef(({ id, className, children, config:
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			"data-chart": chartId,
 			ref,
-			className: cn$1("flex w-full h-full aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none", className),
+			className: cn("flex w-full h-full aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none", className),
 			...props,
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartStyle, {
 				id: chartId,
@@ -28152,12 +28174,12 @@ var ChartTooltipContent = import_react.forwardRef(({ active, payload, className,
 		const itemConfig = getPayloadConfigFromPayload(config$1, item, `${labelKey || item?.dataKey || item?.name || "value"}`);
 		const value = !labelKey && typeof label === "string" ? config$1[label]?.label || label : itemConfig?.label;
 		if (labelFormatter) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: cn$1("font-medium", labelClassName),
+			className: cn("font-medium", labelClassName),
 			children: labelFormatter(value, payload)
 		});
 		if (!value) return null;
 		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: cn$1("font-medium", labelClassName),
+			className: cn("font-medium", labelClassName),
 			children: value
 		});
 	}, [
@@ -28173,16 +28195,16 @@ var ChartTooltipContent = import_react.forwardRef(({ active, payload, className,
 	const nestLabel = payload.length === 1 && indicator !== "dot";
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		ref,
-		className: cn$1("grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl", className),
+		className: cn("grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl", className),
 		children: [!nestLabel ? tooltipLabel : null, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 			className: "grid gap-1.5",
 			children: payload.map((item, index) => {
 				const itemConfig = getPayloadConfigFromPayload(config$1, item, `${nameKey || item.name || item.dataKey || "value"}`);
 				const indicatorColor = color$1 || item.payload.fill || item.color;
 				return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: cn$1("flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground", indicator === "dot" && "items-center"),
+					className: cn("flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground", indicator === "dot" && "items-center"),
 					children: formatter && item?.value !== void 0 && item.name ? formatter(item.value, item.name, item, index, item.payload) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [itemConfig?.icon ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(itemConfig.icon, {}) : !hideIndicator && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: cn$1("shrink-0 rounded-[2px] border-[--color-border] bg-[--color-bg]", {
+						className: cn("shrink-0 rounded-[2px] border-[--color-border] bg-[--color-bg]", {
 							"h-2.5 w-2.5": indicator === "dot",
 							"w-1": indicator === "line",
 							"w-0 border-[1.5px] border-dashed bg-transparent": indicator === "dashed",
@@ -28193,7 +28215,7 @@ var ChartTooltipContent = import_react.forwardRef(({ active, payload, className,
 							"--color-border": indicatorColor
 						}
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: cn$1("flex flex-1 justify-between leading-none", nestLabel ? "items-end" : "items-center"),
+						className: cn("flex flex-1 justify-between leading-none", nestLabel ? "items-end" : "items-center"),
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "grid gap-1.5",
 							children: [nestLabel ? tooltipLabel : null, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
@@ -28216,11 +28238,11 @@ var ChartLegendContent = import_react.forwardRef(({ className, hideIcon = false,
 	if (!payload?.length) return null;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		ref,
-		className: cn$1("flex items-center justify-center gap-4", verticalAlign === "top" ? "pb-3" : "pt-3", className),
+		className: cn("flex items-center justify-center gap-4", verticalAlign === "top" ? "pb-3" : "pt-3", className),
 		children: payload.map((item) => {
 			const itemConfig = getPayloadConfigFromPayload(config$1, item, `${nameKey || item.dataKey || "value"}`);
 			return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: cn$1("flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"),
+				className: cn("flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"),
 				children: [itemConfig?.icon && !hideIcon ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(itemConfig.icon, {}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "h-2 w-2 shrink-0 rounded-[2px]",
 					style: { backgroundColor: item.color }
@@ -28542,151 +28564,215 @@ function AudienceScatterChart({ data, loading }) {
 		})]
 	});
 }
-function HostComparison({ data, presenters }) {
-	const metrics = (0, import_react.useMemo)(() => {
+var MetricRow = ({ label, data, higherIsBetter = true }) => {
+	const values = data.map((d) => d.rawValue);
+	const maxValue = Math.max(...values);
+	const minValue = Math.min(...values);
+	const getBestValue = () => higherIsBetter ? maxValue : minValue;
+	const getWorstValue = () => higherIsBetter ? minValue : maxValue;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "py-5 border-b border-[#E5E5E7] last:border-0 hover:bg-[#FBFBFD]/50 transition-colors px-6 md:px-8",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+			className: "text-[11px] uppercase tracking-widest text-[#86868B] font-semibold mb-3",
+			children: label
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+			className: "grid gap-8",
+			style: { gridTemplateColumns: `repeat(${data.length}, 1fr)` },
+			children: data.map((item) => {
+				const isBest = item.rawValue === getBestValue() && maxValue !== minValue;
+				const isWorst = item.rawValue === getWorstValue() && maxValue !== minValue;
+				const percentage = maxValue > 0 ? item.rawValue / maxValue * 100 : 0;
+				return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "space-y-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-2",
+						children: [
+							isBest && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Crown, { className: "h-4 w-4 text-[#F5A623] fill-[#F5A623]" }),
+							isWorst && data.length > 1 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingDown, { className: "h-4 w-4 text-[#86868B]/60" }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: `font-semibold text-[15px] tracking-tight ${isBest ? "text-[#1D1D1F]" : isWorst ? "text-[#86868B]" : "text-[#1D1D1F]"}`,
+								children: item.displayValue
+							})
+						]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "h-1.5 bg-[#E5E5E7]/60 rounded-full overflow-hidden w-full max-w-[200px]",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: `h-full rounded-full transition-all duration-1000 ease-out ${isBest ? "bg-[#0071E3]" : "bg-[#86868B]/40"}`,
+							style: { width: `${percentage}%` }
+						})
+					})]
+				}, item.id);
+			})
+		})]
+	});
+};
+const HostComparison = ({ data, presenters }) => {
+	const hostStats = (0, import_react.useMemo)(() => {
 		return presenters.map((p) => {
 			const hostData = data.filter((d) => d.presenter === p);
 			const count = hostData.length;
 			if (count === 0) return {
-				presenter: p,
-				totalLives: 0,
-				totalRevenue: 0,
-				totalSales: 0,
-				avgConversion: 0,
-				avgRetention: 0,
-				avgRevenuePerLive: 0
+				id: p,
+				name: p,
+				lives: 0,
+				revenue: 0,
+				sales: 0,
+				conversion: 0,
+				retention: 0
 			};
-			const totalRevenue = hostData.reduce((acc, curr) => acc + curr.revenue, 0);
 			return {
-				presenter: p,
-				totalLives: count,
-				totalRevenue,
-				totalSales: hostData.reduce((acc, curr) => acc + curr.sales, 0),
-				avgConversion: hostData.reduce((acc, curr) => acc + curr.conversionRate, 0) / count,
-				avgRetention: hostData.reduce((acc, curr) => acc + curr.retentionRate, 0) / count,
-				avgRevenuePerLive: totalRevenue / count
+				id: p,
+				name: p,
+				lives: count,
+				revenue: hostData.reduce((acc, curr) => acc + curr.revenue, 0),
+				sales: hostData.reduce((acc, curr) => acc + curr.sales, 0),
+				conversion: hostData.reduce((acc, curr) => acc + curr.conversionRate, 0) / count,
+				retention: hostData.reduce((acc, curr) => acc + curr.retentionRate, 0) / count
 			};
 		});
 	}, [data, presenters]);
-	const getMax = (key) => Math.max(...metrics.map((m) => m[key]));
-	const getMin = (key) => Math.min(...metrics.map((m) => m[key]));
-	const renderMetricRow = (label, key, formatFn) => {
-		const maxVal = getMax(key);
-		const minVal = getMin(key);
-		return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "mb-6 last:mb-0",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-				className: "text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3",
-				children: label
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "grid gap-4",
-				style: { gridTemplateColumns: `repeat(${metrics.length}, minmax(0, 1fr))` },
-				children: metrics.map((m) => {
-					const val = m[key];
-					const isBest = val === maxVal && val > 0;
-					const isWorst = val === minVal && val < maxVal;
-					const displayVal = formatFn ? formatFn(val) : val.toLocaleString("pt-BR");
-					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "bg-gray-50 rounded-lg p-3 relative border border-gray-100",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex justify-between items-center mb-2",
-							children: [
-								/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: cn("text-lg font-bold", isBest ? "text-yellow-600" : "text-gray-900"),
-									children: displayVal
-								}),
-								isBest && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Crown, { className: "w-4 h-4 text-yellow-500 fill-yellow-500" }),
-								isWorst && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingDown, { className: "w-4 h-4 text-gray-400 opacity-50" })
-							]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Progress, {
-							value: maxVal > 0 ? val / maxVal * 100 : 0,
-							className: "h-1.5",
-							indicatorClassName: isBest ? "bg-yellow-500" : "bg-gray-400"
-						})]
-					}, m.presenter);
-				})
-			})]
-		});
-	};
 	if (presenters.length < 2 || presenters.length > 4) return null;
+	const metrics = [
+		{
+			label: "Total de Lives",
+			data: hostStats.map((h) => ({
+				id: h.id,
+				rawValue: h.lives,
+				displayValue: h.lives
+			}))
+		},
+		{
+			label: "Faturamento Total",
+			data: hostStats.map((h) => ({
+				id: h.id,
+				rawValue: h.revenue,
+				displayValue: h.revenue.toLocaleString("pt-BR", {
+					style: "currency",
+					currency: "BRL"
+				})
+			}))
+		},
+		{
+			label: "Total de Vendas",
+			data: hostStats.map((h) => ({
+				id: h.id,
+				rawValue: h.sales,
+				displayValue: h.sales
+			}))
+		},
+		{
+			label: "Conversão Média",
+			data: hostStats.map((h) => ({
+				id: h.id,
+				rawValue: h.conversion,
+				displayValue: `${h.conversion.toFixed(1)}%`
+			}))
+		},
+		{
+			label: "Retenção Média",
+			data: hostStats.map((h) => ({
+				id: h.id,
+				rawValue: h.retention,
+				displayValue: `${h.retention.toFixed(1)}%`
+			}))
+		}
+	];
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-		className: "border shadow-sm rounded-xl overflow-hidden mt-8",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-			className: "bg-gray-50 border-b px-6 py-4",
+		className: "bg-white/80 backdrop-blur-md border border-[#E5E5E7] rounded-[20px] shadow-sm mb-8 overflow-hidden",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+			className: "px-8 pt-8 pb-6 border-b border-[#E5E5E7]",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex items-center gap-2",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Crown, { className: "w-5 h-5 text-yellow-600" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-					className: "text-lg font-bold text-gray-900",
-					children: "Comparativo de Performance"
+				className: "flex justify-between items-start mb-6",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-4",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "size-10 bg-indigo-50 text-indigo-600 rounded-xl flex items-center justify-center",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Scale, { className: "w-5 h-5" })
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+						className: "text-xl font-semibold tracking-tight text-[#1D1D1F]",
+						children: "Comparativo de Hosts"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "text-sm text-[#86868B] mt-0.5",
+						children: "Análise lado a lado dos top performers"
+					})] })]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+					className: "text-xs font-medium px-3 py-1 bg-[#F5F5F7] rounded-full text-[#86868B] border border-[#E5E5E7]",
+					children: [presenters.length, " hosts selecionados"]
 				})]
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "flex gap-4 mt-2",
-				children: metrics.map((m) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "flex-1 font-medium text-center bg-white border rounded-md py-1 text-sm text-gray-700 shadow-sm",
-					children: m.presenter
-				}, m.presenter))
+				className: "grid gap-8 pl-0",
+				style: { gridTemplateColumns: `repeat(${presenters.length}, 1fr)` },
+				children: hostStats.map((host) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-3",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "size-10 rounded-full bg-gray-100 flex items-center justify-center text-[#86868B] border border-[#E5E5E7]",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(User, { className: "w-5 h-5" })
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "text-sm font-semibold text-[#1D1D1F] truncate max-w-[120px]",
+						children: host.name
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+						className: "text-[11px] text-[#86868B]",
+						children: "Apresentador"
+					})] })]
+				}, host.id))
 			})]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-			className: "p-6",
-			children: [
-				renderMetricRow("Total de Lives", "totalLives"),
-				renderMetricRow("Faturamento Total", "totalRevenue", (v) => `R$ ${v.toLocaleString("pt-BR")}`),
-				renderMetricRow("Total de Vendas", "totalSales"),
-				renderMetricRow("Conversão Média", "avgConversion", (v) => `${v.toFixed(2)}%`),
-				renderMetricRow("Retenção Média", "avgRetention", (v) => `${v.toFixed(2)}%`),
-				renderMetricRow("Ticket Médio por Live", "avgRevenuePerLive", (v) => `R$ ${v.toLocaleString("pt-BR")}`)
-			]
+		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+			className: "p-0",
+			children: metrics.map((metric) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MetricRow, {
+				label: metric.label,
+				data: metric.data
+			}, metric.label))
 		})]
 	});
-}
+};
 var Table = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "relative w-full overflow-auto",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("table", {
 		ref,
-		className: cn$1("w-full caption-bottom text-sm", className),
+		className: cn("w-full caption-bottom text-sm", className),
 		...props
 	})
 }));
 Table.displayName = "Table";
 var TableHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", {
 	ref,
-	className: cn$1("[&_tr]:border-b", className),
+	className: cn("[&_tr]:border-b", className),
 	...props
 }));
 TableHeader.displayName = "TableHeader";
 var TableBody = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", {
 	ref,
-	className: cn$1("[&_tr:last-child]:border-0", className),
+	className: cn("[&_tr:last-child]:border-0", className),
 	...props
 }));
 TableBody.displayName = "TableBody";
 var TableFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tfoot", {
 	ref,
-	className: cn$1("border-t bg-muted/50 font-medium [&>tr]:last:border-b-0", className),
+	className: cn("border-t bg-muted/50 font-medium [&>tr]:last:border-b-0", className),
 	...props
 }));
 TableFooter.displayName = "TableFooter";
 var TableRow = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", {
 	ref,
-	className: cn$1("border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", className),
+	className: cn("border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", className),
 	...props
 }));
 TableRow.displayName = "TableRow";
 var TableHead = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
 	ref,
-	className: cn$1("h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0", className),
+	className: cn("h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0", className),
 	...props
 }));
 TableHead.displayName = "TableHead";
 var TableCell = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
 	ref,
-	className: cn$1("p-4 align-middle [&:has([role=checkbox])]:pr-0", className),
+	className: cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className),
 	...props
 }));
 TableCell.displayName = "TableCell";
 var TableCaption = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("caption", {
 	ref,
-	className: cn$1("mt-4 text-sm text-muted-foreground", className),
+	className: cn("mt-4 text-sm text-muted-foreground", className),
 	...props
 }));
 TableCaption.displayName = "TableCaption";
@@ -28960,4 +29046,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-W0u_gXtd.js.map
+//# sourceMappingURL=Lives-DkewWIrH.js.map
