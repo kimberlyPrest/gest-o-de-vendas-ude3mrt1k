@@ -1,5 +1,5 @@
-import { C as format, _ as PopoverContent, a as SelectValue, b as parseISO, d as DialogFooter, f as DialogHeader, g as Popover, h as Calendar, i as SelectTrigger, l as DialogContent, m as DialogTrigger, n as SelectContent, p as DialogTitle, r as SelectItem, s as Dialog, t as Select, u as DialogDescription, v as PopoverTrigger, x as subDays, y as ptBR } from "./select-CYv7rfRB.js";
-import { F as Input, I as Button, Q as clsx_default, X as createLucideIcon, Y as LoaderCircle, _ as googleSheetsService, bt as __export, ft as require_jsx_runtime, gt as useToast, n as useLivesStore, q as cn, s as startOfDay, t as Label$1, u as toDate, vt as require_react, xt as __toESM, y as Skeleton, yt as __commonJSMin, z as Slot } from "./index-DX5goG9l.js";
+import { C as format, _ as PopoverContent, a as SelectValue, b as parseISO, d as DialogFooter, f as DialogHeader, g as Popover, h as Calendar, i as SelectTrigger, l as DialogContent, m as DialogTrigger, n as SelectContent, p as DialogTitle, r as SelectItem, s as Dialog, t as Select, u as DialogDescription, v as PopoverTrigger, x as subDays, y as ptBR } from "./select-0e4LTvRK.js";
+import { F as Input, I as Button, Q as clsx_default, X as createLucideIcon, Y as LoaderCircle, _ as googleSheetsService, bt as __export, ft as require_jsx_runtime, gt as useToast, n as useLivesStore, q as cn, s as startOfDay, t as Label$1, u as toDate, vt as require_react, xt as __toESM, y as Skeleton, yt as __commonJSMin, z as Slot } from "./index-Ctr70Z9f.js";
 var Calendar$1 = createLucideIcon("calendar", [
 	["path", {
 		d: "M8 2v4",
@@ -27835,12 +27835,12 @@ function getPayloadConfigFromPayload(config$1, payload, key) {
 	return configLabelKey in config$1 ? config$1[configLabelKey] : config$1[key];
 }
 var chartConfig = {
-	sales: {
-		label: "Vendas",
-		color: "#0071E3"
-	},
 	revenue: {
 		label: "Faturamento",
+		color: "#0071E3"
+	},
+	retentionRate: {
+		label: "Retenção",
 		color: "#34C759"
 	}
 };
@@ -27896,19 +27896,23 @@ function LiveChart({ data, loading }) {
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "text-[#0071E3] font-medium",
-							children: "Vendas:"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-bold text-[#0071E3]",
-							children: item.sales
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-[#34C759] font-medium",
 							children: "Faturamento:"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+							className: "font-bold text-[#0071E3]",
+							children: [
+								"R$",
+								" ",
+								item.revenue.toLocaleString("pt-BR", { minimumFractionDigits: 2 })
+							]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "text-[#34C759] font-medium",
+							children: "Retenção:"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 							className: "font-bold text-[#34C759]",
-							children: ["R$ ", item.revenue.toLocaleString("pt-BR")]
+							children: [item.retentionRate.toFixed(1), "%"]
 						})
 					]
 				})]
@@ -27947,7 +27951,7 @@ function LiveChart({ data, loading }) {
 						onMouseUp: zoom,
 						children: [
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("defs", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("linearGradient", {
-								id: "colorSales",
+								id: "colorRevenue",
 								x1: "0",
 								y1: "0",
 								x2: "0",
@@ -27962,7 +27966,7 @@ function LiveChart({ data, loading }) {
 									stopOpacity: 0
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("linearGradient", {
-								id: "colorRevenue",
+								id: "colorRetention",
 								x1: "0",
 								y1: "0",
 								x2: "0",
@@ -28000,6 +28004,7 @@ function LiveChart({ data, loading }) {
 								yAxisId: "left",
 								orientation: "left",
 								stroke: "#0071E3",
+								tickFormatter: (val) => `R$${val >= 1e3 ? (val / 1e3).toFixed(0) + "k" : val}`,
 								tick: {
 									fill: "#0071E3",
 									fontSize: 11
@@ -28012,7 +28017,7 @@ function LiveChart({ data, loading }) {
 								yAxisId: "right",
 								orientation: "right",
 								stroke: "#34C759",
-								tickFormatter: (val) => `R$${val / 1e3}k`,
+								tickFormatter: (val) => `${val}%`,
 								tick: {
 									fill: "#34C759",
 									fontSize: 11
@@ -28041,8 +28046,8 @@ function LiveChart({ data, loading }) {
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Line, {
 								yAxisId: "left",
 								type: "monotone",
-								dataKey: "sales",
-								name: "Vendas",
+								dataKey: "revenue",
+								name: "Faturamento",
 								stroke: "#0071E3",
 								strokeWidth: 2,
 								dot: {
@@ -28055,13 +28060,13 @@ function LiveChart({ data, loading }) {
 									strokeWidth: 0
 								},
 								animationDuration: 500,
-								fill: "url(#colorSales)"
+								fill: "url(#colorRevenue)"
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Line, {
 								yAxisId: "right",
 								type: "monotone",
-								dataKey: "revenue",
-								name: "Faturamento",
+								dataKey: "retentionRate",
+								name: "Retenção",
 								stroke: "#34C759",
 								strokeWidth: 2,
 								dot: {
@@ -28074,7 +28079,7 @@ function LiveChart({ data, loading }) {
 									strokeWidth: 0
 								},
 								animationDuration: 500,
-								fill: "url(#colorRevenue)"
+								fill: "url(#colorRetention)"
 							}),
 							refAreaLeft && refAreaRight ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ReferenceArea, {
 								yAxisId: "left",
@@ -28640,7 +28645,7 @@ function Lives() {
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "text-[14px]",
 								style: { color: "#86868B" },
-								children: "Vendas e Faturamento por dia"
+								children: "Faturamento e Retenção por dia"
 							})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "flex gap-6" })]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LiveChart, {
@@ -29111,4 +29116,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-D7tLSHrE.js.map
+//# sourceMappingURL=Lives-BBvzieMD.js.map

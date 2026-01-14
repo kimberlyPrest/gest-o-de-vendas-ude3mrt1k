@@ -194,10 +194,14 @@ export const googleSheetsService = {
           }
           if (!conversion && peak > 0) conversion = (sales / peak) * 100
 
-          let retention = findValue(o, ['retenção', 'retention'])
+          // Retention calculation / mapping
+          // Matches: "retenção", "retencao", "retention"
+          // This will pick up "Taxa de Retenção" or just "Retenção"
+          let retention = findValue(o, ['retenção', 'retencao', 'retention'])
           if (typeof retention === 'string') {
             retention = Number(retention.replace('%', '').replace(',', '.'))
           }
+          // Fallback to calculation if not provided
           if (!retention && peak > 0) retention = (retained / peak) * 100
 
           return {

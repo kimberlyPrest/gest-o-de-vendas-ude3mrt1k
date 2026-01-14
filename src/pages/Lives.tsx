@@ -652,12 +652,10 @@ export default function Lives() {
                 Performance
               </h3>
               <p className="text-[14px]" style={{ color: '#86868B' }}>
-                Vendas e Faturamento por dia
+                Faturamento e Retenção por dia
               </p>
             </div>
-            <div className="flex gap-6">
-              {/* Legend moved to LiveChart or kept minimal here if needed, but LiveChart has legend */}
-            </div>
+            <div className="flex gap-6">{/* Legend moved to LiveChart */}</div>
           </div>
 
           <LiveChart data={filteredData} loading={loading} />

@@ -25,12 +25,12 @@ interface LiveChartProps {
 }
 
 const chartConfig = {
-  sales: {
-    label: 'Vendas',
-    color: '#0071E3',
-  },
   revenue: {
     label: 'Faturamento',
+    color: '#0071E3',
+  },
+  retentionRate: {
+    label: 'Retenção',
     color: '#34C759',
   },
 }
@@ -82,11 +82,16 @@ export function LiveChart({ data, loading }: LiveChartProps) {
             <span className="font-medium text-gray-900">{item.weekday}</span>
             <span className="text-gray-500">Apresentador:</span>
             <span className="font-medium text-gray-900">{item.presenter}</span>
-            <span className="text-[#0071E3] font-medium">Vendas:</span>
-            <span className="font-bold text-[#0071E3]">{item.sales}</span>
-            <span className="text-[#34C759] font-medium">Faturamento:</span>
+            <span className="text-[#0071E3] font-medium">Faturamento:</span>
+            <span className="font-bold text-[#0071E3]">
+              R${' '}
+              {item.revenue.toLocaleString('pt-BR', {
+                minimumFractionDigits: 2,
+              })}
+            </span>
+            <span className="text-[#34C759] font-medium">Retenção:</span>
             <span className="font-bold text-[#34C759]">
-              R$ {item.revenue.toLocaleString('pt-BR')}
+              {item.retentionRate.toFixed(1)}%
             </span>
           </div>
         </div>
@@ -136,11 +141,11 @@ export function LiveChart({ data, loading }: LiveChartProps) {
               onMouseUp={zoom}
             >
               <defs>
-                <linearGradient id="colorSales" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#0071E3" stopOpacity={0.1} />
                   <stop offset="95%" stopColor="#0071E3" stopOpacity={0} />
                 </linearGradient>
-                <linearGradient id="colorRevenue" x1="0" y1="0" x2="0" y2="1">
+                <linearGradient id="colorRetention" x1="0" y1="0" x2="0" y2="1">
                   <stop offset="5%" stopColor="#34C759" stopOpacity={0.1} />
                   <stop offset="95%" stopColor="#34C759" stopOpacity={0} />
                 </linearGradient>
@@ -165,6 +170,9 @@ export function LiveChart({ data, loading }: LiveChartProps) {
                 yAxisId="left"
                 orientation="left"
                 stroke="#0071E3"
+                tickFormatter={(val) =>
+                  `R$${val >= 1000 ? (val / 1000).toFixed(0) + 'k' : val}`
+                }
                 tick={{ fill: '#0071E3', fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
@@ -174,7 +182,7 @@ export function LiveChart({ data, loading }: LiveChartProps) {
                 yAxisId="right"
                 orientation="right"
                 stroke="#34C759"
-                tickFormatter={(val) => `R$${val / 1000}k`}
+                tickFormatter={(val) => `${val}%`}
                 tick={{ fill: '#34C759', fontSize: 11 }}
                 axisLine={false}
                 tickLine={false}
@@ -197,26 +205,26 @@ export function LiveChart({ data, loading }: LiveChartProps) {
               <Line
                 yAxisId="left"
                 type="monotone"
-                dataKey="sales"
-                name="Vendas"
+                dataKey="revenue"
+                name="Faturamento"
                 stroke="#0071E3"
                 strokeWidth={2}
                 dot={{ r: 3, fill: '#0071E3', strokeWidth: 0 }}
                 activeDot={{ r: 6, strokeWidth: 0 }}
                 animationDuration={500}
-                fill="url(#colorSales)"
+                fill="url(#colorRevenue)"
               />
               <Line
                 yAxisId="right"
                 type="monotone"
-                dataKey="revenue"
-                name="Faturamento"
+                dataKey="retentionRate"
+                name="Retenção"
                 stroke="#34C759"
                 strokeWidth={2}
                 dot={{ r: 3, fill: '#34C759', strokeWidth: 0 }}
                 activeDot={{ r: 6, strokeWidth: 0 }}
                 animationDuration={500}
-                fill="url(#colorRevenue)"
+                fill="url(#colorRetention)"
               />
 
               {refAreaLeft && refAreaRight ? (

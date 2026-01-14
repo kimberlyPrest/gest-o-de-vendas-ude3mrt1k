@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-D7tLSHrE.js","assets/select-CYv7rfRB.js","assets/CRM-BiNpjiaY.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-BBvzieMD.js","assets/select-0e4LTvRK.js","assets/CRM-DCEK0VEF.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -33910,7 +33910,11 @@ const googleSheetsService = {
 				let conversion = findValue(o, ["conversão", "conversion"]);
 				if (typeof conversion === "string") conversion = Number(conversion.replace("%", "").replace(",", "."));
 				if (!conversion && peak > 0) conversion = sales / peak * 100;
-				let retention = findValue(o, ["retenção", "retention"]);
+				let retention = findValue(o, [
+					"retenção",
+					"retencao",
+					"retention"
+				]);
 				if (typeof retention === "string") retention = Number(retention.replace("%", "").replace(",", "."));
 				if (!retention && peak > 0) retention = retained / peak * 100;
 				return {
@@ -35064,8 +35068,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-D7tLSHrE.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-BiNpjiaY.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-BBvzieMD.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-DCEK0VEF.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -35125,4 +35129,4 @@ var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 export { VISUALLY_HIDDEN_STYLES as $, hideOthers as A, Anchor as B, Overlay as C, Trigger as D, Title as E, Input as F, useId as G, Content$1 as H, Button as I, X as J, toast as K, buttonVariants as L, useFocusGuards as M, FocusScope as N, WarningProvider as O, Primitive as P, clsx_default as Q, useIsMobile as R, Description as S, Root$1 as T, Root2 as U, Arrow as V, createPopperScope as W, createLucideIcon as X, LoaderCircle as Y, cva as Z, googleSheetsService as _, require_react_dom as _t, differenceInDays as a, useCallbackRef$1 as at, Close as b, __export as bt, normalizeDates as c, createCollection as ct, constructFrom as d, createContextScope as dt, useControllableState as et, millisecondsInHour as f, require_jsx_runtime as ft, minutesInMonth as g, useToast as gt, minutesInDay as h, composeEventHandlers as ht, useCRMStore as i, DismissableLayer as it, Combination_default as j, createDialogScope as k, getTimezoneOffsetInMilliseconds as l, createSlot as lt, millisecondsInWeek as m, useComposedRefs as mt, useLivesStore as n, Portal as nt, differenceInCalendarDays as o, Primitive$1 as ot, millisecondsInMinute as p, composeRefs as pt, cn as q, COLUMNS as r, useLayoutEffect2 as rt, startOfDay as s, dispatchDiscreteCustomEvent as st, Label as t, Presence as tt, toDate as u, createSlottable as ut, require_shim as v, require_react as vt, Portal$1 as w, Content as x, __toESM as xt, Skeleton as y, __commonJSMin as yt, Slot as z };
 
-//# sourceMappingURL=index-DX5goG9l.js.map
+//# sourceMappingURL=index-Ctr70Z9f.js.map
