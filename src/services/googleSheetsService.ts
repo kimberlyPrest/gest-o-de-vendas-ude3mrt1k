@@ -1,5 +1,6 @@
 import { supabase } from '@/lib/supabase/client'
 import { CRMLead } from '@/stores/crmStore'
+import { toast } from 'sonner'
 
 export interface Lead {
   id: string
@@ -52,7 +53,7 @@ const parseDate = (value: string): string | null => {
   return null
 }
 
-// Generate a stable ID based on unique attributes
+// Generate a stable ID based on unique attributes for Leads
 const generateId = (item: any): string => {
   const seed = (item.email || item.nomeCompleto || JSON.stringify(item))
     .trim()
@@ -66,10 +67,16 @@ const generateId = (item: any): string => {
   return Math.abs(hash).toString(16)
 }
 
+// Generate a stable ID based on Date and Presenter for Lives (Full Mirror Upsert)
 const generateLiveId = (item: LiveData): string => {
-  const seed = `${item.date}-${item.presenter}-${item.revenue}`
+  // We use only Date and Presenter as the unique key.
+  // This allows updating metrics (revenue, sales) without creating duplicates.
+  const normalizedPresenter = (item.presenter || 'Desconhecido')
     .trim()
     .toLowerCase()
+  const normalizedDate = item.date
+  const seed = `${normalizedDate}-${normalizedPresenter}`
+
   let hash = 0
   for (let i = 0; i < seed.length; i++) {
     const char = seed.charCodeAt(i)
@@ -132,6 +139,35 @@ export const googleSheetsService = {
       console.error('Connection check failed:', error)
       return false
     }
+  },
+
+  async addLiveToSheet(live: Partial<LiveData>): Promise<void> {
+    // This is a mock implementation since we don't have write access to Sheets API via the proxy yet
+    // In a real scenario, this would call an edge function to append the row
+    console.log('Adding live to sheet (mock):', live)
+    // We can simulate an optimistic update by inserting into DB directly
+    if (!live.date || !live.presenter) throw new Error('Dados incompletos')
+
+    const liveData = live as LiveData
+    const id = generateLiveId(liveData)
+
+    const { error } = await supabase.from('lives').upsert({
+      id,
+      date: liveData.date,
+      weekday: liveData.weekday,
+      peak_viewers: liveData.peakViewers,
+      retained_viewers: liveData.retainedViewers,
+      sales: liveData.sales,
+      presenter: liveData.presenter,
+      conversion_rate: liveData.conversionRate,
+      retention_rate: liveData.retentionRate,
+      revenue: liveData.revenue,
+      additional_seats: liveData.additionalSeats,
+      updated_at: new Date().toISOString(),
+      created_at: new Date().toISOString(),
+    })
+
+    if (error) throw error
   },
 
   async syncLeads(): Promise<{ added: number; updated: number }> {
@@ -218,8 +254,6 @@ export const googleSheetsService = {
       }
 
       // 4. Perform Updates
-      // We use upsert for batch processing, but careful not to overwrite status if not desired.
-      // Since leadsToUpdate only contains safe fields, it's fine.
       if (leadsToUpdate.length > 0) {
         const { error: updateError } = await supabase
           .from('leads')
@@ -237,11 +271,17 @@ export const googleSheetsService = {
     }
   },
 
-  async syncLives(): Promise<{ added: number }> {
+  async syncLives(): Promise<{
+    added: number
+    updated: number
+    removed: number
+  }> {
     try {
+      // 1. Fetch from Google Sheets
       const rows = await fetchSheetData('lives')
       const rawObjects = mapRowsToObjects(rows)
 
+      // 2. Parse and Prepare Data
       const sheetLives = rawObjects
         .map((o): LiveData | null => {
           const dateValue = findValue(o, ['data'])
@@ -279,13 +319,14 @@ export const googleSheetsService = {
             ),
             additionalSeats: Number(findValue(o, ['assentos']) || 0),
           }
+          // ID Generation based strictly on Date + Presenter
           return { ...liveObj, id: generateLiveId(liveObj) }
         })
         .filter((item): item is LiveData => item !== null)
         .filter((l) => l.revenue > 0 || l.sales > 0 || l.peakViewers > 0)
 
       const dbLives = sheetLives.map((l) => ({
-        id: l.id,
+        id: l.id!,
         date: l.date,
         weekday: l.weekday,
         peak_viewers: l.peakViewers,
@@ -299,6 +340,7 @@ export const googleSheetsService = {
         updated_at: new Date().toISOString(),
       }))
 
+      // 3. Upsert All (Update or Insert) - "Full Mirror" Update Part
       if (dbLives.length > 0) {
         const { error } = await supabase
           .from('lives')
@@ -306,9 +348,36 @@ export const googleSheetsService = {
         if (error) throw error
       }
 
-      return { added: dbLives.length }
+      // 4. Delete Missing (Cleanup) - "Full Mirror" Delete Part
+      // Get all live IDs currently in the DB
+      const { data: allDbLives, error: fetchError } = await supabase
+        .from('lives')
+        .select('id')
+
+      if (fetchError) throw fetchError
+
+      const sheetIds = new Set(dbLives.map((l) => l.id))
+      const idsToDelete = allDbLives
+        .filter((row) => !sheetIds.has(row.id))
+        .map((row) => row.id)
+
+      let removed = 0
+      if (idsToDelete.length > 0) {
+        const { error: deleteError } = await supabase
+          .from('lives')
+          .delete()
+          .in('id', idsToDelete)
+
+        if (deleteError) throw deleteError
+        removed = idsToDelete.length
+      }
+
+      return { added: dbLives.length, updated: 0, removed } // We don't distinguish added/updated in upsert easily without checking before
     } catch (error) {
       console.error('Error syncing lives:', error)
+      toast.error('Erro na sincronização de Lives', {
+        description: 'Verifique a conexão com a planilha.',
+      })
       throw error
     }
   },
@@ -324,7 +393,6 @@ export const googleSheetsService = {
       throw error
     }
 
-    // Map snake_case DB fields to camelCase CRMLead model
     return (data || []).map((l) => ({
       id: l.id,
       nomeCompleto: l.nome_completo || 'Sem Nome',

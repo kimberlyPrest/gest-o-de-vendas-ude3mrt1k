@@ -12,7 +12,7 @@ import {
   parseISO,
   differenceInDays,
 } from 'date-fns'
-import { Video, RefreshCw, AlertTriangle } from 'lucide-react'
+import { Video, RefreshCw, AlertTriangle, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 // New Charts
@@ -161,10 +161,15 @@ export default function Lives() {
             <h1 className="text-3xl font-bold tracking-tight text-white font-display">
               Dashboard de Lives
             </h1>
-            {loading && (
-              <span className="flex items-center text-[12px] text-[#27E39F] bg-[#27E39F]/10 px-2 py-0.5 rounded-full animate-pulse">
+            {loading ? (
+              <span className="flex items-center text-[12px] text-[#27E39F] bg-[#27E39F]/10 px-2 py-0.5 rounded-full animate-pulse border border-[#27E39F]/20">
                 <RefreshCw className="h-3 w-3 animate-spin mr-1.5" />
-                Atualizando...
+                Sincronizando...
+              </span>
+            ) : (
+              <span className="flex items-center text-[12px] text-gray-400 bg-gray-800/50 px-2 py-0.5 rounded-full border border-gray-700">
+                <CheckCircle2 className="h-3 w-3 mr-1.5 text-green-500" />
+                Atualizado
               </span>
             )}
           </div>

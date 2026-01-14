@@ -1594,6 +1594,9 @@ body {
 .border-none{
   border-style: none;
 }
+.border-\[\#27E39F\]\/20{
+  border-color: rgb(39 227 159 / 0.2);
+}
 .border-\[\#333333\]{
   --tw-border-opacity: 1;
   border-color: rgb(51 51 51 / var(--tw-border-opacity, 1));
@@ -1813,6 +1816,9 @@ body {
 .bg-gray-600{
   --tw-bg-opacity: 1;
   background-color: rgb(75 85 99 / var(--tw-bg-opacity, 1));
+}
+.bg-gray-800\/50{
+  background-color: rgb(31 41 55 / 0.5);
 }
 .bg-green-100{
   --tw-bg-opacity: 1;

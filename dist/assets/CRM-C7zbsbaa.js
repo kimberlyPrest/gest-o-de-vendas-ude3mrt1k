@@ -1,5 +1,5 @@
-import { _ as ArrowUp, a as parseISO, f as TriangleAlert, g as ChevronLeft, h as DollarSign, i as PopoverTrigger, l as isSameDay, m as Download, n as Popover, o as subDays, p as Funnel, r as PopoverContent, s as isBefore, t as Calendar, v as ArrowRightLeft, y as ArrowDown } from "./calendar-8bS1_cMB.js";
-import { $ as millisecondsInHour, A as calculateLeadValue, B as getRoundingMethod, Bt as Search, C as ptBR, D as DropdownMenuTrigger, E as DropdownMenuItem, Ft as cn, Ht as LoaderCircle, It as X, Jt as Calendar$1, M as formatDistanceToNow, N as format, Pt as toast, Q as constructFrom, Rt as Users, St as useIsMobile, T as DropdownMenuContent, Ut as Clock, V as differenceInDays, Vt as RefreshCw, W as constructNow, Wt as CircleAlert, Xt as cva, Yt as createLucideIcon, _ as DialogContent, a as SelectValue, at as Content, b as DialogHeader, bt as Button, cn as require_jsx_runtime, ct as Portal, dt as Trigger, fn as require_react, ft as WarningProvider, g as DialogClose, h as Dialog, hn as __toESM, i as SelectTrigger, it as Close, j as useCRMStore, k as COLUMNS, ln as useComposedRefs, lt as Root$1, n as SelectContent, nt as require_shim, on as createSlottable, ot as Description, pt as createDialogScope, q as normalizeDates, r as SelectItem, rn as useCallbackRef, s as Label, sn as createContextScope, st as Overlay, t as Select, tn as useLayoutEffect2, un as composeEventHandlers, ut as Title, vt as Primitive, w as DropdownMenu, x as DialogTitle, xt as buttonVariants, y as DialogFooter, yt as Input, zt as TrendingUp } from "./index-BMjPvTWj.js";
+import { _ as ChevronLeft, a as parseISO, b as ArrowDown, f as TriangleAlert, g as CircleCheck, h as DollarSign, i as PopoverTrigger, l as isSameDay, m as Download, n as Popover, o as subDays, p as Funnel, r as PopoverContent, s as isBefore, t as Calendar, v as ArrowUp, y as ArrowRightLeft } from "./calendar-Cft_V2TF.js";
+import { $ as millisecondsInHour, A as calculateLeadValue, B as getRoundingMethod, Bt as Search, C as ptBR, D as DropdownMenuTrigger, E as DropdownMenuItem, Ft as cn, Ht as LoaderCircle, It as X, Jt as Calendar$1, M as formatDistanceToNow, N as format, Pt as toast, Q as constructFrom, Rt as Users, St as useIsMobile, T as DropdownMenuContent, Ut as Clock, V as differenceInDays, Vt as RefreshCw, W as constructNow, Wt as CircleAlert, Xt as cva, Yt as createLucideIcon, _ as DialogContent, a as SelectValue, at as Content, b as DialogHeader, bt as Button, cn as require_jsx_runtime, ct as Portal, dt as Trigger, fn as require_react, ft as WarningProvider, g as DialogClose, h as Dialog, hn as __toESM, i as SelectTrigger, it as Close, j as useCRMStore, k as COLUMNS, ln as useComposedRefs, lt as Root$1, n as SelectContent, nt as require_shim, on as createSlottable, ot as Description, pt as createDialogScope, q as normalizeDates, r as SelectItem, rn as useCallbackRef, s as Label, sn as createContextScope, st as Overlay, t as Select, tn as useLayoutEffect2, un as composeEventHandlers, ut as Title, vt as Primitive, w as DropdownMenu, x as DialogTitle, xt as buttonVariants, y as DialogFooter, yt as Input, zt as TrendingUp } from "./index-c46Ny26c.js";
 var Activity = createLucideIcon("activity", [["path", {
 	d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
 	key: "169zse"
@@ -38,15 +38,6 @@ var CircleCheckBig = createLucideIcon("circle-check-big", [["path", {
 }], ["path", {
 	d: "m9 11 3 3L22 4",
 	key: "1pflzl"
-}]]);
-var CircleCheck = createLucideIcon("circle-check", [["circle", {
-	cx: "12",
-	cy: "12",
-	r: "10",
-	key: "1mglay"
-}], ["path", {
-	d: "m9 12 2 2 4-4",
-	key: "dzmm74"
 }]]);
 var Globe = createLucideIcon("globe", [
 	["circle", {
@@ -2030,4 +2021,4 @@ function CRM() {
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-SaZ0Yzl7.js.map
+//# sourceMappingURL=CRM-C7zbsbaa.js.map

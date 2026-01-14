@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-Bomrhhar.js","assets/calendar-8bS1_cMB.js","assets/CRM-SaZ0Yzl7.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-UydpXXeA.js","assets/calendar-Cft_V2TF.js","assets/CRM-C7zbsbaa.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -34144,7 +34144,8 @@ var generateId = (item) => {
 	return Math.abs(hash).toString(16);
 };
 var generateLiveId = (item) => {
-	const seed = `${item.date}-${item.presenter}-${item.revenue}`.trim().toLowerCase();
+	const normalizedPresenter = (item.presenter || "Desconhecido").trim().toLowerCase();
+	const seed = `${item.date}-${normalizedPresenter}`;
 	let hash = 0;
 	for (let i = 0; i < seed.length; i++) {
 		const char = seed.charCodeAt(i);
@@ -34190,6 +34191,28 @@ const googleSheetsService = {
 			console.error("Connection check failed:", error);
 			return false;
 		}
+	},
+	async addLiveToSheet(live) {
+		console.log("Adding live to sheet (mock):", live);
+		if (!live.date || !live.presenter) throw new Error("Dados incompletos");
+		const liveData = live;
+		const id = generateLiveId(liveData);
+		const { error } = await supabase.from("lives").upsert({
+			id,
+			date: liveData.date,
+			weekday: liveData.weekday,
+			peak_viewers: liveData.peakViewers,
+			retained_viewers: liveData.retainedViewers,
+			sales: liveData.sales,
+			presenter: liveData.presenter,
+			conversion_rate: liveData.conversionRate,
+			retention_rate: liveData.retentionRate,
+			revenue: liveData.revenue,
+			additional_seats: liveData.additionalSeats,
+			updated_at: (/* @__PURE__ */ new Date()).toISOString(),
+			created_at: (/* @__PURE__ */ new Date()).toISOString()
+		});
+		if (error) throw error;
 	},
 	async syncLeads() {
 		try {
@@ -34326,9 +34349,24 @@ const googleSheetsService = {
 				const { error } = await supabase.from("lives").upsert(dbLives, { onConflict: "id" });
 				if (error) throw error;
 			}
-			return { added: dbLives.length };
+			const { data: allDbLives, error: fetchError } = await supabase.from("lives").select("id");
+			if (fetchError) throw fetchError;
+			const sheetIds = new Set(dbLives.map((l) => l.id));
+			const idsToDelete = allDbLives.filter((row) => !sheetIds.has(row.id)).map((row) => row.id);
+			let removed = 0;
+			if (idsToDelete.length > 0) {
+				const { error: deleteError } = await supabase.from("lives").delete().in("id", idsToDelete);
+				if (deleteError) throw deleteError;
+				removed = idsToDelete.length;
+			}
+			return {
+				added: dbLives.length,
+				updated: 0,
+				removed
+			};
 		} catch (error) {
 			console.error("Error syncing lives:", error);
+			toast.error("Erro na sincronização de Lives", { description: "Verifique a conexão com a planilha." });
 			throw error;
 		}
 	},
@@ -36475,11 +36513,13 @@ const useLivesStore = create((set, get$1) => ({
 			error: false
 		});
 		try {
-			await googleSheetsService.syncLives();
+			const stats = await googleSheetsService.syncLives();
+			if (stats.removed > 0) toast.info("Sincronização de Lives", { description: `${stats.removed} registros antigos/inválidos removidos.` });
 			set({ allData: await googleSheetsService.fetchLivesFromDB() });
 		} catch (error) {
 			console.error(error);
 			set({ error: true });
+			toast.error("Erro ao carregar Lives", { description: "Não foi possível sincronizar com a base de dados." });
 		} finally {
 			set({ loading: false });
 		}
@@ -36488,8 +36528,10 @@ const useLivesStore = create((set, get$1) => ({
 		try {
 			await googleSheetsService.addLiveToSheet(live);
 			await get$1().fetchData();
+			toast.success("Live adicionada", { description: "Os dados foram salvos com sucesso." });
 		} catch (err) {
 			console.error(err);
+			toast.error("Erro ao adicionar", { description: "Verifique os dados e tente novamente." });
 			throw err;
 		}
 	}
@@ -40657,8 +40699,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-Bomrhhar.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-SaZ0Yzl7.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-UydpXXeA.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-C7zbsbaa.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -40718,4 +40760,4 @@ var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 export { millisecondsInHour as $, Presence as $t, calculateLeadValue as A, Content$1 as At, getRoundingMethod as B, Search as Bt, ptBR as C, Slot$2 as Ct, DropdownMenuTrigger as D, TooltipTrigger as Dt, DropdownMenuItem as E, TooltipProvider as Et, getISOWeek as F, cn as Ft, differenceInCalendarDays as G, ChevronRight as Gt, differenceInCalendarMonths as H, LoaderCircle as Ht, enUS as I, X as It, startOfISOWeek as J, Calendar as Jt, startOfDay as K, ChevronDown as Kt, startOfYear as L, Video as Lt, formatDistanceToNow as M, createPopperScope as Mt, format as N, useId as Nt, useLivesStore as O, Anchor as Ot, getWeek as P, toast as Pt, constructFrom as Q, useControllableState as Qt, endOfMonth as R, Users as Rt, DialogTrigger as S, useIsMobile as St, DropdownMenuContent as T, TooltipContent as Tt, isDate as U, Clock as Ut, differenceInDays as V, RefreshCw as Vt, constructNow as W, CircleAlert as Wt, getDefaultOptions as X, cva as Xt, startOfWeek as Y, createLucideIcon as Yt, toDate as Z, clsx_default as Zt, DialogContent as _, FocusScope as _t, SelectValue as a, createSlot as an, Content as at, DialogHeader as b, Button as bt, Command as c, require_jsx_runtime as cn, Portal$3 as ct, CommandInput as d, useToast as dn, Trigger$2 as dt, Portal as en, millisecondsInMinute as et, CommandItem as f, require_react as fn, WarningProvider as ft, DialogClose as g, useFocusGuards as gt, Dialog as h, __toESM as hn, Combination_default as ht, SelectTrigger as i, Primitive as in, Close as it, useCRMStore as j, Root2$2 as jt, COLUMNS as k, Arrow as kt, CommandEmpty as l, useComposedRefs as ln, Root$3 as lt, CommandSeparator as m, __export as mn, hideOthers as mt, SelectContent as n, DismissableLayer as nn, require_shim as nt, Switch as o, createSlottable as on, Description as ot, CommandList as p, __commonJSMin as pn, createDialogScope as pt, normalizeDates as q, Check as qt, SelectItem as r, useCallbackRef as rn, Skeleton as rt, Label as s, createContextScope as sn, Overlay as st, Select as t, useLayoutEffect2 as tn, googleSheetsService as tt, CommandGroup as u, composeEventHandlers as un, Title as ut, DialogDescription as v, Primitive$1 as vt, DropdownMenu as w, Tooltip as wt, DialogTitle as x, buttonVariants as xt, DialogFooter as y, Input as yt, endOfDay as z, TrendingUp as zt };
 
-//# sourceMappingURL=index-BMjPvTWj.js.map
+//# sourceMappingURL=index-c46Ny26c.js.map
