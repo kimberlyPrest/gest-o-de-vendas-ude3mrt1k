@@ -3942,9 +3942,6 @@ body {
   .sm\:justify-end{
     justify-content: flex-end;
   }
-  .sm\:gap-2{
-    gap: 0.5rem;
-  }
   .sm\:gap-2\.5{
     gap: 0.625rem;
   }
