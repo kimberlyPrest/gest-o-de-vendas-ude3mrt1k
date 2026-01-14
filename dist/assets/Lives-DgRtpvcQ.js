@@ -1,5 +1,5 @@
-import { a as parseISO, c as startOfMonth, d as addDays, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, m as ArrowUp, n as Popover, o as subDays, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-DRFsrAtP.js";
-import { Bt as Search, C as DialogDescription, D as DialogTrigger, E as DialogTitle, G as differenceInDays, Gt as ChevronDown, H as endOfMonth, Ht as LoaderCircle, It as cn, Jt as createLucideIcon, Kt as Check, L as format, Lt as Video, N as useLivesStore, O as ptBR, Ot as Slot, Rt as Users, S as DialogContent, St as Separator, T as DialogHeader, Tt as Button, U as endOfDay, Ut as ChevronUp, Vt as RefreshCw, X as startOfDay, Xt as clsx_default, _ as CommandItem, a as CardTitle, at as googleSheetsService, b as Dialog, c as SelectItem, d as Switch, dn as require_react, f as Label$1, fn as __commonJSMin, g as CommandInput, h as CommandGroup, i as CardHeader, l as SelectTrigger, m as CommandEmpty, mn as __toESM, n as CardContent, o as Select, p as Command, pn as __export, qt as Calendar, r as CardDescription, s as SelectContent, sn as require_jsx_runtime, st as Skeleton, t as Card, tt as toDate, u as SelectValue, un as useToast, v as CommandList, w as DialogFooter, wt as Input, y as CommandSeparator, zt as TrendingUp } from "./index-ChSeICpI.js";
+import { a as parseISO, c as startOfMonth, d as addDays, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, m as ArrowUp, n as Popover, o as subDays, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-CiErFMuI.js";
+import { Bt as LoaderCircle, C as DialogDescription, Ct as Input, D as DialogTrigger, Dt as Slot, E as DialogTitle, Ft as cn, G as differenceInDays, Gt as Calendar, H as endOfMonth, It as Video, Jt as clsx_default, Kt as createLucideIcon, L as format, Lt as Users, N as useLivesStore, O as ptBR, Rt as TrendingUp, S as DialogContent, T as DialogHeader, U as endOfDay, Ut as ChevronDown, Vt as ChevronUp, Wt as Check, X as startOfDay, _ as CommandItem, a as CardTitle, an as require_jsx_runtime, at as googleSheetsService, b as Dialog, c as SelectItem, cn as useToast, d as Switch, dn as __export, f as Label$1, fn as __toESM, g as CommandInput, h as CommandGroup, i as CardHeader, l as SelectTrigger, ln as require_react, m as CommandEmpty, n as CardContent, o as Select, p as Command, r as CardDescription, s as SelectContent, st as Skeleton, t as Card, tt as toDate, u as SelectValue, un as __commonJSMin, v as CommandList, w as DialogFooter, wt as Button, y as CommandSeparator, zt as RefreshCw } from "./index-Hz8WIHMQ.js";
 var ArrowDown = createLucideIcon("arrow-down", [["path", {
 	d: "M12 5v14",
 	key: "s699le"
@@ -99,6 +99,10 @@ var FunnelX = createLucideIcon("funnel-x", [
 		key: "m0lwru"
 	}]
 ]);
+var Funnel = createLucideIcon("funnel", [["path", {
+	d: "M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z",
+	key: "sc7q7i"
+}]]);
 var Minus = createLucideIcon("minus", [["path", {
 	d: "M5 12h14",
 	key: "1ays0h"
@@ -5882,16 +5886,9 @@ var DATE_PRESETS = [
 		value: "currentMonth"
 	}
 ];
-function LiveFilters({ presenters, onApply, onClear, loading, initialFilters }) {
-	const [date$4, setDate] = (0, import_react.useState)(initialFilters?.dateRange);
-	const [selectedPresenters, setSelectedPresenters] = (0, import_react.useState)(initialFilters?.presenters || []);
-	const [selectedWeekdays, setSelectedWeekdays] = (0, import_react.useState)(initialFilters?.weekdays || []);
-	const [comparisonEnabled, setComparisonEnabled] = (0, import_react.useState)(initialFilters?.comparisonEnabled || false);
+function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 	const [openPresenters, setOpenPresenters] = (0, import_react.useState)(false);
 	const [selectedPreset, setSelectedPreset] = (0, import_react.useState)("30days");
-	(0, import_react.useEffect)(() => {
-		if (!initialFilters) handlePresetChange("30days");
-	}, []);
 	const handlePresetChange = (value) => {
 		setSelectedPreset(value);
 		const today = /* @__PURE__ */ new Date();
@@ -5913,201 +5910,198 @@ function LiveFilters({ presenters, onApply, onClear, loading, initialFilters }) 
 				break;
 			default: return;
 		}
-		if (from && to) setDate({
-			from,
-			to
-		});
-	};
-	const handleApply = () => {
-		onApply({
-			dateRange: date$4,
-			presenters: selectedPresenters,
-			weekdays: selectedWeekdays,
-			comparisonEnabled: comparisonEnabled && !!date$4?.from && !!date$4?.to
+		if (from && to) onFilterChange({
+			...filters,
+			dateRange: {
+				from,
+				to
+			}
 		});
 	};
 	const handleClear = () => {
-		handlePresetChange("30days");
-		setSelectedPresenters([]);
-		setSelectedWeekdays([]);
-		setComparisonEnabled(false);
-		onClear();
+		setSelectedPreset("30days");
+		onFilterChange({
+			dateRange: {
+				from: subDays(/* @__PURE__ */ new Date(), 30),
+				to: /* @__PURE__ */ new Date()
+			},
+			presenters: [],
+			weekdays: [],
+			comparisonEnabled: false
+		});
 	};
 	const togglePresenter = (presenter) => {
-		setSelectedPresenters((prev) => prev.includes(presenter) ? prev.filter((p) => p !== presenter) : [...prev, presenter]);
+		const current = filters.presenters;
+		const newPresenters = current.includes(presenter) ? current.filter((p) => p !== presenter) : [...current, presenter];
+		onFilterChange({
+			...filters,
+			presenters: newPresenters
+		});
 	};
 	const toggleWeekday = (value) => {
-		setSelectedWeekdays((prev) => prev.includes(value) ? prev.filter((d) => d !== value) : [...prev, value]);
+		const current = filters.weekdays;
+		const newWeekdays = current.includes(value) ? current.filter((d) => d !== value) : [...current, value];
+		onFilterChange({
+			...filters,
+			weekdays: newWeekdays
+		});
 	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "mb-6 space-y-4 rounded-xl border bg-card p-5 shadow-sm",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "flex flex-col gap-6 md:flex-row md:items-start",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "grid flex-1 gap-4 md:grid-cols-2 lg:grid-cols-4",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-col gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-							className: "text-xs font-semibold text-muted-foreground uppercase",
-							children: "Período Rápido"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
-							value: selectedPreset,
-							onValueChange: handlePresetChange,
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, { placeholder: "Selecione..." }) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, { children: [DATE_PRESETS.map((preset) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-								value: preset.value,
-								children: preset.label
-							}, preset.value)), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-								value: "custom",
-								children: "Personalizado"
-							})] })]
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-col gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-							className: "text-xs font-semibold text-muted-foreground uppercase",
-							children: "Intervalo de Datas"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
-							asChild: true,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-								variant: "outline",
-								className: cn("w-full justify-start text-left font-normal truncate", !date$4 && "text-muted-foreground"),
-								onClick: () => setSelectedPreset("custom"),
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "mr-2 h-4 w-4 shrink-0" }), date$4?.from ? date$4.to ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "truncate",
-									children: [
-										format(date$4.from, "dd/MM/yy"),
-										" -",
-										" ",
-										format(date$4.to, "dd/MM/yy")
-									]
-								}) : format(date$4.from, "dd/MM/yy") : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecione datas" })]
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
-							className: "w-auto p-0",
-							align: "start",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar$1, {
-								initialFocus: true,
-								mode: "range",
-								defaultMonth: date$4?.from,
-								selected: date$4,
-								onSelect: (range$5) => {
-									setDate(range$5);
-									setSelectedPreset("custom");
-								},
-								numberOfMonths: 2,
-								locale: ptBR
-							})
-						})] })]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-col gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-							className: "text-xs font-semibold text-muted-foreground uppercase",
-							children: "Apresentadores"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, {
-							open: openPresenters,
-							onOpenChange: setOpenPresenters,
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
-								asChild: true,
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-									variant: "outline",
-									role: "combobox",
-									"aria-expanded": openPresenters,
-									className: "w-full justify-between",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "truncate",
-										children: selectedPresenters.length === 0 ? "Todos" : `${selectedPresenters.length} selecionado(s)`
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronsUpDown, { className: "ml-2 h-4 w-4 shrink-0 opacity-50" })]
-								})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
-								className: "w-[220px] p-0",
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Command, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandInput, { placeholder: "Buscar apresentador..." }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandList, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandEmpty, { children: "Nenhum apresentador." }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandGroup, { children: [
-									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
-										onSelect: () => {
-											if (selectedPresenters.length === presenters.length) setSelectedPresenters([]);
-											else setSelectedPresenters([...presenters]);
-										},
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-											className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", selectedPresenters.length === presenters.length && presenters.length > 0 ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecionar Todos" })]
-									}),
-									/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandSeparator, { className: "my-1" }),
-									presenters.map((presenter) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
-										value: presenter,
-										onSelect: () => togglePresenter(presenter),
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-											className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", selectedPresenters.includes(presenter) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
-										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: presenter })]
-									}, presenter))
-								] })] })] })
-							})]
-						})]
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-col gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-							className: "text-xs font-semibold text-muted-foreground uppercase",
-							children: "Dias da Semana"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "flex flex-wrap gap-1",
-							children: WEEKDAYS.map((day) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
-								onClick: () => toggleWeekday(day.value),
-								className: cn("px-2 py-1 rounded text-[10px] font-medium transition-all border", selectedWeekdays.includes(day.value) ? "bg-primary text-primary-foreground border-primary" : "bg-background hover:bg-muted text-muted-foreground border-border"),
-								children: day.label
-							}, day.value))
-						})]
+	const hasActiveFilters = filters.presenters.length > 0 || filters.weekdays.length > 0 || filters.comparisonEnabled;
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+		className: "bg-white border rounded-xl p-2 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar shadow-sm",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex items-center gap-2 px-3 text-muted-foreground shrink-0 border-r pr-4 mr-2",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Funnel, { className: "w-5 h-5" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-sm font-medium",
+					children: "Filtros:"
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+				value: selectedPreset,
+				onValueChange: handlePresetChange,
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
+					className: "h-10 w-[140px] border-input shrink-0",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, { placeholder: "Período" })
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, { children: [DATE_PRESETS.map((preset) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+					value: preset.value,
+					children: preset.label
+				}, preset.value)), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+					value: "custom",
+					children: "Personalizado"
+				})] })]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
+				asChild: true,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+					variant: "outline",
+					className: cn("h-10 justify-start text-left font-normal shrink-0", !filters.dateRange && "text-muted-foreground"),
+					onClick: () => setSelectedPreset("custom"),
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "mr-2 h-4 w-4" }), filters.dateRange?.from ? filters.dateRange.to ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
+						format(filters.dateRange.from, "dd/MM/yy"),
+						" -",
+						" ",
+						format(filters.dateRange.to, "dd/MM/yy")
+					] }) : format(filters.dateRange.from, "dd/MM/yy") : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecione datas" })]
+				})
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
+				className: "w-auto p-0",
+				align: "start",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar$1, {
+					initialFocus: true,
+					mode: "range",
+					defaultMonth: filters.dateRange?.from,
+					selected: filters.dateRange,
+					onSelect: (range$5) => {
+						onFilterChange({
+							...filters,
+							dateRange: range$5
+						});
+						setSelectedPreset("custom");
+					},
+					numberOfMonths: 2,
+					locale: ptBR
+				})
+			})] }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, {
+				open: openPresenters,
+				onOpenChange: setOpenPresenters,
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
+					asChild: true,
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+						variant: "outline",
+						role: "combobox",
+						"aria-expanded": openPresenters,
+						className: "h-10 justify-between shrink-0 min-w-[150px]",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "truncate",
+							children: filters.presenters.length === 0 ? "Todos os Hosts" : `${filters.presenters.length} selecionado(s)`
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronsUpDown, { className: "ml-2 h-4 w-4 shrink-0 opacity-50" })]
 					})
-				]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex flex-col gap-4 border-l pl-6 md:w-[240px]",
-				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center justify-between gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-							className: "text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70",
-							children: "Comparar Período"
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Switch, {
-							checked: comparisonEnabled,
-							onCheckedChange: setComparisonEnabled,
-							disabled: !date$4?.from || !date$4?.to
-						})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
+					className: "w-[220px] p-0",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Command, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandInput, { placeholder: "Buscar apresentador..." }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandList, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandEmpty, { children: "Nenhum apresentador." }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandGroup, { children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
+							onSelect: () => {
+								if (filters.presenters.length === presenters.length) onFilterChange({
+									...filters,
+									presenters: []
+								});
+								else onFilterChange({
+									...filters,
+									presenters: [...presenters]
+								});
+							},
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.length === presenters.length && presenters.length > 0 ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecionar Todos" })]
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandSeparator, { className: "my-1" }),
+						presenters.map((presenter) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
+							value: presenter,
+							onSelect: () => togglePresenter(presenter),
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+								className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.includes(presenter) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: presenter })]
+						}, presenter))
+					] })] })] })
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
+				asChild: true,
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+					variant: "outline",
+					role: "combobox",
+					className: "h-10 justify-between shrink-0 min-w-[150px]",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "truncate",
+						children: filters.weekdays.length === 0 ? "Dia da Semana" : `${filters.weekdays.length} dia(s)`
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronsUpDown, { className: "ml-2 h-4 w-4 shrink-0 opacity-50" })]
+				})
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
+				className: "w-[200px] p-0",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Command, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandList, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandGroup, { children: WEEKDAYS.map((day) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
+					value: day.value,
+					onSelect: () => toggleWeekday(day.value),
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.weekdays.includes(day.value) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: day.value })]
+				}, day.value)) }) }) })
+			})] }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex items-center gap-3 shrink-0 cursor-pointer group px-2",
+				onClick: () => onFilterChange({
+					...filters,
+					comparisonEnabled: !filters.comparisonEnabled
+				}),
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Switch, {
+					checked: filters.comparisonEnabled,
+					onCheckedChange: (checked) => onFilterChange({
+						...filters,
+						comparisonEnabled: checked
 					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Separator, {}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-col gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-							onClick: handleApply,
-							disabled: loading || date$4?.from && date$4?.to && date$4.from > date$4.to,
-							className: "w-full",
-							children: [loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, { className: "mr-2 h-4 w-4 animate-spin" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, { className: "mr-2 h-4 w-4" }), "Aplicar Filtros"]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
-							onClick: handleClear,
-							variant: "ghost",
-							disabled: loading,
-							className: "w-full",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FunnelX, { className: "mr-2 h-4 w-4" }), "Limpar Filtros"]
-						})]
-					})
-				]
-			})]
-		}), comparisonEnabled && date$4?.from && date$4?.to && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "flex items-center gap-2 rounded-lg bg-blue-50 p-2 text-sm text-blue-700",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRightLeft, { className: "h-4 w-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", { children: [
-				"Comparando",
-				" ",
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("strong", { children: [
-					format(date$4.from, "dd/MM"),
-					" - ",
-					format(date$4.to, "dd/MM")
-				] }),
-				" ",
-				"com período anterior equivalente"
-			] })]
-		})]
+					disabled: !filters.dateRange?.from || !filters.dateRange?.to
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRightLeft, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "text-xs font-medium",
+						children: "Comparar"
+					})]
+				})]
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "flex-1" }),
+			hasActiveFilters && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+				onClick: handleClear,
+				className: "flex items-center gap-1.5 px-3 py-1.5 text-muted-foreground hover:text-red-500 hover:bg-red-50 rounded-lg transition-all shrink-0",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FunnelX, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-xs font-medium",
+					children: "Limpar Filtros"
+				})]
+			})
+		]
 	});
 }
 function LiveKPIs({ currentData, previousData, comparisonEnabled, loading }) {
@@ -28563,13 +28557,9 @@ function Lives() {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LiveFilters, {
 				presenters: uniquePresenters,
-				onApply: setFilters,
-				onClear: () => setFilters((prev) => ({
-					...prev,
-					comparisonEnabled: false
-				})),
-				loading,
-				initialFilters: filters
+				filters,
+				onFilterChange: setFilters,
+				loading
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LiveKPIs, {
 				currentData,
@@ -28615,4 +28605,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-DDOhWFc4.js.map
+//# sourceMappingURL=Lives-DgRtpvcQ.js.map

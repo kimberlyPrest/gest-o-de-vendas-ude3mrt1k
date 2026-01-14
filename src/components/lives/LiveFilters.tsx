@@ -1,10 +1,4 @@
-import {
-  format,
-  subMonths,
-  startOfMonth,
-  endOfMonth,
-  subDays,
-} from 'date-fns'
+import { format, subMonths, startOfMonth, endOfMonth, subDays } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import {
   Calendar as CalendarIcon,
@@ -175,7 +169,7 @@ export function LiveFilters({
             variant="outline"
             className={cn(
               'h-10 justify-start text-left font-normal shrink-0',
-              !filters.dateRange && 'text-muted-foreground'
+              !filters.dateRange && 'text-muted-foreground',
             )}
             onClick={() => setSelectedPreset('custom')}
           >
@@ -238,7 +232,10 @@ export function LiveFilters({
                     if (filters.presenters.length === presenters.length) {
                       onFilterChange({ ...filters, presenters: [] })
                     } else {
-                      onFilterChange({ ...filters, presenters: [...presenters] })
+                      onFilterChange({
+                        ...filters,
+                        presenters: [...presenters],
+                      })
                     }
                   }}
                 >
@@ -248,7 +245,7 @@ export function LiveFilters({
                       filters.presenters.length === presenters.length &&
                         presenters.length > 0
                         ? 'bg-primary text-primary-foreground'
-                        : 'opacity-50 [&_svg]:invisible'
+                        : 'opacity-50 [&_svg]:invisible',
                     )}
                   >
                     <Check className={cn('h-4 w-4')} />
@@ -267,7 +264,7 @@ export function LiveFilters({
                         'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                         filters.presenters.includes(presenter)
                           ? 'bg-primary text-primary-foreground'
-                          : 'opacity-50 [&_svg]:invisible'
+                          : 'opacity-50 [&_svg]:invisible',
                       )}
                     >
                       <Check className={cn('h-4 w-4')} />
@@ -312,7 +309,7 @@ export function LiveFilters({
                         'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                         filters.weekdays.includes(day.value)
                           ? 'bg-primary text-primary-foreground'
-                          : 'opacity-50 [&_svg]:invisible'
+                          : 'opacity-50 [&_svg]:invisible',
                       )}
                     >
                       <Check className={cn('h-4 w-4')} />
@@ -327,10 +324,20 @@ export function LiveFilters({
       </Popover>
 
       {/* Comparison Toggle */}
-      <div className="flex items-center gap-3 shrink-0 cursor-pointer group px-2" onClick={() => onFilterChange({ ...filters, comparisonEnabled: !filters.comparisonEnabled })}>
+      <div
+        className="flex items-center gap-3 shrink-0 cursor-pointer group px-2"
+        onClick={() =>
+          onFilterChange({
+            ...filters,
+            comparisonEnabled: !filters.comparisonEnabled,
+          })
+        }
+      >
         <Switch
           checked={filters.comparisonEnabled}
-          onCheckedChange={(checked) => onFilterChange({ ...filters, comparisonEnabled: checked })}
+          onCheckedChange={(checked) =>
+            onFilterChange({ ...filters, comparisonEnabled: checked })
+          }
           disabled={!filters.dateRange?.from || !filters.dateRange?.to}
         />
         <div className="flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors">
