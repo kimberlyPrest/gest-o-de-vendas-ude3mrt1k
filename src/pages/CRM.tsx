@@ -5,30 +5,34 @@ import { CRMMetrics } from '@/components/crm/CRMMetrics'
 import { CRMBoard } from '@/components/crm/CRMBoard'
 import { ExportButton } from '@/components/common/ExportButton'
 import { formatLeadsForExport } from '@/utils/exportUtils'
-import { Loader2, Download, RefreshCw } from 'lucide-react'
+import { Loader2, Download, RefreshCw, AlertTriangle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
 export default function CRM() {
   const { fetchLeads, loading, error, leads, filteredLeads } = useCRMStore()
 
   useEffect(() => {
-    // Initial fetch, maybe cached or quick DB load
+    // Fetches data on mount (cached or fresh from DB)
     fetchLeads()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   if (error) {
     return (
-      <div className="flex h-full flex-col items-center justify-center gap-4 bg-background">
-        <span className="material-symbols-outlined text-[48px] text-[#FF453A]">
-          error
-        </span>
+      <div className="flex h-full flex-col items-center justify-center gap-4 bg-background animate-fade-in">
+        <div className="rounded-full bg-destructive/10 p-6 mb-2">
+          <AlertTriangle className="h-12 w-12 text-[#FF453A]" />
+        </div>
         <h2 className="text-xl font-bold font-display text-white">
           Erro ao carregar CRM
         </h2>
+        <p className="text-gray-400 text-sm max-w-[300px] text-center">
+          Não foi possível recuperar os dados dos leads. Verifique sua conexão e
+          tente novamente.
+        </p>
         <button
           onClick={() => fetchLeads(true)}
-          className="bg-[#D9B979] hover:bg-[#D9B979]/90 text-black px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)]"
+          className="bg-[#D9B979] hover:bg-[#D9B979]/90 text-black px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)] mt-2"
         >
           <RefreshCw className="h-4 w-4" />
           Tentar Novamente
@@ -50,7 +54,7 @@ export default function CRM() {
               Gerencie seus leads e acompanhe o funil de vendas.
             </p>
             {loading && (
-              <span className="flex items-center text-[12px] text-[#D9B979] bg-[#D9B979]/10 px-2 py-0.5 rounded-full animate-pulse">
+              <span className="flex items-center text-[12px] text-[#D9B979] bg-[#D9B979]/10 px-2 py-0.5 rounded-full animate-pulse border border-[#D9B979]/20">
                 <Loader2 className="h-3 w-3 animate-spin mr-1.5" />
                 Sincronizando...
               </span>

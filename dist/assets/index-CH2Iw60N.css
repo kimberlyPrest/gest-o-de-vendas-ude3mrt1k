@@ -1785,6 +1785,9 @@ body {
 .bg-destructive{
   background-color: hsl(var(--destructive));
 }
+.bg-destructive\/10{
+  background-color: hsl(var(--destructive) / 0.1);
+}
 .bg-emerald-50{
   --tw-bg-opacity: 1;
   background-color: rgb(236 253 245 / var(--tw-bg-opacity, 1));
@@ -2221,9 +2224,6 @@ body {
 }
 .text-\[32px\]{
   font-size: 32px;
-}
-.text-\[48px\]{
-  font-size: 48px;
 }
 .text-\[8px\]{
   font-size: 8px;

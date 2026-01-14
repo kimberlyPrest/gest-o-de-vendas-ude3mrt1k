@@ -1,5 +1,5 @@
-import { toast } from '@/hooks/use-toast'
 import { supabase } from '@/lib/supabase/client'
+import { CRMLead } from '@/stores/crmStore'
 
 export interface Lead {
   id: string
@@ -164,7 +164,7 @@ export const googleSheetsService = {
           }
         })
 
-      // 2. Fetch existing IDs from Supabase
+      // 2. Fetch existing IDs from Supabase to optimize updates
       const { data: existingLeads, error: fetchError } = await supabase
         .from('leads')
         .select('id')
@@ -177,7 +177,8 @@ export const googleSheetsService = {
 
       for (const lead of sheetLeads) {
         if (existingIds.has(lead.id)) {
-          // Exclude status and dates from update to preserve CRM state
+          // Prepare update payload (snake_case for DB)
+          // Exclude status and tracking dates to preserve CRM state
           leadsToUpdate.push({
             id: lead.id,
             nome_completo: lead.nomeCompleto,
@@ -188,6 +189,7 @@ export const googleSheetsService = {
             updated_at: new Date().toISOString(),
           })
         } else {
+          // Prepare insert payload (snake_case for DB)
           newLeads.push({
             id: lead.id,
             nome_completo: lead.nomeCompleto,
@@ -196,28 +198,36 @@ export const googleSheetsService = {
             assentos_adicionais: lead.assentosAdicionais,
             origem: lead.origem,
             status: lead.status,
-            data_captacao: lead.dataCaptacao || new Date().toISOString(), // Use current time only if new
+            data_captacao: lead.dataCaptacao || new Date().toISOString(),
+            last_interaction: lead.dataCaptacao || new Date().toISOString(),
             updated_at: new Date().toISOString(),
             created_at: new Date().toISOString(),
           })
         }
       }
 
-      // 3. Perform Bulk Insert for New
+      // 3. Perform Bulk Insert for New Leads
       if (newLeads.length > 0) {
         const { error: insertError } = await supabase
           .from('leads')
           .insert(newLeads)
-        if (insertError) throw insertError
+        if (insertError) {
+          console.error('Error inserting new leads:', insertError)
+          throw insertError
+        }
       }
 
-      // 4. Perform Updates (One by one or bulk upsert with ignoreDuplicates? Upsert overwrites)
-      // Since we want to update specific fields for existing, we use upsert but carefully
+      // 4. Perform Updates
+      // We use upsert for batch processing, but careful not to overwrite status if not desired.
+      // Since leadsToUpdate only contains safe fields, it's fine.
       if (leadsToUpdate.length > 0) {
         const { error: updateError } = await supabase
           .from('leads')
           .upsert(leadsToUpdate, { onConflict: 'id' })
-        if (updateError) throw updateError
+        if (updateError) {
+          console.error('Error updating existing leads:', updateError)
+          throw updateError
+        }
       }
 
       return { added: newLeads.length, updated: leadsToUpdate.length }
@@ -272,9 +282,8 @@ export const googleSheetsService = {
           return { ...liveObj, id: generateLiveId(liveObj) }
         })
         .filter((item): item is LiveData => item !== null)
-        .filter((l) => l.revenue > 0 || l.sales > 0 || l.peakViewers > 0) // Filter empty rows
+        .filter((l) => l.revenue > 0 || l.sales > 0 || l.peakViewers > 0)
 
-      // Upsert Lives (Metrics should update if sheet changes)
       const dbLives = sheetLives.map((l) => ({
         id: l.id,
         date: l.date,
@@ -304,28 +313,33 @@ export const googleSheetsService = {
     }
   },
 
-  async fetchLeadsFromDB(): Promise<any[]> {
+  async fetchLeadsFromDB(): Promise<Partial<CRMLead>[]> {
     const { data, error } = await supabase
       .from('leads')
       .select('*')
       .order('data_captacao', { ascending: false })
 
-    if (error) throw error
+    if (error) {
+      console.error('Failed to fetch leads from DB:', error)
+      throw error
+    }
 
-    return data.map((l) => ({
+    // Map snake_case DB fields to camelCase CRMLead model
+    return (data || []).map((l) => ({
       id: l.id,
-      nomeCompleto: l.nome_completo,
-      email: l.email,
-      telefone: l.telefone,
-      assentosAdicionais: l.assentos_adicionais,
-      origem: l.origem,
-      status: l.status,
-      dataCaptacao: l.data_captacao,
-      lastInteraction: l.last_interaction,
-      valorEstimado: l.valor_estimado,
-      notes: l.notes,
-      history: l.history,
-      followUp: l.follow_up,
+      nomeCompleto: l.nome_completo || 'Sem Nome',
+      email: l.email || '',
+      telefone: l.telefone || '',
+      assentosAdicionais: l.assentos_adicionais || 0,
+      origem: l.origem || 'Desconhecido',
+      status: l.status || 'Capturado',
+      dataCaptacao: l.data_captacao || new Date().toISOString(),
+      lastInteraction:
+        l.last_interaction || l.data_captacao || new Date().toISOString(),
+      valorEstimado: l.valor_estimado ?? undefined,
+      notes: Array.isArray(l.notes) ? l.notes : [],
+      history: Array.isArray(l.history) ? l.history : [],
+      followUp: l.follow_up || undefined,
     }))
   },
 
@@ -340,41 +354,15 @@ export const googleSheetsService = {
     return data.map((l) => ({
       id: l.id,
       date: l.date,
-      weekday: l.weekday,
-      peakViewers: l.peak_viewers,
-      retainedViewers: l.retained_viewers,
-      sales: l.sales,
-      presenter: l.presenter,
-      conversionRate: Number(l.conversion_rate),
-      retentionRate: Number(l.retention_rate),
-      revenue: Number(l.revenue),
-      additionalSeats: l.additional_seats,
+      weekday: l.weekday || '',
+      peakViewers: l.peak_viewers || 0,
+      retainedViewers: l.retained_viewers || 0,
+      sales: l.sales || 0,
+      presenter: l.presenter || '',
+      conversionRate: Number(l.conversion_rate) || 0,
+      retentionRate: Number(l.retention_rate) || 0,
+      revenue: Number(l.revenue) || 0,
+      additionalSeats: l.additional_seats || 0,
     }))
-  },
-
-  async addLiveToSheet(data: Partial<LiveData>): Promise<void> {
-    // Mock implementation for adding to sheet (read-only proxy)
-    // In a real scenario, this would post to a write-enabled endpoint
-    console.log('Would add data to sheet:', data)
-
-    // Optimistic update in DB
-    const newLive = {
-      id: generateLiveId(data as LiveData),
-      date: data.date,
-      weekday: data.weekday,
-      peak_viewers: data.peakViewers,
-      retained_viewers: data.retainedViewers,
-      sales: data.sales,
-      presenter: data.presenter,
-      conversion_rate: data.conversionRate,
-      retention_rate: data.retentionRate,
-      revenue: data.revenue,
-      additional_seats: data.additionalSeats,
-      created_at: new Date().toISOString(),
-      updated_at: new Date().toISOString(),
-    }
-
-    const { error } = await supabase.from('lives').insert(newLive)
-    if (error) throw error
   },
 }

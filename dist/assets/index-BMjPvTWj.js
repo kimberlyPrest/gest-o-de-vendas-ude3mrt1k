@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-BpuASZ3Z.js","assets/calendar-Di0OAoj6.js","assets/CRM-D4vuxzbw.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-Bomrhhar.js","assets/calendar-8bS1_cMB.js","assets/CRM-SaZ0Yzl7.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -34243,16 +34243,23 @@ const googleSheetsService = {
 				origem: lead.origem,
 				status: lead.status,
 				data_captacao: lead.dataCaptacao || (/* @__PURE__ */ new Date()).toISOString(),
+				last_interaction: lead.dataCaptacao || (/* @__PURE__ */ new Date()).toISOString(),
 				updated_at: (/* @__PURE__ */ new Date()).toISOString(),
 				created_at: (/* @__PURE__ */ new Date()).toISOString()
 			});
 			if (newLeads.length > 0) {
 				const { error: insertError } = await supabase.from("leads").insert(newLeads);
-				if (insertError) throw insertError;
+				if (insertError) {
+					console.error("Error inserting new leads:", insertError);
+					throw insertError;
+				}
 			}
 			if (leadsToUpdate.length > 0) {
 				const { error: updateError } = await supabase.from("leads").upsert(leadsToUpdate, { onConflict: "id" });
-				if (updateError) throw updateError;
+				if (updateError) {
+					console.error("Error updating existing leads:", updateError);
+					throw updateError;
+				}
 			}
 			return {
 				added: newLeads.length,
@@ -34327,21 +34334,24 @@ const googleSheetsService = {
 	},
 	async fetchLeadsFromDB() {
 		const { data, error } = await supabase.from("leads").select("*").order("data_captacao", { ascending: false });
-		if (error) throw error;
-		return data.map((l) => ({
+		if (error) {
+			console.error("Failed to fetch leads from DB:", error);
+			throw error;
+		}
+		return (data || []).map((l) => ({
 			id: l.id,
-			nomeCompleto: l.nome_completo,
-			email: l.email,
-			telefone: l.telefone,
-			assentosAdicionais: l.assentos_adicionais,
-			origem: l.origem,
-			status: l.status,
-			dataCaptacao: l.data_captacao,
-			lastInteraction: l.last_interaction,
-			valorEstimado: l.valor_estimado,
-			notes: l.notes,
-			history: l.history,
-			followUp: l.follow_up
+			nomeCompleto: l.nome_completo || "Sem Nome",
+			email: l.email || "",
+			telefone: l.telefone || "",
+			assentosAdicionais: l.assentos_adicionais || 0,
+			origem: l.origem || "Desconhecido",
+			status: l.status || "Capturado",
+			dataCaptacao: l.data_captacao || (/* @__PURE__ */ new Date()).toISOString(),
+			lastInteraction: l.last_interaction || l.data_captacao || (/* @__PURE__ */ new Date()).toISOString(),
+			valorEstimado: l.valor_estimado ?? void 0,
+			notes: Array.isArray(l.notes) ? l.notes : [],
+			history: Array.isArray(l.history) ? l.history : [],
+			followUp: l.follow_up || void 0
 		}));
 	},
 	async fetchLivesFromDB() {
@@ -34350,36 +34360,16 @@ const googleSheetsService = {
 		return data.map((l) => ({
 			id: l.id,
 			date: l.date,
-			weekday: l.weekday,
-			peakViewers: l.peak_viewers,
-			retainedViewers: l.retained_viewers,
-			sales: l.sales,
-			presenter: l.presenter,
-			conversionRate: Number(l.conversion_rate),
-			retentionRate: Number(l.retention_rate),
-			revenue: Number(l.revenue),
-			additionalSeats: l.additional_seats
+			weekday: l.weekday || "",
+			peakViewers: l.peak_viewers || 0,
+			retainedViewers: l.retained_viewers || 0,
+			sales: l.sales || 0,
+			presenter: l.presenter || "",
+			conversionRate: Number(l.conversion_rate) || 0,
+			retentionRate: Number(l.retention_rate) || 0,
+			revenue: Number(l.revenue) || 0,
+			additionalSeats: l.additional_seats || 0
 		}));
-	},
-	async addLiveToSheet(data) {
-		console.log("Would add data to sheet:", data);
-		const newLive = {
-			id: generateLiveId(data),
-			date: data.date,
-			weekday: data.weekday,
-			peak_viewers: data.peakViewers,
-			retained_viewers: data.retainedViewers,
-			sales: data.sales,
-			presenter: data.presenter,
-			conversion_rate: data.conversionRate,
-			retention_rate: data.retentionRate,
-			revenue: data.revenue,
-			additional_seats: data.additionalSeats,
-			created_at: (/* @__PURE__ */ new Date()).toISOString(),
-			updated_at: (/* @__PURE__ */ new Date()).toISOString()
-		};
-		const { error } = await supabase.from("lives").insert(newLive);
-		if (error) throw error;
 	}
 };
 const useConnectionStore = create((set) => ({
@@ -36195,8 +36185,16 @@ var createHistoryItem = (type, description) => ({
 	author: "Você"
 });
 var updateLeadInDB = async (id, updates) => {
-	const { error } = await supabase.from("leads").update(updates).eq("id", id);
-	if (error) console.error("Failed to update lead in DB:", error);
+	try {
+		const { error } = await supabase.from("leads").update(updates).eq("id", id);
+		if (error) {
+			console.error("Failed to update lead in DB:", error);
+			toast.error("Erro ao salvar", { description: "Não foi possível salvar as alterações no banco de dados." });
+		}
+	} catch (err) {
+		console.error("Exception updating lead in DB:", err);
+		toast.error("Erro de conexão", { description: "Verifique sua conexão com a internet." });
+	}
 };
 const useCRMStore = create((set, get$1) => ({
 	leads: [],
@@ -36213,26 +36211,35 @@ const useCRMStore = create((set, get$1) => ({
 		}
 	},
 	fetchLeads: async (forceSync = false) => {
+		if (get$1().loading) return;
 		set({
 			loading: true,
 			error: false
 		});
 		try {
 			if (forceSync) {
-				const { added } = await googleSheetsService.syncLeads();
-				if (added > 0) {
+				toast.info("Iniciando sincronização...", { description: "Buscando dados da planilha e atualizando base." });
+				const { added, updated } = await googleSheetsService.syncLeads();
+				if (added > 0 || updated > 0) {
 					useNotificationStore.getState().addNotification({
 						type: "new_lead",
 						title: "Sincronização Concluída",
-						message: `${added} novos leads foram adicionados.`,
+						message: `${added} novos leads, ${updated} atualizados.`,
 						actionUrl: "/crm"
 					});
 					toast.success("Sincronização finalizada", { description: `${added} novos leads importados.` });
-				}
+				} else toast.info("Tudo atualizado", { description: "Nenhum novo dado encontrado." });
 			}
 			set({ leads: (await googleSheetsService.fetchLeadsFromDB()).map((l) => ({
 				...l,
+				id: l.id,
+				nomeCompleto: l.nomeCompleto || "Sem Nome",
+				email: l.email || "",
+				telefone: l.telefone || "",
+				assentosAdicionais: l.assentosAdicionais || 0,
+				origem: l.origem || "Desconhecido",
 				status: l.status || "Capturado",
+				dataCaptacao: l.dataCaptacao || (/* @__PURE__ */ new Date()).toISOString(),
 				lastInteraction: l.lastInteraction || l.dataCaptacao || (/* @__PURE__ */ new Date()).toISOString(),
 				notes: l.notes || [],
 				history: l.history || [],
@@ -36240,9 +36247,9 @@ const useCRMStore = create((set, get$1) => ({
 			})) });
 			get$1().setFilter("search", get$1().filters.search);
 		} catch (error) {
-			console.error(error);
+			console.error("CRM Fetch Error:", error);
 			set({ error: true });
-			toast.error("Erro na sincronização", { description: "Não foi possível atualizar os dados." });
+			toast.error("Erro ao carregar leads", { description: "Verifique sua conexão e tente novamente." });
 		} finally {
 			set({ loading: false });
 		}
@@ -36416,16 +36423,17 @@ const useCRMStore = create((set, get$1) => ({
 						history: [historyItem, ...lead.history],
 						lastInteraction: (/* @__PURE__ */ new Date()).toISOString()
 					};
-					updateLeadInDB(leadId, {
-						nome_completo: updatedLead.nomeCompleto,
-						email: updatedLead.email,
-						telefone: updatedLead.telefone,
-						assentos_adicionais: updatedLead.assentosAdicionais,
-						origem: updatedLead.origem,
-						valor_estimado: updatedLead.valorEstimado,
+					const dbUpdates = {
 						history: updatedLead.history,
 						last_interaction: updatedLead.lastInteraction
-					});
+					};
+					if (updates.nomeCompleto) dbUpdates.nome_completo = updates.nomeCompleto;
+					if (updates.email) dbUpdates.email = updates.email;
+					if (updates.telefone) dbUpdates.telefone = updates.telefone;
+					if (updates.assentosAdicionais !== void 0) dbUpdates.assentos_adicionais = updates.assentosAdicionais;
+					if (updates.origem) dbUpdates.origem = updates.origem;
+					if (updates.valorEstimado !== void 0) dbUpdates.valor_estimado = updates.valorEstimado;
+					updateLeadInDB(leadId, dbUpdates);
 					return updatedLead;
 				}
 				return lead;
@@ -40649,8 +40657,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-BpuASZ3Z.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-D4vuxzbw.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-Bomrhhar.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-SaZ0Yzl7.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -40710,4 +40718,4 @@ var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 export { millisecondsInHour as $, Presence as $t, calculateLeadValue as A, Content$1 as At, getRoundingMethod as B, Search as Bt, ptBR as C, Slot$2 as Ct, DropdownMenuTrigger as D, TooltipTrigger as Dt, DropdownMenuItem as E, TooltipProvider as Et, getISOWeek as F, cn as Ft, differenceInCalendarDays as G, ChevronRight as Gt, differenceInCalendarMonths as H, LoaderCircle as Ht, enUS as I, X as It, startOfISOWeek as J, Calendar as Jt, startOfDay as K, ChevronDown as Kt, startOfYear as L, Video as Lt, formatDistanceToNow as M, createPopperScope as Mt, format as N, useId as Nt, useLivesStore as O, Anchor as Ot, getWeek as P, toast as Pt, constructFrom as Q, useControllableState as Qt, endOfMonth as R, Users as Rt, DialogTrigger as S, useIsMobile as St, DropdownMenuContent as T, TooltipContent as Tt, isDate as U, Clock as Ut, differenceInDays as V, RefreshCw as Vt, constructNow as W, CircleAlert as Wt, getDefaultOptions as X, cva as Xt, startOfWeek as Y, createLucideIcon as Yt, toDate as Z, clsx_default as Zt, DialogContent as _, FocusScope as _t, SelectValue as a, createSlot as an, Content as at, DialogHeader as b, Button as bt, Command as c, require_jsx_runtime as cn, Portal$3 as ct, CommandInput as d, useToast as dn, Trigger$2 as dt, Portal as en, millisecondsInMinute as et, CommandItem as f, require_react as fn, WarningProvider as ft, DialogClose as g, useFocusGuards as gt, Dialog as h, __toESM as hn, Combination_default as ht, SelectTrigger as i, Primitive as in, Close as it, useCRMStore as j, Root2$2 as jt, COLUMNS as k, Arrow as kt, CommandEmpty as l, useComposedRefs as ln, Root$3 as lt, CommandSeparator as m, __export as mn, hideOthers as mt, SelectContent as n, DismissableLayer as nn, require_shim as nt, Switch as o, createSlottable as on, Description as ot, CommandList as p, __commonJSMin as pn, createDialogScope as pt, normalizeDates as q, Check as qt, SelectItem as r, useCallbackRef as rn, Skeleton as rt, Label as s, createContextScope as sn, Overlay as st, Select as t, useLayoutEffect2 as tn, googleSheetsService as tt, CommandGroup as u, composeEventHandlers as un, Title as ut, DialogDescription as v, Primitive$1 as vt, DropdownMenu as w, Tooltip as wt, DialogTitle as x, buttonVariants as xt, DialogFooter as y, Input as yt, endOfDay as z, TrendingUp as zt };
 
-//# sourceMappingURL=index-CF7Z8fcd.js.map
+//# sourceMappingURL=index-BMjPvTWj.js.map

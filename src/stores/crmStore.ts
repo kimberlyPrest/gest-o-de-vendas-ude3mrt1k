@@ -1,7 +1,6 @@
 import { create } from 'zustand'
 import { googleSheetsService } from '@/services/googleSheetsService'
 import { v4 as uuidv4 } from 'uuid'
-import { useSyncStore } from './syncStore'
 import { useNotificationStore } from './notificationStore'
 import { supabase } from '@/lib/supabase/client'
 import { toast } from 'sonner'
@@ -103,10 +102,22 @@ const createHistoryItem = (
   author: 'Você',
 })
 
-// Helper to update Supabase
+// Helper to update Supabase with visual feedback
 const updateLeadInDB = async (id: string, updates: any) => {
-  const { error } = await supabase.from('leads').update(updates).eq('id', id)
-  if (error) console.error('Failed to update lead in DB:', error)
+  try {
+    const { error } = await supabase.from('leads').update(updates).eq('id', id)
+    if (error) {
+      console.error('Failed to update lead in DB:', error)
+      toast.error('Erro ao salvar', {
+        description: 'Não foi possível salvar as alterações no banco de dados.',
+      })
+    }
+  } catch (err) {
+    console.error('Exception updating lead in DB:', err)
+    toast.error('Erro de conexão', {
+      description: 'Verifique sua conexão com a internet.',
+    })
+  }
 }
 
 export const useCRMStore = create<CRMStore>((set, get) => ({
@@ -122,46 +133,64 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
   },
 
   fetchLeads: async (forceSync = false) => {
+    // Prevent fetching if already loading to avoid race conditions
+    if (get().loading) return
+
     set({ loading: true, error: false })
     try {
       if (forceSync) {
-        // Trigger Sync
-        const { added } = await googleSheetsService.syncLeads()
-        if (added > 0) {
+        toast.info('Iniciando sincronização...', {
+          description: 'Buscando dados da planilha e atualizando base.',
+        })
+
+        const { added, updated } = await googleSheetsService.syncLeads()
+
+        if (added > 0 || updated > 0) {
           useNotificationStore.getState().addNotification({
             type: 'new_lead',
             title: 'Sincronização Concluída',
-            message: `${added} novos leads foram adicionados.`,
+            message: `${added} novos leads, ${updated} atualizados.`,
             actionUrl: '/crm',
           })
           toast.success('Sincronização finalizada', {
             description: `${added} novos leads importados.`,
           })
+        } else {
+          toast.info('Tudo atualizado', {
+            description: 'Nenhum novo dado encontrado.',
+          })
         }
       }
 
-      // Fetch from DB
+      // Fetch from DB - This is the source of truth
       const leads = await googleSheetsService.fetchLeadsFromDB()
 
-      // Ensure local required fields
+      // Ensure local required fields conform to CRMLead
       const processedLeads: CRMLead[] = leads.map((l) => ({
         ...l,
+        id: l.id!,
+        nomeCompleto: l.nomeCompleto || 'Sem Nome',
+        email: l.email || '',
+        telefone: l.telefone || '',
+        assentosAdicionais: l.assentosAdicionais || 0,
+        origem: l.origem || 'Desconhecido',
         status: l.status || 'Capturado',
+        dataCaptacao: l.dataCaptacao || new Date().toISOString(),
         lastInteraction:
           l.lastInteraction || l.dataCaptacao || new Date().toISOString(),
         notes: l.notes || [],
         history: l.history || [],
-        valorEstimado: l.valorEstimado ?? calculateLeadValue(l),
+        valorEstimado: l.valorEstimado ?? calculateLeadValue(l as CRMLead),
       }))
 
       set({ leads: processedLeads })
       // Re-apply filters
       get().setFilter('search', get().filters.search)
     } catch (error) {
-      console.error(error)
+      console.error('CRM Fetch Error:', error)
       set({ error: true })
-      toast.error('Erro na sincronização', {
-        description: 'Não foi possível atualizar os dados.',
+      toast.error('Erro ao carregar leads', {
+        description: 'Verifique sua conexão e tente novamente.',
       })
     } finally {
       set({ loading: false })
@@ -360,16 +389,22 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
             lastInteraction: new Date().toISOString(),
           }
 
-          updateLeadInDB(leadId, {
-            nome_completo: updatedLead.nomeCompleto,
-            email: updatedLead.email,
-            telefone: updatedLead.telefone,
-            assentos_adicionais: updatedLead.assentosAdicionais,
-            origem: updatedLead.origem,
-            valor_estimado: updatedLead.valorEstimado,
+          // Map updates to DB snake_case columns
+          const dbUpdates: any = {
             history: updatedLead.history,
             last_interaction: updatedLead.lastInteraction,
-          })
+          }
+          if (updates.nomeCompleto)
+            dbUpdates.nome_completo = updates.nomeCompleto
+          if (updates.email) dbUpdates.email = updates.email
+          if (updates.telefone) dbUpdates.telefone = updates.telefone
+          if (updates.assentosAdicionais !== undefined)
+            dbUpdates.assentos_adicionais = updates.assentosAdicionais
+          if (updates.origem) dbUpdates.origem = updates.origem
+          if (updates.valorEstimado !== undefined)
+            dbUpdates.valor_estimado = updates.valorEstimado
+
+          updateLeadInDB(leadId, dbUpdates)
 
           return updatedLead
         }
