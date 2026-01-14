@@ -1,33 +1,8 @@
-import { A as ChevronLeft, C as format, D as isSameDay, E as differenceInCalendarMonths, O as getDefaultOptions, S as isBefore, T as endOfMonth, _ as PopoverContent, a as SelectValue, b as parseISO, c as DialogClose, d as DialogFooter, f as DialogHeader, g as Popover, h as Calendar, i as SelectTrigger, j as Check, k as ChevronRight, l as DialogContent, n as SelectContent, o as useDirection, p as DialogTitle, r as SelectItem, s as Dialog, t as Select, v as PopoverTrigger, w as enUS, x as subDays, y as ptBR } from "./select-DvSwqWAO.js";
-import { A as hideOthers, B as Anchor, C as Overlay, D as Trigger$1, E as Title, F as Input, G as useId, H as Content$1, I as Button, K as toast, L as buttonVariants, M as useFocusGuards, N as FocusScope, O as WarningProvider, P as Primitive$1, R as useIsMobile, S as Description, T as Root$2, U as Root2$2, V as Arrow, W as createPopperScope, X as createLucideIcon, Z as cva, a as differenceInDays, at as useCallbackRef, b as Close, c as normalizeDates, ct as createCollection, d as constructFrom, dt as createContextScope, et as useControllableState, f as millisecondsInHour, ft as require_jsx_runtime, g as minutesInMonth, h as minutesInDay, ht as composeEventHandlers, i as useCRMStore, it as DismissableLayer, j as Combination_default, k as createDialogScope, l as getTimezoneOffsetInMilliseconds, lt as createSlot, mt as useComposedRefs, nt as Portal, ot as Primitive, pt as composeRefs, q as cn, r as COLUMNS, rt as useLayoutEffect2, st as dispatchDiscreteCustomEvent, t as Label$1, tt as Presence, u as toDate, ut as createSlottable, v as require_shim, vt as require_react, w as Portal$2, x as Content, xt as __toESM } from "./index-CXv06xj4.js";
+import { A as isSameDay, B as Check, C as isBefore, D as endOfMonth, F as DollarSign, H as ArrowRightLeft, L as ChevronRight, O as endOfDay, P as Users, R as ChevronLeft, S as subDays, T as enUS, V as ArrowUp, _ as Popover, a as SelectValue, b as ptBR, c as Dialog, f as DialogFooter, g as Calendar, i as SelectTrigger, j as getDefaultOptions, k as differenceInCalendarMonths, l as DialogClose, m as DialogTitle, n as SelectContent, p as DialogHeader, r as SelectItem, s as useDirection, t as Select, u as DialogContent, v as PopoverContent, w as format, x as parseISO, y as PopoverTrigger } from "./select-BRXzw63O.js";
+import { $ as toast, A as Root$2, B as Primitive$1, C as require_shim, Ct as composeEventHandlers, D as Description, E as Content, Et as require_react, F as hideOthers, H as Button, I as Combination_default, J as Content$1, K as Anchor, L as useFocusGuards, M as Trigger$1, N as WarningProvider, O as Overlay, P as createDialogScope, Q as useId, R as FocusScope, St as useComposedRefs, T as Close, U as buttonVariants, V as Input, W as useIsMobile, X as createPopperScope, Y as Root2$2, _ as millisecondsInHour, _t as createSlot, at as cva, b as minutesInDay, bt as require_jsx_runtime, c as COLUMNS, ct as useControllableState, dt as useLayoutEffect2, et as cn, ft as DismissableLayer, g as constructFrom, gt as createCollection, h as toDate, ht as dispatchDiscreteCustomEvent, it as createLucideIcon, j as Title, k as Portal$2, kt as __toESM, l as useCRMStore, lt as Presence, m as getTimezoneOffsetInMilliseconds, mt as Primitive, o as Label$1, p as normalizeDates, pt as useCallbackRef, q as Arrow, u as differenceInDays, ut as Portal, vt as createSlottable, x as minutesInMonth, xt as composeRefs, yt as createContextScope } from "./index-_N1K3nDU.js";
 var Activity = createLucideIcon("activity", [["path", {
 	d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
 	key: "169zse"
-}]]);
-var ArrowRightLeft = createLucideIcon("arrow-right-left", [
-	["path", {
-		d: "m16 3 4 4-4 4",
-		key: "1x1c3m"
-	}],
-	["path", {
-		d: "M20 7H4",
-		key: "zbl0bi"
-	}],
-	["path", {
-		d: "m8 21-4-4 4-4",
-		key: "h9nckh"
-	}],
-	["path", {
-		d: "M4 17h16",
-		key: "g4d7ey"
-	}]
-]);
-var ArrowUp = createLucideIcon("arrow-up", [["path", {
-	d: "m5 12 7-7 7 7",
-	key: "hav0vg"
-}], ["path", {
-	d: "M12 19V5",
-	key: "x0mq9r"
 }]]);
 var CalendarClock = createLucideIcon("calendar-clock", [
 	["path", {
@@ -71,16 +46,6 @@ var Circle = createLucideIcon("circle", [["circle", {
 	cy: "12",
 	r: "10",
 	key: "1mglay"
-}]]);
-var DollarSign = createLucideIcon("dollar-sign", [["line", {
-	x1: "12",
-	x2: "12",
-	y1: "2",
-	y2: "22",
-	key: "7eqyqh"
-}], ["path", {
-	d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6",
-	key: "1b0p4s"
 }]]);
 var Download = createLucideIcon("download", [
 	["path", {
@@ -208,26 +173,6 @@ var Trash2 = createLucideIcon("trash-2", [
 		key: "e791ji"
 	}]
 ]);
-var Users = createLucideIcon("users", [
-	["path", {
-		d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2",
-		key: "1yyitq"
-	}],
-	["path", {
-		d: "M16 3.128a4 4 0 0 1 0 7.744",
-		key: "16gr8j"
-	}],
-	["path", {
-		d: "M22 21v-2a4 4 0 0 0-3-3.87",
-		key: "kshegd"
-	}],
-	["circle", {
-		cx: "9",
-		cy: "7",
-		r: "4",
-		key: "nufk8"
-	}]
-]);
 function compareAsc(dateLeft, dateRight) {
 	const diff = +toDate(dateLeft) - +toDate(dateRight);
 	if (diff < 0) return -1;
@@ -250,11 +195,6 @@ function differenceInHours(laterDate, earlierDate, options) {
 }
 function differenceInMilliseconds(laterDate, earlierDate) {
 	return +toDate(laterDate) - +toDate(earlierDate);
-}
-function endOfDay(date, options) {
-	const _date = toDate(date, options?.in);
-	_date.setHours(23, 59, 59, 999);
-	return _date;
 }
 function isLastDayOfMonth(date, options) {
 	const _date = toDate(date, options?.in);
@@ -3462,4 +3402,4 @@ function CRM() {
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-DYDVh0jE.js.map
+//# sourceMappingURL=CRM-PEST4UIB.js.map

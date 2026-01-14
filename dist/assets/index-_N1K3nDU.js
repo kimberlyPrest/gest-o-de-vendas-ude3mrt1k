@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-pEj_l_v6.js","assets/select-DvSwqWAO.js","assets/CRM-DYDVh0jE.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-ugi0C9xC.js","assets/select-BRXzw63O.js","assets/CRM-PEST4UIB.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -35080,8 +35080,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-pEj_l_v6.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-DYDVh0jE.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-ugi0C9xC.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-PEST4UIB.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -35139,6 +35139,6 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(J, {
 });
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
-export { VISUALLY_HIDDEN_STYLES as $, hideOthers as A, Anchor as B, Overlay as C, Trigger as D, Title as E, Input as F, useId as G, Content$1 as H, Button as I, X as J, toast as K, buttonVariants as L, useFocusGuards as M, FocusScope as N, WarningProvider as O, Primitive as P, clsx_default as Q, useIsMobile as R, Description as S, Root$1 as T, Root2 as U, Arrow as V, createPopperScope as W, createLucideIcon as X, LoaderCircle as Y, cva as Z, googleSheetsService as _, require_react_dom as _t, differenceInDays as a, useCallbackRef$1 as at, Close as b, __export as bt, normalizeDates as c, createCollection as ct, constructFrom as d, createContextScope as dt, useControllableState as et, millisecondsInHour as f, require_jsx_runtime as ft, minutesInMonth as g, useToast as gt, minutesInDay as h, composeEventHandlers as ht, useCRMStore as i, DismissableLayer as it, Combination_default as j, createDialogScope as k, getTimezoneOffsetInMilliseconds as l, createSlot as lt, millisecondsInWeek as m, useComposedRefs as mt, useLivesStore as n, Portal as nt, differenceInCalendarDays as o, Primitive$1 as ot, millisecondsInMinute as p, composeRefs as pt, cn as q, COLUMNS as r, useLayoutEffect2 as rt, startOfDay as s, dispatchDiscreteCustomEvent as st, Label as t, Presence as tt, toDate as u, createSlottable as ut, require_shim as v, require_react as vt, Portal$1 as w, Content as x, __toESM as xt, Skeleton as y, __commonJSMin as yt, Slot as z };
+export { toast as $, Root$1 as A, Primitive as B, require_shim as C, composeEventHandlers as Ct, Description as D, __commonJSMin as Dt, Content as E, require_react as Et, hideOthers as F, Slot as G, Button as H, Combination_default as I, Content$1 as J, Anchor as K, useFocusGuards as L, Trigger as M, WarningProvider as N, Overlay as O, __export as Ot, createDialogScope as P, useId as Q, FocusScope as R, googleSheetsService as S, useComposedRefs as St, Close as T, require_react_dom as Tt, buttonVariants as U, Input as V, useIsMobile as W, createPopperScope as X, Root2 as Y, useSize as Z, millisecondsInHour as _, createSlot as _t, CardTitle as a, cva as at, minutesInDay as b, require_jsx_runtime as bt, COLUMNS as c, useControllableState as ct, differenceInCalendarDays as d, useLayoutEffect2 as dt, cn as et, startOfDay as f, DismissableLayer as ft, constructFrom as g, createCollection as gt, toDate as h, dispatchDiscreteCustomEvent as ht, CardHeader as i, createLucideIcon as it, Title as j, Portal$1 as k, __toESM as kt, useCRMStore as l, Presence as lt, getTimezoneOffsetInMilliseconds as m, Primitive$1 as mt, CardContent as n, RefreshCw as nt, Label as o, clsx_default as ot, normalizeDates as p, useCallbackRef$1 as pt, Arrow as q, CardDescription as r, LoaderCircle as rt, useLivesStore as s, VISUALLY_HIDDEN_STYLES as st, Card as t, X as tt, differenceInDays as u, Portal as ut, millisecondsInMinute as v, createSlottable as vt, Skeleton as w, useToast as wt, minutesInMonth as x, composeRefs as xt, millisecondsInWeek as y, createContextScope as yt, Separator as z };
 
-//# sourceMappingURL=index-CXv06xj4.js.map
+//# sourceMappingURL=index-_N1K3nDU.js.map

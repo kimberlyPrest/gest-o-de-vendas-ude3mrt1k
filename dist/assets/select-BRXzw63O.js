@@ -1,4 +1,29 @@
-import { $ as VISUALLY_HIDDEN_STYLES, A as hideOthers, B as Anchor, C as Overlay, D as Trigger$2, E as Title, G as useId, H as Content, I as Button, J as X, L as buttonVariants, M as useFocusGuards, N as FocusScope, S as Description, T as Root$1, U as Root2$2, V as Arrow, W as createPopperScope, X as createLucideIcon, _t as require_react_dom, at as useCallbackRef, b as Close, bt as __export, c as normalizeDates, ct as createCollection, d as constructFrom, dt as createContextScope, et as useControllableState, f as millisecondsInHour, ft as require_jsx_runtime, ht as composeEventHandlers, it as DismissableLayer, j as Combination_default, lt as createSlot, m as millisecondsInWeek, mt as useComposedRefs, nt as Portal, o as differenceInCalendarDays, ot as Primitive, p as millisecondsInMinute, q as cn, rt as useLayoutEffect2, s as startOfDay, tt as Presence, u as toDate, vt as require_react, w as Portal$3, x as Content$1, xt as __toESM } from "./index-CXv06xj4.js";
+import { A as Root$1, Ct as composeEventHandlers, D as Description, E as Content$1, Et as require_react, F as hideOthers, H as Button, I as Combination_default, J as Content, K as Anchor, L as useFocusGuards, M as Trigger$2, O as Overlay, Ot as __export, Q as useId, R as FocusScope, St as useComposedRefs, T as Close, Tt as require_react_dom, U as buttonVariants, X as createPopperScope, Y as Root2$2, _ as millisecondsInHour, _t as createSlot, bt as require_jsx_runtime, ct as useControllableState, d as differenceInCalendarDays, dt as useLayoutEffect2, et as cn, f as startOfDay, ft as DismissableLayer, g as constructFrom, gt as createCollection, h as toDate, it as createLucideIcon, j as Title, k as Portal$3, kt as __toESM, lt as Presence, mt as Primitive, p as normalizeDates, pt as useCallbackRef, q as Arrow, st as VISUALLY_HIDDEN_STYLES, tt as X, ut as Portal, v as millisecondsInMinute, y as millisecondsInWeek, yt as createContextScope } from "./index-_N1K3nDU.js";
+var ArrowRightLeft = createLucideIcon("arrow-right-left", [
+	["path", {
+		d: "m16 3 4 4-4 4",
+		key: "1x1c3m"
+	}],
+	["path", {
+		d: "M20 7H4",
+		key: "zbl0bi"
+	}],
+	["path", {
+		d: "m8 21-4-4 4-4",
+		key: "h9nckh"
+	}],
+	["path", {
+		d: "M4 17h16",
+		key: "g4d7ey"
+	}]
+]);
+var ArrowUp = createLucideIcon("arrow-up", [["path", {
+	d: "m5 12 7-7 7 7",
+	key: "hav0vg"
+}], ["path", {
+	d: "M12 19V5",
+	key: "x0mq9r"
+}]]);
 var Check = createLucideIcon("check", [["path", {
 	d: "M20 6 9 17l-5-5",
 	key: "1gmf2c"
@@ -19,6 +44,36 @@ var ChevronUp = createLucideIcon("chevron-up", [["path", {
 	d: "m18 15-6-6-6 6",
 	key: "153udz"
 }]]);
+var DollarSign = createLucideIcon("dollar-sign", [["line", {
+	x1: "12",
+	x2: "12",
+	y1: "2",
+	y2: "22",
+	key: "7eqyqh"
+}], ["path", {
+	d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6",
+	key: "1b0p4s"
+}]]);
+var Users = createLucideIcon("users", [
+	["path", {
+		d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2",
+		key: "1yyitq"
+	}],
+	["path", {
+		d: "M16 3.128a4 4 0 0 1 0 7.744",
+		key: "16gr8j"
+	}],
+	["path", {
+		d: "M22 21v-2a4 4 0 0 0-3-3.87",
+		key: "kshegd"
+	}],
+	["circle", {
+		cx: "9",
+		cy: "7",
+		r: "4",
+		key: "nufk8"
+	}]
+]);
 function addDays(date, amount, options) {
 	const _date = toDate(date, options?.in);
 	if (isNaN(amount)) return constructFrom(options?.in || date, NaN);
@@ -122,6 +177,11 @@ function differenceInCalendarMonths(laterDate, earlierDate, options) {
 	const yearsDiff = laterDate_.getFullYear() - earlierDate_.getFullYear();
 	const monthsDiff = laterDate_.getMonth() - earlierDate_.getMonth();
 	return yearsDiff * 12 + monthsDiff;
+}
+function endOfDay(date, options) {
+	const _date = toDate(date, options?.in);
+	_date.setHours(23, 59, 59, 999);
+	return _date;
 }
 function endOfMonth(date, options) {
 	const _date = toDate(date, options?.in);
@@ -5629,6 +5689,6 @@ var SelectSeparator = import_react.forwardRef(({ className, ...props }, ref) => 
 	...props
 }));
 SelectSeparator.displayName = Separator.displayName;
-export { ChevronLeft as A, format as C, isSameDay as D, differenceInCalendarMonths as E, getDefaultOptions as O, isBefore as S, endOfMonth as T, PopoverContent as _, SelectValue as a, parseISO as b, DialogClose as c, DialogFooter as d, DialogHeader as f, Popover as g, Calendar as h, SelectTrigger as i, Check as j, ChevronRight as k, DialogContent as l, DialogTrigger as m, SelectContent as n, useDirection as o, DialogTitle as p, SelectItem as r, Dialog as s, Select as t, DialogDescription as u, PopoverTrigger as v, enUS$1 as w, subDays as x, ptBR as y };
+export { isSameDay as A, Check as B, isBefore as C, endOfMonth as D, startOfMonth as E, DollarSign as F, ArrowRightLeft as H, ChevronUp as I, ChevronRight as L, addMonths as M, addDays as N, endOfDay as O, Users as P, ChevronLeft as R, subDays as S, enUS$1 as T, ArrowUp as V, Popover as _, SelectValue as a, ptBR as b, Dialog as c, DialogDescription as d, DialogFooter as f, Calendar as g, DialogTrigger as h, SelectTrigger as i, getDefaultOptions as j, differenceInCalendarMonths as k, DialogClose as l, DialogTitle as m, SelectContent as n, usePrevious as o, DialogHeader as p, SelectItem as r, useDirection as s, Select as t, DialogContent as u, PopoverContent as v, format as w, parseISO as x, PopoverTrigger as y, ChevronDown as z };
 
-//# sourceMappingURL=select-DvSwqWAO.js.map
+//# sourceMappingURL=select-BRXzw63O.js.map
