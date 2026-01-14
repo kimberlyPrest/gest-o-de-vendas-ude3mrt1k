@@ -1,5 +1,5 @@
-import { _ as ArrowRightLeft, a as parseISO, c as startOfMonth, d as addDays, f as Funnel, g as ArrowUp, h as ChevronLeft, i as PopoverTrigger, m as DollarSign, n as Popover, o as subDays, p as Download, r as PopoverContent, t as Calendar$1, u as addMonths, v as ArrowDown } from "./calendar-2zJYXbW6.js";
-import { $t as createLucideIcon, At as TooltipProvider, C as DialogFooter, Ct as Input, D as ptBR, Dt as Slot, E as DialogTrigger, G as differenceInDays, Gt as RefreshCw, Ht as Users, Kt as LoaderCircle, L as format, M as useLivesStore, Ot as Tooltip$1, Qt as Calendar, S as DialogDescription, T as DialogTitle, U as endOfDay, Ut as TrendingUp, Vt as Video, X as startOfDay, Yt as ChevronRight, Zt as Check, _ as CommandList, _n as __commonJSMin, a as Select, at as googleSheetsService, c as SelectTrigger, d as Label$1, f as Command, fn as require_jsx_runtime, g as CommandItem, gn as require_react, h as CommandInput, hn as useToast, i as CardTitle, jt as TooltipTrigger, kt as TooltipContent, l as SelectValue, m as CommandGroup, n as CardContent, o as SelectContent, p as CommandEmpty, r as CardHeader, s as SelectItem, st as Skeleton, t as Card, tn as clsx_default, tt as toDate, u as Switch, v as CommandSeparator, vn as __export, w as DialogHeader, wt as Button, x as DialogContent, y as Dialog, yn as __toESM, zt as cn } from "./index-DPRIRTVl.js";
+import { _ as ArrowRightLeft, a as parseISO, c as startOfMonth, d as addDays, f as Funnel, g as ArrowUp, h as ChevronLeft, i as PopoverTrigger, m as DollarSign, n as Popover, o as subDays, p as Download, r as PopoverContent, t as Calendar$1, u as addMonths, v as ArrowDown } from "./calendar-CmXXeJAd.js";
+import { C as ptBR, Ct as Slot, Dt as TooltipTrigger, Et as TooltipProvider, Ft as cn, Gt as ChevronRight, Ht as LoaderCircle, Jt as Calendar, K as startOfDay, Lt as Video, N as format, O as useLivesStore, Rt as Users, S as DialogTrigger, Tt as TooltipContent, V as differenceInDays, Vt as RefreshCw, Yt as createLucideIcon, Z as toDate, Zt as clsx_default, _ as DialogContent, a as SelectValue, b as DialogHeader, bt as Button, c as Command, cn as require_jsx_runtime, d as CommandInput, dn as useToast, f as CommandItem, fn as require_react, h as Dialog, hn as __toESM, i as SelectTrigger, l as CommandEmpty, m as CommandSeparator, mn as __export, n as SelectContent, o as Switch, p as CommandList, pn as __commonJSMin, qt as Check, r as SelectItem, rt as Skeleton, s as Label$1, t as Select, tt as googleSheetsService, u as CommandGroup, v as DialogDescription, wt as Tooltip$1, x as DialogTitle, y as DialogFooter, yt as Input, z as endOfDay, zt as TrendingUp } from "./index-Dh1Uds23.js";
 var Award = createLucideIcon("award", [["path", {
 	d: "m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526",
 	key: "1yiouv"
@@ -6223,6 +6223,42 @@ function LiveFilters({ presenters, filters, onFilterChange, loading, dateBounds,
 		]
 	});
 }
+var Card = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("cyber-card text-card-foreground", className),
+	...props
+}));
+Card.displayName = "Card";
+var CardHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("flex flex-col space-y-1.5 p-6", className),
+	...props
+}));
+CardHeader.displayName = "CardHeader";
+var CardTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("text-2xl font-bold leading-none tracking-tight font-display text-[#D9B979]", className),
+	...props
+}));
+CardTitle.displayName = "CardTitle";
+var CardDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("text-sm text-muted-foreground", className),
+	...props
+}));
+CardDescription.displayName = "CardDescription";
+var CardContent = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("p-6 pt-0", className),
+	...props
+}));
+CardContent.displayName = "CardContent";
+var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	ref,
+	className: cn("flex items-center p-6 pt-0", className),
+	...props
+}));
+CardFooter.displayName = "CardFooter";
 function LiveKPIs({ currentData, previousData, comparisonEnabled, loading }) {
 	const sum = (data, key) => data.reduce((acc, curr) => acc + curr[key], 0);
 	const avg = (data, key) => data.length ? sum(data, key) / data.length : 0;
@@ -29151,4 +29187,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-csV_ifll.js.map
+//# sourceMappingURL=Lives-DeYsU4_O.js.map

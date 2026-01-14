@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-csV_ifll.js","assets/calendar-2zJYXbW6.js","assets/CRM-aZU52SKN.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-DeYsU4_O.js","assets/calendar-CmXXeJAd.js","assets/CRM-C4-xscMz.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -18973,6 +18973,47 @@ var Clock = createLucideIcon("clock", [["path", {
 	r: "10",
 	key: "1mglay"
 }]]);
+var EyeOff = createLucideIcon("eye-off", [
+	["path", {
+		d: "M10.733 5.076a10.744 10.744 0 0 1 11.205 6.575 1 1 0 0 1 0 .696 10.747 10.747 0 0 1-1.444 2.49",
+		key: "ct8e1f"
+	}],
+	["path", {
+		d: "M14.084 14.158a3 3 0 0 1-4.242-4.242",
+		key: "151rxh"
+	}],
+	["path", {
+		d: "M17.479 17.499a10.75 10.75 0 0 1-15.417-5.151 1 1 0 0 1 0-.696 10.75 10.75 0 0 1 4.446-5.143",
+		key: "13bj9a"
+	}],
+	["path", {
+		d: "m2 2 20 20",
+		key: "1ooewy"
+	}]
+]);
+var Eye = createLucideIcon("eye", [["path", {
+	d: "M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0",
+	key: "1nclc0"
+}], ["circle", {
+	cx: "12",
+	cy: "12",
+	r: "3",
+	key: "1v7zrd"
+}]]);
+var Gem = createLucideIcon("gem", [
+	["path", {
+		d: "M10.5 3 8 9l4 13 4-13-2.5-6",
+		key: "b3dvk1"
+	}],
+	["path", {
+		d: "M17 3a2 2 0 0 1 1.6.8l3 4a2 2 0 0 1 .013 2.382l-7.99 10.986a2 2 0 0 1-3.247 0l-7.99-10.986A2 2 0 0 1 2.4 7.8l2.998-3.997A2 2 0 0 1 7 3z",
+		key: "7w4byz"
+	}],
+	["path", {
+		d: "M2 9h20",
+		key: "16fsjt"
+	}]
+]);
 var Info = createLucideIcon("info", [
 	["circle", {
 		cx: "12",
@@ -19026,18 +19067,6 @@ var LayoutDashboard = createLucideIcon("layout-dashboard", [
 var LoaderCircle = createLucideIcon("loader-circle", [["path", {
 	d: "M21 12a9 9 0 1 1-6.219-8.56",
 	key: "13zald"
-}]]);
-var Lock = createLucideIcon("lock", [["rect", {
-	width: "18",
-	height: "11",
-	x: "3",
-	y: "11",
-	rx: "2",
-	ry: "2",
-	key: "1w4ew1"
-}], ["path", {
-	d: "M7 11V7a5 5 0 0 1 10 0v4",
-	key: "fwvmzm"
 }]]);
 var LogOut = createLucideIcon("log-out", [
 	["path", {
@@ -19151,6 +19180,13 @@ var Settings = createLucideIcon("settings", [["path", {
 	cy: "12",
 	r: "3",
 	key: "1v7zrd"
+}]]);
+var ShieldCheck = createLucideIcon("shield-check", [["path", {
+	d: "M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1z",
+	key: "oel41y"
+}], ["path", {
+	d: "m9 12 2 2 4-4",
+	key: "dzmm74"
 }]]);
 var Sparkles = createLucideIcon("sparkles", [
 	["path", {
@@ -40365,135 +40401,171 @@ var Index = () => {
 	return null;
 };
 var Index_default = Index;
-var Card = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	ref,
-	className: cn("cyber-card text-card-foreground", className),
-	...props
-}));
-Card.displayName = "Card";
-var CardHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	ref,
-	className: cn("flex flex-col space-y-1.5 p-6", className),
-	...props
-}));
-CardHeader.displayName = "CardHeader";
-var CardTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	ref,
-	className: cn("text-2xl font-bold leading-none tracking-tight font-display text-[#D9B979]", className),
-	...props
-}));
-CardTitle.displayName = "CardTitle";
-var CardDescription = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	ref,
-	className: cn("text-sm text-muted-foreground", className),
-	...props
-}));
-CardDescription.displayName = "CardDescription";
-var CardContent = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	ref,
-	className: cn("p-6 pt-0", className),
-	...props
-}));
-CardContent.displayName = "CardContent";
-var CardFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-	ref,
-	className: cn("flex items-center p-6 pt-0", className),
-	...props
-}));
-CardFooter.displayName = "CardFooter";
 function Login() {
 	const [email, setEmail] = (0, import_react.useState)("");
 	const [password, setPassword] = (0, import_react.useState)("");
 	const [isLoading, setIsLoading] = (0, import_react.useState)(false);
+	const [showPassword, setShowPassword] = (0, import_react.useState)(false);
 	const { signIn } = useAuth();
 	const navigate = useNavigate();
-	const from = useLocation().state?.from?.pathname || "/";
+	const from = useLocation().state?.from?.pathname || "/lives";
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		if (!email || !password) {
+			toast.error("Campos obrigatórios", {
+				description: "Por favor, preencha todos os campos para continuar.",
+				style: {
+					backgroundColor: "#1A1A1A",
+					borderColor: "#FF5C5C",
+					color: "#F5F5F7"
+				}
+			});
+			return;
+		}
 		setIsLoading(true);
 		try {
 			const { error } = await signIn(email, password);
-			if (error) toast.error("Erro ao fazer login", { description: "Verifique suas credenciais e tente novamente." });
+			if (error) toast.error("Falha na autenticação", {
+				description: "Verifique suas credenciais e tente novamente.",
+				style: {
+					backgroundColor: "#1A1A1A",
+					borderColor: "#FF5C5C",
+					color: "#F5F5F7"
+				}
+			});
 			else {
-				toast.success("Login realizado com sucesso");
+				toast.success("Login realizado", {
+					description: "Acesso concedido ao sistema.",
+					style: {
+						backgroundColor: "#1A1A1A",
+						borderColor: "#D9B979",
+						color: "#F5F5F7"
+					}
+				});
 				navigate(from, { replace: true });
 			}
 		} catch (error) {
-			toast.error("Erro inesperado", { description: "Ocorreu um erro ao tentar fazer login." });
 			console.error(error);
+			toast.error("Erro inesperado", {
+				description: "Ocorreu um erro ao tentar fazer login.",
+				style: {
+					backgroundColor: "#1A1A1A",
+					borderColor: "#FF5C5C",
+					color: "#F5F5F7"
+				}
+			});
 		} finally {
 			setIsLoading(false);
 		}
 	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		className: "min-h-screen flex items-center justify-center bg-[#F5F5F7] p-4 dark:bg-background",
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "w-full max-w-sm animate-fade-in-up",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-				className: "border-border/40 shadow-elevation",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
-					className: "space-y-1 text-center pb-8",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 shadow-lg",
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Lock, { className: "h-6 w-6 text-white" })
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-							className: "text-2xl font-semibold tracking-tight",
-							children: "Bem-vindo de volta"
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardDescription, { children: "Entre com suas credenciais para acessar o sistema" })
-					]
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
-					onSubmit: handleSubmit,
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardContent, {
-						className: "space-y-4",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-								htmlFor: "email",
-								children: "Email"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-								id: "email",
-								type: "email",
-								placeholder: "nome@exemplo.com",
-								value: email,
-								onChange: (e) => setEmail(e.target.value),
-								required: true,
-								className: "h-11 bg-gray-50/50 dark:bg-muted/50",
-								disabled: isLoading
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "space-y-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
-								htmlFor: "password",
-								children: "Senha"
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
-								id: "password",
-								type: "password",
-								placeholder: "••••••••",
-								value: password,
-								onChange: (e) => setPassword(e.target.value),
-								required: true,
-								className: "h-11 bg-gray-50/50 dark:bg-muted/50",
-								disabled: isLoading
-							})]
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardFooter, {
-						className: "flex flex-col gap-4 pt-4",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
-							type: "submit",
-							className: "w-full h-11 text-[15px] font-medium bg-[#0071E3] hover:bg-[#0077ED] transition-all shadow-sm",
-							disabled: isLoading,
-							children: isLoading ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "mr-2 h-4 w-4 animate-spin" }), "Entrando..."] }) : "Entrar"
-						})
-					})]
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+		className: "min-h-screen flex flex-col items-center justify-center p-4 bg-gradient-to-b from-[#0C0C0D] to-[#191919] font-body text-foreground overflow-hidden",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-[-10%] left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#D9B979]/5 rounded-full blur-[100px]" })
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "w-full max-w-[400px] relative z-10 animate-fade-in-up",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "group relative rounded-2xl border border-[#D9B979] bg-gradient-to-br from-[#2C2C2E] to-[#1E1E20] p-1 shadow-2xl backdrop-blur-sm transition-all duration-300 hover:shadow-[0_0_20px_rgba(217,185,121,0.15)]",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "rounded-xl bg-[#151516]/80 p-8 flex flex-col items-center space-y-8 h-full w-full relative overflow-hidden",
+						children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-[#D9B979]/30 to-transparent" }),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+								className: "text-center space-y-5 flex flex-col items-center w-full",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: "relative",
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "h-14 w-14 rounded-2xl bg-[#D9B979]/10 flex items-center justify-center border border-[#D9B979]/30 shadow-[0_0_15px_rgba(217,185,121,0.2)] transform transition-transform group-hover:scale-105 duration-500",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Gem, { className: "h-7 w-7 text-[#D9B979]" })
+									})
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+									className: "font-display text-xl font-bold uppercase tracking-[0.2em] text-[#D9B979] text-glow",
+									children: "Acesso ao Sistema"
+								})]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+								onSubmit: handleSubmit,
+								className: "w-full space-y-6",
+								children: [
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "space-y-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											htmlFor: "email",
+											className: "text-xs font-medium uppercase tracking-widest text-gray-500 ml-1 font-sans",
+											children: "Email"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+											className: "relative group/input",
+											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+												id: "email",
+												type: "email",
+												value: email,
+												onChange: (e) => setEmail(e.target.value),
+												className: cn("w-full h-12 rounded-lg bg-[#1A1A1A] border border-[#333333] px-4 text-white placeholder-gray-700 outline-none transition-all duration-300 font-sans", "focus:border-[#D9B979] focus:ring-1 focus:ring-[#D9B979] focus:shadow-[0_0_10px_rgba(217,185,121,0.15)]", "disabled:opacity-50 disabled:cursor-not-allowed", "group-hover/input:border-[#444444]"),
+												placeholder: "nome@exemplo.com",
+												disabled: isLoading,
+												autoComplete: "email",
+												required: true
+											})
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+										className: "space-y-2",
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
+											htmlFor: "password",
+											className: "text-xs font-medium uppercase tracking-widest text-gray-500 ml-1 font-sans",
+											children: "Senha"
+										}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+											className: "relative group/input",
+											children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+												id: "password",
+												type: showPassword ? "text" : "password",
+												value: password,
+												onChange: (e) => setPassword(e.target.value),
+												className: cn("w-full h-12 rounded-lg bg-[#1A1A1A] border border-[#333333] px-4 text-white placeholder-gray-700 outline-none transition-all duration-300 font-sans", "focus:border-[#D9B979] focus:ring-1 focus:ring-[#D9B979] focus:shadow-[0_0_10px_rgba(217,185,121,0.15)]", "disabled:opacity-50 disabled:cursor-not-allowed", "pr-10", "group-hover/input:border-[#444444]"),
+												placeholder: "••••••••",
+												disabled: isLoading,
+												autoComplete: "current-password",
+												required: true
+											}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+												type: "button",
+												onClick: () => setShowPassword(!showPassword),
+												className: "absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-[#D9B979] transition-colors p-1",
+												disabled: isLoading,
+												"aria-label": showPassword ? "Ocultar senha" : "Mostrar senha",
+												children: showPassword ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EyeOff, { size: 18 }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Eye, { size: 18 })
+											})]
+										})]
+									}),
+									/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+										className: "pt-2",
+										children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+											type: "submit",
+											disabled: isLoading,
+											className: cn("w-full h-12 rounded-lg bg-[#D9B979] text-[#0C0C0D] font-bold uppercase tracking-widest text-sm font-display", "hover:brightness-110 active:scale-[0.98] transition-all duration-200 shadow-lg", "disabled:opacity-70 disabled:cursor-not-allowed disabled:active:scale-100", "flex items-center justify-center gap-2", "focus:outline-none focus:ring-2 focus:ring-[#D9B979]/50 focus:ring-offset-2 focus:ring-offset-[#1E1E20]"),
+											children: isLoading ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-4 w-4 animate-spin" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Autenticando..." })] }) : "Entrar"
+										})
+									})
+								]
+							})
+						]
+					})
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
+					className: "mt-6 text-center text-xs text-gray-600 font-medium tracking-wide",
+					children: ["Gestão de Vendas © ", (/* @__PURE__ */ new Date()).getFullYear()]
 				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-				className: "mt-6 text-center text-sm text-muted-foreground",
-				children: ["Gestão de Vendas © ", (/* @__PURE__ */ new Date()).getFullYear()]
-			})]
-		})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "fixed bottom-8 left-0 right-0 flex items-center justify-center gap-4 opacity-20 pointer-events-none",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-px w-16 bg-gradient-to-r from-transparent via-[#D9B979] to-[#D9B979]" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ShieldCheck, { className: "h-5 w-5 text-[#D9B979]" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "h-px w-16 bg-gradient-to-r from-[#D9B979] via-[#D9B979] to-transparent" })
+				]
+			})
+		]
 	});
 }
 var NotFound = () => {
@@ -40544,8 +40616,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-csV_ifll.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-aZU52SKN.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-DeYsU4_O.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-C4-xscMz.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -40603,6 +40675,6 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(J, {
 });
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
-export { startOfWeek as $, createLucideIcon as $t, DropdownMenuItem as A, TooltipProvider as At, enUS as B, X as Bt, DialogFooter as C, Input as Ct, ptBR as D, Slot$2 as Dt, DialogTrigger as E, useIsMobile as Et, useCRMStore as F, Root2$2 as Ft, differenceInDays as G, RefreshCw as Gt, endOfMonth as H, Users as Ht, formatDistanceToNow as I, createPopperScope as It, constructNow as J, CircleAlert as Jt, differenceInCalendarMonths as K, LoaderCircle as Kt, format as L, useId as Lt, useLivesStore as M, Anchor as Mt, COLUMNS as N, Arrow as Nt, DropdownMenu as O, Tooltip as Ot, calculateLeadValue as P, Content$1 as Pt, startOfISOWeek as Q, Calendar as Qt, getWeek as R, toast as Rt, DialogDescription as S, Primitive$1 as St, DialogTitle as T, buttonVariants as Tt, endOfDay as U, TrendingUp as Ut, startOfYear as V, Video as Vt, getRoundingMethod as W, Search as Wt, startOfDay as X, ChevronDown as Xt, differenceInCalendarDays as Y, ChevronRight as Yt, normalizeDates as Z, Check as Zt, CommandList as _, __commonJSMin as _n, createDialogScope as _t, Select as a, useLayoutEffect2 as an, googleSheetsService as at, DialogClose as b, useFocusGuards as bt, SelectTrigger as c, Primitive as cn, Close as ct, Label as d, createContextScope as dn, Overlay as dt, cva as en, getDefaultOptions as et, Command as f, require_jsx_runtime as fn, Portal$3 as ft, CommandItem as g, require_react as gn, WarningProvider as gt, CommandInput as h, useToast as hn, Trigger$2 as ht, CardTitle as i, Portal as in, millisecondsInMinute as it, DropdownMenuTrigger as j, TooltipTrigger as jt, DropdownMenuContent as k, TooltipContent as kt, SelectValue as l, createSlot as ln, Content as lt, CommandGroup as m, composeEventHandlers as mn, Title as mt, CardContent as n, useControllableState as nn, constructFrom as nt, SelectContent as o, DismissableLayer as on, require_shim as ot, CommandEmpty as p, useComposedRefs as pn, Root$3 as pt, isDate as q, Clock as qt, CardHeader as r, Presence as rn, millisecondsInHour as rt, SelectItem as s, useCallbackRef as sn, Skeleton as st, Card as t, clsx_default as tn, toDate as tt, Switch as u, createSlottable as un, Description as ut, CommandSeparator as v, __export as vn, hideOthers as vt, DialogHeader as w, Button as wt, DialogContent as x, FocusScope as xt, Dialog as y, __toESM as yn, Combination_default as yt, getISOWeek as z, cn as zt };
+export { millisecondsInHour as $, Presence as $t, calculateLeadValue as A, Content$1 as At, getRoundingMethod as B, Search as Bt, ptBR as C, Slot$2 as Ct, DropdownMenuTrigger as D, TooltipTrigger as Dt, DropdownMenuItem as E, TooltipProvider as Et, getISOWeek as F, cn as Ft, differenceInCalendarDays as G, ChevronRight as Gt, differenceInCalendarMonths as H, LoaderCircle as Ht, enUS as I, X as It, startOfISOWeek as J, Calendar as Jt, startOfDay as K, ChevronDown as Kt, startOfYear as L, Video as Lt, formatDistanceToNow as M, createPopperScope as Mt, format as N, useId as Nt, useLivesStore as O, Anchor as Ot, getWeek as P, toast as Pt, constructFrom as Q, useControllableState as Qt, endOfMonth as R, Users as Rt, DialogTrigger as S, useIsMobile as St, DropdownMenuContent as T, TooltipContent as Tt, isDate as U, Clock as Ut, differenceInDays as V, RefreshCw as Vt, constructNow as W, CircleAlert as Wt, getDefaultOptions as X, cva as Xt, startOfWeek as Y, createLucideIcon as Yt, toDate as Z, clsx_default as Zt, DialogContent as _, FocusScope as _t, SelectValue as a, createSlot as an, Content as at, DialogHeader as b, Button as bt, Command as c, require_jsx_runtime as cn, Portal$3 as ct, CommandInput as d, useToast as dn, Trigger$2 as dt, Portal as en, millisecondsInMinute as et, CommandItem as f, require_react as fn, WarningProvider as ft, DialogClose as g, useFocusGuards as gt, Dialog as h, __toESM as hn, Combination_default as ht, SelectTrigger as i, Primitive as in, Close as it, useCRMStore as j, Root2$2 as jt, COLUMNS as k, Arrow as kt, CommandEmpty as l, useComposedRefs as ln, Root$3 as lt, CommandSeparator as m, __export as mn, hideOthers as mt, SelectContent as n, DismissableLayer as nn, require_shim as nt, Switch as o, createSlottable as on, Description as ot, CommandList as p, __commonJSMin as pn, createDialogScope as pt, normalizeDates as q, Check as qt, SelectItem as r, useCallbackRef as rn, Skeleton as rt, Label as s, createContextScope as sn, Overlay as st, Select as t, useLayoutEffect2 as tn, googleSheetsService as tt, CommandGroup as u, composeEventHandlers as un, Title as ut, DialogDescription as v, Primitive$1 as vt, DropdownMenu as w, Tooltip as wt, DialogTitle as x, buttonVariants as xt, DialogFooter as y, Input as yt, endOfDay as z, TrendingUp as zt };
 
-//# sourceMappingURL=index-DPRIRTVl.js.map
+//# sourceMappingURL=index-Dh1Uds23.js.map
