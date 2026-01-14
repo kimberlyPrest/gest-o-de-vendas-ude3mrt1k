@@ -177,7 +177,7 @@ export function AddLiveModal({
         {customTrigger || (
           <Button className="h-12 w-12 rounded-full bg-[#10B981] p-0 hover:bg-[#059669] md:h-10 md:w-auto md:rounded-md md:px-4">
             <Plus className="h-6 w-6 md:mr-2 md:h-4 md:w-4" />
-            <span className="hidden md:inline">Adicionar Live Exponencial</span>
+            <span className="hidden md:inline">Adicionar Live</span>
           </Button>
         )}
       </DialogTrigger>
