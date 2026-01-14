@@ -37,12 +37,12 @@ Deno.serve(async (req) => {
     }
 
     // 2. Parse Request Body
-    const { spreadsheetId, range } = await req.json()
+    const { type, range } = await req.json()
 
-    if (!spreadsheetId || !range) {
+    if (!type || !range) {
       return new Response(
         JSON.stringify({
-          error: 'Missing required parameters: spreadsheetId and range',
+          error: 'Missing required parameters: type and range',
         }),
         {
           status: 400,
@@ -51,7 +51,37 @@ Deno.serve(async (req) => {
       )
     }
 
-    // 3. Get API Key from Secrets
+    // 3. Resolve Spreadsheet ID based on type
+    let spreadsheetId = ''
+    if (type === 'crm') {
+      spreadsheetId = Deno.env.get('CRM_SPREADSHEET_ID') ?? ''
+    } else if (type === 'lives') {
+      spreadsheetId = Deno.env.get('LIVES_SPREADSHEET_ID') ?? ''
+    } else {
+      return new Response(
+        JSON.stringify({
+          error: 'Invalid spreadsheet type. Allowed values: crm, lives',
+        }),
+        {
+          status: 400,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        },
+      )
+    }
+
+    if (!spreadsheetId) {
+      return new Response(
+        JSON.stringify({
+          error: `Server configuration error: Spreadsheet ID for ${type} not found`,
+        }),
+        {
+          status: 500,
+          headers: { ...corsHeaders, 'Content-Type': 'application/json' },
+        },
+      )
+    }
+
+    // 4. Get API Key from Secrets
     const apiKey = Deno.env.get('GOOGLE_SHEETS_API_KEY')
     if (!apiKey) {
       return new Response(
@@ -65,7 +95,7 @@ Deno.serve(async (req) => {
       )
     }
 
-    // 4. Fetch Data from Google Sheets API
+    // 5. Fetch Data from Google Sheets API
     const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}?key=${apiKey}`
     const response = await fetch(url)
     const data = await response.json()
@@ -83,7 +113,7 @@ Deno.serve(async (req) => {
       )
     }
 
-    // 5. Return Data
+    // 6. Return Data
     return new Response(JSON.stringify(data), {
       headers: { ...corsHeaders, 'Content-Type': 'application/json' },
     })

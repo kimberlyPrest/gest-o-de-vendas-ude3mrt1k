@@ -25,10 +25,8 @@ export interface LiveData {
   additionalSeats: number
 }
 
-// NOTE: API Key has been moved to Supabase Secrets (GOOGLE_SHEETS_API_KEY)
-// and is accessed via the 'google-sheets-proxy' Edge Function.
-const CRM_SHEET_ID = '1j_Rwr5t3RPcs2HjEkrRBzJEnfhmJM8jZoq8IZNEpMk0'
-const LIVES_SHEET_ID = '1ZkYOpKQIefyc5jrb3_fVKQ1jCSXLh_7HOzlN7Xw3_oc'
+// NOTE: IDs have been moved to Supabase Secrets (CRM_SPREADSHEET_ID, LIVES_SPREADSHEET_ID)
+// and are accessed via the 'google-sheets-proxy' Edge Function.
 const CRM_TAB = 'Adapta Elite'
 const LIVES_TAB = '🟢 Onboarding'
 
@@ -71,14 +69,14 @@ const generateId = (item: any): string => {
 }
 
 const fetchSheetData = async (
-  spreadsheetId: string,
+  type: 'crm' | 'lives',
   range: string,
 ): Promise<any[]> => {
   try {
     const { data, error } = await supabase.functions.invoke(
       'google-sheets-proxy',
       {
-        body: { spreadsheetId, range },
+        body: { type, range },
       },
     )
 
@@ -129,7 +127,7 @@ export const googleSheetsService = {
   async checkConnection(): Promise<boolean> {
     try {
       // Try to fetch just 1 cell from Lives sheet to verify connection
-      await fetchSheetData(LIVES_SHEET_ID, `${LIVES_TAB}!A1`)
+      await fetchSheetData('lives', `${LIVES_TAB}!A1`)
       return true
     } catch (error) {
       console.error('Connection check failed:', error)
@@ -139,7 +137,7 @@ export const googleSheetsService = {
 
   async fetchLeads(): Promise<Lead[]> {
     try {
-      const rows = await fetchSheetData(CRM_SHEET_ID, `${CRM_TAB}!A:Z`)
+      const rows = await fetchSheetData('crm', `${CRM_TAB}!A:Z`)
       const rawObjects = mapRowsToObjects(rows)
 
       return rawObjects
@@ -173,7 +171,7 @@ export const googleSheetsService = {
 
   async fetchLivesData(): Promise<LiveData[]> {
     try {
-      const rows = await fetchSheetData(LIVES_SHEET_ID, `${LIVES_TAB}!A:Z`)
+      const rows = await fetchSheetData('lives', `${LIVES_TAB}!A:Z`)
       const rawObjects = mapRowsToObjects(rows)
 
       return rawObjects
