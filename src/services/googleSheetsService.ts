@@ -1,4 +1,5 @@
 import { toast } from '@/hooks/use-toast'
+import { supabase } from '@/lib/supabase/client'
 
 export interface Lead {
   id: string
@@ -24,7 +25,8 @@ export interface LiveData {
   additionalSeats: number
 }
 
-const API_KEY = 'AIzaSyCwdVm83ZNLdP9I8vDKK8KHuz4Dg8vHwUg'
+// NOTE: API Key has been moved to Supabase Secrets (GOOGLE_SHEETS_API_KEY)
+// and is accessed via the 'google-sheets-proxy' Edge Function.
 const CRM_SHEET_ID = '1j_Rwr5t3RPcs2HjEkrRBzJEnfhmJM8jZoq8IZNEpMk0'
 const LIVES_SHEET_ID = '1ZkYOpKQIefyc5jrb3_fVKQ1jCSXLh_7HOzlN7Xw3_oc'
 const CRM_TAB = 'Adapta Elite'
@@ -72,16 +74,31 @@ const fetchSheetData = async (
   spreadsheetId: string,
   range: string,
 ): Promise<any[]> => {
-  const url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${encodeURIComponent(range)}?key=${API_KEY}`
-  const response = await fetch(url)
-  if (!response.ok) {
-    const errorBody = await response.json()
-    throw new Error(
-      errorBody.error?.message || `Failed to fetch sheet: ${response.status}`,
+  try {
+    const { data, error } = await supabase.functions.invoke(
+      'google-sheets-proxy',
+      {
+        body: { spreadsheetId, range },
+      },
     )
+
+    if (error) {
+      // If the error object exists, it means invocation failed or returned non-2xx
+      throw new Error(
+        error.message || 'Falha ao conectar com o serviço de planilhas',
+      )
+    }
+
+    // Check if the edge function returned an application-level error
+    if (data?.error) {
+      throw new Error(data.error)
+    }
+
+    return data.values || []
+  } catch (error) {
+    console.error('Error in fetchSheetData:', error)
+    throw error
   }
-  const data = await response.json()
-  return data.values || []
 }
 
 // Map row array to object using headers
@@ -214,16 +231,16 @@ export const googleSheetsService = {
 
   async addLiveToSheet(data: Partial<LiveData>): Promise<void> {
     // This is a mock implementation because writing requires OAuth2
-    // and we only have an API Key.
+    // and we only have an API Key (now via Proxy).
     console.warn(
-      'Writing to Google Sheets is not supported with API Key only. Mocking success.',
+      'Writing to Google Sheets is not supported via the read-only proxy. Mocking success.',
     )
     await new Promise((resolve) => setTimeout(resolve, 800))
     console.log('Would add data to sheet:', data)
     toast({
       title: 'Simulação',
       description:
-        'Dados processados localmente. Escrita requer OAuth (não configurado).',
+        'Dados processados localmente. Escrita não suportada pelo proxy de leitura.',
       className: 'bg-[#3B82F6] text-white border-none',
     })
   },
