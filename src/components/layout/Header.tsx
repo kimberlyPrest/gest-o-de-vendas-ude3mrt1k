@@ -1,4 +1,4 @@
-import { SidebarTrigger } from '@/components/ui/sidebar'
+import { SidebarToggle } from '@/components/layout/SidebarToggle'
 import { NotificationCenter } from '@/components/layout/NotificationCenter'
 import { GlobalSearch } from '@/components/layout/GlobalSearch'
 import { Button } from '@/components/ui/button'
@@ -11,7 +11,7 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-20 flex h-16 items-center gap-4 border-b bg-white/80 dark:bg-card/80 px-4 shadow-sm backdrop-blur-md md:px-6 transition-all">
-      <SidebarTrigger className="-ml-2 h-9 w-9 hover:bg-gray-100 dark:hover:bg-gray-800" />
+      <SidebarToggle className="-ml-2 text-gray-700 dark:text-gray-200" />
 
       <div className="flex-1 flex items-center gap-4 md:ml-4">
         <GlobalSearch />

@@ -7,10 +7,11 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
   SidebarFooter,
+  useSidebar,
 } from '@/components/ui/sidebar'
 import { cn } from '@/lib/utils'
 import { useAuth } from '@/hooks/use-auth'
-import { LogOut } from 'lucide-react'
+import { LogOut, LayoutDashboard, Radio, Settings, Users } from 'lucide-react'
 import { toast } from 'sonner'
 
 export function AppSidebar() {
@@ -18,22 +19,23 @@ export function AppSidebar() {
   const pathname = location.pathname
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
+  const { state } = useSidebar()
 
   const items = [
     {
       title: 'Lives',
       url: '/lives',
-      icon: 'live_tv',
+      icon: Radio,
     },
     {
       title: 'CRM',
       url: '/crm',
-      icon: 'group',
+      icon: Users,
     },
     {
       title: 'Ajustes',
       url: '/settings',
-      icon: 'settings',
+      icon: Settings,
     },
   ]
 
@@ -50,48 +52,41 @@ export function AppSidebar() {
 
   return (
     <>
-      <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
-        rel="stylesheet"
-      />
       <style>{`
-        .material-symbols-outlined {
-          font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
-        }
         .glass-sidebar {
           background: rgba(255, 255, 255, 0.7) !important;
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border-right: 1px solid #E5E5E7 !important;
         }
         .nav-item-active {
           background: rgba(0, 113, 227, 0.08);
           color: #0071E3 !important;
         }
       `}</style>
-      <Sidebar className="glass-sidebar border-r-0" collapsible="offcanvas">
-        <SidebarHeader className="p-8">
+      <Sidebar
+        className="glass-sidebar border-r border-gray-200/50"
+        collapsible="offcanvas"
+      >
+        <SidebarHeader className="p-6">
           <div className="flex items-center gap-3">
             <div
-              className="size-9 rounded-xl flex items-center justify-center shadow-lg"
+              className="size-9 shrink-0 rounded-xl flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105"
               style={{
                 background: 'linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)',
                 boxShadow: '0 4px 14px rgba(59, 130, 246, 0.3)',
               }}
             >
-              <span className="material-symbols-outlined text-white text-[20px]">
-                analytics
-              </span>
+              <LayoutDashboard className="text-white h-5 w-5" />
             </div>
-            <div>
+            <div className="flex flex-col overflow-hidden transition-all duration-300">
               <h1
-                className="text-[15px] font-semibold tracking-tight"
+                className="text-[15px] font-semibold tracking-tight truncate"
                 style={{ color: '#1D1D1F' }}
               >
                 Performance
               </h1>
               <p
-                className="text-[10px] font-medium uppercase tracking-wider"
+                className="text-[10px] font-medium uppercase tracking-wider truncate"
                 style={{ color: '#86868B' }}
               >
                 Analytics Suite
@@ -119,10 +114,8 @@ export function AppSidebar() {
                     }}
                   >
                     <Link to={item.url} className="flex items-center gap-3">
-                      <span className="material-symbols-outlined text-[20px]">
-                        {item.icon}
-                      </span>
-                      <span className="text-[14px]">{item.title}</span>
+                      <item.icon className="h-5 w-5 shrink-0" />
+                      <span className="text-[14px] truncate">{item.title}</span>
                     </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -130,26 +123,23 @@ export function AppSidebar() {
             })}
           </SidebarMenu>
         </SidebarContent>
-        <SidebarFooter
-          className="p-6 border-t"
-          style={{ borderColor: '#E5E5E7' }}
-        >
+        <SidebarFooter className="p-6 border-t border-gray-100/50">
           <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-3 p-2 rounded-xl transition-colors">
+            <div className="flex items-center gap-3 p-2 rounded-xl transition-colors hover:bg-black/5">
               <div
-                className="size-8 rounded-full flex items-center justify-center"
+                className="size-8 shrink-0 rounded-full flex items-center justify-center"
                 style={{ backgroundColor: '#E5E5E7', color: '#86868B' }}
               >
-                <span className="material-symbols-outlined text-[18px]">
-                  person
+                <span className="font-medium text-xs">
+                  {user?.email?.charAt(0).toUpperCase() || 'U'}
                 </span>
               </div>
-              <div className="flex flex-col min-w-0">
+              <div className="flex flex-col min-w-0 overflow-hidden">
                 <p
                   className="text-[13px] font-medium truncate"
                   style={{ color: '#1D1D1F' }}
                 >
-                  Usuário
+                  {user?.user_metadata?.name || 'Usuário'}
                 </p>
                 <p
                   className="text-[11px] truncate"
@@ -164,8 +154,8 @@ export function AppSidebar() {
               onClick={handleLogout}
               className="flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-red-500 hover:bg-red-50 transition-colors w-full"
             >
-              <LogOut size={14} />
-              <span>Sair do sistema</span>
+              <LogOut size={14} className="shrink-0" />
+              <span className="truncate">Sair do sistema</span>
             </button>
           </div>
         </SidebarFooter>

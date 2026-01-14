@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-ugi0C9xC.js","assets/select-BRXzw63O.js","assets/CRM-PEST4UIB.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-C3TwbPy3.js","assets/select-XbH_0oWd.js","assets/CRM-Xj7fAP4D.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -18891,6 +18891,40 @@ var createLucideIcon = (iconName, iconNode) => {
 	Component.displayName = toPascalCase(iconName);
 	return Component;
 };
+var LayoutDashboard = createLucideIcon("layout-dashboard", [
+	["rect", {
+		width: "7",
+		height: "9",
+		x: "3",
+		y: "3",
+		rx: "1",
+		key: "10lvy0"
+	}],
+	["rect", {
+		width: "7",
+		height: "5",
+		x: "14",
+		y: "3",
+		rx: "1",
+		key: "16une8"
+	}],
+	["rect", {
+		width: "7",
+		height: "9",
+		x: "14",
+		y: "12",
+		rx: "1",
+		key: "1hutg5"
+	}],
+	["rect", {
+		width: "7",
+		height: "5",
+		x: "3",
+		y: "16",
+		rx: "1",
+		key: "ldoo1y"
+	}]
+]);
 var LoaderCircle = createLucideIcon("loader-circle", [["path", {
 	d: "M21 12a9 9 0 1 1-6.219-8.56",
 	key: "13zald"
@@ -18932,6 +18966,30 @@ var PanelLeft = createLucideIcon("panel-left", [["rect", {
 	d: "M9 3v18",
 	key: "fh3hqa"
 }]]);
+var Radio = createLucideIcon("radio", [
+	["path", {
+		d: "M16.247 7.761a6 6 0 0 1 0 8.478",
+		key: "1fwjs5"
+	}],
+	["path", {
+		d: "M19.075 4.933a10 10 0 0 1 0 14.134",
+		key: "ehdyv1"
+	}],
+	["path", {
+		d: "M4.925 19.067a10 10 0 0 1 0-14.134",
+		key: "1q22gi"
+	}],
+	["path", {
+		d: "M7.753 16.239a6 6 0 0 1 0-8.478",
+		key: "r2q7qm"
+	}],
+	["circle", {
+		cx: "12",
+		cy: "12",
+		r: "2",
+		key: "1c9p78"
+	}]
+]);
 var RefreshCw = createLucideIcon("refresh-cw", [
 	["path", {
 		d: "M3 12a9 9 0 0 1 9-9 9.75 9.75 0 0 1 6.74 2.74L21 8",
@@ -18948,6 +19006,35 @@ var RefreshCw = createLucideIcon("refresh-cw", [
 	["path", {
 		d: "M8 16H3v5",
 		key: "1cv678"
+	}]
+]);
+var Settings = createLucideIcon("settings", [["path", {
+	d: "M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915",
+	key: "1i5ecw"
+}], ["circle", {
+	cx: "12",
+	cy: "12",
+	r: "3",
+	key: "1v7zrd"
+}]]);
+var Users = createLucideIcon("users", [
+	["path", {
+		d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2",
+		key: "1yyitq"
+	}],
+	["path", {
+		d: "M16 3.128a4 4 0 0 1 0 7.744",
+		key: "16gr8j"
+	}],
+	["path", {
+		d: "M22 21v-2a4 4 0 0 0-3-3.87",
+		key: "kshegd"
+	}],
+	["circle", {
+		cx: "9",
+		cy: "7",
+		r: "4",
+		key: "nufk8"
 	}]
 ]);
 var X = createLucideIcon("x", [["path", {
@@ -33464,21 +33551,22 @@ function AppSidebar() {
 	const pathname = useLocation().pathname;
 	const { user, signOut } = useAuth();
 	const navigate = useNavigate();
+	const { state } = useSidebar();
 	const items = [
 		{
 			title: "Lives",
 			url: "/lives",
-			icon: "live_tv"
+			icon: Radio
 		},
 		{
 			title: "CRM",
 			url: "/crm",
-			icon: "group"
+			icon: Users
 		},
 		{
 			title: "Ajustes",
 			url: "/settings",
-			icon: "settings"
+			icon: Settings
 		}
 	];
 	const handleLogout = async () => {
@@ -33491,120 +33579,111 @@ function AppSidebar() {
 			toast.error("Erro ao sair");
 		}
 	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("link", {
-			href: "https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap",
-			rel: "stylesheet"
-		}),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", { children: `
-        .material-symbols-outlined {
-          font-variation-settings: "FILL" 0, "wght" 300, "GRAD" 0, "opsz" 24;
-        }
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", { children: `
         .glass-sidebar {
           background: rgba(255, 255, 255, 0.7) !important;
           backdrop-filter: blur(20px);
           -webkit-backdrop-filter: blur(20px);
-          border-right: 1px solid #E5E5E7 !important;
         }
         .nav-item-active {
           background: rgba(0, 113, 227, 0.08);
           color: #0071E3 !important;
         }
-      ` }),
-		/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Sidebar, {
-			className: "glass-sidebar border-r-0",
-			collapsible: "offcanvas",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarHeader, {
-					className: "p-8",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-3",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "size-9 rounded-xl flex items-center justify-center shadow-lg",
-							style: {
-								background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
-								boxShadow: "0 4px 14px rgba(59, 130, 246, 0.3)"
-							},
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "material-symbols-outlined text-white text-[20px]",
-								children: "analytics"
-							})
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-							className: "text-[15px] font-semibold tracking-tight",
+      ` }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Sidebar, {
+		className: "glass-sidebar border-r border-gray-200/50",
+		collapsible: "offcanvas",
+		children: [
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarHeader, {
+				className: "p-6",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-3",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "size-9 shrink-0 rounded-xl flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105",
+						style: {
+							background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
+							boxShadow: "0 4px 14px rgba(59, 130, 246, 0.3)"
+						},
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LayoutDashboard, { className: "text-white h-5 w-5" })
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex flex-col overflow-hidden transition-all duration-300",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+							className: "text-[15px] font-semibold tracking-tight truncate",
 							style: { color: "#1D1D1F" },
 							children: "Performance"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-[10px] font-medium uppercase tracking-wider",
+							className: "text-[10px] font-medium uppercase tracking-wider truncate",
 							style: { color: "#86868B" },
 							children: "Analytics Suite"
-						})] })]
-					})
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarContent, {
-					className: "px-4 py-2",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenu, {
-						className: "space-y-1",
-						children: items.map((item) => {
-							const isActive = pathname === item.url || item.url === "/lives" && pathname === "/";
-							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuButton, {
-								asChild: true,
-								tooltip: item.title,
-								className: cn("w-full justify-start rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200", isActive ? "nav-item-active" : "hover:bg-black/5"),
-								style: { color: isActive ? "#0071E3" : "#86868B" },
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-									to: item.url,
-									className: "flex items-center gap-3",
-									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "material-symbols-outlined text-[20px]",
-										children: item.icon
-									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-[14px]",
-										children: item.title
-									})]
-								})
-							}) }, item.title);
-						})
-					})
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarFooter, {
-					className: "p-6 border-t",
-					style: { borderColor: "#E5E5E7" },
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-col gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-							className: "flex items-center gap-3 p-2 rounded-xl transition-colors",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: "size-8 rounded-full flex items-center justify-center",
-								style: {
-									backgroundColor: "#E5E5E7",
-									color: "#86868B"
-								},
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "material-symbols-outlined text-[18px]",
-									children: "person"
-								})
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-								className: "flex flex-col min-w-0",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-[13px] font-medium truncate",
-									style: { color: "#1D1D1F" },
-									children: "Usuário"
-								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-									className: "text-[11px] truncate",
-									style: { color: "#86868B" },
-									children: user?.email || "Carregando..."
-								})]
-							})]
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-							onClick: handleLogout,
-							className: "flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-red-500 hover:bg-red-50 transition-colors w-full",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, { size: 14 }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Sair do sistema" })]
 						})]
+					})]
+				})
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarContent, {
+				className: "px-4 py-2",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenu, {
+					className: "space-y-1",
+					children: items.map((item) => {
+						const isActive = pathname === item.url || item.url === "/lives" && pathname === "/";
+						return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuButton, {
+							asChild: true,
+							tooltip: item.title,
+							className: cn("w-full justify-start rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200", isActive ? "nav-item-active" : "hover:bg-black/5"),
+							style: { color: isActive ? "#0071E3" : "#86868B" },
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+								to: item.url,
+								className: "flex items-center gap-3",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, { className: "h-5 w-5 shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+									className: "text-[14px] truncate",
+									children: item.title
+								})]
+							})
+						}) }, item.title);
 					})
 				})
-			]
-		})
-	] });
+			}),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarFooter, {
+				className: "p-6 border-t border-gray-100/50",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex flex-col gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "flex items-center gap-3 p-2 rounded-xl transition-colors hover:bg-black/5",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: "size-8 shrink-0 rounded-full flex items-center justify-center",
+							style: {
+								backgroundColor: "#E5E5E7",
+								color: "#86868B"
+							},
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "font-medium text-xs",
+								children: user?.email?.charAt(0).toUpperCase() || "U"
+							})
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+							className: "flex flex-col min-w-0 overflow-hidden",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-[13px] font-medium truncate",
+								style: { color: "#1D1D1F" },
+								children: user?.user_metadata?.name || "Usuário"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+								className: "text-[11px] truncate",
+								style: { color: "#86868B" },
+								children: user?.email || "Carregando..."
+							})]
+						})]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+						onClick: handleLogout,
+						className: "flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-red-500 hover:bg-red-50 transition-colors w-full",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, {
+							size: 14,
+							className: "shrink-0"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "truncate",
+							children: "Sair do sistema"
+						})]
+					})]
+				})
+			})
+		]
+	})] });
 }
 var createStoreImpl = (createState) => {
 	let state;
@@ -34853,6 +34932,7 @@ function SyncManager() {
 }
 function Layout() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SidebarProvider, {
+		defaultOpen: true,
 		style: {
 			"--sidebar-width": "260px",
 			"--sidebar-background": "rgba(255, 255, 255, 0.7)",
@@ -34862,7 +34942,7 @@ function Layout() {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SyncManager, {}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AppSidebar, {}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SidebarInset, {
-				className: "transition-colors duration-300",
+				className: "transition-all duration-300 ease-in-out",
 				style: { backgroundColor: "#F5F5F7" },
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
 					className: "flex-1 overflow-auto",
@@ -35080,8 +35160,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-ugi0C9xC.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-PEST4UIB.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-C3TwbPy3.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-Xj7fAP4D.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -35139,6 +35219,6 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(J, {
 });
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
-export { toast as $, Root$1 as A, Primitive as B, require_shim as C, composeEventHandlers as Ct, Description as D, __commonJSMin as Dt, Content as E, require_react as Et, hideOthers as F, Slot as G, Button as H, Combination_default as I, Content$1 as J, Anchor as K, useFocusGuards as L, Trigger as M, WarningProvider as N, Overlay as O, __export as Ot, createDialogScope as P, useId as Q, FocusScope as R, googleSheetsService as S, useComposedRefs as St, Close as T, require_react_dom as Tt, buttonVariants as U, Input as V, useIsMobile as W, createPopperScope as X, Root2 as Y, useSize as Z, millisecondsInHour as _, createSlot as _t, CardTitle as a, cva as at, minutesInDay as b, require_jsx_runtime as bt, COLUMNS as c, useControllableState as ct, differenceInCalendarDays as d, useLayoutEffect2 as dt, cn as et, startOfDay as f, DismissableLayer as ft, constructFrom as g, createCollection as gt, toDate as h, dispatchDiscreteCustomEvent as ht, CardHeader as i, createLucideIcon as it, Title as j, Portal$1 as k, __toESM as kt, useCRMStore as l, Presence as lt, getTimezoneOffsetInMilliseconds as m, Primitive$1 as mt, CardContent as n, RefreshCw as nt, Label as o, clsx_default as ot, normalizeDates as p, useCallbackRef$1 as pt, Arrow as q, CardDescription as r, LoaderCircle as rt, useLivesStore as s, VISUALLY_HIDDEN_STYLES as st, Card as t, X as tt, differenceInDays as u, Portal as ut, millisecondsInMinute as v, createSlottable as vt, Skeleton as w, useToast as wt, minutesInMonth as x, composeRefs as xt, millisecondsInWeek as y, createContextScope as yt, Separator as z };
+export { toast as $, Root$1 as A, __toESM as At, Primitive as B, require_shim as C, useComposedRefs as Ct, Description as D, require_react as Dt, Content as E, require_react_dom as Et, hideOthers as F, Slot as G, Button as H, Combination_default as I, Content$1 as J, Anchor as K, useFocusGuards as L, Trigger as M, WarningProvider as N, Overlay as O, __commonJSMin as Ot, createDialogScope as P, useId as Q, FocusScope as R, googleSheetsService as S, composeRefs as St, Close as T, useToast as Tt, buttonVariants as U, Input as V, useIsMobile as W, createPopperScope as X, Root2 as Y, useSize as Z, millisecondsInHour as _, createCollection as _t, CardTitle as a, createLucideIcon as at, minutesInDay as b, createContextScope as bt, COLUMNS as c, VISUALLY_HIDDEN_STYLES as ct, differenceInCalendarDays as d, Portal as dt, cn as et, startOfDay as f, useLayoutEffect2 as ft, constructFrom as g, dispatchDiscreteCustomEvent as gt, toDate as h, Primitive$1 as ht, CardHeader as i, LoaderCircle as it, Title as j, Portal$1 as k, __export as kt, useCRMStore as l, useControllableState as lt, getTimezoneOffsetInMilliseconds as m, useCallbackRef$1 as mt, CardContent as n, Users as nt, Label as o, cva as ot, normalizeDates as p, DismissableLayer as pt, Arrow as q, CardDescription as r, RefreshCw as rt, useLivesStore as s, clsx_default as st, Card as t, X as tt, differenceInDays as u, Presence as ut, millisecondsInMinute as v, createSlot as vt, Skeleton as w, composeEventHandlers as wt, minutesInMonth as x, require_jsx_runtime as xt, millisecondsInWeek as y, createSlottable as yt, Separator as z };
 
-//# sourceMappingURL=index-_N1K3nDU.js.map
+//# sourceMappingURL=index-CuStz71A.js.map

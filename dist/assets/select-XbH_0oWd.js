@@ -1,4 +1,4 @@
-import { A as Root$1, Ct as composeEventHandlers, D as Description, E as Content$1, Et as require_react, F as hideOthers, H as Button, I as Combination_default, J as Content, K as Anchor, L as useFocusGuards, M as Trigger$2, O as Overlay, Ot as __export, Q as useId, R as FocusScope, St as useComposedRefs, T as Close, Tt as require_react_dom, U as buttonVariants, X as createPopperScope, Y as Root2$2, _ as millisecondsInHour, _t as createSlot, bt as require_jsx_runtime, ct as useControllableState, d as differenceInCalendarDays, dt as useLayoutEffect2, et as cn, f as startOfDay, ft as DismissableLayer, g as constructFrom, gt as createCollection, h as toDate, it as createLucideIcon, j as Title, k as Portal$3, kt as __toESM, lt as Presence, mt as Primitive, p as normalizeDates, pt as useCallbackRef, q as Arrow, st as VISUALLY_HIDDEN_STYLES, tt as X, ut as Portal, v as millisecondsInMinute, y as millisecondsInWeek, yt as createContextScope } from "./index-_N1K3nDU.js";
+import { A as Root$1, At as __toESM, Ct as useComposedRefs, D as Description, Dt as require_react, E as Content$1, Et as require_react_dom, F as hideOthers, H as Button, I as Combination_default, J as Content, K as Anchor, L as useFocusGuards, M as Trigger$2, O as Overlay, Q as useId, R as FocusScope, T as Close, U as buttonVariants, X as createPopperScope, Y as Root2$2, _ as millisecondsInHour, _t as createCollection, at as createLucideIcon, bt as createContextScope, ct as VISUALLY_HIDDEN_STYLES, d as differenceInCalendarDays, dt as Portal, et as cn, f as startOfDay, ft as useLayoutEffect2, g as constructFrom, h as toDate, ht as Primitive, j as Title, k as Portal$3, kt as __export, lt as useControllableState, mt as useCallbackRef, p as normalizeDates, pt as DismissableLayer, q as Arrow, tt as X, ut as Presence, v as millisecondsInMinute, vt as createSlot, wt as composeEventHandlers, xt as require_jsx_runtime, y as millisecondsInWeek } from "./index-CuStz71A.js";
 var ArrowRightLeft = createLucideIcon("arrow-right-left", [
 	["path", {
 		d: "m16 3 4 4-4 4",
@@ -54,26 +54,6 @@ var DollarSign = createLucideIcon("dollar-sign", [["line", {
 	d: "M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6",
 	key: "1b0p4s"
 }]]);
-var Users = createLucideIcon("users", [
-	["path", {
-		d: "M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2",
-		key: "1yyitq"
-	}],
-	["path", {
-		d: "M16 3.128a4 4 0 0 1 0 7.744",
-		key: "16gr8j"
-	}],
-	["path", {
-		d: "M22 21v-2a4 4 0 0 0-3-3.87",
-		key: "kshegd"
-	}],
-	["circle", {
-		cx: "9",
-		cy: "7",
-		r: "4",
-		key: "nufk8"
-	}]
-]);
 function addDays(date, amount, options) {
 	const _date = toDate(date, options?.in);
 	if (isNaN(amount)) return constructFrom(options?.in || date, NaN);
@@ -5689,6 +5669,6 @@ var SelectSeparator = import_react.forwardRef(({ className, ...props }, ref) => 
 	...props
 }));
 SelectSeparator.displayName = Separator.displayName;
-export { isSameDay as A, Check as B, isBefore as C, endOfMonth as D, startOfMonth as E, DollarSign as F, ArrowRightLeft as H, ChevronUp as I, ChevronRight as L, addMonths as M, addDays as N, endOfDay as O, Users as P, ChevronLeft as R, subDays as S, enUS$1 as T, ArrowUp as V, Popover as _, SelectValue as a, ptBR as b, Dialog as c, DialogDescription as d, DialogFooter as f, Calendar as g, DialogTrigger as h, SelectTrigger as i, getDefaultOptions as j, differenceInCalendarMonths as k, DialogClose as l, DialogTitle as m, SelectContent as n, usePrevious as o, DialogHeader as p, SelectItem as r, useDirection as s, Select as t, DialogContent as u, PopoverContent as v, format as w, parseISO as x, PopoverTrigger as y, ChevronDown as z };
+export { isSameDay as A, ArrowUp as B, isBefore as C, endOfMonth as D, startOfMonth as E, ChevronUp as F, ChevronRight as I, ChevronLeft as L, addMonths as M, addDays as N, endOfDay as O, DollarSign as P, ChevronDown as R, subDays as S, enUS$1 as T, ArrowRightLeft as V, Popover as _, SelectValue as a, ptBR as b, Dialog as c, DialogDescription as d, DialogFooter as f, Calendar as g, DialogTrigger as h, SelectTrigger as i, getDefaultOptions as j, differenceInCalendarMonths as k, DialogClose as l, DialogTitle as m, SelectContent as n, usePrevious as o, DialogHeader as p, SelectItem as r, useDirection as s, Select as t, DialogContent as u, PopoverContent as v, format as w, parseISO as x, PopoverTrigger as y, Check as z };
 
-//# sourceMappingURL=select-BRXzw63O.js.map
+//# sourceMappingURL=select-XbH_0oWd.js.map
