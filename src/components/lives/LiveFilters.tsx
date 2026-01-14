@@ -48,6 +48,7 @@ interface LiveFiltersProps {
   filters: FilterState
   onFilterChange: (filters: FilterState) => void
   loading: boolean
+  dateBounds?: { min: Date; max: Date }
 }
 
 const WEEKDAYS = [
@@ -65,6 +66,7 @@ const DATE_PRESETS = [
   { label: 'Últimos 3 Meses', value: '3months' },
   { label: 'Últimos 6 Meses', value: '6months' },
   { label: 'Mês Atual', value: 'currentMonth' },
+  { label: 'Período Total', value: 'allTime' },
 ]
 
 export function LiveFilters({
@@ -72,6 +74,7 @@ export function LiveFilters({
   filters,
   onFilterChange,
   loading,
+  dateBounds,
 }: LiveFiltersProps) {
   const [openPresenters, setOpenPresenters] = useState(false)
   const [selectedPreset, setSelectedPreset] = useState<string>('30days')
@@ -95,6 +98,12 @@ export function LiveFilters({
       case 'currentMonth':
         from = startOfMonth(today)
         to = today
+        break
+      case 'allTime':
+        if (dateBounds) {
+          from = dateBounds.min
+          to = dateBounds.max
+        }
         break
       default:
         return
@@ -142,12 +151,12 @@ export function LiveFilters({
     <section className="bg-[#1A1A1A] border border-[#333333] rounded-xl p-2 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar shadow-lg">
       <div className="flex items-center gap-2 px-3 text-gray-400 shrink-0 border-r border-[#333333] pr-4 mr-2">
         <Filter className="w-5 h-5 text-[#D9B979]" />
-        <span className="text-sm font-medium">Filtros:</span>
+        <span className="text-sm font-medium font-sans">Filtros:</span>
       </div>
 
       {/* Preset Selector */}
       <Select value={selectedPreset} onValueChange={handlePresetChange}>
-        <SelectTrigger className="h-10 w-[140px] border-[#333333] bg-[#0C0C0D] text-gray-200 shrink-0 focus:ring-[#D9B979]/50">
+        <SelectTrigger className="h-10 w-[140px] border-[#333333] bg-[#0C0C0D] text-gray-200 shrink-0 focus:ring-[#D9B979]/50 font-sans">
           <SelectValue placeholder="Período" />
         </SelectTrigger>
         <SelectContent className="bg-[#1A1A1A] border-[#333333] text-gray-200">
@@ -155,14 +164,15 @@ export function LiveFilters({
             <SelectItem
               key={preset.value}
               value={preset.value}
-              className="focus:bg-[#333333] focus:text-white"
+              disabled={preset.value === 'allTime' && !dateBounds}
+              className="focus:bg-[#D9B979] focus:text-black font-sans data-[state=checked]:bg-[#D9B979]/20 data-[state=checked]:text-[#D9B979]"
             >
               {preset.label}
             </SelectItem>
           ))}
           <SelectItem
             value="custom"
-            className="focus:bg-[#333333] focus:text-white"
+            className="focus:bg-[#D9B979] focus:text-black font-sans"
           >
             Personalizado
           </SelectItem>
@@ -175,7 +185,7 @@ export function LiveFilters({
           <Button
             variant="outline"
             className={cn(
-              'h-10 justify-start text-left font-normal shrink-0 bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white',
+              'h-10 justify-start text-left font-normal shrink-0 bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white font-sans',
               !filters.dateRange && 'text-muted-foreground',
             )}
             onClick={() => setSelectedPreset('custom')}
@@ -222,7 +232,7 @@ export function LiveFilters({
             variant="outline"
             role="combobox"
             aria-expanded={openPresenters}
-            className="h-10 justify-between shrink-0 min-w-[150px] bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white"
+            className="h-10 justify-between shrink-0 min-w-[150px] bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white font-sans"
           >
             <span className="truncate">
               {filters.presenters.length === 0
@@ -252,7 +262,7 @@ export function LiveFilters({
                       })
                     }
                   }}
-                  className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white"
+                  className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white font-sans"
                 >
                   <div
                     className={cn(
@@ -273,7 +283,7 @@ export function LiveFilters({
                     key={presenter}
                     value={presenter}
                     onSelect={() => togglePresenter(presenter)}
-                    className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white"
+                    className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white font-sans"
                   >
                     <div
                       className={cn(
@@ -300,7 +310,7 @@ export function LiveFilters({
           <Button
             variant="outline"
             role="combobox"
-            className="h-10 justify-between shrink-0 min-w-[150px] bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white"
+            className="h-10 justify-between shrink-0 min-w-[150px] bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white font-sans"
           >
             <span className="truncate">
               {filters.weekdays.length === 0
@@ -319,7 +329,7 @@ export function LiveFilters({
                     key={day.value}
                     value={day.value}
                     onSelect={() => toggleWeekday(day.value)}
-                    className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white"
+                    className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white font-sans"
                   >
                     <div
                       className={cn(
@@ -358,7 +368,7 @@ export function LiveFilters({
           disabled={!filters.dateRange?.from || !filters.dateRange?.to}
           className="data-[state=checked]:bg-[#D9B979]"
         />
-        <div className="flex items-center gap-1.5 text-gray-400 group-hover:text-white transition-colors">
+        <div className="flex items-center gap-1.5 text-gray-400 group-hover:text-white transition-colors font-sans">
           <ArrowRightLeft className="w-4 h-4" />
           <span className="text-xs font-medium">Comparar</span>
         </div>
@@ -370,7 +380,7 @@ export function LiveFilters({
       {hasActiveFilters && (
         <button
           onClick={handleClear}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-gray-400 hover:text-[#FF453A] hover:bg-[#FF453A]/10 rounded-lg transition-all shrink-0"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-gray-400 hover:text-[#FF453A] hover:bg-[#FF453A]/10 rounded-lg transition-all shrink-0 font-sans"
         >
           <FilterX className="w-4 h-4" />
           <span className="text-xs font-medium">Limpar Filtros</span>

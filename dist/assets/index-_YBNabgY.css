@@ -3001,9 +3001,9 @@ body {
   --tw-border-opacity: 1;
   border-color: rgb(217 185 121 / var(--tw-border-opacity, 1));
 }
-.focus\:bg-\[\#333333\]:focus{
+.focus\:bg-\[\#D9B979\]:focus{
   --tw-bg-opacity: 1;
-  background-color: rgb(51 51 51 / var(--tw-bg-opacity, 1));
+  background-color: rgb(217 185 121 / var(--tw-bg-opacity, 1));
 }
 .focus\:bg-accent:focus{
   background-color: hsl(var(--accent));
@@ -3015,9 +3015,9 @@ body {
 .focus\:text-accent-foreground:focus{
   color: hsl(var(--accent-foreground));
 }
-.focus\:text-white:focus{
+.focus\:text-black:focus{
   --tw-text-opacity: 1;
-  color: rgb(255 255 255 / var(--tw-text-opacity, 1));
+  color: rgb(0 0 0 / var(--tw-text-opacity, 1));
 }
 .focus\:opacity-100:focus{
   opacity: 1;
@@ -3321,6 +3321,9 @@ body {
   --tw-bg-opacity: 1;
   background-color: rgb(217 185 121 / var(--tw-bg-opacity, 1));
 }
+.data-\[state\=checked\]\:bg-\[\#D9B979\]\/20[data-state="checked"]{
+  background-color: rgb(217 185 121 / 0.2);
+}
 .data-\[state\=checked\]\:bg-primary[data-state="checked"]{
   background-color: hsl(var(--primary));
 }
@@ -3369,6 +3372,10 @@ body {
 }
 .data-\[state\=active\]\:text-foreground[data-state="active"]{
   color: hsl(var(--foreground));
+}
+.data-\[state\=checked\]\:text-\[\#D9B979\][data-state="checked"]{
+  --tw-text-opacity: 1;
+  color: rgb(217 185 121 / var(--tw-text-opacity, 1));
 }
 .data-\[state\=checked\]\:text-primary-foreground[data-state="checked"]{
   color: hsl(var(--primary-foreground));

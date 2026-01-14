@@ -42,6 +42,16 @@ export default function Lives() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
+  // Derived State: Data Bounds for "Período Total"
+  const dateBounds = useMemo(() => {
+    if (allData.length === 0) return undefined
+    const timestamps = allData.map((d) => parseISO(d.date).getTime())
+    return {
+      min: new Date(Math.min(...timestamps)),
+      max: new Date(Math.max(...timestamps)),
+    }
+  }, [allData])
+
   // Derived State: Comparison Date Range
   const comparisonRange = useMemo(() => {
     if (
@@ -166,6 +176,7 @@ export default function Lives() {
         filters={filters}
         onFilterChange={setFilters}
         loading={loading}
+        dateBounds={dateBounds}
       />
 
       {/* KPI Dashboard */}
