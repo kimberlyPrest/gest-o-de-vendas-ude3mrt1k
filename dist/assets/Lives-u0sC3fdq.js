@@ -1,12 +1,5 @@
-import { a as parseISO, c as startOfMonth, d as addDays, f as Download, g as ArrowRightLeft, h as ArrowUp, i as PopoverTrigger, m as ChevronLeft, n as Popover, o as subDays, p as DollarSign, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-ZqnhQV0v.js";
-import { At as TooltipTrigger, Bt as Users, C as DialogHeader, Ct as Button, Dt as Tooltip$1, E as ptBR, Et as Slot, H as endOfDay, Ht as RefreshCw, I as format, Jt as createLucideIcon, Kt as Check, Ot as TooltipContent, Rt as cn, S as DialogFooter, St as Input, T as DialogTrigger, Ut as LoaderCircle, Vt as TrendingUp, W as differenceInDays, Wt as ChevronRight, Xt as clsx_default, Y as startOfDay, _ as CommandSeparator, a as Select, b as DialogContent, c as SelectTrigger, d as Label$1, dn as require_react, et as toDate, f as Command, fn as __commonJSMin, g as CommandList, h as CommandItem, i as CardTitle, it as googleSheetsService, j as useLivesStore, kt as TooltipProvider, l as SelectValue, m as CommandGroup, mn as __toESM, n as CardContent, o as SelectContent, ot as Skeleton, p as CommandEmpty, pn as __export, qt as Calendar, r as CardHeader, s as SelectItem, sn as require_jsx_runtime, t as Card, u as Switch, un as useToast, v as Dialog, w as DialogTitle, x as DialogDescription, zt as Video } from "./index-DHzT6Z6x.js";
-var ArrowDown = createLucideIcon("arrow-down", [["path", {
-	d: "M12 5v14",
-	key: "s699le"
-}], ["path", {
-	d: "m19 12-7 7-7-7",
-	key: "1idqje"
-}]]);
+import { _ as ArrowRightLeft, a as parseISO, c as startOfMonth, d as addDays, f as Funnel, g as ArrowUp, h as ChevronLeft, i as PopoverTrigger, m as DollarSign, n as Popover, o as subDays, p as Download, r as PopoverContent, t as Calendar$1, u as addMonths, v as ArrowDown } from "./calendar-CveEDU1m.js";
+import { $t as createLucideIcon, At as TooltipProvider, C as DialogFooter, Ct as Input, D as ptBR, Dt as Slot, E as DialogTrigger, G as differenceInDays, Gt as RefreshCw, Ht as Users, Kt as LoaderCircle, L as format, M as useLivesStore, Ot as Tooltip$1, Qt as Calendar, S as DialogDescription, T as DialogTitle, U as endOfDay, Ut as TrendingUp, Vt as Video, X as startOfDay, Yt as ChevronRight, Zt as Check, _ as CommandList, _n as __commonJSMin, a as Select, at as googleSheetsService, c as SelectTrigger, d as Label$1, f as Command, fn as require_jsx_runtime, g as CommandItem, gn as require_react, h as CommandInput, hn as useToast, i as CardTitle, jt as TooltipTrigger, kt as TooltipContent, l as SelectValue, m as CommandGroup, n as CardContent, o as SelectContent, p as CommandEmpty, r as CardHeader, s as SelectItem, st as Skeleton, t as Card, tn as clsx_default, tt as toDate, u as Switch, v as CommandSeparator, vn as __export, w as DialogHeader, wt as Button, x as DialogContent, y as Dialog, yn as __toESM, zt as cn } from "./index-Bv5eVTFr.js";
 var Award = createLucideIcon("award", [["path", {
 	d: "m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526",
 	key: "1yiouv"
@@ -104,10 +97,6 @@ var FunnelX = createLucideIcon("funnel-x", [
 		key: "m0lwru"
 	}]
 ]);
-var Funnel = createLucideIcon("funnel", [["path", {
-	d: "M10 20a1 1 0 0 0 .553.895l2 1A1 1 0 0 0 14 21v-7a2 2 0 0 1 .517-1.341L21.74 4.67A1 1 0 0 0 21 3H3a1 1 0 0 0-.742 1.67l7.225 7.989A2 2 0 0 1 10 14z",
-	key: "sc7q7i"
-}]]);
 var Minus = createLucideIcon("minus", [["path", {
 	d: "M5 12h14",
 	key: "1ays0h"
@@ -6016,11 +6005,11 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 	};
 	const hasActiveFilters = filters.presenters.length > 0 || filters.weekdays.length > 0 || filters.comparisonEnabled;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
-		className: "bg-white border rounded-xl p-2 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar shadow-sm",
+		className: "bg-[#1A1A1A] border border-[#333333] rounded-xl p-2 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar shadow-lg",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex items-center gap-2 px-3 text-muted-foreground shrink-0 border-r pr-4 mr-2",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Funnel, { className: "w-5 h-5" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+				className: "flex items-center gap-2 px-3 text-gray-400 shrink-0 border-r border-[#333333] pr-4 mr-2",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Funnel, { className: "w-5 h-5 text-[#D9B979]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 					className: "text-sm font-medium",
 					children: "Filtros:"
 				})]
@@ -6029,21 +6018,26 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 				value: selectedPreset,
 				onValueChange: handlePresetChange,
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, {
-					className: "h-10 w-[140px] border-input shrink-0",
+					className: "h-10 w-[140px] border-[#333333] bg-[#0C0C0D] text-gray-200 shrink-0 focus:ring-[#D9B979]/50",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, { placeholder: "Período" })
-				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, { children: [DATE_PRESETS.map((preset) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-					value: preset.value,
-					children: preset.label
-				}, preset.value)), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-					value: "custom",
-					children: "Personalizado"
-				})] })]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, {
+					className: "bg-[#1A1A1A] border-[#333333] text-gray-200",
+					children: [DATE_PRESETS.map((preset) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+						value: preset.value,
+						className: "focus:bg-[#333333] focus:text-white",
+						children: preset.label
+					}, preset.value)), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+						value: "custom",
+						className: "focus:bg-[#333333] focus:text-white",
+						children: "Personalizado"
+					})]
+				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
 				asChild: true,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 					variant: "outline",
-					className: cn("h-10 justify-start text-left font-normal shrink-0", !filters.dateRange && "text-muted-foreground"),
+					className: cn("h-10 justify-start text-left font-normal shrink-0 bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white", !filters.dateRange && "text-muted-foreground"),
 					onClick: () => setSelectedPreset("custom"),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "mr-2 h-4 w-4" }), filters.dateRange?.from ? filters.dateRange.to ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 						format(filters.dateRange.from, "dd/MM/yy"),
@@ -6053,7 +6047,7 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 					] }) : format(filters.dateRange.from, "dd/MM/yy") : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecione datas" })]
 				})
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
-				className: "w-auto p-0",
+				className: "w-auto p-0 border-[#333333] bg-[#1A1A1A]",
 				align: "start",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar$1, {
 					initialFocus: true,
@@ -6068,7 +6062,8 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 						setSelectedPreset("custom");
 					},
 					numberOfMonths: 2,
-					locale: ptBR
+					locale: ptBR,
+					className: "bg-[#1A1A1A] text-white"
 				})
 			})] }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, {
@@ -6080,41 +6075,49 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 						variant: "outline",
 						role: "combobox",
 						"aria-expanded": openPresenters,
-						className: "h-10 justify-between shrink-0 min-w-[150px]",
+						className: "h-10 justify-between shrink-0 min-w-[150px] bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "truncate",
 							children: filters.presenters.length === 0 ? "Todos os Hosts" : `${filters.presenters.length} selecionado(s)`
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronsUpDown, { className: "ml-2 h-4 w-4 shrink-0 opacity-50" })]
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
-					className: "w-[220px] p-0",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Command, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandList, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandEmpty, { children: "Nenhum apresentador." }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandGroup, { children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
-							onSelect: () => {
-								if (filters.presenters.length === presenters.length) onFilterChange({
-									...filters,
-									presenters: []
-								});
-								else onFilterChange({
-									...filters,
-									presenters: [...presenters]
-								});
-							},
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.length === presenters.length && presenters.length > 0 ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecionar Todos" })]
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandSeparator, { className: "my-1" }),
-						presenters.map((presenter) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
-							value: presenter,
-							onSelect: () => togglePresenter(presenter),
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.includes(presenter) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
-							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: presenter })]
-						}, presenter))
-					] })] }) })
+					className: "w-[220px] p-0 border-[#333333] bg-[#1A1A1A]",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Command, {
+						className: "bg-[#1A1A1A] text-white",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandInput, {
+							placeholder: "Buscar apresentador...",
+							className: "border-[#333333]"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandList, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandEmpty, { children: "Nenhum apresentador." }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandGroup, { children: [
+							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
+								onSelect: () => {
+									if (filters.presenters.length === presenters.length) onFilterChange({
+										...filters,
+										presenters: []
+									});
+									else onFilterChange({
+										...filters,
+										presenters: [...presenters]
+									});
+								},
+								className: "data-[selected=true]:bg-[#333333] data-[selected=true]:text-white",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.length === presenters.length && presenters.length > 0 ? "bg-[#D9B979] text-black border-[#D9B979]" : "opacity-50 [&_svg]:invisible"),
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecionar Todos" })]
+							}),
+							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandSeparator, { className: "my-1 bg-[#333333]" }),
+							presenters.map((presenter) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
+								value: presenter,
+								onSelect: () => togglePresenter(presenter),
+								className: "data-[selected=true]:bg-[#333333] data-[selected=true]:text-white",
+								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+									className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.includes(presenter) ? "bg-[#D9B979] text-black border-[#D9B979]" : "opacity-50 [&_svg]:invisible"),
+									children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
+								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: presenter })]
+							}, presenter))
+						] })] })]
+					})
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
@@ -6122,22 +6125,26 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 					variant: "outline",
 					role: "combobox",
-					className: "h-10 justify-between shrink-0 min-w-[150px]",
+					className: "h-10 justify-between shrink-0 min-w-[150px] bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 						className: "truncate",
 						children: filters.weekdays.length === 0 ? "Dia da Semana" : `${filters.weekdays.length} dia(s)`
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronsUpDown, { className: "ml-2 h-4 w-4 shrink-0 opacity-50" })]
 				})
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
-				className: "w-[200px] p-0",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Command, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandList, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandGroup, { children: WEEKDAYS.map((day) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
-					value: day.value,
-					onSelect: () => toggleWeekday(day.value),
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.weekdays.includes(day.value) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: day.value })]
-				}, day.value)) }) }) })
+				className: "w-[200px] p-0 border-[#333333] bg-[#1A1A1A]",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Command, {
+					className: "bg-[#1A1A1A] text-white",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandList, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandGroup, { children: WEEKDAYS.map((day) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CommandItem, {
+						value: day.value,
+						onSelect: () => toggleWeekday(day.value),
+						className: "data-[selected=true]:bg-[#333333] data-[selected=true]:text-white",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+							className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.weekdays.includes(day.value) ? "bg-[#D9B979] text-black border-[#D9B979]" : "opacity-50 [&_svg]:invisible"),
+							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: day.value })]
+					}, day.value)) }) })
+				})
 			})] }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex items-center gap-3 shrink-0 cursor-pointer group px-2",
@@ -6151,9 +6158,10 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 						...filters,
 						comparisonEnabled: checked
 					}),
-					disabled: !filters.dateRange?.from || !filters.dateRange?.to
+					disabled: !filters.dateRange?.from || !filters.dateRange?.to,
+					className: "data-[state=checked]:bg-[#D9B979]"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors",
+					className: "flex items-center gap-1.5 text-gray-400 group-hover:text-white transition-colors",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRightLeft, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 						className: "text-xs font-medium",
 						children: "Comparar"
@@ -6163,7 +6171,7 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { className: "flex-1" }),
 			hasActiveFilters && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 				onClick: handleClear,
-				className: "flex items-center gap-1.5 px-3 py-1.5 text-muted-foreground hover:text-red-500 hover:bg-red-50 rounded-lg transition-all shrink-0",
+				className: "flex items-center gap-1.5 px-3 py-1.5 text-gray-400 hover:text-[#FF453A] hover:bg-[#FF453A]/10 rounded-lg transition-all shrink-0",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FunnelX, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 					className: "text-xs font-medium",
 					children: "Limpar Filtros"
@@ -6295,50 +6303,50 @@ function LiveKPIs({ currentData, previousData, comparisonEnabled, loading }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5",
 		children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-			className: cn("overflow-hidden transition-all hover:shadow-md relative", item.variant === "primary" && "border-blue-200 bg-blue-50/50 dark:bg-blue-950/20", item.variant === "accent" && "border-amber-200 bg-amber-50/50 dark:bg-amber-950/20"),
+			className: cn("overflow-hidden relative transition-all hover:shadow-glow-hover", item.variant === "primary" && "border-[#D9B979]/30", item.variant === "accent" && "border-[#D9B979]/20"),
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
 					className: "flex flex-row items-center justify-between space-y-0 pb-2 p-4",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-						className: "text-xs font-medium text-muted-foreground uppercase tracking-wider",
+						className: "text-[10px] font-semibold font-sans text-gray-400 uppercase tracking-wider",
 						children: item.title
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, { className: cn("h-4 w-4", item.variant === "primary" ? "text-blue-600" : item.variant === "accent" ? "text-amber-600" : "text-gray-500") })]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, { className: cn("h-4 w-4", item.variant === "primary" || item.variant === "accent" ? "text-[#D9B979]" : "text-gray-500") })]
 				}),
 				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
 					className: "p-4 pt-0",
 					children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "space-y-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-7 w-20" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-3 w-12" })]
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-7 w-20 bg-[#333333]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-3 w-12 bg-[#333333]" })]
 					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "text-2xl font-bold tracking-tight",
+							className: "text-2xl font-bold tracking-tight font-display text-white",
 							children: item.value
 						}),
 						item.subValue && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-xs text-muted-foreground mt-1 truncate",
+							className: "text-xs text-gray-500 mt-1 truncate",
 							title: item.subValue,
 							children: item.subValue
 						}),
 						item.trend !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center mt-1",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: cn("flex items-center text-xs font-medium", item.trend > 0 ? "text-emerald-600" : item.trend < 0 ? "text-red-600" : "text-gray-500"),
+								className: cn("flex items-center text-xs font-medium", item.trend > 0 ? "text-[#27E39F]" : item.trend < 0 ? "text-[#FF453A]" : "text-gray-500"),
 								children: [
 									item.trend > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUp, { className: "mr-0.5 h-3 w-3" }) : item.trend < 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowDown, { className: "mr-0.5 h-3 w-3" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minus, { className: "mr-0.5 h-3 w-3" }),
 									Math.abs(item.trend).toFixed(1),
 									"%"
 								]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-[10px] text-muted-foreground ml-1.5",
+								className: "text-[10px] text-gray-500 ml-1.5",
 								children: "vs anterior"
 							})]
 						})
 					] })
 				}),
 				item.id === "total-revenue" && !loading && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "absolute bottom-0 left-0 w-full h-1 bg-blue-100",
+					className: "absolute bottom-0 left-0 w-full h-1 bg-[#333333]",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "h-full bg-blue-500 transition-all duration-1000",
+						className: "h-full bg-[#D9B979] shadow-glow transition-all duration-1000",
 						style: { width: `${goalProgress}%` }
 					})
 				})
@@ -27903,9 +27911,9 @@ function HostPerformanceChart({ data, loading }) {
 		if (active && payload && payload.length) {
 			const data$1 = payload[0].payload;
 			return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "rounded-lg border bg-white p-3 shadow-md text-sm",
+				className: "rounded-lg border border-[#333333] bg-[#1A1A1A] p-3 shadow-xl text-sm",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "font-semibold mb-2 text-gray-900",
+					className: "font-semibold mb-2 text-white font-display",
 					children: data$1.presenter
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "space-y-1",
@@ -27913,30 +27921,30 @@ function HostPerformanceChart({ data, loading }) {
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 							className: "flex justify-between gap-4",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-gray-500",
+								className: "text-gray-400",
 								children: "Conversão Média:"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "font-bold text-yellow-600",
+								className: "font-bold text-[#D9B979]",
 								children: [data$1.avgConversion.toFixed(1), "%"]
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 							className: "flex justify-between gap-4",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-gray-500",
+								className: "text-gray-400",
 								children: "Faturamento Total:"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: "font-medium",
+								className: "font-medium text-gray-200",
 								children: ["R$ ", data$1.totalRevenue.toLocaleString("pt-BR")]
 							})]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 							className: "flex justify-between gap-4",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-gray-500",
+								className: "text-gray-400",
 								children: "Lives Realizadas:"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "font-medium",
+								className: "font-medium text-gray-200",
 								children: data$1.count
 							})]
 						})
@@ -27946,13 +27954,13 @@ function HostPerformanceChart({ data, loading }) {
 		}
 		return null;
 	};
-	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-[350px] w-full rounded-xl" });
+	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-[350px] w-full rounded-xl bg-[#333333]" });
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "h-[350px] w-full p-4 bg-white rounded-xl border shadow-sm",
+		className: "h-[350px] w-full p-4 cyber-card",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex items-center gap-2 mb-6",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trophy, { className: "w-5 h-5 text-yellow-500" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-				className: "text-lg font-semibold text-gray-800",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Trophy, { className: "w-5 h-5 text-[#D9B979]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+				className: "text-lg font-bold text-white font-display",
 				children: "Ranking de Conversão"
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ResponsiveContainer, {
@@ -27966,7 +27974,8 @@ function HostPerformanceChart({ data, loading }) {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartesianGrid, {
 						strokeDasharray: "3 3",
 						horizontal: true,
-						vertical: false
+						vertical: false,
+						stroke: "#333333"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
 						type: "number",
@@ -27980,12 +27989,15 @@ function HostPerformanceChart({ data, loading }) {
 						width: 100,
 						tick: {
 							fontSize: 12,
-							fill: "#6B7280"
+							fill: "#A1A1AA"
 						}
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tooltip, {
 						content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CustomTooltip, {}),
-						cursor: { fill: "#F3F4F6" }
+						cursor: {
+							fill: "#333333",
+							opacity: .4
+						}
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Bar, {
 						dataKey: "avgConversion",
@@ -27997,7 +28009,7 @@ function HostPerformanceChart({ data, loading }) {
 						],
 						barSize: 32,
 						children: chartData.map((entry, index) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Cell, {
-							fill: `#EAB308`,
+							fill: "#D9B979",
 							fillOpacity: 1 - index * .15,
 							style: { filter: `brightness(${1 - index * .05})` },
 							stroke: "none"
@@ -28056,16 +28068,16 @@ function WeekdayEfficiencyChart({ data, loading }) {
 		if (active && payload && payload.length) {
 			const data$1 = payload[0].payload;
 			return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "rounded-lg border bg-white p-3 shadow-md text-sm",
+				className: "rounded-lg border border-[#333333] bg-[#1A1A1A] p-3 shadow-xl text-sm",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "font-semibold mb-2 text-gray-900",
+					className: "font-semibold mb-2 text-white font-display",
 					children: data$1.fullName
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "space-y-1",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 						className: "flex justify-between gap-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-gray-500",
+							className: "text-gray-400",
 							children: "Conversão Média:"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 							className: "font-bold text-[#27E39F]",
@@ -28074,10 +28086,10 @@ function WeekdayEfficiencyChart({ data, loading }) {
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 						className: "flex justify-between gap-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "text-gray-500",
+							className: "text-gray-400",
 							children: "Total de Lives:"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-							className: "font-medium",
+							className: "font-medium text-gray-200",
 							children: data$1.count
 						})]
 					})]
@@ -28086,13 +28098,13 @@ function WeekdayEfficiencyChart({ data, loading }) {
 		}
 		return null;
 	};
-	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-[350px] w-full rounded-xl" });
+	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-[350px] w-full rounded-xl bg-[#333333]" });
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "h-[350px] w-full p-4 bg-white rounded-xl border shadow-sm",
+		className: "h-[350px] w-full p-4 cyber-card",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex items-center gap-2 mb-6",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "w-5 h-5 text-[#27E39F]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-				className: "text-lg font-semibold text-gray-800",
+				className: "text-lg font-bold text-white font-display",
 				children: "Eficiência por Dia"
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ResponsiveContainer, {
@@ -28103,7 +28115,8 @@ function WeekdayEfficiencyChart({ data, loading }) {
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartesianGrid, {
 						strokeDasharray: "3 3",
-						vertical: false
+						vertical: false,
+						stroke: "#333333"
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
 						dataKey: "name",
@@ -28112,7 +28125,7 @@ function WeekdayEfficiencyChart({ data, loading }) {
 						dy: 10,
 						tick: {
 							fontSize: 12,
-							fill: "#6B7280"
+							fill: "#A1A1AA"
 						}
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(YAxis, {
@@ -28121,12 +28134,15 @@ function WeekdayEfficiencyChart({ data, loading }) {
 						tickFormatter: (value) => `${value.toFixed(0)}%`,
 						tick: {
 							fontSize: 12,
-							fill: "#6B7280"
+							fill: "#A1A1AA"
 						}
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tooltip, {
 						content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CustomTooltip, {}),
-						cursor: { fill: "#F3F4F6" }
+						cursor: {
+							fill: "#333333",
+							opacity: .4
+						}
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("defs", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("linearGradient", {
 						id: "jadeGradient",
@@ -28297,11 +28313,11 @@ function getPayloadConfigFromPayload(config$1, payload, key) {
 var chartConfig = {
 	revenueCurrent: {
 		label: "Período Atual",
-		color: "#EAB308"
+		color: "#D9B979"
 	},
 	revenuePrevious: {
 		label: "Período Anterior",
-		color: "#A3A3A3"
+		color: "#71717A"
 	}
 };
 function RevenueEvolutionChart({ currentData, previousData, comparisonEnabled, dateRange, loading }) {
@@ -28333,20 +28349,20 @@ function RevenueEvolutionChart({ currentData, previousData, comparisonEnabled, d
 		comparisonEnabled,
 		dateRange
 	]);
-	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-[350px] w-full rounded-xl" });
+	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-[350px] w-full rounded-xl bg-[#333333]" });
 	if (currentData.length === 0 && (!comparisonEnabled || previousData.length === 0)) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "flex h-[350px] flex-col items-center justify-center rounded-xl border border-dashed bg-muted/20 text-muted-foreground",
+		className: "flex h-[350px] flex-col items-center justify-center rounded-xl border border-dashed border-[#333333] bg-[#1A1A1A] text-gray-500",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SearchX, { className: "mb-4 h-10 w-10 opacity-20" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 			className: "text-sm font-medium",
 			children: "Sem dados para o período"
 		})]
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "h-[350px] w-full p-4 bg-white rounded-xl border shadow-sm",
+		className: "h-[350px] w-full p-4 cyber-card",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex items-center gap-2 mb-6",
-			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingUp, { className: "w-5 h-5 text-yellow-500" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-				className: "text-lg font-semibold text-gray-800",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingUp, { className: "w-5 h-5 text-[#D9B979]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+				className: "text-lg font-bold text-white font-display",
 				children: "Evolução de Faturamento"
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartContainer, {
@@ -28372,18 +28388,18 @@ function RevenueEvolutionChart({ currentData, previousData, comparisonEnabled, d
 							y2: "1",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("stop", {
 								offset: "5%",
-								stopColor: "#EAB308",
+								stopColor: "#D9B979",
 								stopOpacity: .3
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("stop", {
 								offset: "95%",
-								stopColor: "#EAB308",
+								stopColor: "#D9B979",
 								stopOpacity: 0
 							})]
 						}) }),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartesianGrid, {
 							vertical: false,
 							strokeDasharray: "3 3",
-							stroke: "#E5E7EB"
+							stroke: "#333333"
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
 							dataKey: "displayDate",
@@ -28391,7 +28407,7 @@ function RevenueEvolutionChart({ currentData, previousData, comparisonEnabled, d
 							tickLine: false,
 							tick: {
 								fontSize: 12,
-								fill: "#6B7280"
+								fill: "#A1A1AA"
 							},
 							dy: 10,
 							minTickGap: 30
@@ -28402,10 +28418,13 @@ function RevenueEvolutionChart({ currentData, previousData, comparisonEnabled, d
 							tickFormatter: (val) => val >= 1e3 ? `R$ ${(val / 1e3).toFixed(0)}k` : `R$ ${val}`,
 							tick: {
 								fontSize: 12,
-								fill: "#6B7280"
+								fill: "#A1A1AA"
 							}
 						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tooltip, { content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltipContent, { indicator: "dot" }) }),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Tooltip, { content: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartTooltipContent, {
+							indicator: "dot",
+							className: "bg-[#1A1A1A] border-[#333333] text-white"
+						}) }),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Legend, {
 							verticalAlign: "top",
 							height: 36,
@@ -28415,7 +28434,7 @@ function RevenueEvolutionChart({ currentData, previousData, comparisonEnabled, d
 							type: "monotone",
 							dataKey: "revenuePrevious",
 							name: "Período Anterior",
-							stroke: "#A3A3A3",
+							stroke: "#71717A",
 							strokeWidth: 2,
 							strokeDasharray: "5 5",
 							fill: "transparent",
@@ -28426,7 +28445,7 @@ function RevenueEvolutionChart({ currentData, previousData, comparisonEnabled, d
 							type: "monotone",
 							dataKey: "revenueCurrent",
 							name: "Período Atual",
-							stroke: "#EAB308",
+							stroke: "#D9B979",
 							fill: "url(#goldGradient)",
 							strokeWidth: 2,
 							animationDuration: 1e3
@@ -28451,14 +28470,14 @@ function AudienceScatterChart({ data, loading }) {
 		if (active && payload && payload.length) {
 			const data$1 = payload[0].payload;
 			return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "rounded-lg border bg-white p-3 shadow-md text-sm",
+				className: "rounded-lg border border-[#333333] bg-[#1A1A1A] p-3 shadow-xl text-sm",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "font-semibold mb-2 text-gray-900",
+						className: "font-semibold mb-2 text-white font-display",
 						children: data$1.presenter
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-						className: "text-xs text-gray-500 mb-2",
+						className: "text-xs text-gray-400 mb-2",
 						children: new Date(data$1.date).toLocaleDateString("pt-BR")
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -28467,30 +28486,30 @@ function AudienceScatterChart({ data, loading }) {
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 								className: "flex justify-between gap-4",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-gray-500",
+									className: "text-gray-400",
 									children: "Pico de Audiência:"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-medium text-blue-600",
+									className: "font-medium text-[#D9B979]",
 									children: data$1.peakViewers
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 								className: "flex justify-between gap-4",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-gray-500",
+									className: "text-gray-400",
 									children: "Vendas:"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "font-medium",
+									className: "font-medium text-white",
 									children: data$1.sales
 								})]
 							}),
 							/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
 								className: "flex justify-between gap-4",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-gray-500",
+									className: "text-gray-400",
 									children: "Faturamento:"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: "font-bold text-green-600",
+									className: "font-bold text-[#27E39F]",
 									children: ["R$ ", data$1.revenue.toLocaleString("pt-BR")]
 								})]
 							})
@@ -28501,19 +28520,19 @@ function AudienceScatterChart({ data, loading }) {
 		}
 		return null;
 	};
-	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-[350px] w-full rounded-xl" });
+	if (loading) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Skeleton, { className: "h-[350px] w-full rounded-xl bg-[#333333]" });
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "h-[350px] w-full p-4 bg-white rounded-xl border shadow-sm relative",
+		className: "h-[350px] w-full p-4 cyber-card relative",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex items-center justify-between mb-6",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex items-center gap-2",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "w-5 h-5 text-blue-500" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-					className: "text-lg font-semibold text-gray-800",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "w-5 h-5 text-[#D9B979]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
+					className: "text-lg font-bold text-white font-display",
 					children: "Audiência vs Vendas"
 				})]
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TooltipProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Tooltip$1, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TooltipTrigger, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleQuestionMark, { className: "w-4 h-4 text-gray-400 hover:text-gray-600" }) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TooltipContent, {
-				className: "max-w-[300px]",
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TooltipProvider, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Tooltip$1, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TooltipTrigger, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleQuestionMark, { className: "w-4 h-4 text-gray-500 hover:text-gray-300" }) }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TooltipContent, {
+				className: "max-w-[300px] bg-[#1A1A1A] border-[#333333] text-gray-300",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", { children: [
 					"Cada ponto representa uma live. ",
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("br", {}),
@@ -28540,7 +28559,10 @@ function AudienceScatterChart({ data, loading }) {
 					left: 0
 				},
 				children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartesianGrid, { strokeDasharray: "3 3" }),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CartesianGrid, {
+						strokeDasharray: "3 3",
+						stroke: "#333333"
+					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(XAxis, {
 						type: "number",
 						dataKey: "peakViewers",
@@ -28548,14 +28570,14 @@ function AudienceScatterChart({ data, loading }) {
 						tickLine: false,
 						axisLine: false,
 						tick: {
-							fill: "#6B7280",
+							fill: "#A1A1AA",
 							fontSize: 12
 						},
 						label: {
 							value: "Pico de Pessoas",
 							position: "bottom",
 							offset: 0,
-							fill: "#9CA3AF",
+							fill: "#71717A",
 							fontSize: 12
 						}
 					}),
@@ -28566,14 +28588,14 @@ function AudienceScatterChart({ data, loading }) {
 						tickLine: false,
 						axisLine: false,
 						tick: {
-							fill: "#6B7280",
+							fill: "#A1A1AA",
 							fontSize: 12
 						},
 						label: {
 							value: "Vendas",
 							angle: -90,
 							position: "insideLeft",
-							fill: "#9CA3AF",
+							fill: "#71717A",
 							fontSize: 12
 						}
 					}),
@@ -28590,7 +28612,7 @@ function AudienceScatterChart({ data, loading }) {
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Scatter, {
 						name: "Lives",
 						data: chartData,
-						fill: "#3B82F6",
+						fill: "#D9B979",
 						fillOpacity: .6
 					})
 				]
@@ -28623,9 +28645,9 @@ function HostComparison({ data, presenters }) {
 		const minVal = Math.min(...values);
 		const hasData = maxVal > 0;
 		return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "py-3 px-6 border-b border-[#E5E5E7] last:border-0 hover:bg-gray-50/50 transition-colors",
+			className: "py-2 px-6 border-b border-[#333333] last:border-0 hover:bg-white/5 transition-colors",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-				className: "text-[10px] uppercase tracking-widest text-[#86868B] font-semibold text-center mb-2",
+				className: "text-[10px] uppercase tracking-widest text-gray-500 font-semibold text-center mb-1",
 				children: label
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "grid gap-8",
@@ -28636,24 +28658,24 @@ function HostComparison({ data, presenters }) {
 					const isWorst = val === minVal && hasData && values.length > 1 && val !== maxVal;
 					const percentage = hasData ? val / maxVal * 100 : 0;
 					return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex flex-col items-center gap-1.5",
+						className: "flex flex-col items-center gap-1",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center gap-1.5 mb-0.5",
 							children: [
-								isBest && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Crown, { className: "h-3.5 w-3.5 text-[#F5A623] fill-[#F5A623]" }),
-								isWorst && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingDown, { className: "h-3.5 w-3.5 text-[#86868B]/60" }),
+								isBest && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Crown, { className: "h-3.5 w-3.5 text-[#D9B979] fill-[#D9B979]" }),
+								isWorst && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TrendingDown, { className: "h-3.5 w-3.5 text-[#FF453A]" }),
 								/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-									className: cn("text-base font-medium tracking-tight", isBest ? "text-[#1D1D1F] font-semibold" : "text-[#1D1D1F]/80", isWorst && "text-[#86868B]"),
+									className: cn("text-base font-medium tracking-tight font-display", isBest ? "text-[#D9B979] font-semibold" : "text-gray-300", isWorst && "text-[#FF453A]"),
 									children: [prefix$2 && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-										className: "text-xs text-gray-500 mr-1",
+										className: "text-xs text-gray-600 mr-1",
 										children: prefix$2
 									}), formatValue(val)]
 								})
 							]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "w-full h-1 bg-[#E5E5E7]/60 rounded-full overflow-hidden max-w-[140px]",
+							className: "w-full h-1 bg-[#333333] rounded-full overflow-hidden max-w-[140px]",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: cn("h-full rounded-full transition-all duration-1000 ease-out", isBest ? "bg-[#C49B3B]" : "bg-[#E5E5E7]"),
+								className: cn("h-full rounded-full transition-all duration-1000 ease-out", isBest ? "bg-[#D9B979] shadow-[0_0_10px_rgba(217,185,121,0.5)]" : "bg-gray-600"),
 								style: { width: `${percentage}%` }
 							})
 						})]
@@ -28664,24 +28686,24 @@ function HostComparison({ data, presenters }) {
 	};
 	const isTwoHosts = stats.length === 2;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "bg-white/80 backdrop-blur-md",
+		className: "bg-[#1A1A1A]/80 backdrop-blur-md",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "relative pt-6 pb-6 px-6",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "grid gap-8",
 					style: { gridTemplateColumns: `repeat(${stats.length}, 1fr)` },
-					children: stats.map((host, i$2) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: cn("flex flex-col relative", isTwoHosts ? i$2 === 0 ? "items-end text-right" : "items-start text-left" : "items-center text-center"),
+					children: stats.map((host) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "flex flex-col relative items-center text-center",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-							className: "text-xl font-bold text-[#1D1D1F] leading-tight tracking-tight",
+							className: "text-xl font-bold text-white leading-tight tracking-tight font-display",
 							children: host.name
 						})
 					}, host.id))
 				}), isTwoHosts && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "h-8 w-8 bg-white rounded-full flex items-center justify-center shadow-sm border border-[#E5E5E7] text-[10px] font-bold text-[#86868B]",
+						className: "h-8 w-8 bg-[#1A1A1A] rounded-full flex items-center justify-center shadow-sm border border-[#333333] text-[10px] font-bold text-gray-500",
 						children: "VS"
 					})
 				})]
@@ -28704,20 +28726,20 @@ function HostComparison({ data, presenters }) {
 				]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "bg-[#F5F5F7]/50 border-t border-[#E5E5E7] px-6 py-3 flex flex-col sm:flex-row items-center justify-between gap-4",
+				className: "bg-[#0C0C0D]/50 border-t border-[#333333] px-6 py-3 flex flex-col sm:flex-row items-center justify-between gap-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "text-[10px] text-[#86868B] text-center sm:text-left",
+					className: "text-[10px] text-gray-500 text-center sm:text-left",
 					children: "Análise comparativa gerada automaticamente."
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex items-center gap-2",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 						variant: "outline",
 						size: "sm",
-						className: "h-7 text-[10px] gap-1.5 bg-white hover:bg-gray-50 px-3",
+						className: "h-7 text-[10px] gap-1.5 bg-transparent border-[#333333] text-gray-300 hover:text-white hover:bg-white/5 px-3",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Share2, { className: "w-3 h-3" }), "Compartilhar"]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 						size: "sm",
-						className: "h-7 text-[10px] gap-1.5 bg-[#1D1D1F] text-white hover:bg-[#1D1D1F]/90 px-3",
+						className: "h-7 text-[10px] gap-1.5 bg-[#D9B979] text-black hover:bg-[#D9B979]/90 px-3",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "w-3 h-3" }), "PDF"]
 					})]
 				})]
@@ -28728,16 +28750,16 @@ function HostComparison({ data, presenters }) {
 function LiveComparative({ data, presenters = [] }) {
 	if (presenters.length < 2 || presenters.length > 4) return null;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-		className: "overflow-hidden rounded-xl border border-[#E5E5E7] shadow-sm bg-white",
+		className: "overflow-hidden cyber-card border-[#333333] shadow-lg",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardHeader, {
-			className: "border-b border-[#E5E5E7] bg-white px-6 py-5",
+			className: "border-b border-[#333333] bg-[#1A1A1A]/50 px-6 py-5",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex items-center gap-3",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "flex h-10 w-10 items-center justify-center rounded-lg bg-[#F5F5F7] text-[#1D1D1F]",
+					className: "flex h-10 w-10 items-center justify-center rounded-lg bg-[#333333] text-[#D9B979]",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Scale, { className: "h-5 w-5" })
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
-					className: "text-xl font-semibold text-[#1D1D1F]",
+					className: "text-xl font-bold font-display text-white",
 					children: "Comparativo de Hosts"
 				}) })]
 			})
@@ -28761,7 +28783,7 @@ var Table = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE
 Table.displayName = "Table";
 var TableHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", {
 	ref,
-	className: cn("[&_tr]:border-b", className),
+	className: cn("[&_tr]:border-b border-[#333333]", className),
 	...props
 }));
 TableHeader.displayName = "TableHeader";
@@ -28779,13 +28801,13 @@ var TableFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @
 TableFooter.displayName = "TableFooter";
 var TableRow = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", {
 	ref,
-	className: cn("border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", className),
+	className: cn("border-b border-[#333333] transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", className),
 	...props
 }));
 TableRow.displayName = "TableRow";
 var TableHead = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
 	ref,
-	className: cn("h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0", className),
+	className: cn("h-12 px-4 text-left align-middle font-medium font-display text-muted-foreground [&:has([role=checkbox])]:pr-0", className),
 	...props
 }));
 TableHead.displayName = "TableHead";
@@ -28815,74 +28837,77 @@ function StreamTable({ data }) {
 	const handleNext = () => setCurrentPage((p) => Math.min(totalPages, p + 1));
 	if (data.length === 0) return null;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "rounded-xl border shadow-sm bg-white overflow-hidden",
+		className: "cyber-card overflow-hidden",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "p-4 border-b",
+				className: "p-4 border-b border-[#333333]",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-					className: "font-semibold text-gray-900",
+					className: "font-bold text-white font-display",
 					children: "Histórico de Lives"
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Table, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHeader, {
-				className: "bg-gray-50",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, { children: [
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-						className: "w-[120px] text-gray-600 font-medium",
-						children: "Data"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-						className: "text-gray-600 font-medium",
-						children: "Apresentador"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-						className: "text-gray-400 font-medium",
-						children: "Dia"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-						className: "text-right text-yellow-600 font-medium",
-						children: "Vendas"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-						className: "text-right text-green-600 font-medium",
-						children: "Faturamento"
-					}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
-						className: "text-right text-blue-600 font-medium",
-						children: "Conversão"
-					})
-				] })
+				className: "bg-[#1A1A1A]",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
+					className: "border-[#333333] hover:bg-transparent",
+					children: [
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							className: "w-[120px] text-gray-400 font-medium",
+							children: "Data"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							className: "text-gray-400 font-medium",
+							children: "Apresentador"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							className: "text-gray-500 font-medium",
+							children: "Dia"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							className: "text-right text-[#D9B979] font-medium",
+							children: "Vendas"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							className: "text-right text-[#27E39F] font-medium",
+							children: "Faturamento"
+						}),
+						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableHead, {
+							className: "text-right text-blue-400 font-medium",
+							children: "Conversão"
+						})
+					]
+				})
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableBody, { children: currentData.map((live$1, idx) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableRow, {
-				className: "hover:bg-gray-50/50",
+				className: "border-[#333333] hover:bg-white/5 transition-colors",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-						className: "font-medium text-gray-900",
+						className: "font-medium text-gray-200",
 						children: format(parseISO(live$1.date), "dd/MM/yyyy")
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-						className: "text-gray-700",
+						className: "text-gray-300",
 						children: live$1.presenter
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-						className: "text-gray-400 text-xs uppercase",
+						className: "text-gray-500 text-xs uppercase",
 						children: live$1.weekday
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(TableCell, {
-						className: "text-right text-yellow-700 font-semibold",
+						className: "text-right text-[#D9B979] font-semibold",
 						children: live$1.sales
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableCell, {
-						className: "text-right text-green-700 font-medium",
+						className: "text-right text-[#27E39F] font-medium",
 						children: ["R$ ", live$1.revenue.toLocaleString("pt-BR")]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(TableCell, {
-						className: "text-right text-blue-600 font-medium",
+						className: "text-right text-blue-400 font-medium",
 						children: [live$1.conversionRate.toFixed(2), "%"]
 					})
 				]
 			}, idx)) })] }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "flex items-center justify-between p-4 border-t bg-gray-50/50",
+				className: "flex items-center justify-between p-4 border-t border-[#333333] bg-[#1A1A1A]",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
 					className: "text-sm text-gray-500",
 					children: [
@@ -28901,11 +28926,11 @@ function StreamTable({ data }) {
 							size: "sm",
 							onClick: handlePrev,
 							disabled: currentPage === 1,
-							className: "h-8 w-8 p-0",
+							className: "h-8 w-8 p-0 border-[#333333] bg-transparent text-gray-300 hover:text-white hover:bg-white/5",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronLeft, { className: "h-4 w-4" })
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-							className: "text-sm font-medium text-gray-900",
+							className: "text-sm font-medium text-gray-300",
 							children: [
 								currentPage,
 								"/",
@@ -28917,7 +28942,7 @@ function StreamTable({ data }) {
 							size: "sm",
 							onClick: handleNext,
 							disabled: currentPage === totalPages,
-							className: "h-8 w-8 p-0",
+							className: "h-8 w-8 p-0 border-[#333333] bg-transparent text-gray-300 hover:text-white hover:bg-white/5",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChevronRight, { className: "h-4 w-4" })
 						})
 					]
@@ -28979,40 +29004,39 @@ function Lives() {
 	const handleLiveAdded = () => {
 		fetchData();
 	};
-	const containerStyle = { fontFamily: "\"Inter\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", Roboto, Helvetica, Arial, sans-serif" };
 	if (error) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex h-[80vh] flex-col items-center justify-center gap-4",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "rounded-full bg-red-100 p-4 text-red-600",
+				className: "rounded-full bg-red-900/20 p-4 text-red-500",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TriangleAlert, { size: 48 })
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-				className: "text-xl font-semibold text-gray-900",
+				className: "text-xl font-semibold text-white",
 				children: "Erro ao carregar dados"
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				className: "text-gray-500",
+				className: "text-gray-400",
 				children: "Não foi possível conectar ao Google Sheets."
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 				onClick: fetchData,
 				variant: "outline",
+				className: "border-gray-700 text-gray-300 hover:bg-white/5 hover:text-white",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, { className: "mr-2 h-4 w-4" }), "Tentar Novamente"]
 			})
 		]
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex-1 p-4 md:p-8 max-w-[1600px] mx-auto w-full space-y-8",
-		style: containerStyle,
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
 				className: "flex flex-col md:flex-row justify-between items-start md:items-center gap-4",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					className: "text-3xl font-bold tracking-tight text-gray-900",
+					className: "text-3xl font-bold tracking-tight text-white font-display",
 					children: "Dashboard de Lives"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "text-muted-foreground mt-1",
+					className: "text-gray-400 mt-1",
 					children: "Acompanhe a performance, compare períodos e analise KPIs em tempo real."
 				})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AddLiveModal, {
 					presenters: uniquePresenters,
@@ -29040,7 +29064,8 @@ function Lives() {
 			currentData.length === 0 && !loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(EmptyState, {
 				icon: Video,
 				title: "Nenhuma live encontrada",
-				description: "Tente ajustar os filtros ou selecionar um período diferente."
+				description: "Tente ajustar os filtros ou selecionar um período diferente.",
+				className: "text-gray-400"
 			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "space-y-8",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -29073,4 +29098,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-CiJuqXue.js.map
+//# sourceMappingURL=Lives-u0sC3fdq.js.map

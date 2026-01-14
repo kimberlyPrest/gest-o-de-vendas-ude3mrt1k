@@ -18,7 +18,6 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { LiveData } from '@/services/googleSheetsService'
 import { cn } from '@/lib/utils'
 import { format } from 'date-fns'
-import { ptBR } from 'date-fns/locale'
 
 interface LiveKPIsProps {
   currentData: LiveData[]
@@ -201,43 +200,39 @@ export function LiveKPIs({
         <Card
           key={item.id}
           className={cn(
-            'overflow-hidden transition-all hover:shadow-md relative',
-            item.variant === 'primary' &&
-              'border-blue-200 bg-blue-50/50 dark:bg-blue-950/20',
-            item.variant === 'accent' &&
-              'border-amber-200 bg-amber-50/50 dark:bg-amber-950/20',
+            'overflow-hidden relative transition-all hover:shadow-glow-hover',
+            item.variant === 'primary' && 'border-[#D9B979]/30',
+            item.variant === 'accent' && 'border-[#D9B979]/20',
           )}
         >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-4">
-            <CardTitle className="text-xs font-medium text-muted-foreground uppercase tracking-wider">
+            <CardTitle className="text-[10px] font-semibold font-sans text-gray-400 uppercase tracking-wider">
               {item.title}
             </CardTitle>
             <item.icon
               className={cn(
                 'h-4 w-4',
-                item.variant === 'primary'
-                  ? 'text-blue-600'
-                  : item.variant === 'accent'
-                    ? 'text-amber-600'
-                    : 'text-gray-500',
+                item.variant === 'primary' || item.variant === 'accent'
+                  ? 'text-[#D9B979]'
+                  : 'text-gray-500',
               )}
             />
           </CardHeader>
           <CardContent className="p-4 pt-0">
             {loading ? (
               <div className="space-y-2">
-                <Skeleton className="h-7 w-20" />
-                <Skeleton className="h-3 w-12" />
+                <Skeleton className="h-7 w-20 bg-[#333333]" />
+                <Skeleton className="h-3 w-12 bg-[#333333]" />
               </div>
             ) : (
               <>
-                <div className="text-2xl font-bold tracking-tight">
+                <div className="text-2xl font-bold tracking-tight font-display text-white">
                   {item.value}
                 </div>
 
                 {item.subValue && (
                   <p
-                    className="text-xs text-muted-foreground mt-1 truncate"
+                    className="text-xs text-gray-500 mt-1 truncate"
                     title={item.subValue}
                   >
                     {item.subValue}
@@ -250,9 +245,9 @@ export function LiveKPIs({
                       className={cn(
                         'flex items-center text-xs font-medium',
                         item.trend > 0
-                          ? 'text-emerald-600'
+                          ? 'text-[#27E39F]'
                           : item.trend < 0
-                            ? 'text-red-600'
+                            ? 'text-[#FF453A]'
                             : 'text-gray-500',
                       )}
                     >
@@ -265,7 +260,7 @@ export function LiveKPIs({
                       )}
                       {Math.abs(item.trend).toFixed(1)}%
                     </span>
-                    <span className="text-[10px] text-muted-foreground ml-1.5">
+                    <span className="text-[10px] text-gray-500 ml-1.5">
                       vs anterior
                     </span>
                   </div>
@@ -276,9 +271,9 @@ export function LiveKPIs({
 
           {/* Goal Progress Bar for Revenue only */}
           {item.id === 'total-revenue' && !loading && (
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-blue-100">
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-[#333333]">
               <div
-                className="h-full bg-blue-500 transition-all duration-1000"
+                className="h-full bg-[#D9B979] shadow-glow transition-all duration-1000"
                 style={{ width: `${goalProgress}%` }}
               />
             </div>

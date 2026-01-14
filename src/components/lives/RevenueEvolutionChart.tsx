@@ -26,11 +26,11 @@ interface RevenueEvolutionChartProps {
 const chartConfig = {
   revenueCurrent: {
     label: 'Período Atual',
-    color: '#EAB308', // Gold
+    color: '#D9B979', // Gold
   },
   revenuePrevious: {
     label: 'Período Anterior',
-    color: '#A3A3A3', // Grey
+    color: '#71717A', // Grey
   },
 }
 
@@ -65,7 +65,6 @@ export function RevenueEvolutionChart({
     })
 
     if (comparisonEnabled && previousData.length > 0) {
-      // Assuming previousData covers the same timespan duration just before current
       const likelyPrevStart = addDays(dateRange.from, -daysSpan)
 
       previousData.forEach((item) => {
@@ -80,14 +79,15 @@ export function RevenueEvolutionChart({
     return normalizedData
   }, [currentData, previousData, comparisonEnabled, dateRange])
 
-  if (loading) return <Skeleton className="h-[350px] w-full rounded-xl" />
+  if (loading)
+    return <Skeleton className="h-[350px] w-full rounded-xl bg-[#333333]" />
 
   if (
     currentData.length === 0 &&
     (!comparisonEnabled || previousData.length === 0)
   ) {
     return (
-      <div className="flex h-[350px] flex-col items-center justify-center rounded-xl border border-dashed bg-muted/20 text-muted-foreground">
+      <div className="flex h-[350px] flex-col items-center justify-center rounded-xl border border-dashed border-[#333333] bg-[#1A1A1A] text-gray-500">
         <SearchX className="mb-4 h-10 w-10 opacity-20" />
         <p className="text-sm font-medium">Sem dados para o período</p>
       </div>
@@ -95,10 +95,10 @@ export function RevenueEvolutionChart({
   }
 
   return (
-    <div className="h-[350px] w-full p-4 bg-white rounded-xl border shadow-sm">
+    <div className="h-[350px] w-full p-4 cyber-card">
       <div className="flex items-center gap-2 mb-6">
-        <TrendingUp className="w-5 h-5 text-yellow-500" />
-        <h3 className="text-lg font-semibold text-gray-800">
+        <TrendingUp className="w-5 h-5 text-[#D9B979]" />
+        <h3 className="text-lg font-bold text-white font-display">
           Evolução de Faturamento
         </h3>
       </div>
@@ -110,20 +110,20 @@ export function RevenueEvolutionChart({
           >
             <defs>
               <linearGradient id="goldGradient" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="#EAB308" stopOpacity={0.3} />
-                <stop offset="95%" stopColor="#EAB308" stopOpacity={0} />
+                <stop offset="5%" stopColor="#D9B979" stopOpacity={0.3} />
+                <stop offset="95%" stopColor="#D9B979" stopOpacity={0} />
               </linearGradient>
             </defs>
             <CartesianGrid
               vertical={false}
               strokeDasharray="3 3"
-              stroke="#E5E7EB"
+              stroke="#333333"
             />
             <XAxis
               dataKey="displayDate"
               axisLine={false}
               tickLine={false}
-              tick={{ fontSize: 12, fill: '#6B7280' }}
+              tick={{ fontSize: 12, fill: '#A1A1AA' }}
               dy={10}
               minTickGap={30}
             />
@@ -133,9 +133,16 @@ export function RevenueEvolutionChart({
               tickFormatter={(val) =>
                 val >= 1000 ? `R$ ${(val / 1000).toFixed(0)}k` : `R$ ${val}`
               }
-              tick={{ fontSize: 12, fill: '#6B7280' }}
+              tick={{ fontSize: 12, fill: '#A1A1AA' }}
             />
-            <Tooltip content={<ChartTooltipContent indicator="dot" />} />
+            <Tooltip
+              content={
+                <ChartTooltipContent
+                  indicator="dot"
+                  className="bg-[#1A1A1A] border-[#333333] text-white"
+                />
+              }
+            />
             <Legend verticalAlign="top" height={36} iconType="circle" />
 
             {comparisonEnabled && (
@@ -143,7 +150,7 @@ export function RevenueEvolutionChart({
                 type="monotone"
                 dataKey="revenuePrevious"
                 name="Período Anterior"
-                stroke="#A3A3A3"
+                stroke="#71717A"
                 strokeWidth={2}
                 strokeDasharray="5 5"
                 fill="transparent"
@@ -155,7 +162,7 @@ export function RevenueEvolutionChart({
               type="monotone"
               dataKey="revenueCurrent"
               name="Período Atual"
-              stroke="#EAB308"
+              stroke="#D9B979"
               fill="url(#goldGradient)"
               strokeWidth={2}
               animationDuration={1000}

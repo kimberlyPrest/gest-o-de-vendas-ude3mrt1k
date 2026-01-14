@@ -45,13 +45,13 @@ export function LeadNotes({ lead }: LeadNotesProps) {
 
   return (
     <div className="space-y-4 animate-fade-in-up">
-      <h3 className="pl-4 text-[13px] font-semibold uppercase tracking-wider text-[#8E8E93]">
+      <h3 className="pl-4 text-[13px] font-semibold uppercase tracking-wider text-gray-500">
         Notas Recentes
       </h3>
 
       <div className="space-y-3">
         {notes.length === 0 ? (
-          <div className="ios-group-container p-8 text-center text-sm italic text-gray-400">
+          <div className="bg-white rounded-xl border border-gray-200 p-8 text-center text-sm italic text-gray-400">
             Sem notas recentes.
           </div>
         ) : (
@@ -59,7 +59,7 @@ export function LeadNotes({ lead }: LeadNotesProps) {
             {notes.map((note) => (
               <div
                 key={note.id}
-                className="group ios-group-container p-4 transition-all hover:shadow-md"
+                className="group bg-white rounded-xl border border-gray-200 p-4 transition-all hover:shadow-md"
               >
                 <div className="flex items-start justify-between gap-3">
                   <div className="flex w-full items-start gap-3">
@@ -92,23 +92,27 @@ export function LeadNotes({ lead }: LeadNotesProps) {
                       <Button
                         variant="ghost"
                         size="icon"
-                        className="-mr-1 -mt-1 h-6 w-6 text-gray-400 opacity-0 transition-opacity hover:text-red-500 group-hover:opacity-100"
+                        className="-mr-1 -mt-1 h-6 w-6 text-gray-400 opacity-0 transition-opacity hover:text-red-500 group-hover:opacity-100 hover:bg-transparent"
                       >
                         <Trash2 className="h-3 w-3" />
                       </Button>
                     </AlertDialogTrigger>
-                    <AlertDialogContent>
+                    <AlertDialogContent className="bg-white border-gray-200">
                       <AlertDialogHeader>
-                        <AlertDialogTitle>Excluir nota?</AlertDialogTitle>
+                        <AlertDialogTitle className="text-gray-900">
+                          Excluir nota?
+                        </AlertDialogTitle>
                         <AlertDialogDescription>
                           Esta ação é irreversível.
                         </AlertDialogDescription>
                       </AlertDialogHeader>
                       <AlertDialogFooter>
-                        <AlertDialogCancel>Cancelar</AlertDialogCancel>
+                        <AlertDialogCancel className="border-gray-200 text-gray-700 hover:bg-gray-50">
+                          Cancelar
+                        </AlertDialogCancel>
                         <AlertDialogAction
                           onClick={handleDeleteMock}
-                          className="bg-red-600 hover:bg-red-700"
+                          className="bg-red-600 hover:bg-red-700 text-white"
                         >
                           Excluir
                         </AlertDialogAction>
@@ -125,7 +129,7 @@ export function LeadNotes({ lead }: LeadNotesProps) {
       {/* Input Area */}
       <div className="mt-4 flex items-center gap-2 rounded-full border border-gray-300 bg-white p-2 shadow-sm transition-all focus-within:ring-2 focus-within:ring-blue-500/20 focus-within:border-blue-400">
         <Input
-          className="h-10 flex-1 border-0 bg-transparent px-4 text-sm shadow-none focus-visible:ring-0 placeholder:text-gray-400"
+          className="h-10 flex-1 border-0 bg-transparent px-4 text-sm shadow-none focus-visible:ring-0 placeholder:text-gray-400 text-gray-900"
           placeholder="Adicionar uma nota..."
           value={noteContent}
           onChange={(e) => setNoteContent(e.target.value)}
@@ -136,7 +140,7 @@ export function LeadNotes({ lead }: LeadNotesProps) {
           className={cn(
             'h-8 w-8 shrink-0 rounded-full transition-all duration-300',
             noteContent.trim()
-              ? 'bg-[#007AFF] hover:bg-blue-600 scale-100'
+              ? 'bg-[#007AFF] hover:bg-blue-600 scale-100 text-white'
               : 'scale-90 bg-gray-200 text-gray-400 hover:bg-gray-300',
           )}
           onClick={handleAddNote}

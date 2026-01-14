@@ -28,7 +28,7 @@ export function LeadInfo({ lead }: LeadInfoProps) {
       <div className="flex flex-col items-center space-y-4 pt-2 text-center">
         <div className="space-y-1">
           <div className="flex items-center justify-center gap-2">
-            <h2 className="text-2xl font-bold text-gray-900 tracking-tight">
+            <h2 className="text-2xl font-bold text-gray-900 tracking-tight font-display">
               {lead.nomeCompleto}
             </h2>
           </div>
@@ -39,19 +39,19 @@ export function LeadInfo({ lead }: LeadInfoProps) {
           <ActionButton
             icon={<Phone className="h-6 w-6" />}
             label="Ligar"
-            color="bg-[#007AFF] shadow-blue-200"
+            color="bg-[#007AFF] shadow-blue-200/50"
             onClick={() => window.open(`tel:${lead.telefone}`)}
           />
           <ActionButton
             icon={<Mail className="h-6 w-6" />}
             label="E-mail"
-            color="bg-[#5856D6] shadow-indigo-200"
+            color="bg-[#5856D6] shadow-indigo-200/50"
             onClick={() => window.open(`mailto:${lead.email}`)}
           />
           <ActionButton
             icon={<MessageCircle className="h-6 w-6" />}
             label="WhatsApp"
-            color="bg-[#34C759] shadow-green-200"
+            color="bg-[#27E39F] shadow-green-200/50"
             onClick={() =>
               window.open(`https://wa.me/55${lead.telefone.replace(/\D/g, '')}`)
             }
@@ -63,17 +63,17 @@ export function LeadInfo({ lead }: LeadInfoProps) {
       <div className="space-y-6">
         {/* Personal Info */}
         <div className="space-y-2">
-          <h3 className="pl-4 text-[13px] font-semibold uppercase tracking-wider text-[#8E8E93]">
+          <h3 className="pl-4 text-[13px] font-semibold uppercase tracking-wider text-gray-500">
             Informações Pessoais
           </h3>
-          <div className="ios-group-container">
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
             <InfoRow
               icon={<Mail className="h-5 w-5 text-[#007AFF]" />}
               label="E-mail"
               value={lead.email}
             />
             <InfoRow
-              icon={<Phone className="h-5 w-5 text-[#34C759]" />}
+              icon={<Phone className="h-5 w-5 text-[#27E39F]" />}
               label="Telefone"
               value={lead.telefone}
             />
@@ -103,10 +103,10 @@ export function LeadInfo({ lead }: LeadInfoProps) {
 
         {/* Sales Data */}
         <div className="space-y-2">
-          <h3 className="pl-4 text-[13px] font-semibold uppercase tracking-wider text-[#8E8E93]">
+          <h3 className="pl-4 text-[13px] font-semibold uppercase tracking-wider text-gray-500">
             Dados da Venda
           </h3>
-          <div className="ios-group-container">
+          <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
             <InfoRow
               icon={<Users className="h-5 w-5 text-gray-500" />}
               label="Assentos Adicionais"
@@ -120,12 +120,16 @@ export function LeadInfo({ lead }: LeadInfoProps) {
               }
             />
             <InfoRow
-              icon={<DollarSign className="h-5 w-5 text-gray-500" />}
+              icon={<DollarSign className="h-5 w-5 text-[#D9B979]" />}
               label="Valor Estimado"
-              value={new Intl.NumberFormat('pt-BR', {
-                style: 'currency',
-                currency: 'BRL',
-              }).format(potentialValue)}
+              value={
+                <span className="font-bold text-[#D9B979]">
+                  {new Intl.NumberFormat('pt-BR', {
+                    style: 'currency',
+                    currency: 'BRL',
+                  }).format(potentialValue)}
+                </span>
+              }
               isLast
             />
           </div>
@@ -159,7 +163,7 @@ function ActionButton({
       >
         {icon}
       </div>
-      <span className="text-[11px] font-medium text-[#007AFF] group-hover:opacity-80">
+      <span className="text-[11px] font-medium text-gray-600 group-hover:text-gray-900 transition-colors">
         {label}
       </span>
     </div>

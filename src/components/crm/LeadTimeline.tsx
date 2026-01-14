@@ -44,14 +44,13 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
         title: match ? `Movido para ${match[1]}` : 'Alteração de Status',
         description: desc,
         icon: <ArrowRightLeft className="h-4 w-4" />,
-        colorClass: 'bg-[#8E8E93]/10 text-[#8E8E93]', // System Gray
+        colorClass: 'bg-gray-100 text-gray-500',
       }
     }
 
     // Interaction
     if (item.type === 'interaction') {
       const parts = desc.split(/[-:]/).map((p) => p.trim())
-      // Example: "Interação registrada: WhatsApp - Conversa"
       const type =
         parts.find((p) =>
           ['WhatsApp', 'Ligação', 'Email', 'Reunião'].some((t) =>
@@ -72,7 +71,7 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
         ) : (
           <Users className="h-4 w-4" />
         ),
-        colorClass: 'bg-[#34C759]/10 text-[#34C759]', // Green
+        colorClass: 'bg-[#27E39F]/10 text-[#27E39F]', // Jade
       }
     }
 
@@ -93,7 +92,7 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
         title: 'Nota Adicionada',
         description: 'Nota interna registrada',
         icon: <StickyNote className="h-4 w-4" />,
-        colorClass: 'bg-[#FF9500]/10 text-[#FF9500]', // Orange
+        colorClass: 'bg-[#D9B979]/10 text-[#D9B979]', // Gold
       }
     }
 
@@ -104,19 +103,19 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
         : 'Evento do Sistema',
       description: desc,
       icon: <CheckCircle2 className="h-4 w-4" />,
-      colorClass: 'bg-[#8E8E93]/10 text-[#8E8E93]',
+      colorClass: 'bg-gray-100 text-gray-500',
     }
   }
 
   return (
     <div className="space-y-3 animate-fade-in-up">
-      <h3 className="pl-4 text-[13px] font-semibold uppercase tracking-wider text-[#8E8E93]">
+      <h3 className="pl-4 text-[13px] font-semibold uppercase tracking-wider text-gray-500">
         Histórico de Atividade
       </h3>
 
-      <div className="ios-group-container">
+      <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
         {history.length === 0 ? (
-          <div className="py-8 text-center text-[13px] text-[#8E8E93]">
+          <div className="py-8 text-center text-[13px] text-gray-400">
             Nenhuma atividade registrada
           </div>
         ) : (
@@ -134,7 +133,9 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
                   )}
                 >
                   {/* Connector Line */}
-                  {!isLast && <div className="timeline-connector" />}
+                  {!isLast && (
+                    <div className="absolute left-[27.5px] top-[40px] bottom-[-10px] w-[1px] bg-gray-200" />
+                  )}
 
                   {/* Icon */}
                   <div
@@ -152,17 +153,17 @@ export function LeadTimeline({ lead }: LeadTimelineProps) {
                       <span className="text-[15px] font-semibold text-gray-900 truncate">
                         {details.title}
                       </span>
-                      <span className="shrink-0 text-[12px] text-[#8E8E93]">
+                      <span className="shrink-0 text-[12px] text-gray-400">
                         {formatTimestamp(item.date)}
                       </span>
                     </div>
 
-                    <p className="text-[14px] leading-relaxed text-[#8E8E93] line-clamp-2">
+                    <p className="text-[14px] leading-relaxed text-gray-500 line-clamp-2">
                       {details.description}
                     </p>
 
                     <div className="pt-1">
-                      <span className="text-[12px] font-medium text-[#007AFF]">
+                      <span className="text-[12px] font-medium text-gray-400">
                         {item.author === 'Sistema'
                           ? 'Sistema (Auto)'
                           : `@${item.author.toLowerCase().replace(' ', '.')}`}

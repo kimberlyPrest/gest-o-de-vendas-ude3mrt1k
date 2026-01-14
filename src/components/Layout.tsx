@@ -16,7 +16,7 @@ function DesktopOverlay() {
 
   return (
     <div
-      className="fixed inset-0 z-[5] bg-black/10 backdrop-blur-[1px] transition-all duration-300 md:block hidden"
+      className="fixed inset-0 z-[5] bg-black/50 backdrop-blur-[1px] transition-all duration-300 md:block hidden"
       onClick={() => setOpen(false)}
     />
   )
@@ -29,17 +29,12 @@ export default function Layout() {
       style={
         {
           '--sidebar-width': '260px',
-          '--sidebar-background': 'rgba(255, 255, 255, 0.7)',
-          '--sidebar-foreground': '#1D1D1F',
         } as React.CSSProperties
       }
     >
       <SyncManager />
       <AppSidebar />
-      <SidebarInset
-        className="transition-all duration-300 ease-in-out"
-        style={{ backgroundColor: '#F5F5F7' }}
-      >
+      <SidebarInset className="transition-all duration-300 ease-in-out bg-background">
         <DesktopOverlay />
         <Header />
         <div className="flex-1 overflow-auto">

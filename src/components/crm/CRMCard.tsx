@@ -2,6 +2,7 @@ import React, { memo } from 'react'
 import { CRMLead, calculateLeadValue } from '@/stores/crmStore'
 import { cn } from '@/lib/utils'
 import { differenceInHours, differenceInDays } from 'date-fns'
+import { Mail, Phone, DollarSign, AlertCircle } from 'lucide-react'
 
 interface CRMCardProps {
   lead: CRMLead
@@ -16,14 +17,11 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
   const daysSinceInteraction = differenceInDays(now, lastInteraction)
 
   // Border Color Logic
-  let borderColor = '#34C759' // Green - recent
-  let statusBg = '#ECFDF5'
+  let borderColor = '#27E39F' // Jade - recent
   if (hoursSinceInteraction > 72) {
-    borderColor = '#FF3B30' // Red - urgent
-    statusBg = '#FEF2F2'
+    borderColor = '#FF453A' // Coral - urgent
   } else if (hoursSinceInteraction > 24) {
-    borderColor = '#FF9500' // Orange - warning
-    statusBg = '#FFF7ED'
+    borderColor = '#FF9F0A' // Orange - warning
   }
 
   const isInactive = daysSinceInteraction > 3
@@ -47,92 +45,51 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
     >
       <div
         className={cn(
-          'overflow-hidden transition-all duration-300 hover:shadow-lg hover:-translate-y-1 active:scale-[0.98]',
+          'overflow-hidden transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] shadow-lg',
         )}
         style={{
-          backgroundColor: 'white',
+          background: 'linear-gradient(145deg, #2C2C2E 0%, #1E1E20 100%)',
           borderRadius: '16px',
-          border: '1px solid #E5E5E7',
+          border: '1px solid #333333',
           borderLeft: `4px solid ${borderColor}`,
-          boxShadow: '0 2px 8px rgba(0, 0, 0, 0.04)',
         }}
       >
         <div className="p-4">
           {/* Header */}
           <div className="flex items-start justify-between mb-3">
             <div className="flex-1 overflow-hidden">
-              <h4
-                className="truncate text-[14px] font-semibold"
-                style={{ color: '#1D1D1F' }}
-              >
+              <h4 className="truncate text-[14px] font-bold text-white font-display">
                 {lead.nomeCompleto}
               </h4>
             </div>
             {isInactive && (
-              <span
-                className="material-symbols-outlined text-[18px] animate-pulse"
-                style={{ color: '#FF3B30' }}
-              >
-                notification_important
-              </span>
+              <AlertCircle className="h-4 w-4 text-[#FF453A] animate-pulse" />
             )}
           </div>
 
           {/* Contact Info */}
           <div className="space-y-2 mb-3">
             <div className="flex items-center gap-2">
-              <span
-                className="material-symbols-outlined text-[14px]"
-                style={{ color: '#86868B' }}
-              >
-                mail
-              </span>
-              <span
-                className="truncate text-[12px]"
-                style={{ color: '#86868B' }}
-              >
+              <Mail className="h-3.5 w-3.5 text-gray-500" />
+              <span className="truncate text-[12px] text-gray-400">
                 {lead.email}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <span
-                className="material-symbols-outlined text-[14px]"
-                style={{ color: '#86868B' }}
-              >
-                phone
-              </span>
-              <span className="text-[12px]" style={{ color: '#86868B' }}>
-                {lead.telefone}
-              </span>
+              <Phone className="h-3.5 w-3.5 text-gray-500" />
+              <span className="text-[12px] text-gray-400">{lead.telefone}</span>
             </div>
           </div>
 
           {/* Footer */}
-          <div
-            className="flex items-center justify-between pt-3"
-            style={{ borderTop: '1px solid #F5F5F7' }}
-          >
-            <div
-              className="px-2 py-1 rounded-md text-[10px] font-medium"
-              style={{
-                backgroundColor: 'rgba(0, 0, 0, 0.03)',
-                color: '#86868B',
-              }}
-            >
+          <div className="flex items-center justify-between pt-3 border-t border-[#333333]">
+            <div className="px-2 py-1 rounded-md text-[10px] font-medium bg-[#333333] text-gray-300">
               {lead.origem}
             </div>
             <div className="flex items-center gap-1">
-              <span
-                className="material-symbols-outlined text-[14px]"
-                style={{ color: '#34C759' }}
-              >
-                payments
-              </span>
-              <span
-                className="text-[12px] font-semibold"
-                style={{ color: '#34C759' }}
-              >
-                R$ {potentialValue.toLocaleString('pt-BR')}
+              <DollarSign className="h-3.5 w-3.5 text-[#D9B979]" />
+              <span className="text-[12px] font-bold text-[#D9B979]">
+                {potentialValue.toLocaleString('pt-BR')}
               </span>
             </div>
           </div>

@@ -27,8 +27,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        sans: ['Inter var', 'SF Pro Display', 'system-ui', 'sans-serif'],
-        display: ['SF Pro Display', 'Inter var', 'system-ui', 'sans-serif'],
+        // Updated Typography
+        sans: ['Instrument Sans', 'sans-serif'],
+        display: ['Chakra Petch', 'sans-serif'],
+        body: ['Instrument Sans', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',
@@ -74,6 +76,26 @@ export default {
           border: 'hsl(var(--sidebar-border))',
           ring: 'hsl(var(--sidebar-ring))',
         },
+        // Cyber-Luxury Colors
+        gold: {
+          DEFAULT: '#D9B979',
+          50: '#FBF8F1',
+          100: '#F6F1E3',
+          200: '#EBE2C7',
+          300: '#E0D3AB',
+          400: '#D5C48F',
+          500: '#D9B979',
+          600: '#C79E4A',
+          700: '#9F7E3B',
+          800: '#775E2C',
+          900: '#4F3F1D',
+        },
+        jade: {
+          DEFAULT: '#27E39F',
+        },
+        coral: {
+          DEFAULT: '#FF453A',
+        },
         chart: {
           1: 'hsl(var(--chart-1))',
           2: 'hsl(var(--chart-2))',
@@ -86,18 +108,12 @@ export default {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
-      },
-      transitionProperty: {
-        width: 'width',
-        height: 'height',
+        xl: '1rem',
+        '2xl': '1rem', // Enforce 16px
       },
       boxShadow: {
-        subtle:
-          '0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px 0 rgba(0, 0, 0, 0.03)',
-        elevation: '0 4px 20px rgba(0, 0, 0, 0.05)',
-      },
-      transitionTimingFunction: {
-        apple: 'cubic-bezier(0.42, 0, 0.58, 1)',
+        glow: '0 0 15px rgba(217, 185, 121, 0.2)',
+        'glow-hover': '0 0 20px rgba(217, 185, 121, 0.4)',
       },
     },
   },

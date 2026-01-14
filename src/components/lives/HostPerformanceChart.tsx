@@ -12,7 +12,7 @@ import {
 } from 'recharts'
 import { LiveData } from '@/services/googleSheetsService'
 import { Skeleton } from '@/components/ui/skeleton'
-import { Trophy, Medal, Award } from 'lucide-react'
+import { Trophy } from 'lucide-react'
 
 interface HostPerformanceChartProps {
   data: LiveData[]
@@ -43,7 +43,7 @@ export function HostPerformanceChart({
           totalRevenue: 0,
         }
       }
-      acc[curr.presenter].totalConversion += curr.conversionRate // Fixed: using conversionRate
+      acc[curr.presenter].totalConversion += curr.conversionRate
       acc[curr.presenter].totalRevenue += curr.revenue
       acc[curr.presenter].count += 1
       return acc
@@ -63,24 +63,26 @@ export function HostPerformanceChart({
     if (active && payload && payload.length) {
       const data = payload[0].payload
       return (
-        <div className="rounded-lg border bg-white p-3 shadow-md text-sm">
-          <p className="font-semibold mb-2 text-gray-900">{data.presenter}</p>
+        <div className="rounded-lg border border-[#333333] bg-[#1A1A1A] p-3 shadow-xl text-sm">
+          <p className="font-semibold mb-2 text-white font-display">
+            {data.presenter}
+          </p>
           <div className="space-y-1">
             <p className="flex justify-between gap-4">
-              <span className="text-gray-500">Conversão Média:</span>
-              <span className="font-bold text-yellow-600">
+              <span className="text-gray-400">Conversão Média:</span>
+              <span className="font-bold text-[#D9B979]">
                 {data.avgConversion.toFixed(1)}%
               </span>
             </p>
             <p className="flex justify-between gap-4">
-              <span className="text-gray-500">Faturamento Total:</span>
-              <span className="font-medium">
+              <span className="text-gray-400">Faturamento Total:</span>
+              <span className="font-medium text-gray-200">
                 R$ {data.totalRevenue.toLocaleString('pt-BR')}
               </span>
             </p>
             <p className="flex justify-between gap-4">
-              <span className="text-gray-500">Lives Realizadas:</span>
-              <span className="font-medium">{data.count}</span>
+              <span className="text-gray-400">Lives Realizadas:</span>
+              <span className="font-medium text-gray-200">{data.count}</span>
             </p>
           </div>
         </div>
@@ -89,13 +91,14 @@ export function HostPerformanceChart({
     return null
   }
 
-  if (loading) return <Skeleton className="h-[350px] w-full rounded-xl" />
+  if (loading)
+    return <Skeleton className="h-[350px] w-full rounded-xl bg-[#333333]" />
 
   return (
-    <div className="h-[350px] w-full p-4 bg-white rounded-xl border shadow-sm">
+    <div className="h-[350px] w-full p-4 cyber-card">
       <div className="flex items-center gap-2 mb-6">
-        <Trophy className="w-5 h-5 text-yellow-500" />
-        <h3 className="text-lg font-semibold text-gray-800">
+        <Trophy className="w-5 h-5 text-[#D9B979]" />
+        <h3 className="text-lg font-bold text-white font-display">
           Ranking de Conversão
         </h3>
       </div>
@@ -105,6 +108,7 @@ export function HostPerformanceChart({
             strokeDasharray="3 3"
             horizontal={true}
             vertical={false}
+            stroke="#333333"
           />
           <XAxis type="number" hide />
           <YAxis
@@ -113,14 +117,17 @@ export function HostPerformanceChart({
             axisLine={false}
             tickLine={false}
             width={100}
-            tick={{ fontSize: 12, fill: '#6B7280' }}
+            tick={{ fontSize: 12, fill: '#A1A1AA' }}
           />
-          <Tooltip content={<CustomTooltip />} cursor={{ fill: '#F3F4F6' }} />
+          <Tooltip
+            content={<CustomTooltip />}
+            cursor={{ fill: '#333333', opacity: 0.4 }}
+          />
           <Bar dataKey="avgConversion" radius={[0, 4, 4, 0]} barSize={32}>
             {chartData.map((entry, index) => (
               <Cell
                 key={`cell-${index}`}
-                fill={`#EAB308`} // Base Gold color
+                fill="#D9B979"
                 fillOpacity={1 - index * 0.15}
                 style={{
                   filter: `brightness(${1 - index * 0.05})`,

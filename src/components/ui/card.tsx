@@ -1,4 +1,3 @@
-/* Card Component primitives - A component that displays a card - from shadcn/ui (exposes Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent) */
 import * as React from 'react'
 
 import { cn } from '@/lib/utils'
@@ -9,10 +8,7 @@ const Card = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn(
-      'rounded-lg border bg-card text-card-foreground shadow-sm',
-      className,
-    )}
+    className={cn('cyber-card text-card-foreground', className)}
     {...props}
   />
 ))
@@ -37,7 +33,7 @@ const CardTitle = React.forwardRef<
   <div
     ref={ref}
     className={cn(
-      'text-2xl font-semibold leading-none tracking-tight',
+      'text-2xl font-bold leading-none tracking-tight font-display text-[#D9B979]',
       className,
     )}
     {...props}

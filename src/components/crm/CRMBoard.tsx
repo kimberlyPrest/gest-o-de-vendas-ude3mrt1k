@@ -45,11 +45,11 @@ export function CRMBoard() {
                 <button
                   key={col.id}
                   onClick={() => setActiveTab(col.id)}
-                  className="flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all text-[13px] font-medium"
+                  className="flex items-center gap-2 px-4 py-2 rounded-full whitespace-nowrap transition-all text-[13px] font-medium border"
                   style={{
-                    backgroundColor: isActive ? '#0071E3' : 'white',
-                    color: isActive ? 'white' : '#1D1D1F',
-                    border: isActive ? 'none' : '1px solid #E5E5E7',
+                    backgroundColor: isActive ? '#D9B979' : '#1A1A1A',
+                    color: isActive ? '#000000' : '#FFFFFF',
+                    borderColor: isActive ? '#D9B979' : '#333333',
                   }}
                 >
                   {col.label}
@@ -57,8 +57,8 @@ export function CRMBoard() {
                     className="text-[11px] px-1.5 py-0.5 rounded-full"
                     style={{
                       backgroundColor: isActive
-                        ? 'rgba(255,255,255,0.2)'
-                        : 'rgba(0,0,0,0.05)',
+                        ? 'rgba(0,0,0,0.1)'
+                        : 'rgba(255,255,255,0.1)',
                     }}
                   >
                     {count}

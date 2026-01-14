@@ -117,24 +117,23 @@ export default function Lives() {
     fetchData()
   }
 
-  const containerStyle = {
-    fontFamily:
-      '"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif',
-  }
-
   if (error) {
     return (
       <div className="flex h-[80vh] flex-col items-center justify-center gap-4">
-        <div className="rounded-full bg-red-100 p-4 text-red-600">
+        <div className="rounded-full bg-red-900/20 p-4 text-red-500">
           <AlertTriangle size={48} />
         </div>
-        <h2 className="text-xl font-semibold text-gray-900">
+        <h2 className="text-xl font-semibold text-white">
           Erro ao carregar dados
         </h2>
-        <p className="text-gray-500">
+        <p className="text-gray-400">
           Não foi possível conectar ao Google Sheets.
         </p>
-        <Button onClick={fetchData} variant="outline">
+        <Button
+          onClick={fetchData}
+          variant="outline"
+          className="border-gray-700 text-gray-300 hover:bg-white/5 hover:text-white"
+        >
           <RefreshCw className="mr-2 h-4 w-4" />
           Tentar Novamente
         </Button>
@@ -143,17 +142,14 @@ export default function Lives() {
   }
 
   return (
-    <div
-      className="flex-1 p-4 md:p-8 max-w-[1600px] mx-auto w-full space-y-8"
-      style={containerStyle}
-    >
+    <div className="flex-1 p-4 md:p-8 max-w-[1600px] mx-auto w-full space-y-8">
       {/* Header */}
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-gray-900">
+          <h1 className="text-3xl font-bold tracking-tight text-white font-display">
             Dashboard de Lives
           </h1>
-          <p className="text-muted-foreground mt-1">
+          <p className="text-gray-400 mt-1">
             Acompanhe a performance, compare períodos e analise KPIs em tempo
             real.
           </p>
@@ -196,6 +192,7 @@ export default function Lives() {
           icon={Video}
           title="Nenhuma live encontrada"
           description="Tente ajustar os filtros ou selecionar um período diferente."
+          className="text-gray-400"
         />
       ) : (
         <div className="space-y-8">

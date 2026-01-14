@@ -1,5 +1,16 @@
 import { useCRMStore, calculateLeadValue } from '@/stores/crmStore'
 import { differenceInDays } from 'date-fns'
+import {
+  TrendingUp,
+  TrendingDown,
+  Clock,
+  Users,
+  DollarSign,
+  CheckCircle,
+  ArrowUp,
+  ArrowDown,
+  Minus,
+} from 'lucide-react'
 
 export function CRMMetrics() {
   const { filteredLeads, loading } = useCRMStore()
@@ -56,13 +67,13 @@ export function CRMMetrics() {
     return (
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5 mb-8">
         {[...Array(5)].map((_, i) => (
-          <div key={i} className="apple-card p-6 animate-pulse">
+          <div key={i} className="cyber-card p-6 animate-pulse">
             <div className="flex justify-between items-start mb-4">
-              <div className="size-10 rounded-xl bg-gray-200"></div>
-              <div className="h-4 w-12 bg-gray-200 rounded"></div>
+              <div className="size-10 rounded-xl bg-[#333333]"></div>
+              <div className="h-4 w-12 bg-[#333333] rounded"></div>
             </div>
-            <div className="h-3 w-24 bg-gray-200 rounded mb-2"></div>
-            <div className="h-8 w-20 bg-gray-200 rounded"></div>
+            <div className="h-3 w-24 bg-[#333333] rounded mb-2"></div>
+            <div className="h-8 w-20 bg-[#333333] rounded"></div>
           </div>
         ))}
       </div>
@@ -74,9 +85,9 @@ export function CRMMetrics() {
       title: 'Taxa de Conversão',
       value: `${conversionRate.toFixed(1)}%`,
       subtitle: `${boughtLeads} de ${totalLeads} leads`,
-      icon: 'trending_up',
-      iconBg: '#EFF6FF',
-      iconColor: '#0071E3',
+      icon: TrendingUp,
+      iconBg: '#1A1A1A',
+      iconColor: '#D9B979',
       trending:
         conversionRate >= 5 ? 'up' : conversionRate >= 3 ? 'neutral' : 'down',
     },
@@ -84,36 +95,36 @@ export function CRMMetrics() {
       title: 'Tempo Médio',
       value: `${avgTime.toFixed(1)} dias`,
       subtitle: 'Ciclo de vendas',
-      icon: 'schedule',
-      iconBg: '#FFF7ED',
-      iconColor: '#F97316',
+      icon: Clock,
+      iconBg: '#1A1A1A',
+      iconColor: '#A3A3A3',
       trending: 'neutral',
     },
     {
       title: 'Leads no Pipeline',
       value: pipelineCount.toString(),
       subtitle: 'Em andamento',
-      icon: 'groups',
-      iconBg: '#F5F3FF',
-      iconColor: '#9333EA',
+      icon: Users,
+      iconBg: '#1A1A1A',
+      iconColor: '#D9B979',
       trending: 'neutral',
     },
     {
       title: 'Valor em Pipeline',
       value: formatCurrency(pipelineValue),
       subtitle: 'Potencial ativo',
-      icon: 'payments',
-      iconBg: '#FEF3C7',
-      iconColor: '#D97706',
+      icon: DollarSign,
+      iconBg: '#1A1A1A',
+      iconColor: '#D9B979',
       trending: 'neutral',
     },
     {
       title: 'Valor Convertido',
       value: formatCurrency(convertedValue),
       subtitle: 'Vendas realizadas',
-      icon: 'check_circle',
-      iconBg: '#ECFDF5',
-      iconColor: '#34C759',
+      icon: CheckCircle,
+      iconBg: '#1A1A1A',
+      iconColor: '#27E39F',
       trending: 'up',
     },
   ]
@@ -121,62 +132,45 @@ export function CRMMetrics() {
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-5 mb-8">
       {metrics.map((metric, index) => (
-        <div key={index} className="apple-card p-6">
+        <div key={index} className="cyber-card p-6">
           <div className="flex justify-between items-start mb-4">
             <div
-              className="size-10 rounded-xl flex items-center justify-center"
+              className="size-10 rounded-xl flex items-center justify-center border border-[#333333]"
               style={{
                 backgroundColor: metric.iconBg,
                 color: metric.iconColor,
               }}
             >
-              <span className="material-symbols-outlined">{metric.icon}</span>
+              <metric.icon className="h-5 w-5" />
             </div>
             {metric.trending === 'up' && (
-              <span
-                className="text-[12px] font-bold flex items-center"
-                style={{ color: '#34C759' }}
-              >
-                <span className="material-symbols-outlined text-[14px]">
-                  arrow_upward
-                </span>
+              <span className="text-[12px] font-bold flex items-center text-[#27E39F]">
+                <ArrowUp className="h-3.5 w-3.5" />
               </span>
             )}
             {metric.trending === 'down' && (
-              <span
-                className="text-[12px] font-bold flex items-center"
-                style={{ color: '#FF3B30' }}
-              >
-                <span className="material-symbols-outlined text-[14px]">
-                  arrow_downward
-                </span>
+              <span className="text-[12px] font-bold flex items-center text-[#FF453A]">
+                <ArrowDown className="h-3.5 w-3.5" />
               </span>
             )}
           </div>
-          <p
-            className="text-[12px] font-semibold uppercase tracking-wider"
-            style={{ color: '#86868B' }}
-          >
+          <p className="text-[12px] font-semibold uppercase tracking-wider text-gray-500">
             {metric.title}
           </p>
           <h3
-            className="text-[28px] font-bold tracking-tight mt-1"
+            className="text-[28px] font-bold tracking-tight mt-1 font-display"
             style={{
               color:
                 metric.title === 'Valor Convertido'
-                  ? '#34C759'
+                  ? '#27E39F'
                   : metric.title === 'Taxa de Conversão' && conversionRate < 3
-                    ? '#FF3B30'
-                    : metric.title === 'Taxa de Conversão' && conversionRate < 5
-                      ? '#FF9500'
-                      : '#1D1D1F',
+                    ? '#FF453A'
+                    : '#FFFFFF',
             }}
           >
             {metric.value}
           </h3>
-          <p className="text-[12px] mt-1" style={{ color: '#86868B' }}>
-            {metric.subtitle}
-          </p>
+          <p className="text-[12px] mt-1 text-gray-400">{metric.subtitle}</p>
         </div>
       ))}
     </div>

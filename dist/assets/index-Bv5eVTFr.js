@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-CiJuqXue.js","assets/calendar-ZqnhQV0v.js","assets/CRM-Jqta8agr.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-u0sC3fdq.js","assets/calendar-CveEDU1m.js","assets/CRM-Du1ggLa8.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -24138,15 +24138,15 @@ function useIsMobile() {
 	}, []);
 	return !!isMobile;
 }
-var buttonVariants = cva("inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0", {
+var buttonVariants = cva("inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0", {
 	variants: {
 		variant: {
-			default: "bg-primary text-primary-foreground hover:bg-primary/90",
+			default: "bg-[#D9B979] text-[#0C0C0D] hover:bg-[#D9B979]/90 hover:shadow-[0_0_15px_rgba(217,185,121,0.4)] transition-all duration-300",
 			destructive: "bg-destructive text-destructive-foreground hover:bg-destructive/90",
 			outline: "border border-input bg-transparent text-foreground hover:bg-accent hover:text-accent-foreground",
 			secondary: "bg-secondary text-secondary-foreground hover:bg-secondary/80",
-			ghost: "text-foreground hover:bg-accent hover:text-accent-foreground",
-			link: "text-foreground underline-offset-4 hover:underline"
+			ghost: "text-foreground hover:bg-white/5 hover:text-white",
+			link: "text-primary underline-offset-4 hover:underline"
 		},
 		size: {
 			default: "h-10 px-4 py-2",
@@ -24175,7 +24175,7 @@ Button.displayName = "Button";
 var Input = import_react.forwardRef(({ className, type, ...props }, ref) => {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
 		type,
-		className: cn("flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-base ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
+		className: cn("flex h-10 w-full rounded-md border border-[#333333] bg-[#1A1A1A] px-3 py-2 text-base text-white ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium file:text-foreground placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[#D9B979] focus-visible:border-[#D9B979] focus-visible:shadow-[0_0_10px_rgba(217,185,121,0.2)] disabled:cursor-not-allowed disabled:opacity-50 md:text-sm", className),
 		ref,
 		...props
 	});
@@ -25461,7 +25461,7 @@ var SheetOverlay = import_react.forwardRef(({ className, ...props }, ref) => /* 
 	ref
 }));
 SheetOverlay.displayName = Overlay.displayName;
-var sheetVariants = cva("fixed z-50 gap-4 bg-background p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500", {
+var sheetVariants = cva("fixed z-50 gap-4 bg-[#1A1A1A] border-[#333333] p-6 shadow-lg transition ease-in-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:duration-300 data-[state=open]:duration-500", {
 	variants: { side: {
 		top: "inset-x-0 top-0 border-b data-[state=closed]:slide-out-to-top data-[state=open]:slide-in-from-top",
 		bottom: "inset-x-0 bottom-0 border-t data-[state=closed]:slide-out-to-bottom data-[state=open]:slide-in-from-bottom",
@@ -25475,7 +25475,7 @@ var SheetContent = import_react.forwardRef(({ side = "right", className, childre
 	className: cn(sheetVariants({ side }), className),
 	...props,
 	children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Close, {
-		className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary",
+		className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-secondary text-gray-400 hover:text-white",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { className: "h-4 w-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 			className: "sr-only",
 			children: "Close"
@@ -25495,7 +25495,7 @@ var SheetFooter = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_ru
 SheetFooter.displayName = "SheetFooter";
 var SheetTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Title, {
 	ref,
-	className: cn("text-lg font-semibold text-foreground", className),
+	className: cn("text-lg font-bold font-display text-[#D9B979]", className),
 	...props
 }));
 SheetTitle.displayName = Title.displayName;
@@ -33805,18 +33805,8 @@ function AppSidebar() {
 		if (isMobile) setOpenMobile(false);
 		else setOpen(false);
 	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("style", { children: `
-        .glass-sidebar {
-          background: rgba(255, 255, 255, 0.7) !important;
-          backdrop-filter: blur(20px);
-          -webkit-backdrop-filter: blur(20px);
-        }
-        .nav-item-active {
-          background: rgba(0, 113, 227, 0.08);
-          color: #0071E3 !important;
-        }
-      ` }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Sidebar, {
-		className: "glass-sidebar border-r border-gray-200/50 z-40",
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Sidebar, {
+		className: "border-r border-[#333333] z-40 bg-[#0C0C0D]",
 		collapsible: "offcanvas",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarHeader, {
@@ -33824,21 +33814,15 @@ function AppSidebar() {
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex items-center gap-3",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "size-9 shrink-0 rounded-xl flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105",
-						style: {
-							background: "linear-gradient(135deg, #3B82F6 0%, #2563EB 100%)",
-							boxShadow: "0 4px 14px rgba(59, 130, 246, 0.3)"
-						},
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LayoutDashboard, { className: "text-white h-5 w-5" })
+						className: "size-9 shrink-0 rounded-xl flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105 bg-[#D9B979] text-[#0C0C0D]",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LayoutDashboard, { className: "h-5 w-5" })
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex flex-col overflow-hidden transition-all duration-300",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-							className: "text-[15px] font-semibold tracking-tight truncate",
-							style: { color: "#1D1D1F" },
+							className: "text-[15px] font-bold tracking-tight truncate font-display text-white",
 							children: "Performance"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-[10px] font-medium uppercase tracking-wider truncate",
-							style: { color: "#86868B" },
+							className: "text-[10px] font-medium uppercase tracking-wider truncate text-[#D9B979]",
 							children: "Analytics Suite"
 						})]
 					})]
@@ -33853,8 +33837,7 @@ function AppSidebar() {
 						return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuButton, {
 							asChild: true,
 							tooltip: item.title,
-							className: cn("w-full justify-start rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200", isActive ? "nav-item-active" : "hover:bg-black/5"),
-							style: { color: isActive ? "#0071E3" : "#86868B" },
+							className: cn("w-full justify-start rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200", isActive ? "bg-[#D9B979]/10 text-[#D9B979]" : "text-gray-400 hover:bg-white/5 hover:text-white"),
 							onClick: handleLinkClick,
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
 								to: item.url,
@@ -33869,17 +33852,13 @@ function AppSidebar() {
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarFooter, {
-				className: "p-6 border-t border-gray-100/50",
+				className: "p-6 border-t border-[#333333]",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex flex-col gap-2",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center gap-3 p-2 rounded-xl transition-colors hover:bg-black/5",
+						className: "flex items-center gap-3 p-2 rounded-xl transition-colors hover:bg-white/5",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "size-8 shrink-0 rounded-full flex items-center justify-center",
-							style: {
-								backgroundColor: "#E5E5E7",
-								color: "#86868B"
-							},
+							className: "size-8 shrink-0 rounded-full flex items-center justify-center bg-[#333333] text-white",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 								className: "font-medium text-xs",
 								children: user?.email?.charAt(0).toUpperCase() || "U"
@@ -33887,18 +33866,16 @@ function AppSidebar() {
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex flex-col min-w-0 overflow-hidden",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-[13px] font-medium truncate",
-								style: { color: "#1D1D1F" },
+								className: "text-[13px] font-medium truncate text-white",
 								children: user?.user_metadata?.name || "Usuário"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-[11px] truncate",
-								style: { color: "#86868B" },
+								className: "text-[11px] truncate text-gray-400",
 								children: user?.email || "Carregando..."
 							})]
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 						onClick: handleLogout,
-						className: "flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-red-500 hover:bg-red-50 transition-colors w-full",
+						className: "flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-red-500 hover:bg-red-500/10 transition-colors w-full",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, {
 							size: 14,
 							className: "shrink-0"
@@ -33910,7 +33887,7 @@ function AppSidebar() {
 				})
 			})
 		]
-	})] });
+	});
 }
 var createStoreImpl = (createState) => {
 	let state;
@@ -37744,14 +37721,14 @@ var DropdownMenuSubTrigger = import_react.forwardRef(({ className, inset, childr
 DropdownMenuSubTrigger.displayName = SubTrigger2.displayName;
 var DropdownMenuSubContent = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SubContent2, {
 	ref,
-	className: cn("z-50 min-w-[8rem] overflow-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-dropdown-menu-content-transform-origin]", className),
+	className: cn("z-50 min-w-[8rem] overflow-hidden rounded-md border border-[#333333] bg-[#1A1A1A] p-1 text-popover-foreground shadow-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-dropdown-menu-content-transform-origin]", className),
 	...props
 }));
 DropdownMenuSubContent.displayName = SubContent2.displayName;
 var DropdownMenuContent = import_react.forwardRef(({ className, sideOffset = 4, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal2, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Content2$1, {
 	ref,
 	sideOffset,
-	className: cn("z-50 max-h-[var(--radix-dropdown-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-dropdown-menu-content-transform-origin]", className),
+	className: cn("z-50 max-h-[var(--radix-dropdown-menu-content-available-height)] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border border-[#333333] bg-[#1A1A1A] p-1 text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-dropdown-menu-content-transform-origin]", className),
 	...props
 }) }));
 DropdownMenuContent.displayName = Content2$1.displayName;
@@ -38852,10 +38829,10 @@ var DialogOverlay = import_react.forwardRef(({ className, ...props }, ref) => /*
 DialogOverlay.displayName = Overlay.displayName;
 var DialogContent = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogPortal, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogOverlay, {}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content, {
 	ref,
-	className: cn("fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg overflow-y-auto max-h-screen", className),
+	className: cn("fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] gap-4 border border-[#333333] bg-[#1A1A1A] p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[state=closed]:slide-out-to-left-1/2 data-[state=closed]:slide-out-to-top-[48%] data-[state=open]:slide-in-from-left-1/2 data-[state=open]:slide-in-from-top-[48%] sm:rounded-lg overflow-y-auto max-h-screen text-gray-100", className),
 	...props,
 	children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Close, {
-		className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground",
+		className: "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground text-gray-400 hover:text-white",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { className: "h-4 w-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 			className: "sr-only",
 			children: "Close"
@@ -38875,7 +38852,7 @@ var DialogFooter = ({ className, ...props }) => /* @__PURE__ */ (0, import_jsx_r
 DialogFooter.displayName = "DialogFooter";
 var DialogTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Title, {
 	ref,
-	className: cn("text-lg font-semibold leading-none tracking-tight", className),
+	className: cn("text-lg font-semibold leading-none tracking-tight font-display text-[#D9B979]", className),
 	...props
 }));
 DialogTitle.displayName = Title.displayName;
@@ -40141,7 +40118,7 @@ var Select = Root2;
 var SelectValue = Value;
 var SelectTrigger = import_react.forwardRef(({ className, children, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Trigger, {
 	ref,
-	className: cn("flex h-10 w-full items-center justify-between rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background data-[placeholder]:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1", className),
+	className: cn("flex h-10 w-full items-center justify-between rounded-md border border-[#333333] bg-[#1A1A1A] px-3 py-2 text-sm ring-offset-background placeholder:text-muted-foreground focus:outline-none focus:ring-1 focus:ring-[#D9B979] focus:border-[#D9B979] disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1", className),
 	...props,
 	children: [children, /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Icon, {
 		asChild: true,
@@ -40165,7 +40142,7 @@ var SelectScrollDownButton = import_react.forwardRef(({ className, ...props }, r
 SelectScrollDownButton.displayName = ScrollDownButton.displayName;
 var SelectContent = import_react.forwardRef(({ className, children, position = "popper", ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Portal$1, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Content2, {
 	ref,
-	className: cn("relative z-50 max-h-[--radix-select-content-available-height] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border bg-popover text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-select-content-transform-origin]", position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1", className),
+	className: cn("relative z-50 max-h-[--radix-select-content-available-height] min-w-[8rem] overflow-y-auto overflow-x-hidden rounded-md border border-[#333333] bg-[#1A1A1A] text-popover-foreground shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 origin-[--radix-select-content-transform-origin]", position === "popper" && "data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1", className),
 	position,
 	...props,
 	children: [
@@ -40326,9 +40303,9 @@ function SettingsModal({ open, onOpenChange }) {
 function Header() {
 	const [settingsOpen, setSettingsOpen] = (0, import_react.useState)(false);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-		className: "sticky top-0 z-20 flex h-16 items-center gap-4 border-b bg-white/80 dark:bg-card/80 px-4 shadow-sm backdrop-blur-md md:px-6 transition-all",
+		className: "sticky top-0 z-20 flex h-16 items-center gap-4 border-b border-[#333333] bg-[#0C0C0D]/80 px-4 shadow-sm backdrop-blur-md md:px-6 transition-all",
 		children: [
-			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarToggle, { className: "-ml-2 text-gray-700 dark:text-gray-200" }),
+			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarToggle, { className: "-ml-2 text-gray-200 hover:text-white" }),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "flex-1 flex items-center gap-4 md:ml-4",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GlobalSearch, {})
@@ -40339,7 +40316,7 @@ function Header() {
 					variant: "ghost",
 					size: "icon",
 					onClick: () => setSettingsOpen(true),
-					className: "text-gray-500 hover:bg-transparent hover:text-gray-800",
+					className: "text-gray-400 hover:bg-white/5 hover:text-white",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Settings, { className: "h-5 w-5" })
 				})]
 			}),
@@ -40354,24 +40331,19 @@ function DesktopOverlay() {
 	const { state, setOpen, isMobile } = useSidebar();
 	if (isMobile || state !== "expanded") return null;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		className: "fixed inset-0 z-[5] bg-black/10 backdrop-blur-[1px] transition-all duration-300 md:block hidden",
+		className: "fixed inset-0 z-[5] bg-black/50 backdrop-blur-[1px] transition-all duration-300 md:block hidden",
 		onClick: () => setOpen(false)
 	});
 }
 function Layout() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SidebarProvider, {
 		defaultOpen: false,
-		style: {
-			"--sidebar-width": "260px",
-			"--sidebar-background": "rgba(255, 255, 255, 0.7)",
-			"--sidebar-foreground": "#1D1D1F"
-		},
+		style: { "--sidebar-width": "260px" },
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SyncManager, {}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AppSidebar, {}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SidebarInset, {
-				className: "transition-all duration-300 ease-in-out",
-				style: { backgroundColor: "#F5F5F7" },
+				className: "transition-all duration-300 ease-in-out bg-background",
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DesktopOverlay, {}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Header, {}),
@@ -40395,7 +40367,7 @@ var Index = () => {
 var Index_default = Index;
 var Card = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	ref,
-	className: cn("rounded-lg border bg-card text-card-foreground shadow-sm", className),
+	className: cn("cyber-card text-card-foreground", className),
 	...props
 }));
 Card.displayName = "Card";
@@ -40407,7 +40379,7 @@ var CardHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @_
 CardHeader.displayName = "CardHeader";
 var CardTitle = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	ref,
-	className: cn("text-2xl font-semibold leading-none tracking-tight", className),
+	className: cn("text-2xl font-bold leading-none tracking-tight font-display text-[#D9B979]", className),
 	...props
 }));
 CardTitle.displayName = "CardTitle";
@@ -40572,8 +40544,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-CiJuqXue.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-Jqta8agr.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-u0sC3fdq.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-Du1ggLa8.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -40631,6 +40603,6 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(J, {
 });
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
-export { getDefaultOptions as $, Portal as $t, DropdownMenuTrigger as A, TooltipTrigger as At, startOfYear as B, Users as Bt, DialogHeader as C, Button as Ct, DropdownMenu as D, Tooltip as Dt, ptBR as E, Slot$2 as Et, formatDistanceToNow as F, createPopperScope as Ft, differenceInCalendarMonths as G, ChevronDown as Gt, endOfDay as H, RefreshCw as Ht, format as I, useId as It, differenceInCalendarDays as J, createLucideIcon as Jt, isDate as K, Check as Kt, getWeek as L, toast as Lt, COLUMNS as M, Arrow as Mt, calculateLeadValue as N, Content$1 as Nt, DropdownMenuContent as O, TooltipContent as Ot, useCRMStore as P, Root2$2 as Pt, startOfWeek as Q, Presence as Qt, getISOWeek as R, cn as Rt, DialogFooter as S, Input as St, DialogTrigger as T, useIsMobile as Tt, getRoundingMethod as U, LoaderCircle as Ut, endOfMonth as V, TrendingUp as Vt, differenceInDays as W, ChevronRight as Wt, normalizeDates as X, clsx_default as Xt, startOfDay as Y, cva as Yt, startOfISOWeek as Z, useControllableState as Zt, CommandSeparator as _, hideOthers as _t, Select as a, createSlottable as an, require_shim as at, DialogContent as b, FocusScope as bt, SelectTrigger as c, useComposedRefs as cn, Content as ct, Label as d, require_react as dn, Portal$3 as dt, useLayoutEffect2 as en, toDate as et, Command as f, __commonJSMin as fn, Root$3 as ft, CommandList as g, createDialogScope as gt, CommandItem as h, WarningProvider as ht, CardTitle as i, createSlot as in, googleSheetsService as it, useLivesStore as j, Anchor as jt, DropdownMenuItem as k, TooltipProvider as kt, SelectValue as l, composeEventHandlers as ln, Description as lt, CommandGroup as m, __toESM as mn, Trigger$2 as mt, CardContent as n, useCallbackRef as nn, millisecondsInHour as nt, SelectContent as o, createContextScope as on, Skeleton as ot, CommandEmpty as p, __export as pn, Title as pt, constructNow as q, Calendar as qt, CardHeader as r, Primitive as rn, millisecondsInMinute as rt, SelectItem as s, require_jsx_runtime as sn, Close as st, Card as t, DismissableLayer as tn, constructFrom as tt, Switch as u, useToast as un, Overlay as ut, Dialog as v, Combination_default as vt, DialogTitle as w, buttonVariants as wt, DialogDescription as x, Primitive$1 as xt, DialogClose as y, useFocusGuards as yt, enUS as z, Video as zt };
+export { startOfWeek as $, createLucideIcon as $t, DropdownMenuItem as A, TooltipProvider as At, enUS as B, X as Bt, DialogFooter as C, Input as Ct, ptBR as D, Slot$2 as Dt, DialogTrigger as E, useIsMobile as Et, useCRMStore as F, Root2$2 as Ft, differenceInDays as G, RefreshCw as Gt, endOfMonth as H, Users as Ht, formatDistanceToNow as I, createPopperScope as It, constructNow as J, CircleAlert as Jt, differenceInCalendarMonths as K, LoaderCircle as Kt, format as L, useId as Lt, useLivesStore as M, Anchor as Mt, COLUMNS as N, Arrow as Nt, DropdownMenu as O, Tooltip as Ot, calculateLeadValue as P, Content$1 as Pt, startOfISOWeek as Q, Calendar as Qt, getWeek as R, toast as Rt, DialogDescription as S, Primitive$1 as St, DialogTitle as T, buttonVariants as Tt, endOfDay as U, TrendingUp as Ut, startOfYear as V, Video as Vt, getRoundingMethod as W, Search as Wt, startOfDay as X, ChevronDown as Xt, differenceInCalendarDays as Y, ChevronRight as Yt, normalizeDates as Z, Check as Zt, CommandList as _, __commonJSMin as _n, createDialogScope as _t, Select as a, useLayoutEffect2 as an, googleSheetsService as at, DialogClose as b, useFocusGuards as bt, SelectTrigger as c, Primitive as cn, Close as ct, Label as d, createContextScope as dn, Overlay as dt, cva as en, getDefaultOptions as et, Command as f, require_jsx_runtime as fn, Portal$3 as ft, CommandItem as g, require_react as gn, WarningProvider as gt, CommandInput as h, useToast as hn, Trigger$2 as ht, CardTitle as i, Portal as in, millisecondsInMinute as it, DropdownMenuTrigger as j, TooltipTrigger as jt, DropdownMenuContent as k, TooltipContent as kt, SelectValue as l, createSlot as ln, Content as lt, CommandGroup as m, composeEventHandlers as mn, Title as mt, CardContent as n, useControllableState as nn, constructFrom as nt, SelectContent as o, DismissableLayer as on, require_shim as ot, CommandEmpty as p, useComposedRefs as pn, Root$3 as pt, isDate as q, Clock as qt, CardHeader as r, Presence as rn, millisecondsInHour as rt, SelectItem as s, useCallbackRef as sn, Skeleton as st, Card as t, clsx_default as tn, toDate as tt, Switch as u, createSlottable as un, Description as ut, CommandSeparator as v, __export as vn, hideOthers as vt, DialogHeader as w, Button as wt, DialogContent as x, FocusScope as xt, Dialog as y, __toESM as yn, Combination_default as yt, getISOWeek as z, cn as zt };
 
-//# sourceMappingURL=index-DHzT6Z6x.js.map
+//# sourceMappingURL=index-Bv5eVTFr.js.map

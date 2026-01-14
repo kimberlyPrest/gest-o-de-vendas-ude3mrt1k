@@ -10,8 +10,8 @@ export function Header() {
   const [settingsOpen, setSettingsOpen] = useState(false)
 
   return (
-    <header className="sticky top-0 z-20 flex h-16 items-center gap-4 border-b bg-white/80 dark:bg-card/80 px-4 shadow-sm backdrop-blur-md md:px-6 transition-all">
-      <SidebarToggle className="-ml-2 text-gray-700 dark:text-gray-200" />
+    <header className="sticky top-0 z-20 flex h-16 items-center gap-4 border-b border-[#333333] bg-[#0C0C0D]/80 px-4 shadow-sm backdrop-blur-md md:px-6 transition-all">
+      <SidebarToggle className="-ml-2 text-gray-200 hover:text-white" />
 
       <div className="flex-1 flex items-center gap-4 md:ml-4">
         <GlobalSearch />
@@ -23,7 +23,7 @@ export function Header() {
           variant="ghost"
           size="icon"
           onClick={() => setSettingsOpen(true)}
-          className="text-gray-500 hover:bg-transparent hover:text-gray-800"
+          className="text-gray-400 hover:bg-white/5 hover:text-white"
         >
           <Settings className="h-5 w-5" />
         </Button>

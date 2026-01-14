@@ -5,8 +5,8 @@ import {
   Check,
   ChevronsUpDown,
   FilterX,
-  ArrowRightLeft,
   Filter,
+  ArrowRightLeft,
 } from 'lucide-react'
 import { DateRange } from 'react-day-picker'
 import { cn } from '@/lib/utils'
@@ -21,6 +21,7 @@ import {
   Command,
   CommandEmpty,
   CommandGroup,
+  CommandInput,
   CommandItem,
   CommandList,
   CommandSeparator,
@@ -138,24 +139,33 @@ export function LiveFilters({
     filters.comparisonEnabled
 
   return (
-    <section className="bg-white border rounded-xl p-2 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar shadow-sm">
-      <div className="flex items-center gap-2 px-3 text-muted-foreground shrink-0 border-r pr-4 mr-2">
-        <Filter className="w-5 h-5" />
+    <section className="bg-[#1A1A1A] border border-[#333333] rounded-xl p-2 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar shadow-lg">
+      <div className="flex items-center gap-2 px-3 text-gray-400 shrink-0 border-r border-[#333333] pr-4 mr-2">
+        <Filter className="w-5 h-5 text-[#D9B979]" />
         <span className="text-sm font-medium">Filtros:</span>
       </div>
 
       {/* Preset Selector */}
       <Select value={selectedPreset} onValueChange={handlePresetChange}>
-        <SelectTrigger className="h-10 w-[140px] border-input shrink-0">
+        <SelectTrigger className="h-10 w-[140px] border-[#333333] bg-[#0C0C0D] text-gray-200 shrink-0 focus:ring-[#D9B979]/50">
           <SelectValue placeholder="Período" />
         </SelectTrigger>
-        <SelectContent>
+        <SelectContent className="bg-[#1A1A1A] border-[#333333] text-gray-200">
           {DATE_PRESETS.map((preset) => (
-            <SelectItem key={preset.value} value={preset.value}>
+            <SelectItem
+              key={preset.value}
+              value={preset.value}
+              className="focus:bg-[#333333] focus:text-white"
+            >
               {preset.label}
             </SelectItem>
           ))}
-          <SelectItem value="custom">Personalizado</SelectItem>
+          <SelectItem
+            value="custom"
+            className="focus:bg-[#333333] focus:text-white"
+          >
+            Personalizado
+          </SelectItem>
         </SelectContent>
       </Select>
 
@@ -165,7 +175,7 @@ export function LiveFilters({
           <Button
             variant="outline"
             className={cn(
-              'h-10 justify-start text-left font-normal shrink-0',
+              'h-10 justify-start text-left font-normal shrink-0 bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white',
               !filters.dateRange && 'text-muted-foreground',
             )}
             onClick={() => setSelectedPreset('custom')}
@@ -185,7 +195,10 @@ export function LiveFilters({
             )}
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-auto p-0" align="start">
+        <PopoverContent
+          className="w-auto p-0 border-[#333333] bg-[#1A1A1A]"
+          align="start"
+        >
           <Calendar
             initialFocus
             mode="range"
@@ -197,6 +210,7 @@ export function LiveFilters({
             }}
             numberOfMonths={2}
             locale={ptBR}
+            className="bg-[#1A1A1A] text-white"
           />
         </PopoverContent>
       </Popover>
@@ -208,7 +222,7 @@ export function LiveFilters({
             variant="outline"
             role="combobox"
             aria-expanded={openPresenters}
-            className="h-10 justify-between shrink-0 min-w-[150px]"
+            className="h-10 justify-between shrink-0 min-w-[150px] bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white"
           >
             <span className="truncate">
               {filters.presenters.length === 0
@@ -218,8 +232,12 @@ export function LiveFilters({
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[220px] p-0">
-          <Command>
+        <PopoverContent className="w-[220px] p-0 border-[#333333] bg-[#1A1A1A]">
+          <Command className="bg-[#1A1A1A] text-white">
+            <CommandInput
+              placeholder="Buscar apresentador..."
+              className="border-[#333333]"
+            />
             <CommandList>
               <CommandEmpty>Nenhum apresentador.</CommandEmpty>
               <CommandGroup>
@@ -234,13 +252,14 @@ export function LiveFilters({
                       })
                     }
                   }}
+                  className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white"
                 >
                   <div
                     className={cn(
                       'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                       filters.presenters.length === presenters.length &&
                         presenters.length > 0
-                        ? 'bg-primary text-primary-foreground'
+                        ? 'bg-[#D9B979] text-black border-[#D9B979]'
                         : 'opacity-50 [&_svg]:invisible',
                     )}
                   >
@@ -248,18 +267,19 @@ export function LiveFilters({
                   </div>
                   <span>Selecionar Todos</span>
                 </CommandItem>
-                <CommandSeparator className="my-1" />
+                <CommandSeparator className="my-1 bg-[#333333]" />
                 {presenters.map((presenter) => (
                   <CommandItem
                     key={presenter}
                     value={presenter}
                     onSelect={() => togglePresenter(presenter)}
+                    className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white"
                   >
                     <div
                       className={cn(
                         'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                         filters.presenters.includes(presenter)
-                          ? 'bg-primary text-primary-foreground'
+                          ? 'bg-[#D9B979] text-black border-[#D9B979]'
                           : 'opacity-50 [&_svg]:invisible',
                       )}
                     >
@@ -280,7 +300,7 @@ export function LiveFilters({
           <Button
             variant="outline"
             role="combobox"
-            className="h-10 justify-between shrink-0 min-w-[150px]"
+            className="h-10 justify-between shrink-0 min-w-[150px] bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white"
           >
             <span className="truncate">
               {filters.weekdays.length === 0
@@ -290,8 +310,8 @@ export function LiveFilters({
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0">
-          <Command>
+        <PopoverContent className="w-[200px] p-0 border-[#333333] bg-[#1A1A1A]">
+          <Command className="bg-[#1A1A1A] text-white">
             <CommandList>
               <CommandGroup>
                 {WEEKDAYS.map((day) => (
@@ -299,12 +319,13 @@ export function LiveFilters({
                     key={day.value}
                     value={day.value}
                     onSelect={() => toggleWeekday(day.value)}
+                    className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white"
                   >
                     <div
                       className={cn(
                         'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                         filters.weekdays.includes(day.value)
-                          ? 'bg-primary text-primary-foreground'
+                          ? 'bg-[#D9B979] text-black border-[#D9B979]'
                           : 'opacity-50 [&_svg]:invisible',
                       )}
                     >
@@ -335,8 +356,9 @@ export function LiveFilters({
             onFilterChange({ ...filters, comparisonEnabled: checked })
           }
           disabled={!filters.dateRange?.from || !filters.dateRange?.to}
+          className="data-[state=checked]:bg-[#D9B979]"
         />
-        <div className="flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors">
+        <div className="flex items-center gap-1.5 text-gray-400 group-hover:text-white transition-colors">
           <ArrowRightLeft className="w-4 h-4" />
           <span className="text-xs font-medium">Comparar</span>
         </div>
@@ -348,7 +370,7 @@ export function LiveFilters({
       {hasActiveFilters && (
         <button
           onClick={handleClear}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-muted-foreground hover:text-red-500 hover:bg-red-50 rounded-lg transition-all shrink-0"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-gray-400 hover:text-[#FF453A] hover:bg-[#FF453A]/10 rounded-lg transition-all shrink-0"
         >
           <FilterX className="w-4 h-4" />
           <span className="text-xs font-medium">Limpar Filtros</span>

@@ -20,14 +20,14 @@ export function LiveComparative({
   }
 
   return (
-    <Card className="overflow-hidden rounded-xl border border-[#E5E5E7] shadow-sm bg-white">
-      <CardHeader className="border-b border-[#E5E5E7] bg-white px-6 py-5">
+    <Card className="overflow-hidden cyber-card border-[#333333] shadow-lg">
+      <CardHeader className="border-b border-[#333333] bg-[#1A1A1A]/50 px-6 py-5">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#F5F5F7] text-[#1D1D1F]">
+          <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#333333] text-[#D9B979]">
             <Scale className="h-5 w-5" />
           </div>
           <div>
-            <CardTitle className="text-xl font-semibold text-[#1D1D1F]">
+            <CardTitle className="text-xl font-bold font-display text-white">
               Comparativo de Hosts
             </CardTitle>
           </div>
