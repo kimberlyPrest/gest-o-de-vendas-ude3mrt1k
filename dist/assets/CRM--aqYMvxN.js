@@ -1,5 +1,5 @@
-import { a as parseISO, f as Download, g as ArrowRightLeft, h as ArrowUp, i as PopoverTrigger, l as isSameDay, m as ChevronLeft, n as Popover, o as subDays, p as DollarSign, r as PopoverContent, s as isBefore, t as Calendar } from "./calendar-BDeyCLQT.js";
-import { A as DropdownMenuItem, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, F as formatDistanceToNow, I as format, Jt as createLucideIcon, Lt as toast, N as COLUMNS, O as DropdownMenu, P as useCRMStore, Rt as cn, St as Input, T as DialogTitle, Tt as useIsMobile, U as getRoundingMethod, Ut as LoaderCircle, W as differenceInDays, X as normalizeDates, Yt as cva, a as Select, an as createSlottable, at as require_shim, b as DialogClose, c as SelectTrigger, cn as useComposedRefs, ct as Content, d as Label, dn as require_react, dt as Portal, en as useLayoutEffect2, ft as Root$1, gt as createDialogScope, ht as WarningProvider, j as DropdownMenuTrigger, k as DropdownMenuContent, l as SelectValue, ln as composeEventHandlers, lt as Description, mn as __toESM, mt as Trigger, nn as useCallbackRef, nt as millisecondsInHour, o as SelectContent, on as createContextScope, pt as Title, q as constructNow, s as SelectItem, sn as require_jsx_runtime, st as Close, tt as constructFrom, ut as Overlay, w as DialogHeader, wt as buttonVariants, x as DialogContent, xt as Primitive, y as Dialog } from "./index-B2MvPRFG.js";
+import { a as parseISO, f as Download, g as ArrowRightLeft, h as ArrowUp, i as PopoverTrigger, l as isSameDay, m as ChevronLeft, n as Popover, o as subDays, p as DollarSign, r as PopoverContent, s as isBefore, t as Calendar } from "./calendar-Xv-qQ9vk.js";
+import { A as DropdownMenuItem, C as DialogFooter, Ct as Input, D as ptBR, Et as useIsMobile, F as useCRMStore, G as differenceInDays, I as formatDistanceToNow, J as constructNow, L as format, N as COLUMNS, O as DropdownMenu, P as calculateLeadValue, Rt as toast, St as Primitive, T as DialogTitle, Tt as buttonVariants, Vt as Users, W as getRoundingMethod, Wt as LoaderCircle, Xt as cva, Yt as createLucideIcon, Z as normalizeDates, _t as createDialogScope, a as Select, b as DialogClose, c as SelectTrigger, cn as require_jsx_runtime, ct as Close, d as Label, dt as Overlay, fn as require_react, ft as Portal, gt as WarningProvider, hn as __toESM, ht as Trigger, j as DropdownMenuTrigger, k as DropdownMenuContent, l as SelectValue, ln as useComposedRefs, lt as Content, mt as Title, nt as constructFrom, o as SelectContent, on as createSlottable, ot as require_shim, pt as Root$1, rn as useCallbackRef, rt as millisecondsInHour, s as SelectItem, sn as createContextScope, tn as useLayoutEffect2, un as composeEventHandlers, ut as Description, w as DialogHeader, wt as Button, x as DialogContent, y as Dialog, zt as cn } from "./index-CxpIw5iv.js";
 var Activity = createLucideIcon("activity", [["path", {
 	d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
 	key: "169zse"
@@ -299,7 +299,7 @@ function CRMFilters() {
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 								className: "text-sm",
 								style: { color: "#86868B" },
-								children: "Filtre por valor estimado (Assentos × R$500)"
+								children: "Filtre pelo valor total estimado do lead"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "grid grid-cols-2 gap-3",
@@ -386,8 +386,8 @@ function CRMMetrics() {
 		"Aguardando Cliente"
 	];
 	const pipelineCount = filteredLeads.filter((l) => pipelineColumns.includes(l.status)).length;
-	const pipelineValue = filteredLeads.filter((l) => pipelineColumns.includes(l.status)).reduce((acc, l) => acc + l.assentosAdicionais * 500, 0);
-	const convertedValue = filteredLeads.filter((l) => l.status === "Comprou").reduce((acc, l) => acc + l.assentosAdicionais * 500, 0);
+	const pipelineValue = filteredLeads.filter((l) => pipelineColumns.includes(l.status)).reduce((acc, l) => acc + (l.valorEstimado ?? calculateLeadValue(l)), 0);
+	const convertedValue = filteredLeads.filter((l) => l.status === "Comprou").reduce((acc, l) => acc + (l.valorEstimado ?? calculateLeadValue(l)), 0);
 	const formatCurrency = (val) => {
 		if (val >= 1e3) return `R$ ${(val / 1e3).toFixed(1)}k`;
 		return `R$ ${val.toLocaleString("pt-BR")}`;
@@ -517,7 +517,7 @@ const CRMCard = (0, import_react.memo)(({ lead, onDragStart, onClick }) => {
 	if (hoursSinceInteraction > 72) borderColor = "#FF3B30";
 	else if (hoursSinceInteraction > 24) borderColor = "#FF9500";
 	const isInactive = daysSinceInteraction > 3;
-	const potentialValue = lead.assentosAdicionais * 500;
+	const potentialValue = lead.valorEstimado ?? calculateLeadValue(lead);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		draggable: true,
 		onDragStart: (e) => {
@@ -767,7 +767,7 @@ function Badge({ className, variant, ...props }) {
 }
 function LeadInfo({ lead }) {
 	const statusColor = COLUMNS.find((c) => c.id === lead.status)?.color || "#6B7280";
-	const potentialValue = lead.valorEstimado ?? (lead.origem === "Planilha" ? 2999 + lead.assentosAdicionais * 699 : lead.assentosAdicionais * 500);
+	const potentialValue = lead.valorEstimado ?? calculateLeadValue(lead);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex flex-col gap-8 animate-fade-in",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -2156,4 +2156,4 @@ function CRM() {
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-CsdRiUHp.js.map
+//# sourceMappingURL=CRM--aqYMvxN.js.map

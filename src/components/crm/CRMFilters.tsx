@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { format } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import { cn } from '@/lib/utils'
-import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import {
   Popover,
@@ -35,8 +34,6 @@ export function CRMFilters() {
     filters.dateRange,
     filters.valueRange.min || filters.valueRange.max,
   ].filter(Boolean).length
-
-  const origins = ['all', 'Planilha', 'Manual', 'Site']
 
   return (
     <div className="apple-card p-5 mb-8 flex flex-wrap items-center gap-8">
@@ -206,7 +203,7 @@ export function CRMFilters() {
                   Valor Potencial
                 </h4>
                 <p className="text-sm" style={{ color: '#86868B' }}>
-                  Filtre por valor estimado (Assentos × R$500)
+                  Filtre pelo valor total estimado do lead
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-3">

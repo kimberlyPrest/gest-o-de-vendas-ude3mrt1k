@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-CwMksul2.js","assets/calendar-BDeyCLQT.js","assets/CRM-CsdRiUHp.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-aycndpr4.js","assets/calendar-Xv-qQ9vk.js","assets/CRM--aqYMvxN.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -36069,6 +36069,11 @@ const COLUMNS = [
 	}
 ];
 var STORAGE_KEY = "crm_leads_data_v2";
+const calculateLeadValue = (lead) => {
+	const seats = Number(lead.assentosAdicionais) || 0;
+	if (lead.origem === "Planilha") return 2999 + seats * 699;
+	return seats * 500;
+};
 var saveToStorage = (leads) => {
 	const persistenceData = leads.reduce((acc, lead) => {
 		acc[lead.id] = {
@@ -36143,7 +36148,7 @@ const useCRMStore = create((set, get$1) => ({
 						author: "Sistema"
 					}],
 					followUp: local.followUp,
-					valorEstimado: local.valorEstimado !== void 0 ? local.valorEstimado : lead.origem === "Planilha" ? 2999 + (lead.assentosAdicionais || 0) * 699 : (lead.assentosAdicionais || 0) * 500
+					valorEstimado: local.valorEstimado !== void 0 ? local.valorEstimado : calculateLeadValue(lead)
 				};
 			});
 			if (mergedLeads.length < 5) generateMockLeads(15).forEach((m$1) => {
@@ -36339,7 +36344,7 @@ function applyFilters(leads, filters) {
 				if (leadDate > filters.dateRange.to.getTime() + 864e5) return false;
 			}
 		}
-		const potentialValue = lead.assentosAdicionais * 500;
+		const potentialValue = lead.valorEstimado ?? calculateLeadValue(lead);
 		if (filters.valueRange.min && potentialValue < Number(filters.valueRange.min)) return false;
 		if (filters.valueRange.max && potentialValue > Number(filters.valueRange.max)) return false;
 		return true;
@@ -36376,7 +36381,7 @@ function generateMockLeads(count$3) {
 		const name = names[Math.floor(Math.random() * names.length)];
 		const surname = surnames[Math.floor(Math.random() * surnames.length)];
 		const captureDate = new Date(Date.now() - Math.floor(Math.random() * 10 * 24 * 60 * 60 * 1e3)).toISOString();
-		return {
+		const leadData = {
 			id: `mock-${i}-${Date.now()}`,
 			nomeCompleto: `${name} ${surname}`,
 			email: `${name.toLowerCase()}.${surname.toLowerCase()}@example.com`,
@@ -36385,8 +36390,12 @@ function generateMockLeads(count$3) {
 			origem: origins[Math.floor(Math.random() * origins.length)],
 			status: statuses[Math.floor(Math.random() * statuses.length)],
 			dataCaptacao: captureDate,
-			lastInteraction: captureDate,
+			lastInteraction: captureDate
+		};
+		return {
+			...leadData,
 			notes: [],
+			valorEstimado: calculateLeadValue(leadData),
 			history: [{
 				id: v4_default(),
 				type: "status_change",
@@ -40563,8 +40572,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-CwMksul2.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-CsdRiUHp.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-aycndpr4.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM--aqYMvxN.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -40622,6 +40631,6 @@ var App = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(J, {
 });
 var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
-export { getDefaultOptions as $, Portal as $t, DropdownMenuItem as A, TooltipTrigger as At, startOfYear as B, Users as Bt, DialogFooter as C, Button as Ct, ptBR as D, Tooltip as Dt, DialogTrigger as E, Slot$2 as Et, formatDistanceToNow as F, createPopperScope as Ft, differenceInCalendarMonths as G, ChevronDown as Gt, endOfDay as H, RefreshCw as Ht, format as I, useId as It, differenceInCalendarDays as J, createLucideIcon as Jt, isDate as K, Check as Kt, getWeek as L, toast as Lt, useLivesStore as M, Arrow as Mt, COLUMNS as N, Content$1 as Nt, DropdownMenu as O, TooltipContent as Ot, useCRMStore as P, Root2$2 as Pt, startOfWeek as Q, Presence as Qt, getISOWeek as R, cn as Rt, DialogDescription as S, Input as St, DialogTitle as T, useIsMobile as Tt, getRoundingMethod as U, LoaderCircle as Ut, endOfMonth as V, TrendingUp as Vt, differenceInDays as W, ChevronRight as Wt, normalizeDates as X, clsx_default as Xt, startOfDay as Y, cva as Yt, startOfISOWeek as Z, useControllableState as Zt, CommandList as _, hideOthers as _t, Select as a, createSlottable as an, require_shim as at, DialogClose as b, FocusScope as bt, SelectTrigger as c, useComposedRefs as cn, Content as ct, Label as d, require_react as dn, Portal$3 as dt, useLayoutEffect2 as en, toDate as et, Command as f, __commonJSMin as fn, Root$3 as ft, CommandItem as g, createDialogScope as gt, CommandInput as h, WarningProvider as ht, CardTitle as i, createSlot as in, googleSheetsService as it, DropdownMenuTrigger as j, Anchor as jt, DropdownMenuContent as k, TooltipProvider as kt, SelectValue as l, composeEventHandlers as ln, Description as lt, CommandGroup as m, __toESM as mn, Trigger$2 as mt, CardContent as n, useCallbackRef as nn, millisecondsInHour as nt, SelectContent as o, createContextScope as on, Skeleton as ot, CommandEmpty as p, __export as pn, Title as pt, constructNow as q, Calendar as qt, CardHeader as r, Primitive as rn, millisecondsInMinute as rt, SelectItem as s, require_jsx_runtime as sn, Close as st, Card as t, DismissableLayer as tn, constructFrom as tt, Switch as u, useToast as un, Overlay as ut, CommandSeparator as v, Combination_default as vt, DialogHeader as w, buttonVariants as wt, DialogContent as x, Primitive$1 as xt, Dialog as y, useFocusGuards as yt, enUS as z, Video as zt };
+export { startOfWeek as $, Presence as $t, DropdownMenuItem as A, TooltipProvider as At, enUS as B, Video as Bt, DialogFooter as C, Input as Ct, ptBR as D, Slot$2 as Dt, DialogTrigger as E, useIsMobile as Et, useCRMStore as F, Root2$2 as Ft, differenceInDays as G, ChevronRight as Gt, endOfMonth as H, TrendingUp as Ht, formatDistanceToNow as I, createPopperScope as It, constructNow as J, Calendar as Jt, differenceInCalendarMonths as K, ChevronDown as Kt, format as L, useId as Lt, useLivesStore as M, Anchor as Mt, COLUMNS as N, Arrow as Nt, DropdownMenu as O, Tooltip as Ot, calculateLeadValue as P, Content$1 as Pt, startOfISOWeek as Q, useControllableState as Qt, getWeek as R, toast as Rt, DialogDescription as S, Primitive$1 as St, DialogTitle as T, buttonVariants as Tt, endOfDay as U, RefreshCw as Ut, startOfYear as V, Users as Vt, getRoundingMethod as W, LoaderCircle as Wt, startOfDay as X, cva as Xt, differenceInCalendarDays as Y, createLucideIcon as Yt, normalizeDates as Z, clsx_default as Zt, CommandList as _, createDialogScope as _t, Select as a, createSlot as an, googleSheetsService as at, DialogClose as b, useFocusGuards as bt, SelectTrigger as c, require_jsx_runtime as cn, Close as ct, Label as d, useToast as dn, Overlay as dt, Portal as en, getDefaultOptions as et, Command as f, require_react as fn, Portal$3 as ft, CommandItem as g, WarningProvider as gt, CommandInput as h, __toESM as hn, Trigger$2 as ht, CardTitle as i, Primitive as in, millisecondsInMinute as it, DropdownMenuTrigger as j, TooltipTrigger as jt, DropdownMenuContent as k, TooltipContent as kt, SelectValue as l, useComposedRefs as ln, Content as lt, CommandGroup as m, __export as mn, Title as mt, CardContent as n, DismissableLayer as nn, constructFrom as nt, SelectContent as o, createSlottable as on, require_shim as ot, CommandEmpty as p, __commonJSMin as pn, Root$3 as pt, isDate as q, Check as qt, CardHeader as r, useCallbackRef as rn, millisecondsInHour as rt, SelectItem as s, createContextScope as sn, Skeleton as st, Card as t, useLayoutEffect2 as tn, toDate as tt, Switch as u, composeEventHandlers as un, Description as ut, CommandSeparator as v, hideOthers as vt, DialogHeader as w, Button as wt, DialogContent as x, FocusScope as xt, Dialog as y, Combination_default as yt, getISOWeek as z, cn as zt };
 
-//# sourceMappingURL=index-B2MvPRFG.js.map
+//# sourceMappingURL=index-CxpIw5iv.js.map

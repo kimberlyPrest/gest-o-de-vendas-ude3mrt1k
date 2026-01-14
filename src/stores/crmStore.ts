@@ -73,6 +73,19 @@ interface CRMStore {
 
 const STORAGE_KEY = 'crm_leads_data_v2'
 
+// Export helper for value calculation to ensure consistency across the app
+export const calculateLeadValue = (lead: {
+  origem: string
+  assentosAdicionais: number
+}) => {
+  const seats = Number(lead.assentosAdicionais) || 0
+  if (lead.origem === 'Planilha') {
+    return 2999 + seats * 699
+  }
+  // Default calculation (Manual, Site, etc)
+  return seats * 500
+}
+
 const saveToStorage = (leads: CRMLead[]) => {
   const persistenceData = leads.reduce(
     (acc, lead) => {
@@ -115,7 +128,6 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
   },
 
   fetchLeads: async (force = false) => {
-    // Avoid double fetch if already has data and not forced
     if (!force && get().leads.length > 0) return
 
     set({ loading: true, error: false })
@@ -127,13 +139,12 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
         console.warn('Failed to fetch from API, checking cache...', err)
         const offlineData = localStorage.getItem(STORAGE_KEY)
         if (!offlineData) throw err
-        apiLeads = generateMockLeads(5) // Fallback
+        apiLeads = generateMockLeads(5)
       }
 
       const localDataStr = localStorage.getItem(STORAGE_KEY)
       const localData = localDataStr ? JSON.parse(localDataStr) : {}
 
-      // Calculate if new leads arrived
       const currentIds = get().leads.map((l) => l.id)
       const newApiIds = apiLeads.map((l) => l.id)
       const hasNewLeads = newApiIds.some((id) => !currentIds.includes(id))
@@ -167,9 +178,7 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
           valorEstimado:
             local.valorEstimado !== undefined
               ? local.valorEstimado
-              : lead.origem === 'Planilha'
-                ? 2999 + (lead.assentosAdicionais || 0) * 699
-                : (lead.assentosAdicionais || 0) * 500,
+              : calculateLeadValue(lead),
         }
       })
 
@@ -216,13 +225,11 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
     const { addToQueue, syncError } = useSyncStore.getState()
     const { addNotification } = useNotificationStore.getState()
 
-    // If offline, queue it
     if (!navigator.onLine || syncError) {
       addToQueue({ type: 'move_lead', leadId, newStatus })
     }
 
     set((state) => {
-      // Check for conversion goal
       const boughtLeads = state.leads.filter(
         (l) => l.status === 'Comprou',
       ).length
@@ -317,10 +324,8 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
   scheduleFollowUp: (leadId, date) => {
     const { addNotification } = useNotificationStore.getState()
 
-    // Schedule local notification (mock)
     const timeDiff = new Date(date).getTime() - Date.now()
     if (timeDiff > 0 && timeDiff < 7200000) {
-      // If within 2 hours
       addNotification({
         type: 'follow_up',
         title: 'Follow-up Próximo',
@@ -395,7 +400,7 @@ function applyFilters(leads: CRMLead[], filters: FilterState): CRMLead[] {
         if (leadDate > toDate) return false
       }
     }
-    const potentialValue = lead.assentosAdicionais * 500
+    const potentialValue = lead.valorEstimado ?? calculateLeadValue(lead)
     if (
       filters.valueRange.min &&
       potentialValue < Number(filters.valueRange.min)
@@ -440,7 +445,7 @@ function generateMockLeads(count: number): CRMLead[] {
       Date.now() - Math.floor(Math.random() * 10 * 24 * 60 * 60 * 1000),
     ).toISOString()
 
-    return {
+    const leadData = {
       id: `mock-${i}-${Date.now()}`,
       nomeCompleto: `${name} ${surname}`,
       email: `${name.toLowerCase()}.${surname.toLowerCase()}@example.com`,
@@ -450,7 +455,12 @@ function generateMockLeads(count: number): CRMLead[] {
       status: statuses[Math.floor(Math.random() * statuses.length)],
       dataCaptacao: captureDate,
       lastInteraction: captureDate,
+    }
+
+    return {
+      ...leadData,
       notes: [],
+      valorEstimado: calculateLeadValue(leadData),
       history: [
         {
           id: uuidv4(),

@@ -1,5 +1,5 @@
 import { type ReactNode } from 'react'
-import { CRMLead, COLUMNS } from '@/stores/crmStore'
+import { CRMLead, COLUMNS, calculateLeadValue } from '@/stores/crmStore'
 import {
   Mail,
   Phone,
@@ -7,7 +7,6 @@ import {
   Globe,
   Users,
   DollarSign,
-  Hash,
   MessageCircle,
 } from 'lucide-react'
 import { Badge } from '@/components/ui/badge'
@@ -22,11 +21,7 @@ export function LeadInfo({ lead }: LeadInfoProps) {
     COLUMNS.find((c) => c.id === lead.status)?.color || '#6B7280'
 
   // Calculate value for display
-  const potentialValue =
-    lead.valorEstimado ??
-    (lead.origem === 'Planilha'
-      ? 2999 + lead.assentosAdicionais * 699
-      : lead.assentosAdicionais * 500)
+  const potentialValue = lead.valorEstimado ?? calculateLeadValue(lead)
 
   return (
     <div className="flex flex-col gap-8 animate-fade-in">

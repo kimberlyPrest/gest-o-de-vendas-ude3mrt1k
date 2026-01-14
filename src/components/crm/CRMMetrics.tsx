@@ -1,4 +1,4 @@
-import { useCRMStore } from '@/stores/crmStore'
+import { useCRMStore, calculateLeadValue } from '@/stores/crmStore'
 import { differenceInDays } from 'date-fns'
 
 export function CRMMetrics() {
@@ -35,15 +35,15 @@ export function CRMMetrics() {
     pipelineColumns.includes(l.status),
   ).length
 
-  // 4. Pipeline Value: Sum of seats * 500 for active pipeline
+  // 4. Pipeline Value: Sum of active pipeline values
   const pipelineValue = filteredLeads
     .filter((l) => pipelineColumns.includes(l.status))
-    .reduce((acc, l) => acc + l.assentosAdicionais * 500, 0)
+    .reduce((acc, l) => acc + (l.valorEstimado ?? calculateLeadValue(l)), 0)
 
   // 5. Converted Value
   const convertedValue = filteredLeads
     .filter((l) => l.status === 'Comprou')
-    .reduce((acc, l) => acc + l.assentosAdicionais * 500, 0)
+    .reduce((acc, l) => acc + (l.valorEstimado ?? calculateLeadValue(l)), 0)
 
   const formatCurrency = (val: number) => {
     if (val >= 1000) {

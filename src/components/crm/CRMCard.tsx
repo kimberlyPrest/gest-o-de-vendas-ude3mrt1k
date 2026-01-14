@@ -1,5 +1,5 @@
 import React, { memo } from 'react'
-import { CRMLead } from '@/stores/crmStore'
+import { CRMLead, calculateLeadValue } from '@/stores/crmStore'
 import { cn } from '@/lib/utils'
 import { differenceInHours, differenceInDays } from 'date-fns'
 
@@ -28,7 +28,7 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
 
   const isInactive = daysSinceInteraction > 3
 
-  const potentialValue = lead.assentosAdicionais * 500
+  const potentialValue = lead.valorEstimado ?? calculateLeadValue(lead)
 
   return (
     <div
