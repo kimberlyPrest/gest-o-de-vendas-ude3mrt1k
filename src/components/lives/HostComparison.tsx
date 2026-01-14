@@ -1,9 +1,67 @@
-import { useMemo } from 'react'
-import { LiveData } from '@/services/googleSheetsService'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { Progress } from '@/components/ui/progress'
-import { Crown, TrendingDown } from 'lucide-react'
-import { cn } from '@/lib/utils'
+import React, { useMemo } from 'react';
+import { Scale, Crown, TrendingDown, User } from 'lucide-react';
+import { LiveData } from '@/services/googleSheetsService';
+
+interface MetricRowProps {
+  label: string;
+  data: { id: string; rawValue: number; displayValue: string | number }[];
+  higherIsBetter?: boolean;
+}
+
+const MetricRow: React.FC<MetricRowProps> = ({ label, data, higherIsBetter = true }) => {
+  const values = data.map(d => d.rawValue);
+  const maxValue = Math.max(...values);
+  const minValue = Math.min(...values);
+  
+  const getBestValue = () => higherIsBetter ? maxValue : minValue;
+  const getWorstValue = () => higherIsBetter ? minValue : maxValue;
+
+  return (
+    <div className="py-5 border-b border-[#E5E5E7] last:border-0 hover:bg-[#FBFBFD]/50 transition-colors px-6 md:px-8">
+      <p className="text-[11px] uppercase tracking-widest text-[#86868B] font-semibold mb-3">
+        {label}
+      </p>
+      <div className="grid gap-8" style={{ gridTemplateColumns: `repeat(${data.length}, 1fr)` }}>
+        {data.map((item) => {
+          const isBest = item.rawValue === getBestValue() && maxValue !== minValue;
+          const isWorst = item.rawValue === getWorstValue() && maxValue !== minValue;
+          const percentage = maxValue > 0 ? (item.rawValue / maxValue) * 100 : 0;
+          
+          return (
+            <div key={item.id} className="space-y-2">
+              <div className="flex items-center gap-2">
+                {isBest && (
+                  <Crown className="h-4 w-4 text-[#F5A623] fill-[#F5A623]" />
+                )}
+                {isWorst && data.length > 1 && (
+                  <TrendingDown className="h-4 w-4 text-[#86868B]/60" />
+                )}
+                <span 
+                  className={`font-semibold text-[15px] tracking-tight ${
+                    isBest ? 'text-[#1D1D1F]' : 
+                    isWorst ? 'text-[#86868B]' : 'text-[#1D1D1F]'
+                  }`}
+                >
+                  {item.displayValue}
+                </span>
+              </div>
+              
+              {/* Apple-style Progress Bar */}
+              <div className="h-1.5 bg-[#E5E5E7]/60 rounded-full overflow-hidden w-full max-w-[200px]">
+                <div 
+                  className={`h-full rounded-full transition-all duration-1000 ease-out ${
+                    isBest ? 'bg-[#0071E3]' : 'bg-[#86868B]/40'
+                  }`}
+                  style={{ width: `${percentage}%` }}
+                />
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+};
 
 interface HostComparisonProps {
   data: LiveData[]
