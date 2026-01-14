@@ -16,7 +16,11 @@ export const useLivesStore = create<LivesState>((set, get) => ({
   fetchData: async () => {
     set({ loading: true, error: false })
     try {
-      const data = await googleSheetsService.fetchLivesData()
+      // Sync first
+      await googleSheetsService.syncLives()
+
+      // Then Fetch from DB
+      const data = await googleSheetsService.fetchLivesFromDB()
       set({ allData: data })
     } catch (error) {
       console.error(error)

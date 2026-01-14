@@ -1,8 +1,10 @@
 import { create } from 'zustand'
-import { googleSheetsService, Lead } from '@/services/googleSheetsService'
+import { googleSheetsService } from '@/services/googleSheetsService'
 import { v4 as uuidv4 } from 'uuid'
 import { useSyncStore } from './syncStore'
 import { useNotificationStore } from './notificationStore'
+import { supabase } from '@/lib/supabase/client'
+import { toast } from 'sonner'
 
 export interface Note {
   id: string
@@ -20,7 +22,15 @@ export interface HistoryItem {
   metadata?: any
 }
 
-export interface CRMLead extends Lead {
+export interface CRMLead {
+  id: string
+  nomeCompleto: string
+  email: string
+  telefone: string
+  assentosAdicionais: number
+  origem: string
+  status: string
+  dataCaptacao: string
   lastInteraction: string
   notes: Note[]
   history: HistoryItem[]
@@ -61,7 +71,7 @@ interface CRMStore {
   loading: boolean
   error: boolean
 
-  fetchLeads: (force?: boolean) => Promise<void>
+  fetchLeads: (forceSync?: boolean) => Promise<void>
   setFilter: (key: keyof FilterState, value: any) => void
   clearFilters: () => void
   moveLead: (leadId: string, newStatus: CRMColumnId) => void
@@ -71,9 +81,6 @@ interface CRMStore {
   updateLead: (leadId: string, updates: Partial<CRMLead>) => void
 }
 
-const STORAGE_KEY = 'crm_leads_data_v2'
-
-// Export helper for value calculation to ensure consistency across the app
 export const calculateLeadValue = (lead: {
   origem: string
   assentosAdicionais: number
@@ -82,26 +89,7 @@ export const calculateLeadValue = (lead: {
   if (lead.origem === 'Planilha') {
     return 2999 + seats * 699
   }
-  // Default calculation (Manual, Site, etc)
   return seats * 500
-}
-
-const saveToStorage = (leads: CRMLead[]) => {
-  const persistenceData = leads.reduce(
-    (acc, lead) => {
-      acc[lead.id] = {
-        status: lead.status,
-        lastInteraction: lead.lastInteraction,
-        notes: lead.notes,
-        history: lead.history,
-        followUp: lead.followUp,
-        valorEstimado: lead.valorEstimado,
-      }
-      return acc
-    },
-    {} as Record<string, Partial<CRMLead>>,
-  )
-  localStorage.setItem(STORAGE_KEY, JSON.stringify(persistenceData))
 }
 
 const createHistoryItem = (
@@ -115,6 +103,12 @@ const createHistoryItem = (
   author: 'Você',
 })
 
+// Helper to update Supabase
+const updateLeadInDB = async (id: string, updates: any) => {
+  const { error } = await supabase.from('leads').update(updates).eq('id', id)
+  if (error) console.error('Failed to update lead in DB:', error)
+}
+
 export const useCRMStore = create<CRMStore>((set, get) => ({
   leads: [],
   filteredLeads: [],
@@ -127,75 +121,48 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
     valueRange: { min: '', max: '' },
   },
 
-  fetchLeads: async (force = false) => {
-    if (!force && get().leads.length > 0) return
-
+  fetchLeads: async (forceSync = false) => {
     set({ loading: true, error: false })
     try {
-      let apiLeads: Lead[] = []
-      try {
-        apiLeads = await googleSheetsService.fetchLeads()
-      } catch (err) {
-        console.warn('Failed to fetch from API, checking cache...', err)
-        const offlineData = localStorage.getItem(STORAGE_KEY)
-        if (!offlineData) throw err
-        apiLeads = generateMockLeads(5)
-      }
-
-      const localDataStr = localStorage.getItem(STORAGE_KEY)
-      const localData = localDataStr ? JSON.parse(localDataStr) : {}
-
-      const currentIds = get().leads.map((l) => l.id)
-      const newApiIds = apiLeads.map((l) => l.id)
-      const hasNewLeads = newApiIds.some((id) => !currentIds.includes(id))
-
-      if (hasNewLeads && currentIds.length > 0) {
-        useNotificationStore.getState().addNotification({
-          type: 'new_lead',
-          title: 'Novos Leads Capturados',
-          message: 'Novos leads foram sincronizados da planilha.',
-          actionUrl: '/crm',
-        })
-      }
-
-      const mergedLeads: CRMLead[] = apiLeads.map((lead) => {
-        const local = localData[lead.id] || {}
-        return {
-          ...lead,
-          status: local.status || lead.status || 'Capturado',
-          lastInteraction: local.lastInteraction || lead.dataCaptacao,
-          notes: local.notes || [],
-          history: local.history || [
-            {
-              id: 'initial',
-              type: 'status_change',
-              description: 'Lead capturado',
-              date: lead.dataCaptacao,
-              author: 'Sistema',
-            },
-          ],
-          followUp: local.followUp,
-          valorEstimado:
-            local.valorEstimado !== undefined
-              ? local.valorEstimado
-              : calculateLeadValue(lead),
+      if (forceSync) {
+        // Trigger Sync
+        const { added } = await googleSheetsService.syncLeads()
+        if (added > 0) {
+          useNotificationStore.getState().addNotification({
+            type: 'new_lead',
+            title: 'Sincronização Concluída',
+            message: `${added} novos leads foram adicionados.`,
+            actionUrl: '/crm',
+          })
+          toast.success('Sincronização finalizada', {
+            description: `${added} novos leads importados.`,
+          })
         }
-      })
-
-      if (mergedLeads.length < 5) {
-        const mockMore = generateMockLeads(15)
-        mockMore.forEach((m) => {
-          if (!mergedLeads.find((l) => l.id === m.id)) {
-            mergedLeads.push(m)
-          }
-        })
       }
 
-      set({ leads: mergedLeads })
+      // Fetch from DB
+      const leads = await googleSheetsService.fetchLeadsFromDB()
+
+      // Ensure local required fields
+      const processedLeads: CRMLead[] = leads.map((l) => ({
+        ...l,
+        status: l.status || 'Capturado',
+        lastInteraction:
+          l.lastInteraction || l.dataCaptacao || new Date().toISOString(),
+        notes: l.notes || [],
+        history: l.history || [],
+        valorEstimado: l.valorEstimado ?? calculateLeadValue(l),
+      }))
+
+      set({ leads: processedLeads })
+      // Re-apply filters
       get().setFilter('search', get().filters.search)
     } catch (error) {
       console.error(error)
       set({ error: true })
+      toast.error('Erro na sincronização', {
+        description: 'Não foi possível atualizar os dados.',
+      })
     } finally {
       set({ loading: false })
     }
@@ -222,12 +189,7 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
   },
 
   moveLead: (leadId, newStatus) => {
-    const { addToQueue, syncError } = useSyncStore.getState()
     const { addNotification } = useNotificationStore.getState()
-
-    if (!navigator.onLine || syncError) {
-      addToQueue({ type: 'move_lead', leadId, newStatus })
-    }
 
     set((state) => {
       const boughtLeads = state.leads.filter(
@@ -255,16 +217,24 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
             'status_change',
             `Status alterado de ${lead.status} para ${newStatus}`,
           )
-          return {
+          const updatedLead = {
             ...lead,
             status: newStatus,
             lastInteraction: new Date().toISOString(),
             history: [historyItem, ...lead.history],
           }
+
+          // Persist to DB
+          updateLeadInDB(leadId, {
+            status: newStatus,
+            last_interaction: updatedLead.lastInteraction,
+            history: updatedLead.history,
+          })
+
+          return updatedLead
         }
         return lead
       })
-      saveToStorage(updatedLeads)
       const filtered = applyFilters(updatedLeads, state.filters)
       return { leads: updatedLeads, filteredLeads: filtered }
     })
@@ -284,16 +254,23 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
             'note_added',
             'Nota adicionada ao lead',
           )
-          return {
+          const updatedLead = {
             ...lead,
             notes: [newNote, ...lead.notes],
             history: [historyItem, ...lead.history],
             lastInteraction: new Date().toISOString(),
           }
+
+          updateLeadInDB(leadId, {
+            notes: updatedLead.notes,
+            history: updatedLead.history,
+            last_interaction: updatedLead.lastInteraction,
+          })
+
+          return updatedLead
         }
         return lead
       })
-      saveToStorage(updatedLeads)
       const filtered = applyFilters(updatedLeads, state.filters)
       return { leads: updatedLeads, filteredLeads: filtered }
     })
@@ -307,15 +284,21 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
             'interaction',
             `Interação registrada: ${type} - ${details}`,
           )
-          return {
+          const updatedLead = {
             ...lead,
             history: [historyItem, ...lead.history],
             lastInteraction: new Date().toISOString(),
           }
+
+          updateLeadInDB(leadId, {
+            history: updatedLead.history,
+            last_interaction: updatedLead.lastInteraction,
+          })
+
+          return updatedLead
         }
         return lead
       })
-      saveToStorage(updatedLeads)
       const filtered = applyFilters(updatedLeads, state.filters)
       return { leads: updatedLeads, filteredLeads: filtered }
     })
@@ -323,7 +306,6 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
 
   scheduleFollowUp: (leadId, date) => {
     const { addNotification } = useNotificationStore.getState()
-
     const timeDiff = new Date(date).getTime() - Date.now()
     if (timeDiff > 0 && timeDiff < 7200000) {
       addNotification({
@@ -341,16 +323,23 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
             'follow_up_set',
             `Follow-up agendado para ${new Date(date).toLocaleString('pt-BR')}`,
           )
-          return {
+          const updatedLead = {
             ...lead,
             followUp: date,
             history: [historyItem, ...lead.history],
             lastInteraction: new Date().toISOString(),
           }
+
+          updateLeadInDB(leadId, {
+            follow_up: date,
+            history: updatedLead.history,
+            last_interaction: updatedLead.lastInteraction,
+          })
+
+          return updatedLead
         }
         return lead
       })
-      saveToStorage(updatedLeads)
       const filtered = applyFilters(updatedLeads, state.filters)
       return { leads: updatedLeads, filteredLeads: filtered }
     })
@@ -364,16 +353,28 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
             'interaction',
             'Dados do lead atualizados manualmente',
           )
-          return {
+          const updatedLead = {
             ...lead,
             ...updates,
             history: [historyItem, ...lead.history],
             lastInteraction: new Date().toISOString(),
           }
+
+          updateLeadInDB(leadId, {
+            nome_completo: updatedLead.nomeCompleto,
+            email: updatedLead.email,
+            telefone: updatedLead.telefone,
+            assentos_adicionais: updatedLead.assentosAdicionais,
+            origem: updatedLead.origem,
+            valor_estimado: updatedLead.valorEstimado,
+            history: updatedLead.history,
+            last_interaction: updatedLead.lastInteraction,
+          })
+
+          return updatedLead
         }
         return lead
       })
-      saveToStorage(updatedLeads)
       const filtered = applyFilters(updatedLeads, state.filters)
       return { leads: updatedLeads, filteredLeads: filtered }
     })
@@ -412,64 +413,5 @@ function applyFilters(leads: CRMLead[], filters: FilterState): CRMLead[] {
     )
       return false
     return true
-  })
-}
-
-function generateMockLeads(count: number): CRMLead[] {
-  const statuses = COLUMNS.map((c) => c.id)
-  const origins = ['Planilha', 'Manual', 'Site', 'Indicação']
-  const names = [
-    'Ana',
-    'Bruno',
-    'Carla',
-    'Daniel',
-    'Elena',
-    'Fabio',
-    'Gabriel',
-    'Helena',
-  ]
-  const surnames = [
-    'Silva',
-    'Santos',
-    'Oliveira',
-    'Souza',
-    'Lima',
-    'Pereira',
-    'Ferreira',
-  ]
-
-  return Array.from({ length: count }).map((_, i) => {
-    const name = names[Math.floor(Math.random() * names.length)]
-    const surname = surnames[Math.floor(Math.random() * surnames.length)]
-    const captureDate = new Date(
-      Date.now() - Math.floor(Math.random() * 10 * 24 * 60 * 60 * 1000),
-    ).toISOString()
-
-    const leadData = {
-      id: `mock-${i}-${Date.now()}`,
-      nomeCompleto: `${name} ${surname}`,
-      email: `${name.toLowerCase()}.${surname.toLowerCase()}@example.com`,
-      telefone: `(11) 9${Math.floor(Math.random() * 90000) + 10000}-${Math.floor(Math.random() * 9000) + 1000}`,
-      assentosAdicionais: Math.floor(Math.random() * 10) + 1,
-      origem: origins[Math.floor(Math.random() * origins.length)],
-      status: statuses[Math.floor(Math.random() * statuses.length)],
-      dataCaptacao: captureDate,
-      lastInteraction: captureDate,
-    }
-
-    return {
-      ...leadData,
-      notes: [],
-      valorEstimado: calculateLeadValue(leadData),
-      history: [
-        {
-          id: uuidv4(),
-          type: 'status_change',
-          description: 'Lead capturado automaticamente',
-          date: captureDate,
-          author: 'Sistema',
-        },
-      ],
-    }
   })
 }

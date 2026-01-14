@@ -1,5 +1,5 @@
-import { _ as ArrowRightLeft, a as parseISO, f as Funnel, g as ArrowUp, h as ChevronLeft, i as PopoverTrigger, l as isSameDay, m as DollarSign, n as Popover, o as subDays, p as Download, r as PopoverContent, s as isBefore, t as Calendar, v as ArrowDown } from "./calendar-CmXXeJAd.js";
-import { $ as millisecondsInHour, A as calculateLeadValue, B as getRoundingMethod, Bt as Search, C as ptBR, D as DropdownMenuTrigger, E as DropdownMenuItem, Ft as cn, Ht as LoaderCircle, It as X, Jt as Calendar$1, M as formatDistanceToNow, N as format, Pt as toast, Q as constructFrom, Rt as Users, St as useIsMobile, T as DropdownMenuContent, Ut as Clock, V as differenceInDays, W as constructNow, Wt as CircleAlert, Xt as cva, Yt as createLucideIcon, _ as DialogContent, a as SelectValue, at as Content, b as DialogHeader, bt as Button, cn as require_jsx_runtime, ct as Portal, dt as Trigger, fn as require_react, ft as WarningProvider, g as DialogClose, h as Dialog, hn as __toESM, i as SelectTrigger, it as Close, j as useCRMStore, k as COLUMNS, ln as useComposedRefs, lt as Root$1, n as SelectContent, nt as require_shim, on as createSlottable, ot as Description, pt as createDialogScope, q as normalizeDates, r as SelectItem, rn as useCallbackRef, s as Label, sn as createContextScope, st as Overlay, t as Select, tn as useLayoutEffect2, un as composeEventHandlers, ut as Title, vt as Primitive, w as DropdownMenu, x as DialogTitle, xt as buttonVariants, y as DialogFooter, yt as Input, zt as TrendingUp } from "./index-Dh1Uds23.js";
+import { _ as ArrowRightLeft, a as parseISO, f as Funnel, g as ArrowUp, h as ChevronLeft, i as PopoverTrigger, l as isSameDay, m as DollarSign, n as Popover, o as subDays, p as Download, r as PopoverContent, s as isBefore, t as Calendar, v as ArrowDown } from "./calendar-Di0OAoj6.js";
+import { $ as millisecondsInHour, A as calculateLeadValue, B as getRoundingMethod, Bt as Search, C as ptBR, D as DropdownMenuTrigger, E as DropdownMenuItem, Ft as cn, Ht as LoaderCircle, It as X, Jt as Calendar$1, M as formatDistanceToNow, N as format, Pt as toast, Q as constructFrom, Rt as Users, St as useIsMobile, T as DropdownMenuContent, Ut as Clock, V as differenceInDays, Vt as RefreshCw, W as constructNow, Wt as CircleAlert, Xt as cva, Yt as createLucideIcon, _ as DialogContent, a as SelectValue, at as Content, b as DialogHeader, bt as Button, cn as require_jsx_runtime, ct as Portal, dt as Trigger, fn as require_react, ft as WarningProvider, g as DialogClose, h as Dialog, hn as __toESM, i as SelectTrigger, it as Close, j as useCRMStore, k as COLUMNS, ln as useComposedRefs, lt as Root$1, n as SelectContent, nt as require_shim, on as createSlottable, ot as Description, pt as createDialogScope, q as normalizeDates, r as SelectItem, rn as useCallbackRef, s as Label, sn as createContextScope, st as Overlay, t as Select, tn as useLayoutEffect2, un as composeEventHandlers, ut as Title, vt as Primitive, w as DropdownMenu, x as DialogTitle, xt as buttonVariants, y as DialogFooter, yt as Input, zt as TrendingUp } from "./index-CF7Z8fcd.js";
 var Activity = createLucideIcon("activity", [["path", {
 	d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
 	key: "169zse"
@@ -1956,7 +1956,7 @@ function CRM() {
 	const { fetchLeads, loading, error, leads, filteredLeads } = useCRMStore();
 	(0, import_react.useEffect)(() => {
 		fetchLeads();
-	}, [fetchLeads]);
+	}, []);
 	if (error) return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex h-full flex-col items-center justify-center gap-4 bg-background",
 		children: [
@@ -1971,10 +1971,7 @@ function CRM() {
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 				onClick: () => fetchLeads(true),
 				className: "bg-[#D9B979] hover:bg-[#D9B979]/90 text-black px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)]",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "material-symbols-outlined text-[20px]",
-					children: "refresh"
-				}), "Tentar Novamente"]
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, { className: "h-4 w-4" }), "Tentar Novamente"]
 			})
 		]
 	});
@@ -1985,21 +1982,34 @@ function CRM() {
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
 				className: "text-[32px] font-bold tracking-tight font-display text-white",
 				children: "CRM - Pipeline de Vendas"
-			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-				className: "text-[15px] mt-1 flex items-center gap-2 text-gray-400",
-				children: ["Gerencie seus leads e acompanhe o funil de vendas.", loading && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-					className: "flex items-center text-[13px] text-[#D9B979]",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-4 w-4 animate-spin mr-1" }), "Sincronizando..."]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex items-center gap-2 mt-1",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
+					className: "text-[15px] text-gray-400",
+					children: "Gerencie seus leads e acompanhe o funil de vendas."
+				}), loading && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+					className: "flex items-center text-[12px] text-[#D9B979] bg-[#D9B979]/10 px-2 py-0.5 rounded-full animate-pulse",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-3 w-3 animate-spin mr-1.5" }), "Sincronizando..."]
 				})]
-			})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExportButton, {
-				data: filteredLeads,
-				filename: "crm_leads",
-				formatData: formatLeadsForExport,
-				label: "Exportar Leads",
-				customButton: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-					className: "bg-[#D9B979] hover:bg-[#D9B979]/90 text-black px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)]",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "h-5 w-5" }), "Exportar Leads"]
-				})
+			})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex items-center gap-3",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+					variant: "outline",
+					size: "sm",
+					onClick: () => fetchLeads(true),
+					disabled: loading,
+					className: "border-[#333333] text-gray-300 hover:text-white hover:bg-white/5 gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, { className: `h-4 w-4 ${loading ? "animate-spin" : ""}` }), "Sync"]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExportButton, {
+					data: filteredLeads,
+					filename: "crm_leads",
+					formatData: formatLeadsForExport,
+					label: "Exportar Leads",
+					customButton: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
+						className: "bg-[#D9B979] hover:bg-[#D9B979]/90 text-black px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)]",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "h-5 w-5" }), "Exportar Leads"]
+					})
+				})]
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex flex-1 flex-col overflow-hidden px-10",
@@ -2016,4 +2026,4 @@ function CRM() {
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-C4-xscMz.js.map
+//# sourceMappingURL=CRM-D4vuxzbw.js.map

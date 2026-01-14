@@ -1,5 +1,5 @@
-import { _ as ArrowRightLeft, a as parseISO, c as startOfMonth, d as addDays, f as Funnel, g as ArrowUp, h as ChevronLeft, i as PopoverTrigger, m as DollarSign, n as Popover, o as subDays, p as Download, r as PopoverContent, t as Calendar$1, u as addMonths, v as ArrowDown } from "./calendar-CmXXeJAd.js";
-import { C as ptBR, Ct as Slot, Dt as TooltipTrigger, Et as TooltipProvider, Ft as cn, Gt as ChevronRight, Ht as LoaderCircle, Jt as Calendar, K as startOfDay, Lt as Video, N as format, O as useLivesStore, Rt as Users, S as DialogTrigger, Tt as TooltipContent, V as differenceInDays, Vt as RefreshCw, Yt as createLucideIcon, Z as toDate, Zt as clsx_default, _ as DialogContent, a as SelectValue, b as DialogHeader, bt as Button, c as Command, cn as require_jsx_runtime, d as CommandInput, dn as useToast, f as CommandItem, fn as require_react, h as Dialog, hn as __toESM, i as SelectTrigger, l as CommandEmpty, m as CommandSeparator, mn as __export, n as SelectContent, o as Switch, p as CommandList, pn as __commonJSMin, qt as Check, r as SelectItem, rt as Skeleton, s as Label$1, t as Select, tt as googleSheetsService, u as CommandGroup, v as DialogDescription, wt as Tooltip$1, x as DialogTitle, y as DialogFooter, yt as Input, z as endOfDay, zt as TrendingUp } from "./index-Dh1Uds23.js";
+import { _ as ArrowRightLeft, a as parseISO, c as startOfMonth, d as addDays, f as Funnel, g as ArrowUp, h as ChevronLeft, i as PopoverTrigger, m as DollarSign, n as Popover, o as subDays, p as Download, r as PopoverContent, t as Calendar$1, u as addMonths, v as ArrowDown } from "./calendar-Di0OAoj6.js";
+import { C as ptBR, Ct as Slot, Dt as TooltipTrigger, Et as TooltipProvider, Ft as cn, Gt as ChevronRight, Ht as LoaderCircle, Jt as Calendar, K as startOfDay, Lt as Video, N as format, O as useLivesStore, Rt as Users, S as DialogTrigger, Tt as TooltipContent, V as differenceInDays, Vt as RefreshCw, Yt as createLucideIcon, Z as toDate, Zt as clsx_default, _ as DialogContent, a as SelectValue, b as DialogHeader, bt as Button, c as Command, cn as require_jsx_runtime, d as CommandInput, dn as useToast, f as CommandItem, fn as require_react, h as Dialog, hn as __toESM, i as SelectTrigger, l as CommandEmpty, m as CommandSeparator, mn as __export, n as SelectContent, o as Switch, p as CommandList, pn as __commonJSMin, qt as Check, r as SelectItem, rt as Skeleton, s as Label$1, t as Select, tt as googleSheetsService, u as CommandGroup, v as DialogDescription, wt as Tooltip$1, x as DialogTitle, y as DialogFooter, yt as Input, z as endOfDay, zt as TrendingUp } from "./index-CF7Z8fcd.js";
 var Award = createLucideIcon("award", [["path", {
 	d: "m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526",
 	key: "1yiouv"
@@ -29042,7 +29042,7 @@ function Lives() {
 		comparisonEnabled: false
 	});
 	(0, import_react.useEffect)(() => {
-		if (allData.length === 0) fetchData();
+		fetchData();
 	}, []);
 	const dateBounds = (0, import_react.useMemo)(() => {
 		if (allData.length === 0) return void 0;
@@ -29104,7 +29104,7 @@ function Lives() {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 				className: "text-gray-400",
-				children: "Não foi possível conectar ao Google Sheets."
+				children: "Não foi possível conectar ao banco de dados."
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 				onClick: fetchData,
@@ -29119,15 +29119,31 @@ function Lives() {
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
 				className: "flex flex-col md:flex-row justify-between items-start md:items-center gap-4",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-					className: "text-3xl font-bold tracking-tight text-white font-display",
-					children: "Dashboard de Lives"
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-3",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
+						className: "text-3xl font-bold tracking-tight text-white font-display",
+						children: "Dashboard de Lives"
+					}), loading && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "flex items-center text-[12px] text-[#27E39F] bg-[#27E39F]/10 px-2 py-0.5 rounded-full animate-pulse",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, { className: "h-3 w-3 animate-spin mr-1.5" }), "Atualizando..."]
+					})]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 					className: "text-gray-400 mt-1",
 					children: "Acompanhe a performance, compare períodos e analise KPIs em tempo real."
-				})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AddLiveModal, {
-					presenters: uniquePresenters,
-					onSuccess: handleLiveAdded
+				})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-3",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+						variant: "ghost",
+						size: "icon",
+						onClick: fetchData,
+						disabled: loading,
+						className: "text-gray-400 hover:text-white",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, { className: `h-4 w-4 ${loading ? "animate-spin" : ""}` })
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AddLiveModal, {
+						presenters: uniquePresenters,
+						onSuccess: handleLiveAdded
+					})]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LiveFilters, {
@@ -29187,4 +29203,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-DeYsU4_O.js.map
+//# sourceMappingURL=Lives-BpuASZ3Z.js.map

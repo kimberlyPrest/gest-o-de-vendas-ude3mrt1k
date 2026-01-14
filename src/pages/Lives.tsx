@@ -38,7 +38,8 @@ export default function Lives() {
   })
 
   useEffect(() => {
-    if (allData.length === 0) fetchData()
+    // Fetch if empty or just to ensure freshness on mount
+    fetchData()
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
@@ -137,7 +138,7 @@ export default function Lives() {
           Erro ao carregar dados
         </h2>
         <p className="text-gray-400">
-          Não foi possível conectar ao Google Sheets.
+          Não foi possível conectar ao banco de dados.
         </p>
         <Button
           onClick={fetchData}
@@ -156,18 +157,37 @@ export default function Lives() {
       {/* Header */}
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
-          <h1 className="text-3xl font-bold tracking-tight text-white font-display">
-            Dashboard de Lives
-          </h1>
+          <div className="flex items-center gap-3">
+            <h1 className="text-3xl font-bold tracking-tight text-white font-display">
+              Dashboard de Lives
+            </h1>
+            {loading && (
+              <span className="flex items-center text-[12px] text-[#27E39F] bg-[#27E39F]/10 px-2 py-0.5 rounded-full animate-pulse">
+                <RefreshCw className="h-3 w-3 animate-spin mr-1.5" />
+                Atualizando...
+              </span>
+            )}
+          </div>
           <p className="text-gray-400 mt-1">
             Acompanhe a performance, compare períodos e analise KPIs em tempo
             real.
           </p>
         </div>
-        <AddLiveModal
-          presenters={uniquePresenters}
-          onSuccess={handleLiveAdded}
-        />
+        <div className="flex items-center gap-3">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={fetchData}
+            disabled={loading}
+            className="text-gray-400 hover:text-white"
+          >
+            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+          </Button>
+          <AddLiveModal
+            presenters={uniquePresenters}
+            onSuccess={handleLiveAdded}
+          />
+        </div>
       </header>
 
       {/* Filters */}

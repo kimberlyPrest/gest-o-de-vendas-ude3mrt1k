@@ -16,11 +16,45 @@ export function SyncManager() {
     failCount,
     incrementFailCount,
     resetFailCount,
-    processQueue,
   } = useSyncStore()
   const { fetchLeads } = useCRMStore()
   const { fetchData: fetchLives } = useLivesStore()
   const { checkConnection } = useConnectionStore()
+
+  const syncData = async () => {
+    if (!navigator.onLine) {
+      setSyncError(true)
+      return
+    }
+
+    setIsSyncing(true)
+    const toastId = toast.loading('Sincronizando dados...', {
+      description: 'Verificando novos registros...',
+    })
+
+    try {
+      // Force sync on leads
+      await Promise.all([fetchLeads(true), fetchLives(), checkConnection()])
+
+      toast.dismiss(toastId)
+      setLastSync(new Date())
+      resetFailCount()
+
+      // Success toast is handled in fetchLeads if new data found
+    } catch (error) {
+      console.error('Sync failed', error)
+      toast.dismiss(toastId)
+      incrementFailCount()
+      if (failCount >= 2) {
+        setSyncError(true)
+        toast.error('Falha na sincronização', {
+          description: 'O sistema entrará em modo offline.',
+        })
+      }
+    } finally {
+      setIsSyncing(false)
+    }
+  }
 
   useEffect(() => {
     // Initial sync
@@ -34,14 +68,12 @@ export function SyncManager() {
       syncFrequency * 60 * 1000,
     )
 
-    // Online/Offline listeners
     const handleOnline = () => {
       toast.success('Conexão restaurada', {
         description: 'Sincronizando dados pendentes...',
       })
       checkConnection()
       resetFailCount()
-      processQueue()
       syncData()
     }
     const handleOffline = () => {
@@ -60,48 +92,8 @@ export function SyncManager() {
       window.removeEventListener('online', handleOnline)
       window.removeEventListener('offline', handleOffline)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [syncFrequency])
 
-  const syncData = async () => {
-    if (!navigator.onLine) {
-      setSyncError(true)
-      return
-    }
-
-    setIsSyncing(true)
-
-    // Show syncing toast if it takes time
-    const toastId = setTimeout(() => {
-      toast('Sincronizando...', {
-        icon: <Loader2 className="h-4 w-4 animate-spin text-blue-500" />,
-        duration: 2000,
-      })
-    }, 1000)
-
-    try {
-      await Promise.all([fetchLeads(true), fetchLives(), checkConnection()])
-
-      clearTimeout(toastId)
-      setLastSync(new Date())
-      resetFailCount()
-
-      toast.success('Dados atualizados', {
-        duration: 2000,
-      })
-    } catch (error) {
-      console.error('Sync failed', error)
-      incrementFailCount()
-      if (failCount >= 2) {
-        // On 3rd try (0, 1, 2)
-        setSyncError(true)
-        toast.error('Falha na sincronização', {
-          description: 'O sistema entrará em modo offline.',
-        })
-      }
-    } finally {
-      setIsSyncing(false)
-    }
-  }
-
-  return null // Headless component
+  return null
 }

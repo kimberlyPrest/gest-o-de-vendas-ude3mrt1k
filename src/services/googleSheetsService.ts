@@ -9,10 +9,11 @@ export interface Lead {
   assentosAdicionais: number
   origem: string
   status: string
-  dataCaptacao: string
+  dataCaptacao: string | null
 }
 
 export interface LiveData {
+  id?: string
   date: string
   weekday: string
   peakViewers: number
@@ -25,33 +26,25 @@ export interface LiveData {
   additionalSeats: number
 }
 
-// NOTE: Spreadsheet IDs and Sheet Names are now managed in the 'spreadsheet_configs' table in Supabase.
-// The 'google-sheets-proxy' Edge Function handles the configuration lookup.
-
-// Helper to clean and parse currency strings (e.g. "R$ 1.500,00" -> 1500.00)
+// Helper to clean and parse currency strings
 const parseCurrency = (value: string | number): number => {
   if (typeof value === 'number') return value
   if (!value) return 0
-  const cleanStr = value.toString().replace(/[^0-9,-]+/g, '') // Remove R$, spaces
+  const cleanStr = value.toString().replace(/[^0-9,-]+/g, '')
   return Number(cleanStr.replace('.', '').replace(',', '.'))
 }
 
-// Helper to parse dates (e.g. "25/12/2023" -> "2023-12-25")
-// Returns null if date is invalid to help filtering
+// Helper to parse dates
 const parseDate = (value: string): string | null => {
   if (!value) return null
-  if (value.match(/^\d{4}-\d{2}-\d{2}/)) return value // Already ISO
+  if (value.match(/^\d{4}-\d{2}-\d{2}/)) return value
 
-  // Handle DD/MM/YYYY
   const parts = value.split('/')
   if (parts.length === 3) {
     const day = parts[0].padStart(2, '0')
     const month = parts[1].padStart(2, '0')
-    const year = parts[2].split(' ')[0] // Remove time if present
-
-    // Handle 2-digit years (assume 20xx) or 4-digit years
+    const year = parts[2].split(' ')[0]
     const fullYear = year.length === 2 ? `20${year}` : year
-
     if (fullYear.length === 4) {
       return `${fullYear}-${month}-${day}`
     }
@@ -59,9 +52,24 @@ const parseDate = (value: string): string | null => {
   return null
 }
 
-// Generate a stable ID based on email or content
+// Generate a stable ID based on unique attributes
 const generateId = (item: any): string => {
-  const seed = item.email || item.nomeCompleto || JSON.stringify(item)
+  const seed = (item.email || item.nomeCompleto || JSON.stringify(item))
+    .trim()
+    .toLowerCase()
+  let hash = 0
+  for (let i = 0; i < seed.length; i++) {
+    const char = seed.charCodeAt(i)
+    hash = (hash << 5) - hash + char
+    hash = hash & hash
+  }
+  return Math.abs(hash).toString(16)
+}
+
+const generateLiveId = (item: LiveData): string => {
+  const seed = `${item.date}-${item.presenter}-${item.revenue}`
+    .trim()
+    .toLowerCase()
   let hash = 0
   for (let i = 0; i < seed.length; i++) {
     const char = seed.charCodeAt(i)
@@ -80,17 +88,11 @@ const fetchSheetData = async (type: 'crm' | 'lives'): Promise<any[]> => {
       },
     )
 
-    if (error) {
-      // If the error object exists, it means invocation failed or returned non-2xx
+    if (error)
       throw new Error(
         error.message || 'Falha ao conectar com o serviço de planilhas',
       )
-    }
-
-    // Check if the edge function returned an application-level error
-    if (data?.error) {
-      throw new Error(data.error)
-    }
+    if (data?.error) throw new Error(data.error)
 
     return data.values || []
   } catch (error) {
@@ -99,7 +101,6 @@ const fetchSheetData = async (type: 'crm' | 'lives'): Promise<any[]> => {
   }
 }
 
-// Map row array to object using headers
 const mapRowsToObjects = (rows: any[][]): any[] => {
   if (rows.length < 2) return []
   const headers = rows[0].map((h: string) => h.toLowerCase().trim())
@@ -108,14 +109,12 @@ const mapRowsToObjects = (rows: any[][]): any[] => {
   return dataRows.map((row) => {
     const obj: any = {}
     headers.forEach((header: string, index: number) => {
-      // Safely handle undefined cells in row
       obj[header] = row[index] !== undefined ? row[index] : ''
     })
     return obj
   })
 }
 
-// Flexible column finder
 const findValue = (obj: any, keys: string[]): any => {
   for (const key of keys) {
     const found = Object.keys(obj).find((k) => k.includes(key))
@@ -127,7 +126,6 @@ const findValue = (obj: any, keys: string[]): any => {
 export const googleSheetsService = {
   async checkConnection(): Promise<boolean> {
     try {
-      // Try to fetch 'lives' data to verify connection
       await fetchSheetData('lives')
       return true
     } catch (error) {
@@ -136,12 +134,13 @@ export const googleSheetsService = {
     }
   },
 
-  async fetchLeads(): Promise<Lead[]> {
+  async syncLeads(): Promise<{ added: number; updated: number }> {
     try {
+      // 1. Fetch from Google Sheets
       const rows = await fetchSheetData('crm')
       const rawObjects = mapRowsToObjects(rows)
 
-      return rawObjects
+      const sheetLeads = rawObjects
         .filter(
           (o) => findValue(o, ['nome', 'lead']) || findValue(o, ['email']),
         )
@@ -149,6 +148,7 @@ export const googleSheetsService = {
           const nome = findValue(o, ['nome', 'lead']) || 'Sem Nome'
           const email = findValue(o, ['email', 'e-mail']) || ''
           const dateStr = findValue(o, ['data', 'criado'])
+
           return {
             id: generateId({ nome, email }),
             nomeCompleto: nome,
@@ -160,118 +160,221 @@ export const googleSheetsService = {
             ),
             origem: findValue(o, ['origem', 'fonte']) || 'Planilha',
             status: findValue(o, ['status', 'fase', 'etapa']) || 'Capturado',
-            dataCaptacao: parseDate(dateStr) || new Date().toISOString(),
+            dataCaptacao: parseDate(dateStr), // Keep null if invalid
           }
         })
+
+      // 2. Fetch existing IDs from Supabase
+      const { data: existingLeads, error: fetchError } = await supabase
+        .from('leads')
+        .select('id')
+
+      if (fetchError) throw fetchError
+
+      const existingIds = new Set(existingLeads?.map((l) => l.id))
+      const newLeads = []
+      const leadsToUpdate = []
+
+      for (const lead of sheetLeads) {
+        if (existingIds.has(lead.id)) {
+          // Exclude status and dates from update to preserve CRM state
+          leadsToUpdate.push({
+            id: lead.id,
+            nome_completo: lead.nomeCompleto,
+            email: lead.email,
+            telefone: lead.telefone,
+            assentos_adicionais: lead.assentosAdicionais,
+            origem: lead.origem,
+            updated_at: new Date().toISOString(),
+          })
+        } else {
+          newLeads.push({
+            id: lead.id,
+            nome_completo: lead.nomeCompleto,
+            email: lead.email,
+            telefone: lead.telefone,
+            assentos_adicionais: lead.assentosAdicionais,
+            origem: lead.origem,
+            status: lead.status,
+            data_captacao: lead.dataCaptacao || new Date().toISOString(), // Use current time only if new
+            updated_at: new Date().toISOString(),
+            created_at: new Date().toISOString(),
+          })
+        }
+      }
+
+      // 3. Perform Bulk Insert for New
+      if (newLeads.length > 0) {
+        const { error: insertError } = await supabase
+          .from('leads')
+          .insert(newLeads)
+        if (insertError) throw insertError
+      }
+
+      // 4. Perform Updates (One by one or bulk upsert with ignoreDuplicates? Upsert overwrites)
+      // Since we want to update specific fields for existing, we use upsert but carefully
+      if (leadsToUpdate.length > 0) {
+        const { error: updateError } = await supabase
+          .from('leads')
+          .upsert(leadsToUpdate, { onConflict: 'id' })
+        if (updateError) throw updateError
+      }
+
+      return { added: newLeads.length, updated: leadsToUpdate.length }
     } catch (error) {
-      console.error('Error fetching leads:', error)
+      console.error('Error syncing leads:', error)
       throw error
     }
   },
 
-  async fetchLivesData(): Promise<LiveData[]> {
+  async syncLives(): Promise<{ added: number }> {
     try {
       const rows = await fetchSheetData('lives')
       const rawObjects = mapRowsToObjects(rows)
 
-      const processedData = rawObjects
+      const sheetLives = rawObjects
         .map((o): LiveData | null => {
-          // Parse date strictly
           const dateValue = findValue(o, ['data'])
           const date = parseDate(dateValue)
-
-          if (!date) {
-            return null // Skip rows with invalid or missing date
-          }
+          if (!date) return null
 
           const peak = Number(findValue(o, ['pico', 'espectadores']) || 0)
           const sales = Number(findValue(o, ['vendas']) || 0)
           const retained = Number(
-            findValue(o, [
-              'retidos',
-              'retenção',
-              'retencao',
-              'pessoas retidas',
-              'retidas',
-            ]) || 0,
+            findValue(o, ['retidos', 'retenção', 'retencao']) || 0,
           )
-          const revenue = parseCurrency(
-            findValue(o, ['faturamento', 'receita']) || 0,
-          )
-          const additionalSeats = Number(findValue(o, ['assentos']) || 0)
 
-          // Presenter
-          const presenter =
-            findValue(o, ['apresentador', 'expert', 'responsável']) ||
-            'Desconhecido'
-
-          // Calculate rates if not explicitly provided or if provided as strings
           let conversion = findValue(o, ['conversão', 'conversion'])
-          if (typeof conversion === 'string') {
+          if (typeof conversion === 'string')
             conversion = Number(conversion.replace('%', '').replace(',', '.'))
-          }
           if (!conversion && peak > 0) conversion = (sales / peak) * 100
 
           let retention = findValue(o, ['retenção', 'retencao', 'retention'])
-          if (typeof retention === 'string') {
+          if (typeof retention === 'string')
             retention = Number(retention.replace('%', '').replace(',', '.'))
-          }
           if (!retention && peak > 0) retention = (retained / peak) * 100
 
-          return {
-            date: date,
+          const liveObj = {
+            date,
             weekday: findValue(o, ['dia', 'semana']) || '',
             peakViewers: peak,
             retainedViewers: retained,
-            sales: sales,
-            presenter: presenter,
+            sales,
+            presenter:
+              findValue(o, ['apresentador', 'expert']) || 'Desconhecido',
             conversionRate: Number(conversion?.toFixed(2) || 0),
             retentionRate: Number(retention?.toFixed(2) || 0),
-            revenue: revenue,
-            additionalSeats: additionalSeats,
+            revenue: parseCurrency(
+              findValue(o, ['faturamento', 'receita']) || 0,
+            ),
+            additionalSeats: Number(findValue(o, ['assentos']) || 0),
           }
+          return { ...liveObj, id: generateLiveId(liveObj) }
         })
-        .filter((item): item is LiveData => item !== null) // Remove nulls (invalid dates)
-        .filter((live) => {
-          // Strict filtering to remove empty/invalid rows or "Sunday gaps"
-          // A valid live must have at least one indicator of activity:
-          // 1. Revenue > 0
-          // 2. Sales > 0
-          // 3. Peak Viewers > 0
-          // 4. A valid presenter name (not empty, not 'Desconhecido')
+        .filter((item): item is LiveData => item !== null)
+        .filter((l) => l.revenue > 0 || l.sales > 0 || l.peakViewers > 0) // Filter empty rows
 
-          const hasRevenue = live.revenue > 0
-          const hasSales = live.sales > 0
-          const hasViewers = live.peakViewers > 0
-          const hasValidPresenter =
-            live.presenter &&
-            live.presenter !== 'Desconhecido' &&
-            live.presenter.trim() !== ''
+      // Upsert Lives (Metrics should update if sheet changes)
+      const dbLives = sheetLives.map((l) => ({
+        id: l.id,
+        date: l.date,
+        weekday: l.weekday,
+        peak_viewers: l.peakViewers,
+        retained_viewers: l.retainedViewers,
+        sales: l.sales,
+        presenter: l.presenter,
+        conversion_rate: l.conversionRate,
+        retention_rate: l.retentionRate,
+        revenue: l.revenue,
+        additional_seats: l.additionalSeats,
+        updated_at: new Date().toISOString(),
+      }))
 
-          return hasRevenue || hasSales || hasViewers || hasValidPresenter
-        })
-        .sort((a, b) => new Date(a.date).getTime() - new Date(b.date).getTime())
+      if (dbLives.length > 0) {
+        const { error } = await supabase
+          .from('lives')
+          .upsert(dbLives, { onConflict: 'id' })
+        if (error) throw error
+      }
 
-      return processedData
+      return { added: dbLives.length }
     } catch (error) {
-      console.error('Error fetching lives data:', error)
+      console.error('Error syncing lives:', error)
       throw error
     }
   },
 
+  async fetchLeadsFromDB(): Promise<any[]> {
+    const { data, error } = await supabase
+      .from('leads')
+      .select('*')
+      .order('data_captacao', { ascending: false })
+
+    if (error) throw error
+
+    return data.map((l) => ({
+      id: l.id,
+      nomeCompleto: l.nome_completo,
+      email: l.email,
+      telefone: l.telefone,
+      assentosAdicionais: l.assentos_adicionais,
+      origem: l.origem,
+      status: l.status,
+      dataCaptacao: l.data_captacao,
+      lastInteraction: l.last_interaction,
+      valorEstimado: l.valor_estimado,
+      notes: l.notes,
+      history: l.history,
+      followUp: l.follow_up,
+    }))
+  },
+
+  async fetchLivesFromDB(): Promise<LiveData[]> {
+    const { data, error } = await supabase
+      .from('lives')
+      .select('*')
+      .order('date', { ascending: true })
+
+    if (error) throw error
+
+    return data.map((l) => ({
+      id: l.id,
+      date: l.date,
+      weekday: l.weekday,
+      peakViewers: l.peak_viewers,
+      retainedViewers: l.retained_viewers,
+      sales: l.sales,
+      presenter: l.presenter,
+      conversionRate: Number(l.conversion_rate),
+      retentionRate: Number(l.retention_rate),
+      revenue: Number(l.revenue),
+      additionalSeats: l.additional_seats,
+    }))
+  },
+
   async addLiveToSheet(data: Partial<LiveData>): Promise<void> {
-    // This is a mock implementation because writing requires OAuth2
-    // and we only have an API Key (now via Proxy).
-    console.warn(
-      'Writing to Google Sheets is not supported via the read-only proxy. Mocking success.',
-    )
-    await new Promise((resolve) => setTimeout(resolve, 800))
+    // Mock implementation for adding to sheet (read-only proxy)
+    // In a real scenario, this would post to a write-enabled endpoint
     console.log('Would add data to sheet:', data)
-    toast({
-      title: 'Simulação',
-      description:
-        'Dados processados localmente. Escrita não suportada pelo proxy de leitura.',
-      className: 'bg-[#3B82F6] text-white border-none',
-    })
+
+    // Optimistic update in DB
+    const newLive = {
+      id: generateLiveId(data as LiveData),
+      date: data.date,
+      weekday: data.weekday,
+      peak_viewers: data.peakViewers,
+      retained_viewers: data.retainedViewers,
+      sales: data.sales,
+      presenter: data.presenter,
+      conversion_rate: data.conversionRate,
+      retention_rate: data.retentionRate,
+      revenue: data.revenue,
+      additional_seats: data.additionalSeats,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+    }
+
+    const { error } = await supabase.from('lives').insert(newLive)
+    if (error) throw error
   },
 }

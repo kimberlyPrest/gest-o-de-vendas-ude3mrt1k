@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-DeYsU4_O.js","assets/calendar-CmXXeJAd.js","assets/CRM-C4-xscMz.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-BpuASZ3Z.js","assets/calendar-Di0OAoj6.js","assets/CRM-D4vuxzbw.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -29643,7 +29643,7 @@ const version$1 = "2.90.1";
 const AUTO_REFRESH_TICK_DURATION_MS = 30 * 1e3;
 const EXPIRY_MARGIN_MS = 3 * AUTO_REFRESH_TICK_DURATION_MS;
 const GOTRUE_URL = "http://localhost:9999";
-const STORAGE_KEY$1 = "supabase.auth.token";
+const STORAGE_KEY = "supabase.auth.token";
 const DEFAULT_HEADERS = { "X-Client-Info": `gotrue-js/${version$1}` };
 const API_VERSION_HEADER_NAME = "X-Supabase-Api-Version";
 const API_VERSIONS = { "2024-01-01": {
@@ -31258,7 +31258,7 @@ var WebAuthnApi = class {
 polyfillGlobalThis();
 var DEFAULT_OPTIONS = {
 	url: GOTRUE_URL,
-	storageKey: STORAGE_KEY$1,
+	storageKey: STORAGE_KEY,
 	autoRefreshToken: true,
 	persistSession: true,
 	detectSessionInUrl: true,
@@ -34134,7 +34134,17 @@ var parseDate = (value) => {
 	return null;
 };
 var generateId = (item) => {
-	const seed = item.email || item.nomeCompleto || JSON.stringify(item);
+	const seed = (item.email || item.nomeCompleto || JSON.stringify(item)).trim().toLowerCase();
+	let hash = 0;
+	for (let i = 0; i < seed.length; i++) {
+		const char = seed.charCodeAt(i);
+		hash = (hash << 5) - hash + char;
+		hash = hash & hash;
+	}
+	return Math.abs(hash).toString(16);
+};
+var generateLiveId = (item) => {
+	const seed = `${item.date}-${item.presenter}-${item.revenue}`.trim().toLowerCase();
 	let hash = 0;
 	for (let i = 0; i < seed.length; i++) {
 		const char = seed.charCodeAt(i);
@@ -34181,9 +34191,9 @@ const googleSheetsService = {
 			return false;
 		}
 	},
-	async fetchLeads() {
+	async syncLeads() {
 		try {
-			return mapRowsToObjects(await fetchSheetData("crm")).filter((o) => findValue(o, ["nome", "lead"]) || findValue(o, ["email"])).map((o) => {
+			const sheetLeads = mapRowsToObjects(await fetchSheetData("crm")).filter((o) => findValue(o, ["nome", "lead"]) || findValue(o, ["email"])).map((o) => {
 				const nome = findValue(o, ["nome", "lead"]) || "Sem Nome";
 				const email = findValue(o, ["email", "e-mail"]) || "";
 				const dateStr = findValue(o, ["data", "criado"]);
@@ -34207,17 +34217,55 @@ const googleSheetsService = {
 						"fase",
 						"etapa"
 					]) || "Capturado",
-					dataCaptacao: parseDate(dateStr) || (/* @__PURE__ */ new Date()).toISOString()
+					dataCaptacao: parseDate(dateStr)
 				};
 			});
+			const { data: existingLeads, error: fetchError } = await supabase.from("leads").select("id");
+			if (fetchError) throw fetchError;
+			const existingIds = new Set(existingLeads?.map((l) => l.id));
+			const newLeads = [];
+			const leadsToUpdate = [];
+			for (const lead of sheetLeads) if (existingIds.has(lead.id)) leadsToUpdate.push({
+				id: lead.id,
+				nome_completo: lead.nomeCompleto,
+				email: lead.email,
+				telefone: lead.telefone,
+				assentos_adicionais: lead.assentosAdicionais,
+				origem: lead.origem,
+				updated_at: (/* @__PURE__ */ new Date()).toISOString()
+			});
+			else newLeads.push({
+				id: lead.id,
+				nome_completo: lead.nomeCompleto,
+				email: lead.email,
+				telefone: lead.telefone,
+				assentos_adicionais: lead.assentosAdicionais,
+				origem: lead.origem,
+				status: lead.status,
+				data_captacao: lead.dataCaptacao || (/* @__PURE__ */ new Date()).toISOString(),
+				updated_at: (/* @__PURE__ */ new Date()).toISOString(),
+				created_at: (/* @__PURE__ */ new Date()).toISOString()
+			});
+			if (newLeads.length > 0) {
+				const { error: insertError } = await supabase.from("leads").insert(newLeads);
+				if (insertError) throw insertError;
+			}
+			if (leadsToUpdate.length > 0) {
+				const { error: updateError } = await supabase.from("leads").upsert(leadsToUpdate, { onConflict: "id" });
+				if (updateError) throw updateError;
+			}
+			return {
+				added: newLeads.length,
+				updated: leadsToUpdate.length
+			};
 		} catch (error) {
-			console.error("Error fetching leads:", error);
+			console.error("Error syncing leads:", error);
 			throw error;
 		}
 	},
-	async fetchLivesData() {
+	async syncLives() {
 		try {
-			return mapRowsToObjects(await fetchSheetData("lives")).map((o) => {
+			const dbLives = mapRowsToObjects(await fetchSheetData("lives")).map((o) => {
 				const date = parseDate(findValue(o, ["data"]));
 				if (!date) return null;
 				const peak = Number(findValue(o, ["pico", "espectadores"]) || 0);
@@ -34225,17 +34273,8 @@ const googleSheetsService = {
 				const retained = Number(findValue(o, [
 					"retidos",
 					"retenção",
-					"retencao",
-					"pessoas retidas",
-					"retidas"
+					"retencao"
 				]) || 0);
-				const revenue = parseCurrency(findValue(o, ["faturamento", "receita"]) || 0);
-				const additionalSeats = Number(findValue(o, ["assentos"]) || 0);
-				const presenter = findValue(o, [
-					"apresentador",
-					"expert",
-					"responsável"
-				]) || "Desconhecido";
 				let conversion = findValue(o, ["conversão", "conversion"]);
 				if (typeof conversion === "string") conversion = Number(conversion.replace("%", "").replace(",", "."));
 				if (!conversion && peak > 0) conversion = sales / peak * 100;
@@ -34246,39 +34285,101 @@ const googleSheetsService = {
 				]);
 				if (typeof retention === "string") retention = Number(retention.replace("%", "").replace(",", "."));
 				if (!retention && peak > 0) retention = retained / peak * 100;
-				return {
+				const liveObj = {
 					date,
 					weekday: findValue(o, ["dia", "semana"]) || "",
 					peakViewers: peak,
 					retainedViewers: retained,
 					sales,
-					presenter,
+					presenter: findValue(o, ["apresentador", "expert"]) || "Desconhecido",
 					conversionRate: Number(conversion?.toFixed(2) || 0),
 					retentionRate: Number(retention?.toFixed(2) || 0),
-					revenue,
-					additionalSeats
+					revenue: parseCurrency(findValue(o, ["faturamento", "receita"]) || 0),
+					additionalSeats: Number(findValue(o, ["assentos"]) || 0)
 				};
-			}).filter((item) => item !== null).filter((live) => {
-				const hasRevenue = live.revenue > 0;
-				const hasSales = live.sales > 0;
-				const hasViewers = live.peakViewers > 0;
-				const hasValidPresenter = live.presenter && live.presenter !== "Desconhecido" && live.presenter.trim() !== "";
-				return hasRevenue || hasSales || hasViewers || hasValidPresenter;
-			}).sort((a, b$1) => new Date(a.date).getTime() - new Date(b$1.date).getTime());
+				return {
+					...liveObj,
+					id: generateLiveId(liveObj)
+				};
+			}).filter((item) => item !== null).filter((l) => l.revenue > 0 || l.sales > 0 || l.peakViewers > 0).map((l) => ({
+				id: l.id,
+				date: l.date,
+				weekday: l.weekday,
+				peak_viewers: l.peakViewers,
+				retained_viewers: l.retainedViewers,
+				sales: l.sales,
+				presenter: l.presenter,
+				conversion_rate: l.conversionRate,
+				retention_rate: l.retentionRate,
+				revenue: l.revenue,
+				additional_seats: l.additionalSeats,
+				updated_at: (/* @__PURE__ */ new Date()).toISOString()
+			}));
+			if (dbLives.length > 0) {
+				const { error } = await supabase.from("lives").upsert(dbLives, { onConflict: "id" });
+				if (error) throw error;
+			}
+			return { added: dbLives.length };
 		} catch (error) {
-			console.error("Error fetching lives data:", error);
+			console.error("Error syncing lives:", error);
 			throw error;
 		}
 	},
+	async fetchLeadsFromDB() {
+		const { data, error } = await supabase.from("leads").select("*").order("data_captacao", { ascending: false });
+		if (error) throw error;
+		return data.map((l) => ({
+			id: l.id,
+			nomeCompleto: l.nome_completo,
+			email: l.email,
+			telefone: l.telefone,
+			assentosAdicionais: l.assentos_adicionais,
+			origem: l.origem,
+			status: l.status,
+			dataCaptacao: l.data_captacao,
+			lastInteraction: l.last_interaction,
+			valorEstimado: l.valor_estimado,
+			notes: l.notes,
+			history: l.history,
+			followUp: l.follow_up
+		}));
+	},
+	async fetchLivesFromDB() {
+		const { data, error } = await supabase.from("lives").select("*").order("date", { ascending: true });
+		if (error) throw error;
+		return data.map((l) => ({
+			id: l.id,
+			date: l.date,
+			weekday: l.weekday,
+			peakViewers: l.peak_viewers,
+			retainedViewers: l.retained_viewers,
+			sales: l.sales,
+			presenter: l.presenter,
+			conversionRate: Number(l.conversion_rate),
+			retentionRate: Number(l.retention_rate),
+			revenue: Number(l.revenue),
+			additionalSeats: l.additional_seats
+		}));
+	},
 	async addLiveToSheet(data) {
-		console.warn("Writing to Google Sheets is not supported via the read-only proxy. Mocking success.");
-		await new Promise((resolve) => setTimeout(resolve, 800));
 		console.log("Would add data to sheet:", data);
-		toast$1({
-			title: "Simulação",
-			description: "Dados processados localmente. Escrita não suportada pelo proxy de leitura.",
-			className: "bg-[#3B82F6] text-white border-none"
-		});
+		const newLive = {
+			id: generateLiveId(data),
+			date: data.date,
+			weekday: data.weekday,
+			peak_viewers: data.peakViewers,
+			retained_viewers: data.retainedViewers,
+			sales: data.sales,
+			presenter: data.presenter,
+			conversion_rate: data.conversionRate,
+			retention_rate: data.retentionRate,
+			revenue: data.revenue,
+			additional_seats: data.additionalSeats,
+			created_at: (/* @__PURE__ */ new Date()).toISOString(),
+			updated_at: (/* @__PURE__ */ new Date()).toISOString()
+		};
+		const { error } = await supabase.from("lives").insert(newLive);
+		if (error) throw error;
 	}
 };
 const useConnectionStore = create((set) => ({
@@ -36081,25 +36182,10 @@ const COLUMNS = [
 		color: "#4B5563"
 	}
 ];
-var STORAGE_KEY = "crm_leads_data_v2";
 const calculateLeadValue = (lead) => {
 	const seats = Number(lead.assentosAdicionais) || 0;
 	if (lead.origem === "Planilha") return 2999 + seats * 699;
 	return seats * 500;
-};
-var saveToStorage = (leads) => {
-	const persistenceData = leads.reduce((acc, lead) => {
-		acc[lead.id] = {
-			status: lead.status,
-			lastInteraction: lead.lastInteraction,
-			notes: lead.notes,
-			history: lead.history,
-			followUp: lead.followUp,
-			valorEstimado: lead.valorEstimado
-		};
-		return acc;
-	}, {});
-	localStorage.setItem(STORAGE_KEY, JSON.stringify(persistenceData));
 };
 var createHistoryItem = (type, description) => ({
 	id: v4_default(),
@@ -36108,6 +36194,10 @@ var createHistoryItem = (type, description) => ({
 	date: (/* @__PURE__ */ new Date()).toISOString(),
 	author: "Você"
 });
+var updateLeadInDB = async (id, updates) => {
+	const { error } = await supabase.from("leads").update(updates).eq("id", id);
+	if (error) console.error("Failed to update lead in DB:", error);
+};
 const useCRMStore = create((set, get$1) => ({
 	leads: [],
 	filteredLeads: [],
@@ -36122,56 +36212,37 @@ const useCRMStore = create((set, get$1) => ({
 			max: ""
 		}
 	},
-	fetchLeads: async (force = false) => {
-		if (!force && get$1().leads.length > 0) return;
+	fetchLeads: async (forceSync = false) => {
 		set({
 			loading: true,
 			error: false
 		});
 		try {
-			let apiLeads = [];
-			try {
-				apiLeads = await googleSheetsService.fetchLeads();
-			} catch (err) {
-				console.warn("Failed to fetch from API, checking cache...", err);
-				if (!localStorage.getItem(STORAGE_KEY)) throw err;
-				apiLeads = generateMockLeads(5);
+			if (forceSync) {
+				const { added } = await googleSheetsService.syncLeads();
+				if (added > 0) {
+					useNotificationStore.getState().addNotification({
+						type: "new_lead",
+						title: "Sincronização Concluída",
+						message: `${added} novos leads foram adicionados.`,
+						actionUrl: "/crm"
+					});
+					toast.success("Sincronização finalizada", { description: `${added} novos leads importados.` });
+				}
 			}
-			const localDataStr = localStorage.getItem(STORAGE_KEY);
-			const localData = localDataStr ? JSON.parse(localDataStr) : {};
-			const currentIds = get$1().leads.map((l) => l.id);
-			if (apiLeads.map((l) => l.id).some((id) => !currentIds.includes(id)) && currentIds.length > 0) useNotificationStore.getState().addNotification({
-				type: "new_lead",
-				title: "Novos Leads Capturados",
-				message: "Novos leads foram sincronizados da planilha.",
-				actionUrl: "/crm"
-			});
-			const mergedLeads = apiLeads.map((lead) => {
-				const local = localData[lead.id] || {};
-				return {
-					...lead,
-					status: local.status || lead.status || "Capturado",
-					lastInteraction: local.lastInteraction || lead.dataCaptacao,
-					notes: local.notes || [],
-					history: local.history || [{
-						id: "initial",
-						type: "status_change",
-						description: "Lead capturado",
-						date: lead.dataCaptacao,
-						author: "Sistema"
-					}],
-					followUp: local.followUp,
-					valorEstimado: local.valorEstimado !== void 0 ? local.valorEstimado : calculateLeadValue(lead)
-				};
-			});
-			if (mergedLeads.length < 5) generateMockLeads(15).forEach((m$1) => {
-				if (!mergedLeads.find((l) => l.id === m$1.id)) mergedLeads.push(m$1);
-			});
-			set({ leads: mergedLeads });
+			set({ leads: (await googleSheetsService.fetchLeadsFromDB()).map((l) => ({
+				...l,
+				status: l.status || "Capturado",
+				lastInteraction: l.lastInteraction || l.dataCaptacao || (/* @__PURE__ */ new Date()).toISOString(),
+				notes: l.notes || [],
+				history: l.history || [],
+				valorEstimado: l.valorEstimado ?? calculateLeadValue(l)
+			})) });
 			get$1().setFilter("search", get$1().filters.search);
 		} catch (error) {
 			console.error(error);
 			set({ error: true });
+			toast.error("Erro na sincronização", { description: "Não foi possível atualizar os dados." });
 		} finally {
 			set({ loading: false });
 		}
@@ -36205,13 +36276,7 @@ const useCRMStore = create((set, get$1) => ({
 		});
 	},
 	moveLead: (leadId, newStatus) => {
-		const { addToQueue, syncError } = useSyncStore.getState();
 		const { addNotification } = useNotificationStore.getState();
-		if (!navigator.onLine || syncError) addToQueue({
-			type: "move_lead",
-			leadId,
-			newStatus
-		});
 		set((state) => {
 			const boughtLeads = state.leads.filter((l) => l.status === "Comprou").length;
 			const totalLeads = state.leads.length;
@@ -36229,16 +36294,21 @@ const useCRMStore = create((set, get$1) => ({
 				if (lead.id === leadId) {
 					if (lead.status === newStatus) return lead;
 					const historyItem = createHistoryItem("status_change", `Status alterado de ${lead.status} para ${newStatus}`);
-					return {
+					const updatedLead = {
 						...lead,
 						status: newStatus,
 						lastInteraction: (/* @__PURE__ */ new Date()).toISOString(),
 						history: [historyItem, ...lead.history]
 					};
+					updateLeadInDB(leadId, {
+						status: newStatus,
+						last_interaction: updatedLead.lastInteraction,
+						history: updatedLead.history
+					});
+					return updatedLead;
 				}
 				return lead;
 			});
-			saveToStorage(updatedLeads);
 			return {
 				leads: updatedLeads,
 				filteredLeads: applyFilters(updatedLeads, state.filters)
@@ -36256,16 +36326,21 @@ const useCRMStore = create((set, get$1) => ({
 						author: "Você"
 					};
 					const historyItem = createHistoryItem("note_added", "Nota adicionada ao lead");
-					return {
+					const updatedLead = {
 						...lead,
 						notes: [newNote, ...lead.notes],
 						history: [historyItem, ...lead.history],
 						lastInteraction: (/* @__PURE__ */ new Date()).toISOString()
 					};
+					updateLeadInDB(leadId, {
+						notes: updatedLead.notes,
+						history: updatedLead.history,
+						last_interaction: updatedLead.lastInteraction
+					});
+					return updatedLead;
 				}
 				return lead;
 			});
-			saveToStorage(updatedLeads);
 			return {
 				leads: updatedLeads,
 				filteredLeads: applyFilters(updatedLeads, state.filters)
@@ -36277,15 +36352,19 @@ const useCRMStore = create((set, get$1) => ({
 			const updatedLeads = state.leads.map((lead) => {
 				if (lead.id === leadId) {
 					const historyItem = createHistoryItem("interaction", `Interação registrada: ${type} - ${details}`);
-					return {
+					const updatedLead = {
 						...lead,
 						history: [historyItem, ...lead.history],
 						lastInteraction: (/* @__PURE__ */ new Date()).toISOString()
 					};
+					updateLeadInDB(leadId, {
+						history: updatedLead.history,
+						last_interaction: updatedLead.lastInteraction
+					});
+					return updatedLead;
 				}
 				return lead;
 			});
-			saveToStorage(updatedLeads);
 			return {
 				leads: updatedLeads,
 				filteredLeads: applyFilters(updatedLeads, state.filters)
@@ -36305,16 +36384,21 @@ const useCRMStore = create((set, get$1) => ({
 			const updatedLeads = state.leads.map((lead) => {
 				if (lead.id === leadId) {
 					const historyItem = createHistoryItem("follow_up_set", `Follow-up agendado para ${new Date(date).toLocaleString("pt-BR")}`);
-					return {
+					const updatedLead = {
 						...lead,
 						followUp: date,
 						history: [historyItem, ...lead.history],
 						lastInteraction: (/* @__PURE__ */ new Date()).toISOString()
 					};
+					updateLeadInDB(leadId, {
+						follow_up: date,
+						history: updatedLead.history,
+						last_interaction: updatedLead.lastInteraction
+					});
+					return updatedLead;
 				}
 				return lead;
 			});
-			saveToStorage(updatedLeads);
 			return {
 				leads: updatedLeads,
 				filteredLeads: applyFilters(updatedLeads, state.filters)
@@ -36326,16 +36410,26 @@ const useCRMStore = create((set, get$1) => ({
 			const updatedLeads = state.leads.map((lead) => {
 				if (lead.id === leadId) {
 					const historyItem = createHistoryItem("interaction", "Dados do lead atualizados manualmente");
-					return {
+					const updatedLead = {
 						...lead,
 						...updates,
 						history: [historyItem, ...lead.history],
 						lastInteraction: (/* @__PURE__ */ new Date()).toISOString()
 					};
+					updateLeadInDB(leadId, {
+						nome_completo: updatedLead.nomeCompleto,
+						email: updatedLead.email,
+						telefone: updatedLead.telefone,
+						assentos_adicionais: updatedLead.assentosAdicionais,
+						origem: updatedLead.origem,
+						valor_estimado: updatedLead.valorEstimado,
+						history: updatedLead.history,
+						last_interaction: updatedLead.lastInteraction
+					});
+					return updatedLead;
 				}
 				return lead;
 			});
-			saveToStorage(updatedLeads);
 			return {
 				leads: updatedLeads,
 				filteredLeads: applyFilters(updatedLeads, state.filters)
@@ -36363,62 +36457,6 @@ function applyFilters(leads, filters) {
 		return true;
 	});
 }
-function generateMockLeads(count$3) {
-	const statuses = COLUMNS.map((c) => c.id);
-	const origins = [
-		"Planilha",
-		"Manual",
-		"Site",
-		"Indicação"
-	];
-	const names = [
-		"Ana",
-		"Bruno",
-		"Carla",
-		"Daniel",
-		"Elena",
-		"Fabio",
-		"Gabriel",
-		"Helena"
-	];
-	const surnames = [
-		"Silva",
-		"Santos",
-		"Oliveira",
-		"Souza",
-		"Lima",
-		"Pereira",
-		"Ferreira"
-	];
-	return Array.from({ length: count$3 }).map((_$1, i) => {
-		const name = names[Math.floor(Math.random() * names.length)];
-		const surname = surnames[Math.floor(Math.random() * surnames.length)];
-		const captureDate = new Date(Date.now() - Math.floor(Math.random() * 10 * 24 * 60 * 60 * 1e3)).toISOString();
-		const leadData = {
-			id: `mock-${i}-${Date.now()}`,
-			nomeCompleto: `${name} ${surname}`,
-			email: `${name.toLowerCase()}.${surname.toLowerCase()}@example.com`,
-			telefone: `(11) 9${Math.floor(Math.random() * 9e4) + 1e4}-${Math.floor(Math.random() * 9e3) + 1e3}`,
-			assentosAdicionais: Math.floor(Math.random() * 10) + 1,
-			origem: origins[Math.floor(Math.random() * origins.length)],
-			status: statuses[Math.floor(Math.random() * statuses.length)],
-			dataCaptacao: captureDate,
-			lastInteraction: captureDate
-		};
-		return {
-			...leadData,
-			notes: [],
-			valorEstimado: calculateLeadValue(leadData),
-			history: [{
-				id: v4_default(),
-				type: "status_change",
-				description: "Lead capturado automaticamente",
-				date: captureDate,
-				author: "Sistema"
-			}]
-		};
-	});
-}
 const useLivesStore = create((set, get$1) => ({
 	allData: [],
 	loading: false,
@@ -36429,7 +36467,8 @@ const useLivesStore = create((set, get$1) => ({
 			error: false
 		});
 		try {
-			set({ allData: await googleSheetsService.fetchLivesData() });
+			await googleSheetsService.syncLives();
+			set({ allData: await googleSheetsService.fetchLivesFromDB() });
 		} catch (error) {
 			console.error(error);
 			set({ error: true });
@@ -36449,10 +36488,38 @@ const useLivesStore = create((set, get$1) => ({
 }));
 function SyncManager() {
 	const { syncFrequency } = useSettingsStore();
-	const { setIsSyncing, setLastSync, setSyncError, failCount, incrementFailCount, resetFailCount, processQueue } = useSyncStore();
+	const { setIsSyncing, setLastSync, setSyncError, failCount, incrementFailCount, resetFailCount } = useSyncStore();
 	const { fetchLeads } = useCRMStore();
 	const { fetchData: fetchLives } = useLivesStore();
 	const { checkConnection } = useConnectionStore();
+	const syncData = async () => {
+		if (!navigator.onLine) {
+			setSyncError(true);
+			return;
+		}
+		setIsSyncing(true);
+		const toastId = toast.loading("Sincronizando dados...", { description: "Verificando novos registros..." });
+		try {
+			await Promise.all([
+				fetchLeads(true),
+				fetchLives(),
+				checkConnection()
+			]);
+			toast.dismiss(toastId);
+			setLastSync(/* @__PURE__ */ new Date());
+			resetFailCount();
+		} catch (error) {
+			console.error("Sync failed", error);
+			toast.dismiss(toastId);
+			incrementFailCount();
+			if (failCount >= 2) {
+				setSyncError(true);
+				toast.error("Falha na sincronização", { description: "O sistema entrará em modo offline." });
+			}
+		} finally {
+			setIsSyncing(false);
+		}
+	};
 	(0, import_react.useEffect)(() => {
 		syncData();
 		const interval = setInterval(() => {
@@ -36462,7 +36529,6 @@ function SyncManager() {
 			toast.success("Conexão restaurada", { description: "Sincronizando dados pendentes..." });
 			checkConnection();
 			resetFailCount();
-			processQueue();
 			syncData();
 		};
 		const handleOffline = () => {
@@ -36478,39 +36544,6 @@ function SyncManager() {
 			window.removeEventListener("offline", handleOffline);
 		};
 	}, [syncFrequency]);
-	const syncData = async () => {
-		if (!navigator.onLine) {
-			setSyncError(true);
-			return;
-		}
-		setIsSyncing(true);
-		const toastId = setTimeout(() => {
-			toast("Sincronizando...", {
-				icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-4 w-4 animate-spin text-blue-500" }),
-				duration: 2e3
-			});
-		}, 1e3);
-		try {
-			await Promise.all([
-				fetchLeads(true),
-				fetchLives(),
-				checkConnection()
-			]);
-			clearTimeout(toastId);
-			setLastSync(/* @__PURE__ */ new Date());
-			resetFailCount();
-			toast.success("Dados atualizados", { duration: 2e3 });
-		} catch (error) {
-			console.error("Sync failed", error);
-			incrementFailCount();
-			if (failCount >= 2) {
-				setSyncError(true);
-				toast.error("Falha na sincronização", { description: "O sistema entrará em modo offline." });
-			}
-		} finally {
-			setIsSyncing(false);
-		}
-	};
 	return null;
 }
 function SidebarToggle({ className }) {
@@ -40616,8 +40649,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-DeYsU4_O.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-C4-xscMz.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-BpuASZ3Z.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-D4vuxzbw.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -40677,4 +40710,4 @@ var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 export { millisecondsInHour as $, Presence as $t, calculateLeadValue as A, Content$1 as At, getRoundingMethod as B, Search as Bt, ptBR as C, Slot$2 as Ct, DropdownMenuTrigger as D, TooltipTrigger as Dt, DropdownMenuItem as E, TooltipProvider as Et, getISOWeek as F, cn as Ft, differenceInCalendarDays as G, ChevronRight as Gt, differenceInCalendarMonths as H, LoaderCircle as Ht, enUS as I, X as It, startOfISOWeek as J, Calendar as Jt, startOfDay as K, ChevronDown as Kt, startOfYear as L, Video as Lt, formatDistanceToNow as M, createPopperScope as Mt, format as N, useId as Nt, useLivesStore as O, Anchor as Ot, getWeek as P, toast as Pt, constructFrom as Q, useControllableState as Qt, endOfMonth as R, Users as Rt, DialogTrigger as S, useIsMobile as St, DropdownMenuContent as T, TooltipContent as Tt, isDate as U, Clock as Ut, differenceInDays as V, RefreshCw as Vt, constructNow as W, CircleAlert as Wt, getDefaultOptions as X, cva as Xt, startOfWeek as Y, createLucideIcon as Yt, toDate as Z, clsx_default as Zt, DialogContent as _, FocusScope as _t, SelectValue as a, createSlot as an, Content as at, DialogHeader as b, Button as bt, Command as c, require_jsx_runtime as cn, Portal$3 as ct, CommandInput as d, useToast as dn, Trigger$2 as dt, Portal as en, millisecondsInMinute as et, CommandItem as f, require_react as fn, WarningProvider as ft, DialogClose as g, useFocusGuards as gt, Dialog as h, __toESM as hn, Combination_default as ht, SelectTrigger as i, Primitive as in, Close as it, useCRMStore as j, Root2$2 as jt, COLUMNS as k, Arrow as kt, CommandEmpty as l, useComposedRefs as ln, Root$3 as lt, CommandSeparator as m, __export as mn, hideOthers as mt, SelectContent as n, DismissableLayer as nn, require_shim as nt, Switch as o, createSlottable as on, Description as ot, CommandList as p, __commonJSMin as pn, createDialogScope as pt, normalizeDates as q, Check as qt, SelectItem as r, useCallbackRef as rn, Skeleton as rt, Label as s, createContextScope as sn, Overlay as st, Select as t, useLayoutEffect2 as tn, googleSheetsService as tt, CommandGroup as u, composeEventHandlers as un, Title as ut, DialogDescription as v, Primitive$1 as vt, DropdownMenu as w, Tooltip as wt, DialogTitle as x, buttonVariants as xt, DialogFooter as y, Input as yt, endOfDay as z, TrendingUp as zt };
 
-//# sourceMappingURL=index-Dh1Uds23.js.map
+//# sourceMappingURL=index-CF7Z8fcd.js.map

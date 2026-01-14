@@ -5,14 +5,17 @@ import { CRMMetrics } from '@/components/crm/CRMMetrics'
 import { CRMBoard } from '@/components/crm/CRMBoard'
 import { ExportButton } from '@/components/common/ExportButton'
 import { formatLeadsForExport } from '@/utils/exportUtils'
-import { Loader2, Download } from 'lucide-react'
+import { Loader2, Download, RefreshCw } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 
 export default function CRM() {
   const { fetchLeads, loading, error, leads, filteredLeads } = useCRMStore()
 
   useEffect(() => {
+    // Initial fetch, maybe cached or quick DB load
     fetchLeads()
-  }, [fetchLeads])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   if (error) {
     return (
@@ -27,7 +30,7 @@ export default function CRM() {
           onClick={() => fetchLeads(true)}
           className="bg-[#D9B979] hover:bg-[#D9B979]/90 text-black px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)]"
         >
-          <span className="material-symbols-outlined text-[20px]">refresh</span>
+          <RefreshCw className="h-4 w-4" />
           Tentar Novamente
         </button>
       </div>
@@ -42,28 +45,42 @@ export default function CRM() {
           <h2 className="text-[32px] font-bold tracking-tight font-display text-white">
             CRM - Pipeline de Vendas
           </h2>
-          <p className="text-[15px] mt-1 flex items-center gap-2 text-gray-400">
-            Gerencie seus leads e acompanhe o funil de vendas.
+          <div className="flex items-center gap-2 mt-1">
+            <p className="text-[15px] text-gray-400">
+              Gerencie seus leads e acompanhe o funil de vendas.
+            </p>
             {loading && (
-              <span className="flex items-center text-[13px] text-[#D9B979]">
-                <Loader2 className="h-4 w-4 animate-spin mr-1" />
+              <span className="flex items-center text-[12px] text-[#D9B979] bg-[#D9B979]/10 px-2 py-0.5 rounded-full animate-pulse">
+                <Loader2 className="h-3 w-3 animate-spin mr-1.5" />
                 Sincronizando...
               </span>
             )}
-          </p>
+          </div>
         </div>
-        <ExportButton
-          data={filteredLeads}
-          filename="crm_leads"
-          formatData={formatLeadsForExport}
-          label="Exportar Leads"
-          customButton={
-            <button className="bg-[#D9B979] hover:bg-[#D9B979]/90 text-black px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)]">
-              <Download className="h-5 w-5" />
-              Exportar Leads
-            </button>
-          }
-        />
+        <div className="flex items-center gap-3">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => fetchLeads(true)}
+            disabled={loading}
+            className="border-[#333333] text-gray-300 hover:text-white hover:bg-white/5 gap-2"
+          >
+            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+            Sync
+          </Button>
+          <ExportButton
+            data={filteredLeads}
+            filename="crm_leads"
+            formatData={formatLeadsForExport}
+            label="Exportar Leads"
+            customButton={
+              <button className="bg-[#D9B979] hover:bg-[#D9B979]/90 text-black px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)]">
+                <Download className="h-5 w-5" />
+                Exportar Leads
+              </button>
+            }
+          />
+        </div>
       </header>
 
       {/* Content */}
