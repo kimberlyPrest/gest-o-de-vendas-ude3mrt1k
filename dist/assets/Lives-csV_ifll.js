@@ -1,5 +1,5 @@
-import { _ as ArrowRightLeft, a as parseISO, c as startOfMonth, d as addDays, f as Funnel, g as ArrowUp, h as ChevronLeft, i as PopoverTrigger, m as DollarSign, n as Popover, o as subDays, p as Download, r as PopoverContent, t as Calendar$1, u as addMonths, v as ArrowDown } from "./calendar-Bi-MxbqY.js";
-import { $t as createLucideIcon, At as TooltipProvider, C as DialogFooter, Ct as Input, D as ptBR, Dt as Slot, E as DialogTrigger, G as differenceInDays, Gt as RefreshCw, Ht as Users, Kt as LoaderCircle, L as format, M as useLivesStore, Ot as Tooltip$1, Qt as Calendar, S as DialogDescription, T as DialogTitle, U as endOfDay, Ut as TrendingUp, Vt as Video, X as startOfDay, Yt as ChevronRight, Zt as Check, _ as CommandList, _n as __commonJSMin, a as Select, at as googleSheetsService, c as SelectTrigger, d as Label$1, f as Command, fn as require_jsx_runtime, g as CommandItem, gn as require_react, h as CommandInput, hn as useToast, i as CardTitle, jt as TooltipTrigger, kt as TooltipContent, l as SelectValue, m as CommandGroup, n as CardContent, o as SelectContent, p as CommandEmpty, r as CardHeader, s as SelectItem, st as Skeleton, t as Card, tn as clsx_default, tt as toDate, u as Switch, v as CommandSeparator, vn as __export, w as DialogHeader, wt as Button, x as DialogContent, y as Dialog, yn as __toESM, zt as cn } from "./index-Daui8mDX.js";
+import { _ as ArrowRightLeft, a as parseISO, c as startOfMonth, d as addDays, f as Funnel, g as ArrowUp, h as ChevronLeft, i as PopoverTrigger, m as DollarSign, n as Popover, o as subDays, p as Download, r as PopoverContent, t as Calendar$1, u as addMonths, v as ArrowDown } from "./calendar-2zJYXbW6.js";
+import { $t as createLucideIcon, At as TooltipProvider, C as DialogFooter, Ct as Input, D as ptBR, Dt as Slot, E as DialogTrigger, G as differenceInDays, Gt as RefreshCw, Ht as Users, Kt as LoaderCircle, L as format, M as useLivesStore, Ot as Tooltip$1, Qt as Calendar, S as DialogDescription, T as DialogTitle, U as endOfDay, Ut as TrendingUp, Vt as Video, X as startOfDay, Yt as ChevronRight, Zt as Check, _ as CommandList, _n as __commonJSMin, a as Select, at as googleSheetsService, c as SelectTrigger, d as Label$1, f as Command, fn as require_jsx_runtime, g as CommandItem, gn as require_react, h as CommandInput, hn as useToast, i as CardTitle, jt as TooltipTrigger, kt as TooltipContent, l as SelectValue, m as CommandGroup, n as CardContent, o as SelectContent, p as CommandEmpty, r as CardHeader, s as SelectItem, st as Skeleton, t as Card, tn as clsx_default, tt as toDate, u as Switch, v as CommandSeparator, vn as __export, w as DialogHeader, wt as Button, x as DialogContent, y as Dialog, yn as __toESM, zt as cn } from "./index-DPRIRTVl.js";
 var Award = createLucideIcon("award", [["path", {
 	d: "m15.477 12.89 1.515 8.526a.5.5 0 0 1-.81.47l-3.58-2.687a1 1 0 0 0-1.197 0l-3.586 2.686a.5.5 0 0 1-.81-.469l1.514-8.526",
 	key: "1yiouv"
@@ -5947,7 +5947,7 @@ var DATE_PRESETS = [
 		value: "allTime"
 	}
 ];
-function LiveFilters({ presenters, filters, onFilterChange, loading, dateBounds }) {
+function LiveFilters({ presenters, filters, onFilterChange, loading, dateBounds, comparisonRange }) {
 	const [openPresenters, setOpenPresenters] = (0, import_react.useState)(false);
 	const [selectedPreset, setSelectedPreset] = (0, import_react.useState)("30days");
 	const handlePresetChange = (value) => {
@@ -6176,6 +6176,38 @@ function LiveFilters({ presenters, filters, onFilterChange, loading, dateBounds 
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowRightLeft, { className: "w-4 h-4" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 						className: "text-xs font-medium",
 						children: "Comparar"
+					})]
+				})]
+			}),
+			filters.comparisonEnabled && filters.dateRange?.from && filters.dateRange?.to && comparisonRange && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex items-center gap-2 animate-fade-in pl-2 border-l border-[#333333]",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-2 px-3 py-1.5 bg-[#222222] border border-[#333333] rounded-lg hover:border-[#D9B979]/50 transition-colors group cursor-default shadow-sm",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "font-display font-semibold text-[#D9B979] text-xs uppercase tracking-wide",
+						children: "Atual:"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "font-sans text-xs text-gray-200",
+						children: [
+							format(filters.dateRange.from, "dd/MM"),
+							" -",
+							" ",
+							format(filters.dateRange.to, "dd/MM")
+						]
+					})]
+				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+					className: "flex items-center gap-2 px-3 py-1.5 bg-[#222222] border border-[#333333] rounded-lg hover:border-gray-500 transition-colors group cursor-default shadow-sm",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						className: "font-display font-semibold text-gray-400 text-xs uppercase tracking-wide",
+						children: "vs."
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
+						className: "font-sans text-xs text-gray-400 group-hover:text-gray-300 transition-colors",
+						children: [
+							format(comparisonRange.from, "dd/MM"),
+							" -",
+							" ",
+							format(comparisonRange.to, "dd/MM")
+						]
 					})]
 				})]
 			}),
@@ -29067,7 +29099,8 @@ function Lives() {
 				filters,
 				onFilterChange: setFilters,
 				loading,
-				dateBounds
+				dateBounds,
+				comparisonRange
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LiveKPIs, {
 				currentData,
@@ -29118,4 +29151,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-BwOj_Jpy.js.map
+//# sourceMappingURL=Lives-csV_ifll.js.map

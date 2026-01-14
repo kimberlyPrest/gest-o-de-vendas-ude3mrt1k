@@ -177,6 +177,7 @@ export default function Lives() {
         onFilterChange={setFilters}
         loading={loading}
         dateBounds={dateBounds}
+        comparisonRange={comparisonRange}
       />
 
       {/* KPI Dashboard */}

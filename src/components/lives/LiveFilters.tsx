@@ -49,6 +49,7 @@ interface LiveFiltersProps {
   onFilterChange: (filters: FilterState) => void
   loading: boolean
   dateBounds?: { min: Date; max: Date }
+  comparisonRange?: { from: Date; to: Date }
 }
 
 const WEEKDAYS = [
@@ -75,6 +76,7 @@ export function LiveFilters({
   onFilterChange,
   loading,
   dateBounds,
+  comparisonRange,
 }: LiveFiltersProps) {
   const [openPresenters, setOpenPresenters] = useState(false)
   const [selectedPreset, setSelectedPreset] = useState<string>('30days')
@@ -373,6 +375,36 @@ export function LiveFilters({
           <span className="text-xs font-medium">Comparar</span>
         </div>
       </div>
+
+      {/* Comparison Badges */}
+      {filters.comparisonEnabled &&
+        filters.dateRange?.from &&
+        filters.dateRange?.to &&
+        comparisonRange && (
+          <div className="flex items-center gap-2 animate-fade-in pl-2 border-l border-[#333333]">
+            {/* Current Period Badge */}
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#222222] border border-[#333333] rounded-lg hover:border-[#D9B979]/50 transition-colors group cursor-default shadow-sm">
+              <span className="font-display font-semibold text-[#D9B979] text-xs uppercase tracking-wide">
+                Atual:
+              </span>
+              <span className="font-sans text-xs text-gray-200">
+                {format(filters.dateRange.from, 'dd/MM')} -{' '}
+                {format(filters.dateRange.to, 'dd/MM')}
+              </span>
+            </div>
+
+            {/* Comparison Period Badge */}
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#222222] border border-[#333333] rounded-lg hover:border-gray-500 transition-colors group cursor-default shadow-sm">
+              <span className="font-display font-semibold text-gray-400 text-xs uppercase tracking-wide">
+                vs.
+              </span>
+              <span className="font-sans text-xs text-gray-400 group-hover:text-gray-300 transition-colors">
+                {format(comparisonRange.from, 'dd/MM')} -{' '}
+                {format(comparisonRange.to, 'dd/MM')}
+              </span>
+            </div>
+          </div>
+        )}
 
       <div className="flex-1"></div>
 
