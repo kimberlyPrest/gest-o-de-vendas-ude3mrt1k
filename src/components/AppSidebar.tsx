@@ -19,7 +19,7 @@ export function AppSidebar() {
   const pathname = location.pathname
   const { user, signOut } = useAuth()
   const navigate = useNavigate()
-  const { state } = useSidebar()
+  const { setOpenMobile, setOpen, isMobile } = useSidebar()
 
   const items = [
     {
@@ -50,6 +50,14 @@ export function AppSidebar() {
     }
   }
 
+  const handleLinkClick = () => {
+    if (isMobile) {
+      setOpenMobile(false)
+    } else {
+      setOpen(false)
+    }
+  }
+
   return (
     <>
       <style>{`
@@ -64,7 +72,7 @@ export function AppSidebar() {
         }
       `}</style>
       <Sidebar
-        className="glass-sidebar border-r border-gray-200/50"
+        className="glass-sidebar border-r border-gray-200/50 z-40"
         collapsible="offcanvas"
       >
         <SidebarHeader className="p-6">
@@ -112,6 +120,7 @@ export function AppSidebar() {
                     style={{
                       color: isActive ? '#0071E3' : '#86868B',
                     }}
+                    onClick={handleLinkClick}
                   >
                     <Link to={item.url} className="flex items-center gap-3">
                       <item.icon className="h-5 w-5 shrink-0" />

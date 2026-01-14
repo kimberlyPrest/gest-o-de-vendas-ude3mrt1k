@@ -1,5 +1,5 @@
-import { B as ArrowUp, D as endOfMonth, E as startOfMonth, F as ChevronUp, M as addMonths, N as addDays, O as endOfDay, P as DollarSign, R as ChevronDown, S as subDays, V as ArrowRightLeft, _ as Popover, a as SelectValue, b as ptBR, c as Dialog, d as DialogDescription, f as DialogFooter, g as Calendar$1, h as DialogTrigger, i as SelectTrigger, m as DialogTitle, n as SelectContent, o as usePrevious, p as DialogHeader, r as SelectItem, t as Select, u as DialogContent, v as PopoverContent, w as format, x as parseISO, y as PopoverTrigger, z as Check } from "./select-XbH_0oWd.js";
-import { A as Root$1, At as __toESM, B as Primitive$1, Ct as useComposedRefs, Dt as require_react, E as Content, G as Slot, H as Button, O as Overlay, Ot as __commonJSMin, Q as useId, S as googleSheetsService, St as composeRefs, Tt as useToast, V as Input, Z as useSize, a as CardTitle, at as createLucideIcon, bt as createContextScope, et as cn, f as startOfDay, h as toDate, ht as Primitive, i as CardHeader, it as LoaderCircle, k as Portal, kt as __export, lt as useControllableState, n as CardContent, nt as Users, o as Label$1, r as CardDescription, rt as RefreshCw, s as useLivesStore, st as clsx_default, t as Card, u as differenceInDays, w as Skeleton, wt as composeEventHandlers, xt as require_jsx_runtime, z as Separator } from "./index-CuStz71A.js";
+import { a as parseISO, c as startOfMonth, d as addDays, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, m as ArrowUp, n as Popover, o as subDays, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-DRFsrAtP.js";
+import { Bt as Search, C as DialogDescription, D as DialogTrigger, E as DialogTitle, G as differenceInDays, Gt as ChevronDown, H as endOfMonth, Ht as LoaderCircle, It as cn, Jt as createLucideIcon, Kt as Check, L as format, Lt as Video, N as useLivesStore, O as ptBR, Ot as Slot, Rt as Users, S as DialogContent, St as Separator, T as DialogHeader, Tt as Button, U as endOfDay, Ut as ChevronUp, Vt as RefreshCw, X as startOfDay, Xt as clsx_default, _ as CommandItem, a as CardTitle, at as googleSheetsService, b as Dialog, c as SelectItem, d as Switch, dn as require_react, f as Label$1, fn as __commonJSMin, g as CommandInput, h as CommandGroup, i as CardHeader, l as SelectTrigger, m as CommandEmpty, mn as __toESM, n as CardContent, o as Select, p as Command, pn as __export, qt as Calendar, r as CardDescription, s as SelectContent, sn as require_jsx_runtime, st as Skeleton, t as Card, tt as toDate, u as SelectValue, un as useToast, v as CommandList, w as DialogFooter, wt as Input, y as CommandSeparator, zt as TrendingUp } from "./index-ChSeICpI.js";
 var ArrowDown = createLucideIcon("arrow-down", [["path", {
 	d: "M12 5v14",
 	key: "s699le"
@@ -58,28 +58,6 @@ var CalendarCheck = createLucideIcon("calendar-check", [
 	["path", {
 		d: "m9 16 2 2 4-4",
 		key: "19s6y9"
-	}]
-]);
-var Calendar = createLucideIcon("calendar", [
-	["path", {
-		d: "M8 2v4",
-		key: "1cmpym"
-	}],
-	["path", {
-		d: "M16 2v4",
-		key: "4m81vk"
-	}],
-	["rect", {
-		width: "18",
-		height: "18",
-		x: "3",
-		y: "4",
-		rx: "2",
-		key: "1hopcy"
-	}],
-	["path", {
-		d: "M3 10h18",
-		key: "8toen8"
 	}]
 ]);
 var ChartColumn = createLucideIcon("chart-column", [
@@ -173,15 +151,6 @@ var SearchX = createLucideIcon("search-x", [
 		key: "1qie3q"
 	}]
 ]);
-var Search = createLucideIcon("search", [["path", {
-	d: "m21 21-4.34-4.34",
-	key: "14j7rj"
-}], ["circle", {
-	cx: "11",
-	cy: "11",
-	r: "8",
-	key: "4ej97u"
-}]]);
 var ShoppingCart = createLucideIcon("shopping-cart", [
 	["circle", {
 		cx: "8",
@@ -200,13 +169,6 @@ var ShoppingCart = createLucideIcon("shopping-cart", [
 		key: "9zh506"
 	}]
 ]);
-var TrendingUp = createLucideIcon("trending-up", [["path", {
-	d: "M16 7h6v6",
-	key: "box55l"
-}], ["path", {
-	d: "m22 7-8.5 8.5-5-5L2 17",
-	key: "1t1m79"
-}]]);
 var TriangleAlert = createLucideIcon("triangle-alert", [
 	["path", {
 		d: "m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3",
@@ -247,17 +209,6 @@ var Trophy = createLucideIcon("trophy", [
 		key: "tex48p"
 	}]
 ]);
-var Video = createLucideIcon("video", [["path", {
-	d: "m16 13 5.223 3.482a.5.5 0 0 0 .777-.416V7.87a.5.5 0 0 0-.752-.432L16 10.5",
-	key: "ftymec"
-}], ["rect", {
-	x: "2",
-	y: "6",
-	width: "14",
-	height: "12",
-	rx: "2",
-	key: "158x01"
-}]]);
 function isWithinInterval(date$4, interval, options) {
 	const time$3 = +toDate(date$4, options?.in);
 	const [startTime, endTime] = [+toDate(interval.start, options?.in), +toDate(interval.end, options?.in)].sort((a$2, b) => a$2 - b);
@@ -1915,8 +1866,8 @@ function $constructor(name, initializer$2, params) {
 		const proto = _.prototype;
 		const keys$6 = Object.keys(proto);
 		for (let i$2 = 0; i$2 < keys$6.length; i$2++) {
-			const k$3 = keys$6[i$2];
-			if (!(k$3 in inst)) inst[k$3] = proto[k$3].bind(inst);
+			const k$1 = keys$6[i$2];
+			if (!(k$1 in inst)) inst[k$1] = proto[k$1].bind(inst);
 		}
 	}
 	const Parent = params?.Parent ?? Object;
@@ -1956,7 +1907,7 @@ function config(newConfig) {
 }
 function getEnumValues(entries) {
 	const numericValues = Object.values(entries).filter((v) => typeof v === "number");
-	return Object.entries(entries).filter(([k$3, _]) => numericValues.indexOf(+k$3) === -1).map(([_, v]) => v);
+	return Object.entries(entries).filter(([k$1, _]) => numericValues.indexOf(+k$1) === -1).map(([_, v]) => v);
 }
 function jsonStringifyReplacer(_, value) {
 	if (typeof value === "bigint") return value.toString();
@@ -2088,8 +2039,8 @@ function normalizeParams(_params) {
 	return params;
 }
 function optionalKeys(shape) {
-	return Object.keys(shape).filter((k$3) => {
-		return shape[k$3]._zod.optin === "optional" && shape[k$3]._zod.optout === "optional";
+	return Object.keys(shape).filter((k$1) => {
+		return shape[k$1]._zod.optin === "optional" && shape[k$1]._zod.optout === "optional";
 	});
 }
 const NUMBER_FORMAT_RANGES = {
@@ -3298,7 +3249,7 @@ function handlePropertyResult(result, final, key, input) {
 }
 function normalizeDef(def) {
 	const keys$6 = Object.keys(def.shape);
-	for (const k$3 of keys$6) if (!def.shape?.[k$3]?._zod?.traits?.has("$ZodType")) throw new Error(`Invalid element at key "${k$3}": expected a Zod schema`);
+	for (const k$1 of keys$6) if (!def.shape?.[k$1]?._zod?.traits?.has("$ZodType")) throw new Error(`Invalid element at key "${k$1}": expected a Zod schema`);
 	const okeys = optionalKeys(def.shape);
 	return {
 		...def,
@@ -3402,8 +3353,8 @@ const $ZodObjectJIT = /* @__PURE__ */ $constructor("$ZodObjectJIT", (inst, def) 
 		]);
 		const normalized = _normalized.value;
 		const parseStr = (key) => {
-			const k$3 = esc(key);
-			return `shape[${k$3}]._zod.run({ value: input[${k$3}], issues: [] }, ctx)`;
+			const k$1 = esc(key);
+			return `shape[${k$1}]._zod.run({ value: input[${k$1}], issues: [] }, ctx)`;
 		};
 		doc.write(`const input = payload.value;`);
 		const ids = Object.create(null);
@@ -3412,23 +3363,23 @@ const $ZodObjectJIT = /* @__PURE__ */ $constructor("$ZodObjectJIT", (inst, def) 
 		doc.write(`const newResult = {};`);
 		for (const key of normalized.keys) {
 			const id = ids[key];
-			const k$3 = esc(key);
+			const k$1 = esc(key);
 			doc.write(`const ${id} = ${parseStr(key)};`);
 			doc.write(`
         if (${id}.issues.length) {
           payload.issues = payload.issues.concat(${id}.issues.map(iss => ({
             ...iss,
-            path: iss.path ? [${k$3}, ...iss.path] : [${k$3}]
+            path: iss.path ? [${k$1}, ...iss.path] : [${k$1}]
           })));
         }
         
         
         if (${id}.value === undefined) {
-          if (${k$3} in input) {
-            newResult[${k$3}] = undefined;
+          if (${k$1} in input) {
+            newResult[${k$1}] = undefined;
           }
         } else {
-          newResult[${k$3}] = ${id}.value;
+          newResult[${k$1}] = ${id}.value;
         }
         
       `);
@@ -3493,7 +3444,7 @@ const $ZodUnion = /* @__PURE__ */ $constructor("$ZodUnion", (inst, def) => {
 	defineLazy(inst._zod, "pattern", () => {
 		if (def.options.every((o$1) => o$1._zod.pattern)) {
 			const patterns = def.options.map((o$1) => o$1._zod.pattern);
-			return /* @__PURE__ */ new RegExp(`^(${patterns.map((p$1) => cleanRegex(p$1.source)).join("|")})$`);
+			return /* @__PURE__ */ new RegExp(`^(${patterns.map((p) => cleanRegex(p.source)).join("|")})$`);
 		}
 	});
 	const single = def.options.length === 1;
@@ -3608,7 +3559,7 @@ const $ZodEnum = /* @__PURE__ */ $constructor("$ZodEnum", (inst, def) => {
 	const values = getEnumValues(def.entries);
 	const valuesSet = new Set(values);
 	inst._zod.values = valuesSet;
-	inst._zod.pattern = /* @__PURE__ */ new RegExp(`^(${values.filter((k$3) => propertyKeyTypes.has(typeof k$3)).map((o$1) => typeof o$1 === "string" ? escapeRegex(o$1) : o$1.toString()).join("|")})$`);
+	inst._zod.pattern = /* @__PURE__ */ new RegExp(`^(${values.filter((k$1) => propertyKeyTypes.has(typeof k$1)).map((o$1) => typeof o$1 === "string" ? escapeRegex(o$1) : o$1.toString()).join("|")})$`);
 	inst._zod.parse = (payload, _ctx) => {
 		const input = payload.value;
 		if (valuesSet.has(input)) return payload;
@@ -3858,9 +3809,9 @@ var $ZodRegistry = class {
 		return this;
 	}
 	get(schema) {
-		const p$1 = schema._zod.parent;
-		if (p$1) {
-			const pm = { ...this.get(p$1) ?? {} };
+		const p = schema._zod.parent;
+		if (p) {
+			const pm = { ...this.get(p) ?? {} };
 			delete pm.id;
 			const f = {
 				...pm,
@@ -4794,10 +4745,10 @@ function s$2(r$1, e) {
 	for (var n$1 = {}; r$1.length;) {
 		var t$1 = r$1[0], s$3 = t$1.code, i$2 = t$1.message, a$2 = t$1.path.join(".");
 		if (!n$1[a$2]) if ("unionErrors" in t$1) {
-			var u$1 = t$1.unionErrors[0].errors[0];
+			var u = t$1.unionErrors[0].errors[0];
 			n$1[a$2] = {
-				message: u$1.message,
-				type: u$1.code
+				message: u.message,
+				type: u.code
 			};
 		} else n$1[a$2] = {
 			message: i$2,
@@ -4819,10 +4770,10 @@ function i(r$1, e) {
 	for (var n$1 = {}; r$1.length;) {
 		var t$1 = r$1[0], s$3 = t$1.code, i$2 = t$1.message, a$2 = t$1.path.join(".");
 		if (!n$1[a$2]) if ("invalid_union" === t$1.code && t$1.errors.length > 0) {
-			var u$1 = t$1.errors[0][0];
+			var u = t$1.errors[0][0];
 			n$1[a$2] = {
-				message: u$1.message,
-				type: u$1.code
+				message: u.message,
+				type: u.code
 			};
 		} else n$1[a$2] = {
 			message: i$2,
@@ -4840,16 +4791,16 @@ function i(r$1, e) {
 	}
 	return n$1;
 }
-function a$1(o$1, a$2, u$1) {
-	if (void 0 === u$1 && (u$1 = {}), function(r$1) {
+function a$1(o$1, a$2, u) {
+	if (void 0 === u && (u = {}), function(r$1) {
 		return "_def" in r$1 && "object" == typeof r$1._def && "typeName" in r$1._def;
 	}(o$1)) return function(n$1, i$2, c$1) {
 		try {
 			return Promise.resolve(t(function() {
-				return Promise.resolve(o$1["sync" === u$1.mode ? "parse" : "parseAsync"](n$1, a$2)).then(function(e) {
+				return Promise.resolve(o$1["sync" === u.mode ? "parse" : "parseAsync"](n$1, a$2)).then(function(e) {
 					return c$1.shouldUseNativeValidation && o({}, c$1), {
 						errors: {},
-						values: u$1.raw ? Object.assign({}, n$1) : e
+						values: u.raw ? Object.assign({}, n$1) : e
 					};
 				});
 			}, function(r$1) {
@@ -4870,10 +4821,10 @@ function a$1(o$1, a$2, u$1) {
 	}(o$1)) return function(s$3, c$1, f) {
 		try {
 			return Promise.resolve(t(function() {
-				return Promise.resolve(("sync" === u$1.mode ? parse$1 : parseAsync$1)(o$1, s$3, a$2)).then(function(e) {
+				return Promise.resolve(("sync" === u.mode ? parse$1 : parseAsync$1)(o$1, s$3, a$2)).then(function(e) {
 					return f.shouldUseNativeValidation && o({}, f), {
 						errors: {},
-						values: u$1.raw ? Object.assign({}, s$3) : e
+						values: u.raw ? Object.assign({}, s$3) : e
 					};
 				});
 			}, function(r$1) {
@@ -5753,10 +5704,10 @@ function AddLiveModal({ presenters, onSuccess, customTrigger }) {
 									/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
 										onValueChange: field.onChange,
 										defaultValue: field.value,
-										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, { placeholder: "Selecione..." }) }) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, { children: [presenters.map((p$1) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
-											value: p$1,
-											children: p$1
-										}, p$1)), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+										children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, { placeholder: "Selecione..." }) }) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, { children: [presenters.map((p) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+											value: p,
+											children: p
+										}, p)), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
 											value: "other",
 											children: "Outro (Novo)"
 										})] })]
@@ -5883,635 +5834,6 @@ function AddLiveModal({ presenters, onSuccess, customTrigger }) {
 		})]
 	});
 }
-var U = 1, Y$1 = .9, H = .8, J = .17, p = .1, u = .999, $ = .9999;
-var k$2 = .99, m = /[\\\/_+.#"@\[\(\{&]/, B$1 = /[\\\/_+.#"@\[\(\{&]/g, K$1 = /[\s-]/, X = /[\s-]/g;
-function G(_, C, h, P$1, A, f, O) {
-	if (f === C.length) return A === _.length ? U : k$2;
-	var T$1 = `${A},${f}`;
-	if (O[T$1] !== void 0) return O[T$1];
-	for (var L$1 = P$1.charAt(f), c$1 = h.indexOf(L$1, A), S = 0, E, N$1, R, M; c$1 >= 0;) E = G(_, C, h, P$1, c$1 + 1, f + 1, O), E > S && (c$1 === A ? E *= U : m.test(_.charAt(c$1 - 1)) ? (E *= H, R = _.slice(A, c$1 - 1).match(B$1), R && A > 0 && (E *= Math.pow(u, R.length))) : K$1.test(_.charAt(c$1 - 1)) ? (E *= Y$1, M = _.slice(A, c$1 - 1).match(X), M && A > 0 && (E *= Math.pow(u, M.length))) : (E *= J, A > 0 && (E *= Math.pow(u, c$1 - A))), _.charAt(c$1) !== C.charAt(f) && (E *= $)), (E < p && h.charAt(c$1 - 1) === P$1.charAt(f + 1) || P$1.charAt(f + 1) === P$1.charAt(f) && h.charAt(c$1 - 1) !== P$1.charAt(f)) && (N$1 = G(_, C, h, P$1, c$1 + 1, f + 2, O), N$1 * p > E && (E = N$1 * p)), E > S && (S = E), c$1 = h.indexOf(L$1, c$1 + 1);
-	return O[T$1] = S, S;
-}
-function D(_) {
-	return _.toLowerCase().replace(X, " ");
-}
-function W(_, C, h) {
-	return _ = h && h.length > 0 ? `${_ + " " + h.join(" ")}` : _, G(_, C, D(_), D(C), 0, 0, {});
-}
-var N = "[cmdk-group=\"\"]", Y = "[cmdk-group-items=\"\"]", be = "[cmdk-group-heading=\"\"]", le = "[cmdk-item=\"\"]", ce = `${le}:not([aria-disabled="true"])`, Z = "cmdk-item-select", T = "data-value", Re = (r$1, o$1, n$1) => W(r$1, o$1, n$1), ue = import_react.createContext(void 0), K = () => import_react.useContext(ue), de = import_react.createContext(void 0), ee = () => import_react.useContext(de), fe = import_react.createContext(void 0), me = import_react.forwardRef((r$1, o$1) => {
-	let n$1 = L(() => {
-		var e, a$2;
-		return {
-			search: "",
-			value: (a$2 = (e = r$1.value) != null ? e : r$1.defaultValue) != null ? a$2 : "",
-			selectedItemId: void 0,
-			filtered: {
-				count: 0,
-				items: /* @__PURE__ */ new Map(),
-				groups: /* @__PURE__ */ new Set()
-			}
-		};
-	}), u$1 = L(() => /* @__PURE__ */ new Set()), c$1 = L(() => /* @__PURE__ */ new Map()), d = L(() => /* @__PURE__ */ new Map()), f = L(() => /* @__PURE__ */ new Set()), p$1 = pe(r$1), { label: b, children: m$1, value: R, onValueChange: x$1, filter: C, shouldFilter: S, loop: A, disablePointerSelection: ge = !1, vimBindings: j = !0, ...O } = r$1, $$1 = useId(), q = useId(), _ = useId(), I = import_react.useRef(null), v = ke();
-	k$1(() => {
-		if (R !== void 0) {
-			let e = R.trim();
-			n$1.current.value = e, E.emit();
-		}
-	}, [R]), k$1(() => {
-		v(6, ne);
-	}, []);
-	let E = import_react.useMemo(() => ({
-		subscribe: (e) => (f.current.add(e), () => f.current.delete(e)),
-		snapshot: () => n$1.current,
-		setState: (e, a$2, s$3) => {
-			var i$2, l, g, y$1;
-			if (!Object.is(n$1.current[e], a$2)) {
-				if (n$1.current[e] = a$2, e === "search") J$1(), z(), v(1, W$1);
-				else if (e === "value") {
-					if (document.activeElement.hasAttribute("cmdk-input") || document.activeElement.hasAttribute("cmdk-root")) {
-						let h = document.getElementById(_);
-						h ? h.focus() : (i$2 = document.getElementById($$1)) == null || i$2.focus();
-					}
-					if (v(7, () => {
-						var h;
-						n$1.current.selectedItemId = (h = M()) == null ? void 0 : h.id, E.emit();
-					}), s$3 || v(5, ne), ((l = p$1.current) == null ? void 0 : l.value) !== void 0) {
-						let h = a$2 != null ? a$2 : "";
-						(y$1 = (g = p$1.current).onValueChange) == null || y$1.call(g, h);
-						return;
-					}
-				}
-				E.emit();
-			}
-		},
-		emit: () => {
-			f.current.forEach((e) => e());
-		}
-	}), []), U$1 = import_react.useMemo(() => ({
-		value: (e, a$2, s$3) => {
-			var i$2;
-			a$2 !== ((i$2 = d.current.get(e)) == null ? void 0 : i$2.value) && (d.current.set(e, {
-				value: a$2,
-				keywords: s$3
-			}), n$1.current.filtered.items.set(e, te(a$2, s$3)), v(2, () => {
-				z(), E.emit();
-			}));
-		},
-		item: (e, a$2) => (u$1.current.add(e), a$2 && (c$1.current.has(a$2) ? c$1.current.get(a$2).add(e) : c$1.current.set(a$2, new Set([e]))), v(3, () => {
-			J$1(), z(), n$1.current.value || W$1(), E.emit();
-		}), () => {
-			d.current.delete(e), u$1.current.delete(e), n$1.current.filtered.items.delete(e);
-			let s$3 = M();
-			v(4, () => {
-				J$1(), (s$3 == null ? void 0 : s$3.getAttribute("id")) === e && W$1(), E.emit();
-			});
-		}),
-		group: (e) => (c$1.current.has(e) || c$1.current.set(e, /* @__PURE__ */ new Set()), () => {
-			d.current.delete(e), c$1.current.delete(e);
-		}),
-		filter: () => p$1.current.shouldFilter,
-		label: b || r$1["aria-label"],
-		getDisablePointerSelection: () => p$1.current.disablePointerSelection,
-		listId: $$1,
-		inputId: _,
-		labelId: q,
-		listInnerRef: I
-	}), []);
-	function te(e, a$2) {
-		var i$2, l;
-		let s$3 = (l = (i$2 = p$1.current) == null ? void 0 : i$2.filter) != null ? l : Re;
-		return e ? s$3(e, n$1.current.search, a$2) : 0;
-	}
-	function z() {
-		if (!n$1.current.search || p$1.current.shouldFilter === !1) return;
-		let e = n$1.current.filtered.items, a$2 = [];
-		n$1.current.filtered.groups.forEach((i$2) => {
-			let l = c$1.current.get(i$2), g = 0;
-			l.forEach((y$1) => {
-				let h = e.get(y$1);
-				g = Math.max(h, g);
-			}), a$2.push([i$2, g]);
-		});
-		let s$3 = I.current;
-		V().sort((i$2, l) => {
-			var h, F;
-			let g = i$2.getAttribute("id"), y$1 = l.getAttribute("id");
-			return ((h = e.get(y$1)) != null ? h : 0) - ((F = e.get(g)) != null ? F : 0);
-		}).forEach((i$2) => {
-			let l = i$2.closest(Y);
-			l ? l.appendChild(i$2.parentElement === l ? i$2 : i$2.closest(`${Y} > *`)) : s$3.appendChild(i$2.parentElement === s$3 ? i$2 : i$2.closest(`${Y} > *`));
-		}), a$2.sort((i$2, l) => l[1] - i$2[1]).forEach((i$2) => {
-			var g;
-			let l = (g = I.current) == null ? void 0 : g.querySelector(`${N}[${T}="${encodeURIComponent(i$2[0])}"]`);
-			l?.parentElement.appendChild(l);
-		});
-	}
-	function W$1() {
-		let e = V().find((s$3) => s$3.getAttribute("aria-disabled") !== "true"), a$2 = e == null ? void 0 : e.getAttribute(T);
-		E.setState("value", a$2 || void 0);
-	}
-	function J$1() {
-		var a$2, s$3, i$2, l;
-		if (!n$1.current.search || p$1.current.shouldFilter === !1) {
-			n$1.current.filtered.count = u$1.current.size;
-			return;
-		}
-		n$1.current.filtered.groups = /* @__PURE__ */ new Set();
-		let e = 0;
-		for (let g of u$1.current) {
-			let F = te((s$3 = (a$2 = d.current.get(g)) == null ? void 0 : a$2.value) != null ? s$3 : "", (l = (i$2 = d.current.get(g)) == null ? void 0 : i$2.keywords) != null ? l : []);
-			n$1.current.filtered.items.set(g, F), F > 0 && e++;
-		}
-		for (let [g, y$1] of c$1.current) for (let h of y$1) if (n$1.current.filtered.items.get(h) > 0) {
-			n$1.current.filtered.groups.add(g);
-			break;
-		}
-		n$1.current.filtered.count = e;
-	}
-	function ne() {
-		var a$2, s$3, i$2;
-		let e = M();
-		e && (((a$2 = e.parentElement) == null ? void 0 : a$2.firstChild) === e && ((i$2 = (s$3 = e.closest(N)) == null ? void 0 : s$3.querySelector(be)) == null || i$2.scrollIntoView({ block: "nearest" })), e.scrollIntoView({ block: "nearest" }));
-	}
-	function M() {
-		var e;
-		return (e = I.current) == null ? void 0 : e.querySelector(`${le}[aria-selected="true"]`);
-	}
-	function V() {
-		var e;
-		return Array.from(((e = I.current) == null ? void 0 : e.querySelectorAll(ce)) || []);
-	}
-	function X$1(e) {
-		let s$3 = V()[e];
-		s$3 && E.setState("value", s$3.getAttribute(T));
-	}
-	function Q(e) {
-		var g;
-		let a$2 = M(), s$3 = V(), i$2 = s$3.findIndex((y$1) => y$1 === a$2), l = s$3[i$2 + e];
-		(g = p$1.current) != null && g.loop && (l = i$2 + e < 0 ? s$3[s$3.length - 1] : i$2 + e === s$3.length ? s$3[0] : s$3[i$2 + e]), l && E.setState("value", l.getAttribute(T));
-	}
-	function re$1(e) {
-		let a$2 = M(), s$3 = a$2 == null ? void 0 : a$2.closest(N), i$2;
-		for (; s$3 && !i$2;) s$3 = e > 0 ? we(s$3, N) : De(s$3, N), i$2 = s$3 == null ? void 0 : s$3.querySelector(ce);
-		i$2 ? E.setState("value", i$2.getAttribute(T)) : Q(e);
-	}
-	let oe = () => X$1(V().length - 1), ie = (e) => {
-		e.preventDefault(), e.metaKey ? oe() : e.altKey ? re$1(1) : Q(1);
-	}, se = (e) => {
-		e.preventDefault(), e.metaKey ? X$1(0) : e.altKey ? re$1(-1) : Q(-1);
-	};
-	return import_react.createElement(Primitive$1.div, {
-		ref: o$1,
-		tabIndex: -1,
-		...O,
-		"cmdk-root": "",
-		onKeyDown: (e) => {
-			var s$3;
-			(s$3 = O.onKeyDown) == null || s$3.call(O, e);
-			let a$2 = e.nativeEvent.isComposing || e.keyCode === 229;
-			if (!(e.defaultPrevented || a$2)) switch (e.key) {
-				case "n":
-				case "j":
-					j && e.ctrlKey && ie(e);
-					break;
-				case "ArrowDown":
-					ie(e);
-					break;
-				case "p":
-				case "k":
-					j && e.ctrlKey && se(e);
-					break;
-				case "ArrowUp":
-					se(e);
-					break;
-				case "Home":
-					e.preventDefault(), X$1(0);
-					break;
-				case "End":
-					e.preventDefault(), oe();
-					break;
-				case "Enter": {
-					e.preventDefault();
-					let i$2 = M();
-					if (i$2) {
-						let l = new Event(Z);
-						i$2.dispatchEvent(l);
-					}
-				}
-			}
-		}
-	}, import_react.createElement("label", {
-		"cmdk-label": "",
-		htmlFor: U$1.inputId,
-		id: U$1.labelId,
-		style: Te
-	}, b), B(r$1, (e) => import_react.createElement(de.Provider, { value: E }, import_react.createElement(ue.Provider, { value: U$1 }, e))));
-}), he = import_react.forwardRef((r$1, o$1) => {
-	var _, I;
-	let n$1 = useId(), u$1 = import_react.useRef(null), c$1 = import_react.useContext(fe), d = K(), f = pe(r$1), p$1 = (I = (_ = f.current) == null ? void 0 : _.forceMount) != null ? I : c$1 == null ? void 0 : c$1.forceMount;
-	k$1(() => {
-		if (!p$1) return d.item(n$1, c$1 == null ? void 0 : c$1.id);
-	}, [p$1]);
-	let b = ve(n$1, u$1, [
-		r$1.value,
-		r$1.children,
-		u$1
-	], r$1.keywords), m$1 = ee(), R = P((v) => v.value && v.value === b.current), x$1 = P((v) => p$1 || d.filter() === !1 ? !0 : v.search ? v.filtered.items.get(n$1) > 0 : !0);
-	import_react.useEffect(() => {
-		let v = u$1.current;
-		if (!(!v || r$1.disabled)) return v.addEventListener(Z, C), () => v.removeEventListener(Z, C);
-	}, [
-		x$1,
-		r$1.onSelect,
-		r$1.disabled
-	]);
-	function C() {
-		var v, E;
-		S(), (E = (v = f.current).onSelect) == null || E.call(v, b.current);
-	}
-	function S() {
-		m$1.setState("value", b.current, !0);
-	}
-	if (!x$1) return null;
-	let { disabled: A, value: ge, onSelect: j, forceMount: O, keywords: $$1, ...q } = r$1;
-	return import_react.createElement(Primitive$1.div, {
-		ref: composeRefs(u$1, o$1),
-		...q,
-		id: n$1,
-		"cmdk-item": "",
-		role: "option",
-		"aria-disabled": !!A,
-		"aria-selected": !!R,
-		"data-disabled": !!A,
-		"data-selected": !!R,
-		onPointerMove: A || d.getDisablePointerSelection() ? void 0 : S,
-		onClick: A ? void 0 : C
-	}, r$1.children);
-}), Ee = import_react.forwardRef((r$1, o$1) => {
-	let { heading: n$1, children: u$1, forceMount: c$1, ...d } = r$1, f = useId(), p$1 = import_react.useRef(null), b = import_react.useRef(null), m$1 = useId(), R = K(), x$1 = P((S) => c$1 || R.filter() === !1 ? !0 : S.search ? S.filtered.groups.has(f) : !0);
-	k$1(() => R.group(f), []), ve(f, p$1, [
-		r$1.value,
-		r$1.heading,
-		b
-	]);
-	let C = import_react.useMemo(() => ({
-		id: f,
-		forceMount: c$1
-	}), [c$1]);
-	return import_react.createElement(Primitive$1.div, {
-		ref: composeRefs(p$1, o$1),
-		...d,
-		"cmdk-group": "",
-		role: "presentation",
-		hidden: x$1 ? void 0 : !0
-	}, n$1 && import_react.createElement("div", {
-		ref: b,
-		"cmdk-group-heading": "",
-		"aria-hidden": !0,
-		id: m$1
-	}, n$1), B(r$1, (S) => import_react.createElement("div", {
-		"cmdk-group-items": "",
-		role: "group",
-		"aria-labelledby": n$1 ? m$1 : void 0
-	}, import_react.createElement(fe.Provider, { value: C }, S))));
-}), ye = import_react.forwardRef((r$1, o$1) => {
-	let { alwaysRender: n$1, ...u$1 } = r$1, c$1 = import_react.useRef(null), d = P((f) => !f.search);
-	return !n$1 && !d ? null : import_react.createElement(Primitive$1.div, {
-		ref: composeRefs(c$1, o$1),
-		...u$1,
-		"cmdk-separator": "",
-		role: "separator"
-	});
-}), Se = import_react.forwardRef((r$1, o$1) => {
-	let { onValueChange: n$1, ...u$1 } = r$1, c$1 = r$1.value != null, d = ee(), f = P((m$1) => m$1.search), p$1 = P((m$1) => m$1.selectedItemId), b = K();
-	return import_react.useEffect(() => {
-		r$1.value != null && d.setState("search", r$1.value);
-	}, [r$1.value]), import_react.createElement(Primitive$1.input, {
-		ref: o$1,
-		...u$1,
-		"cmdk-input": "",
-		autoComplete: "off",
-		autoCorrect: "off",
-		spellCheck: !1,
-		"aria-autocomplete": "list",
-		role: "combobox",
-		"aria-expanded": !0,
-		"aria-controls": b.listId,
-		"aria-labelledby": b.labelId,
-		"aria-activedescendant": p$1,
-		id: b.inputId,
-		type: "text",
-		value: c$1 ? r$1.value : f,
-		onChange: (m$1) => {
-			c$1 || d.setState("search", m$1.target.value), n$1?.(m$1.target.value);
-		}
-	});
-}), Ce = import_react.forwardRef((r$1, o$1) => {
-	let { children: n$1, label: u$1 = "Suggestions", ...c$1 } = r$1, d = import_react.useRef(null), f = import_react.useRef(null), p$1 = P((m$1) => m$1.selectedItemId), b = K();
-	return import_react.useEffect(() => {
-		if (f.current && d.current) {
-			let m$1 = f.current, R = d.current, x$1, C = new ResizeObserver(() => {
-				x$1 = requestAnimationFrame(() => {
-					let S = m$1.offsetHeight;
-					R.style.setProperty("--cmdk-list-height", S.toFixed(1) + "px");
-				});
-			});
-			return C.observe(m$1), () => {
-				cancelAnimationFrame(x$1), C.unobserve(m$1);
-			};
-		}
-	}, []), import_react.createElement(Primitive$1.div, {
-		ref: composeRefs(d, o$1),
-		...c$1,
-		"cmdk-list": "",
-		role: "listbox",
-		tabIndex: -1,
-		"aria-activedescendant": p$1,
-		"aria-label": u$1,
-		id: b.listId
-	}, B(r$1, (m$1) => import_react.createElement("div", {
-		ref: composeRefs(f, b.listInnerRef),
-		"cmdk-list-sizer": ""
-	}, m$1)));
-}), xe = import_react.forwardRef((r$1, o$1) => {
-	let { open: n$1, onOpenChange: u$1, overlayClassName: c$1, contentClassName: d, container: f, ...p$1 } = r$1;
-	return import_react.createElement(Root$1, {
-		open: n$1,
-		onOpenChange: u$1
-	}, import_react.createElement(Portal, { container: f }, import_react.createElement(Overlay, {
-		"cmdk-overlay": "",
-		className: c$1
-	}), import_react.createElement(Content, {
-		"aria-label": r$1.label,
-		"cmdk-dialog": "",
-		className: d
-	}, import_react.createElement(me, {
-		ref: o$1,
-		...p$1
-	}))));
-}), Ie = import_react.forwardRef((r$1, o$1) => P((u$1) => u$1.filtered.count === 0) ? import_react.createElement(Primitive$1.div, {
-	ref: o$1,
-	...r$1,
-	"cmdk-empty": "",
-	role: "presentation"
-}) : null), Pe = import_react.forwardRef((r$1, o$1) => {
-	let { progress: n$1, children: u$1, label: c$1 = "Loading...", ...d } = r$1;
-	return import_react.createElement(Primitive$1.div, {
-		ref: o$1,
-		...d,
-		"cmdk-loading": "",
-		role: "progressbar",
-		"aria-valuenow": n$1,
-		"aria-valuemin": 0,
-		"aria-valuemax": 100,
-		"aria-label": c$1
-	}, B(r$1, (f) => import_react.createElement("div", { "aria-hidden": !0 }, f)));
-}), _e = Object.assign(me, {
-	List: Ce,
-	Item: he,
-	Input: Se,
-	Group: Ee,
-	Separator: ye,
-	Dialog: xe,
-	Empty: Ie,
-	Loading: Pe
-});
-function we(r$1, o$1) {
-	let n$1 = r$1.nextElementSibling;
-	for (; n$1;) {
-		if (n$1.matches(o$1)) return n$1;
-		n$1 = n$1.nextElementSibling;
-	}
-}
-function De(r$1, o$1) {
-	let n$1 = r$1.previousElementSibling;
-	for (; n$1;) {
-		if (n$1.matches(o$1)) return n$1;
-		n$1 = n$1.previousElementSibling;
-	}
-}
-function pe(r$1) {
-	let o$1 = import_react.useRef(r$1);
-	return k$1(() => {
-		o$1.current = r$1;
-	}), o$1;
-}
-var k$1 = typeof window == "undefined" ? import_react.useEffect : import_react.useLayoutEffect;
-function L(r$1) {
-	let o$1 = import_react.useRef();
-	return o$1.current === void 0 && (o$1.current = r$1()), o$1;
-}
-function P(r$1) {
-	let o$1 = ee(), n$1 = () => r$1(o$1.snapshot());
-	return import_react.useSyncExternalStore(o$1.subscribe, n$1, n$1);
-}
-function ve(r$1, o$1, n$1, u$1 = []) {
-	let c$1 = import_react.useRef(), d = K();
-	return k$1(() => {
-		var b;
-		let f = (() => {
-			var m$1;
-			for (let R of n$1) {
-				if (typeof R == "string") return R.trim();
-				if (typeof R == "object" && "current" in R) return R.current ? (m$1 = R.current.textContent) == null ? void 0 : m$1.trim() : c$1.current;
-			}
-		})(), p$1 = u$1.map((m$1) => m$1.trim());
-		d.value(r$1, f, p$1), (b = o$1.current) == null || b.setAttribute(T, f), c$1.current = f;
-	}), c$1;
-}
-var ke = () => {
-	let [r$1, o$1] = import_react.useState(), n$1 = L(() => /* @__PURE__ */ new Map());
-	return k$1(() => {
-		n$1.current.forEach((u$1) => u$1()), n$1.current = /* @__PURE__ */ new Map();
-	}, [r$1]), (u$1, c$1) => {
-		n$1.current.set(u$1, c$1), o$1({});
-	};
-};
-function Me(r$1) {
-	let o$1 = r$1.type;
-	return typeof o$1 == "function" ? o$1(r$1.props) : "render" in o$1 ? o$1.render(r$1.props) : r$1;
-}
-function B({ asChild: r$1, children: o$1 }, n$1) {
-	return r$1 && import_react.isValidElement(o$1) ? import_react.cloneElement(Me(o$1), { ref: o$1.ref }, n$1(o$1.props.children)) : n$1(o$1);
-}
-var Te = {
-	position: "absolute",
-	width: "1px",
-	height: "1px",
-	padding: "0",
-	margin: "-1px",
-	overflow: "hidden",
-	clip: "rect(0, 0, 0, 0)",
-	whiteSpace: "nowrap",
-	borderWidth: "0"
-};
-var Command = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(_e, {
-	ref,
-	className: cn("flex h-full w-full flex-col overflow-hidden rounded-md bg-popover text-popover-foreground", className),
-	...props
-}));
-Command.displayName = _e.displayName;
-var CommandInput = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-	className: "flex items-center border-b px-3",
-	"cmdk-input-wrapper": "",
-	children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, { className: "mr-2 h-4 w-4 shrink-0 opacity-50" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(_e.Input, {
-		ref,
-		className: cn("flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50", className),
-		...props
-	})]
-}));
-CommandInput.displayName = _e.Input.displayName;
-var CommandList = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(_e.List, {
-	ref,
-	className: cn("max-h-[300px] overflow-y-auto overflow-x-hidden", className),
-	...props
-}));
-CommandList.displayName = _e.List.displayName;
-var CommandEmpty = import_react.forwardRef((props, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(_e.Empty, {
-	ref,
-	className: "py-6 text-center text-sm",
-	...props
-}));
-CommandEmpty.displayName = _e.Empty.displayName;
-var CommandGroup = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(_e.Group, {
-	ref,
-	className: cn("overflow-hidden p-1 text-foreground [&_[cmdk-group-heading]]:px-2 [&_[cmdk-group-heading]]:py-1.5 [&_[cmdk-group-heading]]:text-xs [&_[cmdk-group-heading]]:font-medium [&_[cmdk-group-heading]]:text-muted-foreground", className),
-	...props
-}));
-CommandGroup.displayName = _e.Group.displayName;
-var CommandSeparator = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(_e.Separator, {
-	ref,
-	className: cn("-mx-1 h-px bg-border", className),
-	...props
-}));
-CommandSeparator.displayName = _e.Separator.displayName;
-var CommandItem = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(_e.Item, {
-	ref,
-	className: cn("relative flex cursor-default gap-2 select-none items-center rounded-sm px-2 py-1.5 text-sm outline-none data-[disabled=true]:pointer-events-none data-[selected='true']:bg-accent data-[selected=true]:text-accent-foreground data-[disabled=true]:opacity-50 [&_svg]:pointer-events-none [&_svg]:size-4 [&_svg]:shrink-0", className),
-	...props
-}));
-CommandItem.displayName = _e.Item.displayName;
-var CommandShortcut = ({ className, ...props }) => {
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-		className: cn("ml-auto text-xs tracking-widest text-muted-foreground", className),
-		...props
-	});
-};
-CommandShortcut.displayName = "CommandShortcut";
-var SWITCH_NAME = "Switch";
-var [createSwitchContext, createSwitchScope] = createContextScope(SWITCH_NAME);
-var [SwitchProvider, useSwitchContext] = createSwitchContext(SWITCH_NAME);
-var Switch$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSwitch, name, checked: checkedProp, defaultChecked, required: required$1, disabled, value = "on", onCheckedChange, form, ...switchProps } = props;
-	const [button, setButton] = import_react.useState(null);
-	const composedRefs = useComposedRefs(forwardedRef, (node) => setButton(node));
-	const hasConsumerStoppedPropagationRef = import_react.useRef(false);
-	const isFormControl = button ? form || !!button.closest("form") : true;
-	const [checked, setChecked] = useControllableState({
-		prop: checkedProp,
-		defaultProp: defaultChecked ?? false,
-		onChange: onCheckedChange,
-		caller: SWITCH_NAME
-	});
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SwitchProvider, {
-		scope: __scopeSwitch,
-		checked,
-		disabled,
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.button, {
-			type: "button",
-			role: "switch",
-			"aria-checked": checked,
-			"aria-required": required$1,
-			"data-state": getState(checked),
-			"data-disabled": disabled ? "" : void 0,
-			disabled,
-			value,
-			...switchProps,
-			ref: composedRefs,
-			onClick: composeEventHandlers(props.onClick, (event) => {
-				setChecked((prevChecked) => !prevChecked);
-				if (isFormControl) {
-					hasConsumerStoppedPropagationRef.current = event.isPropagationStopped();
-					if (!hasConsumerStoppedPropagationRef.current) event.stopPropagation();
-				}
-			})
-		}), isFormControl && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SwitchBubbleInput, {
-			control: button,
-			bubbles: !hasConsumerStoppedPropagationRef.current,
-			name,
-			value,
-			checked,
-			required: required$1,
-			disabled,
-			form,
-			style: { transform: "translateX(-100%)" }
-		})]
-	});
-});
-Switch$1.displayName = SWITCH_NAME;
-var THUMB_NAME = "SwitchThumb";
-var SwitchThumb = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeSwitch, ...thumbProps } = props;
-	const context = useSwitchContext(THUMB_NAME, __scopeSwitch);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
-		"data-state": getState(context.checked),
-		"data-disabled": context.disabled ? "" : void 0,
-		...thumbProps,
-		ref: forwardedRef
-	});
-});
-SwitchThumb.displayName = THUMB_NAME;
-var BUBBLE_INPUT_NAME = "SwitchBubbleInput";
-var SwitchBubbleInput = import_react.forwardRef(({ __scopeSwitch, control, checked, bubbles = true, ...props }, forwardedRef) => {
-	const ref = import_react.useRef(null);
-	const composedRefs = useComposedRefs(ref, forwardedRef);
-	const prevChecked = usePrevious(checked);
-	const controlSize = useSize(control);
-	import_react.useEffect(() => {
-		const input = ref.current;
-		if (!input) return;
-		const inputProto = window.HTMLInputElement.prototype;
-		const setChecked = Object.getOwnPropertyDescriptor(inputProto, "checked").set;
-		if (prevChecked !== checked && setChecked) {
-			const event = new Event("click", { bubbles });
-			setChecked.call(input, checked);
-			input.dispatchEvent(event);
-		}
-	}, [
-		prevChecked,
-		checked,
-		bubbles
-	]);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
-		type: "checkbox",
-		"aria-hidden": true,
-		defaultChecked: checked,
-		...props,
-		tabIndex: -1,
-		ref: composedRefs,
-		style: {
-			...props.style,
-			...controlSize,
-			position: "absolute",
-			pointerEvents: "none",
-			opacity: 0,
-			margin: 0
-		}
-	});
-});
-SwitchBubbleInput.displayName = BUBBLE_INPUT_NAME;
-function getState(checked) {
-	return checked ? "checked" : "unchecked";
-}
-var Root = Switch$1;
-var Thumb = SwitchThumb;
-var Switch = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
-	className: cn("peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-primary data-[state=unchecked]:bg-input", className),
-	...props,
-	ref,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Thumb, { className: cn("pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-transform data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0") })
-}));
-Switch.displayName = Root.displayName;
 var WEEKDAYS = [
 	{
 		label: "Seg",
@@ -6612,7 +5934,7 @@ function LiveFilters({ presenters, onApply, onClear, loading, initialFilters }) 
 		onClear();
 	};
 	const togglePresenter = (presenter) => {
-		setSelectedPresenters((prev) => prev.includes(presenter) ? prev.filter((p$1) => p$1 !== presenter) : [...prev, presenter]);
+		setSelectedPresenters((prev) => prev.includes(presenter) ? prev.filter((p) => p !== presenter) : [...prev, presenter]);
 	};
 	const toggleWeekday = (value) => {
 		setSelectedWeekdays((prev) => prev.includes(value) ? prev.filter((d) => d !== value) : [...prev, value]);
@@ -7537,7 +6859,7 @@ var require_react_is_development$1 = /* @__PURE__ */ __commonJSMin(((exports) =>
 		var Fragment = REACT_FRAGMENT_TYPE;
 		var Lazy = REACT_LAZY_TYPE;
 		var Memo = REACT_MEMO_TYPE;
-		var Portal$1 = REACT_PORTAL_TYPE;
+		var Portal = REACT_PORTAL_TYPE;
 		var Profiler = REACT_PROFILER_TYPE;
 		var StrictMode = REACT_STRICT_MODE_TYPE;
 		var Suspense = REACT_SUSPENSE_TYPE;
@@ -7601,7 +6923,7 @@ var require_react_is_development$1 = /* @__PURE__ */ __commonJSMin(((exports) =>
 		exports.Fragment = Fragment;
 		exports.Lazy = Lazy;
 		exports.Memo = Memo;
-		exports.Portal = Portal$1;
+		exports.Portal = Portal;
 		exports.Profiler = Profiler;
 		exports.StrictMode = StrictMode;
 		exports.Suspense = Suspense;
@@ -8700,10 +8022,10 @@ function appendRound(digits) {
 	let d = Math.floor(digits);
 	if (!(d >= 0)) throw new Error(`invalid digits: ${digits}`);
 	if (d > 15) return append;
-	const k$3 = 10 ** d;
+	const k$1 = 10 ** d;
 	return function(strings) {
 		this._ += strings[0];
-		for (let i$2 = 1, n$1 = strings.length; i$2 < n$1; ++i$2) this._ += Math.round(arguments[i$2] * k$3) / k$3 + strings[i$2];
+		for (let i$2 = 1, n$1 = strings.length; i$2 < n$1; ++i$2) this._ += Math.round(arguments[i$2] * k$1) / k$1 + strings[i$2];
 	};
 }
 var Path = class {
@@ -8817,11 +8139,11 @@ Linear.prototype = {
 function linear_default(context) {
 	return new Linear(context);
 }
-function x(p$1) {
-	return p$1[0];
+function x(p) {
+	return p[0];
 }
-function y(p$1) {
-	return p$1[1];
+function y(p) {
+	return p[1];
 }
 function line_default(x$1, y$1) {
 	var defined$1 = constant_default$1(true), context = null, curve = linear_default, output = null, path$1 = withPath(line);
@@ -8860,7 +8182,7 @@ function area_default(x0, y0, y1) {
 	y0 = typeof y0 === "function" ? y0 : y0 === void 0 ? constant_default$1(0) : constant_default$1(+y0);
 	y1 = typeof y1 === "function" ? y1 : y1 === void 0 ? y : constant_default$1(+y1);
 	function area(data) {
-		var i$2, j, k$3, n$1 = (data = array_default(data)).length, d, defined0 = false, buffer, x0z = new Array(n$1), y0z = new Array(n$1);
+		var i$2, j, k$1, n$1 = (data = array_default(data)).length, d, defined0 = false, buffer, x0z = new Array(n$1), y0z = new Array(n$1);
 		if (context == null) output = curve(buffer = path$1());
 		for (i$2 = 0; i$2 <= n$1; ++i$2) {
 			if (!(i$2 < n$1 && defined$1(d = data[i$2], i$2, data)) === defined0) if (defined0 = !defined0) {
@@ -8870,7 +8192,7 @@ function area_default(x0, y0, y1) {
 			} else {
 				output.lineEnd();
 				output.lineStart();
-				for (k$3 = i$2 - 1; k$3 >= j; --k$3) output.point(x0z[k$3], y0z[k$3]);
+				for (k$1 = i$2 - 1; k$1 >= j; --k$1) output.point(x0z[k$1], y0z[k$1]);
 				output.lineEnd();
 				output.areaEnd();
 			}
@@ -9244,8 +8566,8 @@ function sign(x$1) {
 	return x$1 < 0 ? -1 : 1;
 }
 function slope3(that, x2, y2) {
-	var h0 = that._x1 - that._x0, h1 = x2 - that._x1, s0 = (that._y1 - that._y0) / (h0 || h1 < 0 && -0), s1 = (y2 - that._y1) / (h1 || h0 < 0 && -0), p$1 = (s0 * h1 + s1 * h0) / (h0 + h1);
-	return (sign(s0) + sign(s1)) * Math.min(Math.abs(s0), Math.abs(s1), .5 * Math.abs(p$1)) || 0;
+	var h0 = that._x1 - that._x0, h1 = x2 - that._x1, s0 = (that._y1 - that._y0) / (h0 || h1 < 0 && -0), s1 = (y2 - that._y1) / (h1 || h0 < 0 && -0), p = (s0 * h1 + s1 * h0) / (h0 + h1);
+	return (sign(s0) + sign(s1)) * Math.min(Math.abs(s0), Math.abs(s1), .5 * Math.abs(p)) || 0;
 }
 function slope2(that, t$1) {
 	var h = that._x1 - that._x0;
@@ -9369,11 +8691,11 @@ Natural.prototype = {
 	}
 };
 function controlPoints(x$1) {
-	var i$2, n$1 = x$1.length - 1, m$1, a$2 = new Array(n$1), b = new Array(n$1), r$1 = new Array(n$1);
+	var i$2, n$1 = x$1.length - 1, m, a$2 = new Array(n$1), b = new Array(n$1), r$1 = new Array(n$1);
 	a$2[0] = 0, b[0] = 2, r$1[0] = x$1[0] + 2 * x$1[1];
 	for (i$2 = 1; i$2 < n$1 - 1; ++i$2) a$2[i$2] = 1, b[i$2] = 4, r$1[i$2] = 4 * x$1[i$2] + 2 * x$1[i$2 + 1];
 	a$2[n$1 - 1] = 2, b[n$1 - 1] = 7, r$1[n$1 - 1] = 8 * x$1[n$1 - 1] + x$1[n$1];
-	for (i$2 = 1; i$2 < n$1; ++i$2) m$1 = a$2[i$2] / b[i$2 - 1], b[i$2] -= m$1, r$1[i$2] -= m$1 * r$1[i$2 - 1];
+	for (i$2 = 1; i$2 < n$1; ++i$2) m = a$2[i$2] / b[i$2 - 1], b[i$2] -= m, r$1[i$2] -= m * r$1[i$2 - 1];
 	a$2[n$1 - 1] = r$1[n$1 - 1] / b[n$1 - 1];
 	for (i$2 = n$1 - 2; i$2 >= 0; --i$2) a$2[i$2] = (r$1[i$2] - a$2[i$2 + 1]) / b[i$2];
 	b[n$1 - 1] = (x$1[n$1] + a$2[n$1 - 1]) / 2;
@@ -9436,9 +8758,9 @@ function stepAfter(context) {
 }
 function none_default(series, order) {
 	if (!((n$1 = series.length) > 1)) return;
-	for (var i$2 = 1, j, s0, s1 = series[order[0]], n$1, m$1 = s1.length; i$2 < n$1; ++i$2) {
+	for (var i$2 = 1, j, s0, s1 = series[order[0]], n$1, m = s1.length; i$2 < n$1; ++i$2) {
 		s0 = s1, s1 = series[order[i$2]];
-		for (j = 0; j < m$1; ++j) s1[j][1] += s1[j][0] = isNaN(s0[j][1]) ? s0[j][0] : s0[j][1];
+		for (j = 0; j < m; ++j) s1[j][1] += s1[j][0] = isNaN(s0[j][1]) ? s0[j][0] : s0[j][1];
 	}
 }
 function none_default$1(series) {
@@ -9479,7 +8801,7 @@ function stack_default() {
 }
 function expand_default(series, order) {
 	if (!((n$1 = series.length) > 0)) return;
-	for (var i$2, n$1, j = 0, m$1 = series[0].length, y$1; j < m$1; ++j) {
+	for (var i$2, n$1, j = 0, m = series[0].length, y$1; j < m; ++j) {
 		for (y$1 = i$2 = 0; i$2 < n$1; ++i$2) y$1 += series[i$2][j][1] || 0;
 		if (y$1) for (i$2 = 0; i$2 < n$1; ++i$2) series[i$2][j][1] /= y$1;
 	}
@@ -9487,19 +8809,19 @@ function expand_default(series, order) {
 }
 function silhouette_default(series, order) {
 	if (!((n$1 = series.length) > 0)) return;
-	for (var j = 0, s0 = series[order[0]], n$1, m$1 = s0.length; j < m$1; ++j) {
+	for (var j = 0, s0 = series[order[0]], n$1, m = s0.length; j < m; ++j) {
 		for (var i$2 = 0, y$1 = 0; i$2 < n$1; ++i$2) y$1 += series[i$2][j][1] || 0;
 		s0[j][1] += s0[j][0] = -y$1 / 2;
 	}
 	none_default(series, order);
 }
 function wiggle_default(series, order) {
-	if (!((n$1 = series.length) > 0) || !((m$1 = (s0 = series[order[0]]).length) > 0)) return;
-	for (var y$1 = 0, j = 1, s0, m$1, n$1; j < m$1; ++j) {
+	if (!((n$1 = series.length) > 0) || !((m = (s0 = series[order[0]]).length) > 0)) return;
+	for (var y$1 = 0, j = 1, s0, m, n$1; j < m; ++j) {
 		for (var i$2 = 0, s1 = 0, s2 = 0; i$2 < n$1; ++i$2) {
 			var si = series[order[i$2]], sij0 = si[j][1] || 0, s3 = (sij0 - (si[j - 1][1] || 0)) / 2;
-			for (var k$3 = 0; k$3 < i$2; ++k$3) {
-				var sk = series[order[k$3]], skj0 = sk[j][1] || 0, skj1 = sk[j - 1][1] || 0;
+			for (var k$1 = 0; k$1 < i$2; ++k$1) {
+				var sk = series[order[k$1]], skj0 = sk[j][1] || 0, skj1 = sk[j - 1][1] || 0;
 				s3 += skj0 - skj1;
 			}
 			s1 += sij0, s2 += s3 * sij0;
@@ -9749,12 +9071,12 @@ function _inherits$16(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$16(subClass, superClass);
 }
-function _setPrototypeOf$16(o$1, p$1) {
-	_setPrototypeOf$16 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$16(o$1, p) {
+	_setPrototypeOf$16 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$16(o$1, p$1);
+	return _setPrototypeOf$16(o$1, p);
 }
 function _defineProperty$40(obj, key, value) {
 	key = _toPropertyKey$41(key);
@@ -10750,12 +10072,12 @@ function _inherits$15(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$15(subClass, superClass);
 }
-function _setPrototypeOf$15(o$1, p$1) {
-	_setPrototypeOf$15 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$15(o$1, p) {
+	_setPrototypeOf$15 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$15(o$1, p$1);
+	return _setPrototypeOf$15(o$1, p);
 }
 function _defineProperty$39(obj, key, value) {
 	key = _toPropertyKey$40(key);
@@ -11221,7 +10543,7 @@ function _arrayLikeToArray$19(arr, len) {
 function _iterableToArrayLimit$11(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -11231,7 +10553,7 @@ function _iterableToArrayLimit$11(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1["return"] && (u$1 = t$1["return"](), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1["return"] && (u = t$1["return"](), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -11537,12 +10859,12 @@ function _inherits$14(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$14(subClass, superClass);
 }
-function _setPrototypeOf$14(o$1, p$1) {
-	_setPrototypeOf$14 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$14(o$1, p) {
+	_setPrototypeOf$14 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$14(o$1, p$1);
+	return _setPrototypeOf$14(o$1, p);
 }
 function _defineProperty$36(obj, key, value) {
 	key = _toPropertyKey$37(key);
@@ -11685,8 +11007,8 @@ var Global = {
 		if (typeof key === "string") Global[key] = value;
 		else {
 			var keys$6 = Object.keys(key);
-			if (keys$6 && keys$6.length) keys$6.forEach(function(k$3) {
-				Global[k$3] = key[k$3];
+			if (keys$6 && keys$6.length) keys$6.forEach(function(k$1) {
+				Global[k$1] = key[k$1];
 			});
 		}
 	}
@@ -11774,12 +11096,12 @@ function _inherits$13(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$13(subClass, superClass);
 }
-function _setPrototypeOf$13(o$1, p$1) {
-	_setPrototypeOf$13 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$13(o$1, p) {
+	_setPrototypeOf$13 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$13(o$1, p$1);
+	return _setPrototypeOf$13(o$1, p);
 }
 function _defineProperty$35(obj, key, value) {
 	key = _toPropertyKey$36(key);
@@ -12099,7 +11421,7 @@ function _arrayLikeToArray$18(arr, len) {
 function _iterableToArrayLimit$10(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -12109,7 +11431,7 @@ function _iterableToArrayLimit$10(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1["return"] && (u$1 = t$1["return"](), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1["return"] && (u = t$1["return"](), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -12377,7 +11699,7 @@ function _arrayLikeToArray$17(arr, len) {
 function _iterableToArrayLimit$9(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -12387,7 +11709,7 @@ function _iterableToArrayLimit$9(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1["return"] && (u$1 = t$1["return"](), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1["return"] && (u = t$1["return"](), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -12639,7 +11961,7 @@ function _arrayLikeToArray$16(arr, len) {
 function _iterableToArrayLimit$8(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -12649,7 +11971,7 @@ function _iterableToArrayLimit$8(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1["return"] && (u$1 = t$1["return"](), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1["return"] && (u = t$1["return"](), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -13011,27 +12333,27 @@ function min$2(values, valueof) {
 	}
 	return min$3;
 }
-function quickselect(array$1, k$3, left = 0, right = Infinity, compare) {
-	k$3 = Math.floor(k$3);
+function quickselect(array$1, k$1, left = 0, right = Infinity, compare) {
+	k$1 = Math.floor(k$1);
 	left = Math.floor(Math.max(0, left));
 	right = Math.floor(Math.min(array$1.length - 1, right));
-	if (!(left <= k$3 && k$3 <= right)) return array$1;
+	if (!(left <= k$1 && k$1 <= right)) return array$1;
 	compare = compare === void 0 ? ascendingDefined : compareDefined(compare);
 	while (right > left) {
 		if (right - left > 600) {
 			const n$1 = right - left + 1;
-			const m$1 = k$3 - left + 1;
+			const m = k$1 - left + 1;
 			const z = Math.log(n$1);
 			const s$3 = .5 * Math.exp(2 * z / 3);
-			const sd = .5 * Math.sqrt(z * s$3 * (n$1 - s$3) / n$1) * (m$1 - n$1 / 2 < 0 ? -1 : 1);
-			const newLeft = Math.max(left, Math.floor(k$3 - m$1 * s$3 / n$1 + sd));
-			const newRight = Math.min(right, Math.floor(k$3 + (n$1 - m$1) * s$3 / n$1 + sd));
-			quickselect(array$1, k$3, newLeft, newRight, compare);
+			const sd = .5 * Math.sqrt(z * s$3 * (n$1 - s$3) / n$1) * (m - n$1 / 2 < 0 ? -1 : 1);
+			const newLeft = Math.max(left, Math.floor(k$1 - m * s$3 / n$1 + sd));
+			const newRight = Math.min(right, Math.floor(k$1 + (n$1 - m) * s$3 / n$1 + sd));
+			quickselect(array$1, k$1, newLeft, newRight, compare);
 		}
-		const t$1 = array$1[k$3];
+		const t$1 = array$1[k$1];
 		let i$2 = left;
 		let j = right;
-		swap(array$1, left, k$3);
+		swap(array$1, left, k$1);
 		if (compare(array$1[right], t$1) > 0) swap(array$1, left, right);
 		while (i$2 < j) {
 			swap(array$1, i$2, j), ++i$2, --j;
@@ -13040,8 +12362,8 @@ function quickselect(array$1, k$3, left = 0, right = Infinity, compare) {
 		}
 		if (compare(array$1[left], t$1) === 0) swap(array$1, left, j);
 		else ++j, swap(array$1, j, right);
-		if (j <= k$3) left = j + 1;
-		if (k$3 <= j) right = j - 1;
+		if (j <= k$1) left = j + 1;
+		if (k$1 <= j) right = j - 1;
 	}
 	return array$1;
 }
@@ -13050,19 +12372,19 @@ function swap(array$1, i$2, j) {
 	array$1[i$2] = array$1[j];
 	array$1[j] = t$1;
 }
-function quantile(values, p$1, valueof) {
+function quantile(values, p, valueof) {
 	values = Float64Array.from(numbers(values, valueof));
-	if (!(n$1 = values.length) || isNaN(p$1 = +p$1)) return;
-	if (p$1 <= 0 || n$1 < 2) return min$2(values);
-	if (p$1 >= 1) return max$3(values);
-	var n$1, i$2 = (n$1 - 1) * p$1, i0 = Math.floor(i$2), value0 = max$3(quickselect(values, i0).subarray(0, i0 + 1));
+	if (!(n$1 = values.length) || isNaN(p = +p)) return;
+	if (p <= 0 || n$1 < 2) return min$2(values);
+	if (p >= 1) return max$3(values);
+	var n$1, i$2 = (n$1 - 1) * p, i0 = Math.floor(i$2), value0 = max$3(quickselect(values, i0).subarray(0, i0 + 1));
 	return value0 + (min$2(values.subarray(i0 + 1)) - value0) * (i$2 - i0);
 }
-function quantileSorted(values, p$1, valueof = number$2) {
-	if (!(n$1 = values.length) || isNaN(p$1 = +p$1)) return;
-	if (p$1 <= 0 || n$1 < 2) return +valueof(values[0], 0, values);
-	if (p$1 >= 1) return +valueof(values[n$1 - 1], n$1 - 1, values);
-	var n$1, i$2 = (n$1 - 1) * p$1, i0 = Math.floor(i$2), value0 = +valueof(values[i0], i0, values);
+function quantileSorted(values, p, valueof = number$2) {
+	if (!(n$1 = values.length) || isNaN(p = +p)) return;
+	if (p <= 0 || n$1 < 2) return +valueof(values[0], 0, values);
+	if (p >= 1) return +valueof(values[n$1 - 1], n$1 - 1, values);
+	var n$1, i$2 = (n$1 - 1) * p, i0 = Math.floor(i$2), value0 = +valueof(values[i0], i0, values);
 	return value0 + (+valueof(values[i0 + 1], i0 + 1, values) - value0) * (i$2 - i0);
 }
 function range$4(start, stop, step) {
@@ -13383,9 +12705,9 @@ function color_formatRgb() {
 	return this.rgb().formatRgb();
 }
 function color(format$2) {
-	var m$1, l;
+	var m, l;
 	format$2 = (format$2 + "").trim().toLowerCase();
-	return (m$1 = reHex.exec(format$2)) ? (l = m$1[1].length, m$1 = parseInt(m$1[1], 16), l === 6 ? rgbn(m$1) : l === 3 ? new Rgb(m$1 >> 8 & 15 | m$1 >> 4 & 240, m$1 >> 4 & 15 | m$1 & 240, (m$1 & 15) << 4 | m$1 & 15, 1) : l === 8 ? rgba(m$1 >> 24 & 255, m$1 >> 16 & 255, m$1 >> 8 & 255, (m$1 & 255) / 255) : l === 4 ? rgba(m$1 >> 12 & 15 | m$1 >> 8 & 240, m$1 >> 8 & 15 | m$1 >> 4 & 240, m$1 >> 4 & 15 | m$1 & 240, ((m$1 & 15) << 4 | m$1 & 15) / 255) : null) : (m$1 = reRgbInteger.exec(format$2)) ? new Rgb(m$1[1], m$1[2], m$1[3], 1) : (m$1 = reRgbPercent.exec(format$2)) ? new Rgb(m$1[1] * 255 / 100, m$1[2] * 255 / 100, m$1[3] * 255 / 100, 1) : (m$1 = reRgbaInteger.exec(format$2)) ? rgba(m$1[1], m$1[2], m$1[3], m$1[4]) : (m$1 = reRgbaPercent.exec(format$2)) ? rgba(m$1[1] * 255 / 100, m$1[2] * 255 / 100, m$1[3] * 255 / 100, m$1[4]) : (m$1 = reHslPercent.exec(format$2)) ? hsla(m$1[1], m$1[2] / 100, m$1[3] / 100, 1) : (m$1 = reHslaPercent.exec(format$2)) ? hsla(m$1[1], m$1[2] / 100, m$1[3] / 100, m$1[4]) : named.hasOwnProperty(format$2) ? rgbn(named[format$2]) : format$2 === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
+	return (m = reHex.exec(format$2)) ? (l = m[1].length, m = parseInt(m[1], 16), l === 6 ? rgbn(m) : l === 3 ? new Rgb(m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, (m & 15) << 4 | m & 15, 1) : l === 8 ? rgba(m >> 24 & 255, m >> 16 & 255, m >> 8 & 255, (m & 255) / 255) : l === 4 ? rgba(m >> 12 & 15 | m >> 8 & 240, m >> 8 & 15 | m >> 4 & 240, m >> 4 & 15 | m & 240, ((m & 15) << 4 | m & 15) / 255) : null) : (m = reRgbInteger.exec(format$2)) ? new Rgb(m[1], m[2], m[3], 1) : (m = reRgbPercent.exec(format$2)) ? new Rgb(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, 1) : (m = reRgbaInteger.exec(format$2)) ? rgba(m[1], m[2], m[3], m[4]) : (m = reRgbaPercent.exec(format$2)) ? rgba(m[1] * 255 / 100, m[2] * 255 / 100, m[3] * 255 / 100, m[4]) : (m = reHslPercent.exec(format$2)) ? hsla(m[1], m[2] / 100, m[3] / 100, 1) : (m = reHslaPercent.exec(format$2)) ? hsla(m[1], m[2] / 100, m[3] / 100, m[4]) : named.hasOwnProperty(format$2) ? rgbn(named[format$2]) : format$2 === "transparent" ? new Rgb(NaN, NaN, NaN, 0) : null;
 }
 function rgbn(n$1) {
 	return new Rgb(n$1 >> 16 & 255, n$1 >> 8 & 255, n$1 & 255, 1);
@@ -13410,13 +12732,13 @@ function Rgb(r$1, g, b, opacity) {
 	this.opacity = +opacity;
 }
 define_default(Rgb, rgb, extend(Color, {
-	brighter(k$3) {
-		k$3 = k$3 == null ? brighter : Math.pow(brighter, k$3);
-		return new Rgb(this.r * k$3, this.g * k$3, this.b * k$3, this.opacity);
+	brighter(k$1) {
+		k$1 = k$1 == null ? brighter : Math.pow(brighter, k$1);
+		return new Rgb(this.r * k$1, this.g * k$1, this.b * k$1, this.opacity);
 	},
-	darker(k$3) {
-		k$3 = k$3 == null ? darker : Math.pow(darker, k$3);
-		return new Rgb(this.r * k$3, this.g * k$3, this.b * k$3, this.opacity);
+	darker(k$1) {
+		k$1 = k$1 == null ? darker : Math.pow(darker, k$1);
+		return new Rgb(this.r * k$1, this.g * k$1, this.b * k$1, this.opacity);
 	},
 	rgb() {
 		return this;
@@ -13485,13 +12807,13 @@ function Hsl(h, s$3, l, opacity) {
 	this.opacity = +opacity;
 }
 define_default(Hsl, hsl, extend(Color, {
-	brighter(k$3) {
-		k$3 = k$3 == null ? brighter : Math.pow(brighter, k$3);
-		return new Hsl(this.h, this.s, this.l * k$3, this.opacity);
+	brighter(k$1) {
+		k$1 = k$1 == null ? brighter : Math.pow(brighter, k$1);
+		return new Hsl(this.h, this.s, this.l * k$1, this.opacity);
 	},
-	darker(k$3) {
-		k$3 = k$3 == null ? darker : Math.pow(darker, k$3);
-		return new Hsl(this.h, this.s, this.l * k$3, this.opacity);
+	darker(k$1) {
+		k$1 = k$1 == null ? darker : Math.pow(darker, k$1);
+		return new Hsl(this.h, this.s, this.l * k$1, this.opacity);
 	},
 	rgb() {
 		var h = this.h % 360 + (this.h < 0) * 360, s$3 = isNaN(h) || isNaN(this.s) ? 0 : this.s, l = this.l, m2 = l + (l < .5 ? l : 1 - l) * s$3, m1 = 2 * l - m2;
@@ -13626,13 +12948,13 @@ function number_default(a$2, b) {
 	};
 }
 function object_default(a$2, b) {
-	var i$2 = {}, c$1 = {}, k$3;
+	var i$2 = {}, c$1 = {}, k$1;
 	if (a$2 === null || typeof a$2 !== "object") a$2 = {};
 	if (b === null || typeof b !== "object") b = {};
-	for (k$3 in b) if (k$3 in a$2) i$2[k$3] = value_default(a$2[k$3], b[k$3]);
-	else c$1[k$3] = b[k$3];
+	for (k$1 in b) if (k$1 in a$2) i$2[k$1] = value_default(a$2[k$1], b[k$1]);
+	else c$1[k$1] = b[k$1];
 	return function(t$1) {
-		for (k$3 in i$2) c$1[k$3] = i$2[k$3](t$1);
+		for (k$1 in i$2) c$1[k$1] = i$2[k$1](t$1);
 		return c$1;
 	};
 }
@@ -13778,8 +13100,8 @@ function transformer$2() {
 	scale.unknown = function(_) {
 		return arguments.length ? (unknown$1 = _, scale) : unknown$1;
 	};
-	return function(t$1, u$1) {
-		transform$1 = t$1, untransform = u$1;
+	return function(t$1, u) {
+		transform$1 = t$1, untransform = u;
 		return rescale();
 	};
 }
@@ -13789,8 +13111,8 @@ function continuous() {
 function formatDecimal_default(x$1) {
 	return Math.abs(x$1 = Math.round(x$1)) >= 1e21 ? x$1.toLocaleString("en").replace(/,/g, "") : x$1.toString(10);
 }
-function formatDecimalParts(x$1, p$1) {
-	if ((i$2 = (x$1 = p$1 ? x$1.toExponential(p$1 - 1) : x$1.toExponential()).indexOf("e")) < 0) return null;
+function formatDecimalParts(x$1, p) {
+	if ((i$2 = (x$1 = p ? x$1.toExponential(p - 1) : x$1.toExponential()).indexOf("e")) < 0) return null;
 	var i$2, coefficient = x$1.slice(0, i$2);
 	return [coefficient.length > 1 ? coefficient[0] + coefficient.slice(2) : coefficient, +x$1.slice(i$2 + 1)];
 }
@@ -13866,28 +13188,28 @@ function formatTrim_default(s$3) {
 	return i0 > 0 ? s$3.slice(0, i0) + s$3.slice(i1 + 1) : s$3;
 }
 var prefixExponent;
-function formatPrefixAuto_default(x$1, p$1) {
-	var d = formatDecimalParts(x$1, p$1);
+function formatPrefixAuto_default(x$1, p) {
+	var d = formatDecimalParts(x$1, p);
 	if (!d) return x$1 + "";
 	var coefficient = d[0], exponent = d[1], i$2 = exponent - (prefixExponent = Math.max(-8, Math.min(8, Math.floor(exponent / 3))) * 3) + 1, n$1 = coefficient.length;
-	return i$2 === n$1 ? coefficient : i$2 > n$1 ? coefficient + new Array(i$2 - n$1 + 1).join("0") : i$2 > 0 ? coefficient.slice(0, i$2) + "." + coefficient.slice(i$2) : "0." + new Array(1 - i$2).join("0") + formatDecimalParts(x$1, Math.max(0, p$1 + i$2 - 1))[0];
+	return i$2 === n$1 ? coefficient : i$2 > n$1 ? coefficient + new Array(i$2 - n$1 + 1).join("0") : i$2 > 0 ? coefficient.slice(0, i$2) + "." + coefficient.slice(i$2) : "0." + new Array(1 - i$2).join("0") + formatDecimalParts(x$1, Math.max(0, p + i$2 - 1))[0];
 }
-function formatRounded_default(x$1, p$1) {
-	var d = formatDecimalParts(x$1, p$1);
+function formatRounded_default(x$1, p) {
+	var d = formatDecimalParts(x$1, p);
 	if (!d) return x$1 + "";
 	var coefficient = d[0], exponent = d[1];
 	return exponent < 0 ? "0." + new Array(-exponent).join("0") + coefficient : coefficient.length > exponent + 1 ? coefficient.slice(0, exponent + 1) + "." + coefficient.slice(exponent + 1) : coefficient + new Array(exponent - coefficient.length + 2).join("0");
 }
 var formatTypes_default = {
-	"%": (x$1, p$1) => (x$1 * 100).toFixed(p$1),
+	"%": (x$1, p) => (x$1 * 100).toFixed(p),
 	"b": (x$1) => Math.round(x$1).toString(2),
 	"c": (x$1) => x$1 + "",
 	"d": formatDecimal_default,
-	"e": (x$1, p$1) => x$1.toExponential(p$1),
-	"f": (x$1, p$1) => x$1.toFixed(p$1),
-	"g": (x$1, p$1) => x$1.toPrecision(p$1),
+	"e": (x$1, p) => x$1.toExponential(p),
+	"f": (x$1, p) => x$1.toFixed(p),
+	"g": (x$1, p) => x$1.toPrecision(p),
 	"o": (x$1) => Math.round(x$1).toString(8),
-	"p": (x$1, p$1) => formatRounded_default(x$1 * 100, p$1),
+	"p": (x$1, p) => formatRounded_default(x$1 * 100, p),
 	"r": formatRounded_default,
 	"s": formatPrefixAuto_default,
 	"X": (x$1) => Math.round(x$1).toString(16).toUpperCase(),
@@ -13973,9 +13295,9 @@ function locale_default(locale$2) {
 		return format$2;
 	}
 	function formatPrefix$1(specifier, value) {
-		var f = newFormat((specifier = formatSpecifier(specifier), specifier.type = "f", specifier)), e = Math.max(-8, Math.min(8, Math.floor(exponent_default(value) / 3))) * 3, k$3 = Math.pow(10, -e), prefix$2 = prefixes[8 + e / 3];
+		var f = newFormat((specifier = formatSpecifier(specifier), specifier.type = "f", specifier)), e = Math.max(-8, Math.min(8, Math.floor(exponent_default(value) / 3))) * 3, k$1 = Math.pow(10, -e), prefix$2 = prefixes[8 + e / 3];
 		return function(value$1) {
-			return f(k$3 * value$1) + prefix$2;
+			return f(k$1 * value$1) + prefix$2;
 		};
 	}
 	return {
@@ -14131,7 +13453,7 @@ function logp(base) {
 	return base === Math.E ? Math.log : base === 10 && Math.log10 || base === 2 && Math.log2 || (base = Math.log(base), (x$1) => Math.log(x$1) / base);
 }
 function reflect(f) {
-	return (x$1, k$3) => -f(-x$1, k$3);
+	return (x$1, k$1) => -f(-x$1, k$1);
 }
 function loggish(transform$1) {
 	const scale = transform$1(transformLog, transformExp);
@@ -14155,31 +13477,31 @@ function loggish(transform$1) {
 	};
 	scale.ticks = (count) => {
 		const d = domain();
-		let u$1 = d[0];
+		let u = d[0];
 		let v = d[d.length - 1];
-		const r$1 = v < u$1;
-		if (r$1) [u$1, v] = [v, u$1];
-		let i$2 = logs(u$1);
+		const r$1 = v < u;
+		if (r$1) [u, v] = [v, u];
+		let i$2 = logs(u);
 		let j = logs(v);
-		let k$3;
+		let k$1;
 		let t$1;
 		const n$1 = count == null ? 10 : +count;
 		let z = [];
 		if (!(base % 1) && j - i$2 < n$1) {
 			i$2 = Math.floor(i$2), j = Math.ceil(j);
-			if (u$1 > 0) for (; i$2 <= j; ++i$2) for (k$3 = 1; k$3 < base; ++k$3) {
-				t$1 = i$2 < 0 ? k$3 / pows(-i$2) : k$3 * pows(i$2);
-				if (t$1 < u$1) continue;
+			if (u > 0) for (; i$2 <= j; ++i$2) for (k$1 = 1; k$1 < base; ++k$1) {
+				t$1 = i$2 < 0 ? k$1 / pows(-i$2) : k$1 * pows(i$2);
+				if (t$1 < u) continue;
 				if (t$1 > v) break;
 				z.push(t$1);
 			}
-			else for (; i$2 <= j; ++i$2) for (k$3 = base - 1; k$3 >= 1; --k$3) {
-				t$1 = i$2 > 0 ? k$3 / pows(-i$2) : k$3 * pows(i$2);
-				if (t$1 < u$1) continue;
+			else for (; i$2 <= j; ++i$2) for (k$1 = base - 1; k$1 >= 1; --k$1) {
+				t$1 = i$2 > 0 ? k$1 / pows(-i$2) : k$1 * pows(i$2);
+				if (t$1 < u) continue;
 				if (t$1 > v) break;
 				z.push(t$1);
 			}
-			if (z.length * 2 < n$1) z = ticks(u$1, v, n$1);
+			if (z.length * 2 < n$1) z = ticks(u, v, n$1);
 		} else z = ticks(i$2, j, Math.min(j - i$2, n$1)).map(pows);
 		return r$1 ? z.reverse() : z;
 	};
@@ -14191,11 +13513,11 @@ function loggish(transform$1) {
 			specifier = format$1(specifier);
 		}
 		if (count === Infinity) return specifier;
-		const k$3 = Math.max(1, base * count / scale.ticks().length);
+		const k$1 = Math.max(1, base * count / scale.ticks().length);
 		return (d) => {
 			let i$2 = d / pows(Math.round(logs(d)));
 			if (i$2 * base < base - .5) i$2 *= base;
-			return i$2 <= k$3 ? specifier(d) : "";
+			return i$2 <= k$1 ? specifier(d) : "";
 		};
 	};
 	scale.nice = () => {
@@ -14453,16 +13775,16 @@ const millisecond = timeInterval(() => {}, (date$4, step) => {
 }, (start, end) => {
 	return end - start;
 });
-millisecond.every = (k$3) => {
-	k$3 = Math.floor(k$3);
-	if (!isFinite(k$3) || !(k$3 > 0)) return null;
-	if (!(k$3 > 1)) return millisecond;
+millisecond.every = (k$1) => {
+	k$1 = Math.floor(k$1);
+	if (!isFinite(k$1) || !(k$1 > 0)) return null;
+	if (!(k$1 > 1)) return millisecond;
 	return timeInterval((date$4) => {
-		date$4.setTime(Math.floor(date$4 / k$3) * k$3);
+		date$4.setTime(Math.floor(date$4 / k$1) * k$1);
 	}, (date$4, step) => {
-		date$4.setTime(+date$4 + step * k$3);
+		date$4.setTime(+date$4 + step * k$1);
 	}, (start, end) => {
-		return (end - start) / k$3;
+		return (end - start) / k$1;
 	});
 };
 millisecond.range;
@@ -14625,13 +13947,13 @@ const timeYear = timeInterval((date$4) => {
 }, (date$4) => {
 	return date$4.getFullYear();
 });
-timeYear.every = (k$3) => {
-	return !isFinite(k$3 = Math.floor(k$3)) || !(k$3 > 0) ? null : timeInterval((date$4) => {
-		date$4.setFullYear(Math.floor(date$4.getFullYear() / k$3) * k$3);
+timeYear.every = (k$1) => {
+	return !isFinite(k$1 = Math.floor(k$1)) || !(k$1 > 0) ? null : timeInterval((date$4) => {
+		date$4.setFullYear(Math.floor(date$4.getFullYear() / k$1) * k$1);
 		date$4.setMonth(0, 1);
 		date$4.setHours(0, 0, 0, 0);
 	}, (date$4, step) => {
-		date$4.setFullYear(date$4.getFullYear() + step * k$3);
+		date$4.setFullYear(date$4.getFullYear() + step * k$1);
 	});
 };
 timeYear.range;
@@ -14645,13 +13967,13 @@ const utcYear = timeInterval((date$4) => {
 }, (date$4) => {
 	return date$4.getUTCFullYear();
 });
-utcYear.every = (k$3) => {
-	return !isFinite(k$3 = Math.floor(k$3)) || !(k$3 > 0) ? null : timeInterval((date$4) => {
-		date$4.setUTCFullYear(Math.floor(date$4.getUTCFullYear() / k$3) * k$3);
+utcYear.every = (k$1) => {
+	return !isFinite(k$1 = Math.floor(k$1)) || !(k$1 > 0) ? null : timeInterval((date$4) => {
+		date$4.setUTCFullYear(Math.floor(date$4.getUTCFullYear() / k$1) * k$1);
 		date$4.setUTCMonth(0, 1);
 		date$4.setUTCHours(0, 0, 0, 0);
 	}, (date$4, step) => {
-		date$4.setUTCFullYear(date$4.getUTCFullYear() + step * k$3);
+		date$4.setUTCFullYear(date$4.getUTCFullYear() + step * k$1);
 	});
 };
 utcYear.range;
@@ -14783,10 +14105,10 @@ function utcDate(d) {
 	}
 	return new Date(Date.UTC(d.y, d.m, d.d, d.H, d.M, d.S, d.L));
 }
-function newDate(y$1, m$1, d) {
+function newDate(y$1, m, d) {
 	return {
 		y: y$1,
-		m: m$1,
+		m,
 		d,
 		H: 0,
 		M: 0,
@@ -14921,13 +14243,13 @@ function formatLocale(locale$2) {
 			return string$2.join("");
 		};
 	}
-	function newParse(specifier, Z$1) {
+	function newParse(specifier, Z) {
 		return function(string$2) {
 			var d = newDate(1900, void 0, 1), i$2 = parseSpecifier(d, specifier, string$2 += "", 0), week, day;
 			if (i$2 != string$2.length) return null;
 			if ("Q" in d) return new Date(d.Q);
 			if ("s" in d) return new Date(d.s * 1e3 + ("L" in d ? d.L : 0));
-			if (Z$1 && !("Z" in d)) d.Z = 0;
+			if (Z && !("Z" in d)) d.Z = 0;
 			if ("p" in d) d.H = d.H % 12 + d.p * 12;
 			if (d.m === void 0) d.m = "q" in d ? d.q : 0;
 			if ("V" in d) {
@@ -14963,9 +14285,9 @@ function formatLocale(locale$2) {
 		};
 	}
 	function parseSpecifier(d, specifier, string$2, j) {
-		var i$2 = 0, n$1 = specifier.length, m$1 = string$2.length, c$1, parse$2;
+		var i$2 = 0, n$1 = specifier.length, m = string$2.length, c$1, parse$2;
 		while (i$2 < n$1) {
-			if (j >= m$1) return -1;
+			if (j >= m) return -1;
 			c$1 = specifier.charCodeAt(i$2++);
 			if (c$1 === 37) {
 				c$1 = specifier.charAt(i$2++);
@@ -15049,11 +14371,11 @@ function formatLocale(locale$2) {
 			return f;
 		},
 		parse: function(specifier) {
-			var p$1 = newParse(specifier += "", false);
-			p$1.toString = function() {
+			var p = newParse(specifier += "", false);
+			p.toString = function() {
 				return specifier;
 			};
-			return p$1;
+			return p;
 		},
 		utcFormat: function(specifier) {
 			var f = newFormat(specifier += "", utcFormats);
@@ -15063,11 +14385,11 @@ function formatLocale(locale$2) {
 			return f;
 		},
 		utcParse: function(specifier) {
-			var p$1 = newParse(specifier += "", true);
-			p$1.toString = function() {
+			var p = newParse(specifier += "", true);
+			p.toString = function() {
 				return specifier;
 			};
-			return p$1;
+			return p;
 		}
 	};
 }
@@ -15169,135 +14491,135 @@ function parseUnixTimestampSeconds(d, string$2, i$2) {
 	var n$1 = numberRe.exec(string$2.slice(i$2));
 	return n$1 ? (d.s = +n$1[0], i$2 + n$1[0].length) : -1;
 }
-function formatDayOfMonth(d, p$1) {
-	return pad(d.getDate(), p$1, 2);
+function formatDayOfMonth(d, p) {
+	return pad(d.getDate(), p, 2);
 }
-function formatHour24(d, p$1) {
-	return pad(d.getHours(), p$1, 2);
+function formatHour24(d, p) {
+	return pad(d.getHours(), p, 2);
 }
-function formatHour12(d, p$1) {
-	return pad(d.getHours() % 12 || 12, p$1, 2);
+function formatHour12(d, p) {
+	return pad(d.getHours() % 12 || 12, p, 2);
 }
-function formatDayOfYear(d, p$1) {
-	return pad(1 + timeDay.count(timeYear(d), d), p$1, 3);
+function formatDayOfYear(d, p) {
+	return pad(1 + timeDay.count(timeYear(d), d), p, 3);
 }
-function formatMilliseconds(d, p$1) {
-	return pad(d.getMilliseconds(), p$1, 3);
+function formatMilliseconds(d, p) {
+	return pad(d.getMilliseconds(), p, 3);
 }
-function formatMicroseconds(d, p$1) {
-	return formatMilliseconds(d, p$1) + "000";
+function formatMicroseconds(d, p) {
+	return formatMilliseconds(d, p) + "000";
 }
-function formatMonthNumber(d, p$1) {
-	return pad(d.getMonth() + 1, p$1, 2);
+function formatMonthNumber(d, p) {
+	return pad(d.getMonth() + 1, p, 2);
 }
-function formatMinutes(d, p$1) {
-	return pad(d.getMinutes(), p$1, 2);
+function formatMinutes(d, p) {
+	return pad(d.getMinutes(), p, 2);
 }
-function formatSeconds(d, p$1) {
-	return pad(d.getSeconds(), p$1, 2);
+function formatSeconds(d, p) {
+	return pad(d.getSeconds(), p, 2);
 }
 function formatWeekdayNumberMonday(d) {
 	var day = d.getDay();
 	return day === 0 ? 7 : day;
 }
-function formatWeekNumberSunday(d, p$1) {
-	return pad(timeSunday.count(timeYear(d) - 1, d), p$1, 2);
+function formatWeekNumberSunday(d, p) {
+	return pad(timeSunday.count(timeYear(d) - 1, d), p, 2);
 }
 function dISO(d) {
 	var day = d.getDay();
 	return day >= 4 || day === 0 ? timeThursday(d) : timeThursday.ceil(d);
 }
-function formatWeekNumberISO(d, p$1) {
+function formatWeekNumberISO(d, p) {
 	d = dISO(d);
-	return pad(timeThursday.count(timeYear(d), d) + (timeYear(d).getDay() === 4), p$1, 2);
+	return pad(timeThursday.count(timeYear(d), d) + (timeYear(d).getDay() === 4), p, 2);
 }
 function formatWeekdayNumberSunday(d) {
 	return d.getDay();
 }
-function formatWeekNumberMonday(d, p$1) {
-	return pad(timeMonday.count(timeYear(d) - 1, d), p$1, 2);
+function formatWeekNumberMonday(d, p) {
+	return pad(timeMonday.count(timeYear(d) - 1, d), p, 2);
 }
-function formatYear(d, p$1) {
-	return pad(d.getFullYear() % 100, p$1, 2);
+function formatYear(d, p) {
+	return pad(d.getFullYear() % 100, p, 2);
 }
-function formatYearISO(d, p$1) {
+function formatYearISO(d, p) {
 	d = dISO(d);
-	return pad(d.getFullYear() % 100, p$1, 2);
+	return pad(d.getFullYear() % 100, p, 2);
 }
-function formatFullYear(d, p$1) {
-	return pad(d.getFullYear() % 1e4, p$1, 4);
+function formatFullYear(d, p) {
+	return pad(d.getFullYear() % 1e4, p, 4);
 }
-function formatFullYearISO(d, p$1) {
+function formatFullYearISO(d, p) {
 	var day = d.getDay();
 	d = day >= 4 || day === 0 ? timeThursday(d) : timeThursday.ceil(d);
-	return pad(d.getFullYear() % 1e4, p$1, 4);
+	return pad(d.getFullYear() % 1e4, p, 4);
 }
 function formatZone(d) {
 	var z = d.getTimezoneOffset();
 	return (z > 0 ? "-" : (z *= -1, "+")) + pad(z / 60 | 0, "0", 2) + pad(z % 60, "0", 2);
 }
-function formatUTCDayOfMonth(d, p$1) {
-	return pad(d.getUTCDate(), p$1, 2);
+function formatUTCDayOfMonth(d, p) {
+	return pad(d.getUTCDate(), p, 2);
 }
-function formatUTCHour24(d, p$1) {
-	return pad(d.getUTCHours(), p$1, 2);
+function formatUTCHour24(d, p) {
+	return pad(d.getUTCHours(), p, 2);
 }
-function formatUTCHour12(d, p$1) {
-	return pad(d.getUTCHours() % 12 || 12, p$1, 2);
+function formatUTCHour12(d, p) {
+	return pad(d.getUTCHours() % 12 || 12, p, 2);
 }
-function formatUTCDayOfYear(d, p$1) {
-	return pad(1 + utcDay.count(utcYear(d), d), p$1, 3);
+function formatUTCDayOfYear(d, p) {
+	return pad(1 + utcDay.count(utcYear(d), d), p, 3);
 }
-function formatUTCMilliseconds(d, p$1) {
-	return pad(d.getUTCMilliseconds(), p$1, 3);
+function formatUTCMilliseconds(d, p) {
+	return pad(d.getUTCMilliseconds(), p, 3);
 }
-function formatUTCMicroseconds(d, p$1) {
-	return formatUTCMilliseconds(d, p$1) + "000";
+function formatUTCMicroseconds(d, p) {
+	return formatUTCMilliseconds(d, p) + "000";
 }
-function formatUTCMonthNumber(d, p$1) {
-	return pad(d.getUTCMonth() + 1, p$1, 2);
+function formatUTCMonthNumber(d, p) {
+	return pad(d.getUTCMonth() + 1, p, 2);
 }
-function formatUTCMinutes(d, p$1) {
-	return pad(d.getUTCMinutes(), p$1, 2);
+function formatUTCMinutes(d, p) {
+	return pad(d.getUTCMinutes(), p, 2);
 }
-function formatUTCSeconds(d, p$1) {
-	return pad(d.getUTCSeconds(), p$1, 2);
+function formatUTCSeconds(d, p) {
+	return pad(d.getUTCSeconds(), p, 2);
 }
 function formatUTCWeekdayNumberMonday(d) {
 	var dow = d.getUTCDay();
 	return dow === 0 ? 7 : dow;
 }
-function formatUTCWeekNumberSunday(d, p$1) {
-	return pad(utcSunday.count(utcYear(d) - 1, d), p$1, 2);
+function formatUTCWeekNumberSunday(d, p) {
+	return pad(utcSunday.count(utcYear(d) - 1, d), p, 2);
 }
 function UTCdISO(d) {
 	var day = d.getUTCDay();
 	return day >= 4 || day === 0 ? utcThursday(d) : utcThursday.ceil(d);
 }
-function formatUTCWeekNumberISO(d, p$1) {
+function formatUTCWeekNumberISO(d, p) {
 	d = UTCdISO(d);
-	return pad(utcThursday.count(utcYear(d), d) + (utcYear(d).getUTCDay() === 4), p$1, 2);
+	return pad(utcThursday.count(utcYear(d), d) + (utcYear(d).getUTCDay() === 4), p, 2);
 }
 function formatUTCWeekdayNumberSunday(d) {
 	return d.getUTCDay();
 }
-function formatUTCWeekNumberMonday(d, p$1) {
-	return pad(utcMonday.count(utcYear(d) - 1, d), p$1, 2);
+function formatUTCWeekNumberMonday(d, p) {
+	return pad(utcMonday.count(utcYear(d) - 1, d), p, 2);
 }
-function formatUTCYear(d, p$1) {
-	return pad(d.getUTCFullYear() % 100, p$1, 2);
+function formatUTCYear(d, p) {
+	return pad(d.getUTCFullYear() % 100, p, 2);
 }
-function formatUTCYearISO(d, p$1) {
+function formatUTCYearISO(d, p) {
 	d = UTCdISO(d);
-	return pad(d.getUTCFullYear() % 100, p$1, 2);
+	return pad(d.getUTCFullYear() % 100, p, 2);
 }
-function formatUTCFullYear(d, p$1) {
-	return pad(d.getUTCFullYear() % 1e4, p$1, 4);
+function formatUTCFullYear(d, p) {
+	return pad(d.getUTCFullYear() % 1e4, p, 4);
 }
-function formatUTCFullYearISO(d, p$1) {
+function formatUTCFullYearISO(d, p) {
 	var day = d.getUTCDay();
 	d = day >= 4 || day === 0 ? utcThursday(d) : utcThursday.ceil(d);
-	return pad(d.getUTCFullYear() % 1e4, p$1, 4);
+	return pad(d.getUTCFullYear() % 1e4, p, 4);
 }
 function formatUTCZone() {
 	return "+0000";
@@ -15680,13 +15002,13 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			toExpNeg: -7,
 			toExpPos: 21,
 			LN10: "2.302585092994045684017991454684364207601101488628772976033327900967572609677352480235997205089598298341967784042286"
-		}, external = true, decimalError = "[DecimalError] ", invalidArgument = decimalError + "Invalid argument: ", exponentOutOfRange = decimalError + "Exponent out of range: ", mathfloor = Math.floor, mathpow = Math.pow, isDecimal = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i, ONE, BASE = 1e7, LOG_BASE = 7, MAX_SAFE_INTEGER$2 = 9007199254740991, MAX_E = mathfloor(MAX_SAFE_INTEGER$2 / LOG_BASE), P$1 = {};
-		P$1.absoluteValue = P$1.abs = function() {
+		}, external = true, decimalError = "[DecimalError] ", invalidArgument = decimalError + "Invalid argument: ", exponentOutOfRange = decimalError + "Exponent out of range: ", mathfloor = Math.floor, mathpow = Math.pow, isDecimal = /^(\d+(\.\d*)?|\.\d+)(e[+-]?\d+)?$/i, ONE, BASE = 1e7, LOG_BASE = 7, MAX_SAFE_INTEGER$2 = 9007199254740991, MAX_E = mathfloor(MAX_SAFE_INTEGER$2 / LOG_BASE), P = {};
+		P.absoluteValue = P.abs = function() {
 			var x$1 = new this.constructor(this);
 			if (x$1.s) x$1.s = 1;
 			return x$1;
 		};
-		P$1.comparedTo = P$1.cmp = function(y$1) {
+		P.comparedTo = P.cmp = function(y$1) {
 			var i$2, j, xdL, ydL, x$1 = this;
 			y$1 = new x$1.constructor(y$1);
 			if (x$1.s !== y$1.s) return x$1.s || -y$1.s;
@@ -15696,50 +15018,50 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			for (i$2 = 0, j = xdL < ydL ? xdL : ydL; i$2 < j; ++i$2) if (x$1.d[i$2] !== y$1.d[i$2]) return x$1.d[i$2] > y$1.d[i$2] ^ x$1.s < 0 ? 1 : -1;
 			return xdL === ydL ? 0 : xdL > ydL ^ x$1.s < 0 ? 1 : -1;
 		};
-		P$1.decimalPlaces = P$1.dp = function() {
+		P.decimalPlaces = P.dp = function() {
 			var x$1 = this, w = x$1.d.length - 1, dp = (w - x$1.e) * LOG_BASE;
 			w = x$1.d[w];
 			if (w) for (; w % 10 == 0; w /= 10) dp--;
 			return dp < 0 ? 0 : dp;
 		};
-		P$1.dividedBy = P$1.div = function(y$1) {
+		P.dividedBy = P.div = function(y$1) {
 			return divide(this, new this.constructor(y$1));
 		};
-		P$1.dividedToIntegerBy = P$1.idiv = function(y$1) {
+		P.dividedToIntegerBy = P.idiv = function(y$1) {
 			var x$1 = this, Ctor = x$1.constructor;
 			return round(divide(x$1, new Ctor(y$1), 0, 1), Ctor.precision);
 		};
-		P$1.equals = P$1.eq = function(y$1) {
+		P.equals = P.eq = function(y$1) {
 			return !this.cmp(y$1);
 		};
-		P$1.exponent = function() {
+		P.exponent = function() {
 			return getBase10Exponent(this);
 		};
-		P$1.greaterThan = P$1.gt = function(y$1) {
+		P.greaterThan = P.gt = function(y$1) {
 			return this.cmp(y$1) > 0;
 		};
-		P$1.greaterThanOrEqualTo = P$1.gte = function(y$1) {
+		P.greaterThanOrEqualTo = P.gte = function(y$1) {
 			return this.cmp(y$1) >= 0;
 		};
-		P$1.isInteger = P$1.isint = function() {
+		P.isInteger = P.isint = function() {
 			return this.e > this.d.length - 2;
 		};
-		P$1.isNegative = P$1.isneg = function() {
+		P.isNegative = P.isneg = function() {
 			return this.s < 0;
 		};
-		P$1.isPositive = P$1.ispos = function() {
+		P.isPositive = P.ispos = function() {
 			return this.s > 0;
 		};
-		P$1.isZero = function() {
+		P.isZero = function() {
 			return this.s === 0;
 		};
-		P$1.lessThan = P$1.lt = function(y$1) {
+		P.lessThan = P.lt = function(y$1) {
 			return this.cmp(y$1) < 0;
 		};
-		P$1.lessThanOrEqualTo = P$1.lte = function(y$1) {
+		P.lessThanOrEqualTo = P.lte = function(y$1) {
 			return this.cmp(y$1) < 1;
 		};
-		P$1.logarithm = P$1.log = function(base) {
+		P.logarithm = P.log = function(base) {
 			var r$1, x$1 = this, Ctor = x$1.constructor, pr = Ctor.precision, wpr = pr + 5;
 			if (base === void 0) base = new Ctor(10);
 			else {
@@ -15753,12 +15075,12 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			external = true;
 			return round(r$1, pr);
 		};
-		P$1.minus = P$1.sub = function(y$1) {
+		P.minus = P.sub = function(y$1) {
 			var x$1 = this;
 			y$1 = new x$1.constructor(y$1);
 			return x$1.s == y$1.s ? subtract(x$1, y$1) : add(x$1, (y$1.s = -y$1.s, y$1));
 		};
-		P$1.modulo = P$1.mod = function(y$1) {
+		P.modulo = P.mod = function(y$1) {
 			var q, x$1 = this, Ctor = x$1.constructor, pr = Ctor.precision;
 			y$1 = new Ctor(y$1);
 			if (!y$1.s) throw Error(decimalError + "NaN");
@@ -15768,23 +15090,23 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			external = true;
 			return x$1.minus(q);
 		};
-		P$1.naturalExponential = P$1.exp = function() {
+		P.naturalExponential = P.exp = function() {
 			return exp(this);
 		};
-		P$1.naturalLogarithm = P$1.ln = function() {
+		P.naturalLogarithm = P.ln = function() {
 			return ln(this);
 		};
-		P$1.negated = P$1.neg = function() {
+		P.negated = P.neg = function() {
 			var x$1 = new this.constructor(this);
 			x$1.s = -x$1.s || 0;
 			return x$1;
 		};
-		P$1.plus = P$1.add = function(y$1) {
+		P.plus = P.add = function(y$1) {
 			var x$1 = this;
 			y$1 = new x$1.constructor(y$1);
 			return x$1.s == y$1.s ? add(x$1, y$1) : subtract(x$1, (y$1.s = -y$1.s, y$1));
 		};
-		P$1.precision = P$1.sd = function(z) {
+		P.precision = P.sd = function(z) {
 			var e, sd, w, x$1 = this;
 			if (z !== void 0 && z !== !!z && z !== 1 && z !== 0) throw Error(invalidArgument + z);
 			e = getBase10Exponent(x$1) + 1;
@@ -15797,7 +15119,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			}
 			return z && e > sd ? e : sd;
 		};
-		P$1.squareRoot = P$1.sqrt = function() {
+		P.squareRoot = P.sqrt = function() {
 			var e, n$1, pr, r$1, s$3, t$1, wpr, x$1 = this, Ctor = x$1.constructor;
 			if (x$1.s < 1) {
 				if (!x$1.s) return new Ctor(0);
@@ -15838,8 +15160,8 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			external = true;
 			return round(r$1, pr);
 		};
-		P$1.times = P$1.mul = function(y$1) {
-			var carry, e, i$2, k$3, r$1, rL, t$1, xdL, ydL, x$1 = this, Ctor = x$1.constructor, xd = x$1.d, yd = (y$1 = new Ctor(y$1)).d;
+		P.times = P.mul = function(y$1) {
+			var carry, e, i$2, k$1, r$1, rL, t$1, xdL, ydL, x$1 = this, Ctor = x$1.constructor, xd = x$1.d, yd = (y$1 = new Ctor(y$1)).d;
 			if (!x$1.s || !y$1.s) return new Ctor(0);
 			y$1.s *= x$1.s;
 			e = x$1.e + y$1.e;
@@ -15858,12 +15180,12 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			for (i$2 = rL; i$2--;) r$1.push(0);
 			for (i$2 = ydL; --i$2 >= 0;) {
 				carry = 0;
-				for (k$3 = xdL + i$2; k$3 > i$2;) {
-					t$1 = r$1[k$3] + yd[i$2] * xd[k$3 - i$2 - 1] + carry;
-					r$1[k$3--] = t$1 % BASE | 0;
+				for (k$1 = xdL + i$2; k$1 > i$2;) {
+					t$1 = r$1[k$1] + yd[i$2] * xd[k$1 - i$2 - 1] + carry;
+					r$1[k$1--] = t$1 % BASE | 0;
 					carry = t$1 / BASE | 0;
 				}
-				r$1[k$3] = (r$1[k$3] + carry) % BASE | 0;
+				r$1[k$1] = (r$1[k$1] + carry) % BASE | 0;
 			}
 			for (; !r$1[--rL];) r$1.pop();
 			if (carry) ++e;
@@ -15872,7 +15194,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			y$1.e = e;
 			return external ? round(y$1, Ctor.precision) : y$1;
 		};
-		P$1.toDecimalPlaces = P$1.todp = function(dp, rm) {
+		P.toDecimalPlaces = P.todp = function(dp, rm) {
 			var x$1 = this, Ctor = x$1.constructor;
 			x$1 = new Ctor(x$1);
 			if (dp === void 0) return x$1;
@@ -15881,7 +15203,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			else checkInt32(rm, 0, 8);
 			return round(x$1, dp + getBase10Exponent(x$1) + 1, rm);
 		};
-		P$1.toExponential = function(dp, rm) {
+		P.toExponential = function(dp, rm) {
 			var str, x$1 = this, Ctor = x$1.constructor;
 			if (dp === void 0) str = toString$4(x$1, true);
 			else {
@@ -15893,7 +15215,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			}
 			return str;
 		};
-		P$1.toFixed = function(dp, rm) {
+		P.toFixed = function(dp, rm) {
 			var str, y$1, x$1 = this, Ctor = x$1.constructor;
 			if (dp === void 0) return toString$4(x$1);
 			checkInt32(dp, 0, MAX_DIGITS);
@@ -15903,15 +15225,15 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			str = toString$4(y$1.abs(), false, dp + getBase10Exponent(y$1) + 1);
 			return x$1.isneg() && !x$1.isZero() ? "-" + str : str;
 		};
-		P$1.toInteger = P$1.toint = function() {
+		P.toInteger = P.toint = function() {
 			var x$1 = this, Ctor = x$1.constructor;
 			return round(new Ctor(x$1), getBase10Exponent(x$1) + 1, Ctor.rounding);
 		};
-		P$1.toNumber = function() {
+		P.toNumber = function() {
 			return +this;
 		};
-		P$1.toPower = P$1.pow = function(y$1) {
-			var e, k$3, pr, r$1, sign$1, yIsInt, x$1 = this, Ctor = x$1.constructor, guard = 12, yn = +(y$1 = new Ctor(y$1));
+		P.toPower = P.pow = function(y$1) {
+			var e, k$1, pr, r$1, sign$1, yIsInt, x$1 = this, Ctor = x$1.constructor, guard = 12, yn = +(y$1 = new Ctor(y$1));
 			if (!y$1.s) return new Ctor(ONE);
 			x$1 = new Ctor(x$1);
 			if (!x$1.s) {
@@ -15922,29 +15244,29 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			pr = Ctor.precision;
 			if (y$1.eq(ONE)) return round(x$1, pr);
 			e = y$1.e;
-			k$3 = y$1.d.length - 1;
-			yIsInt = e >= k$3;
+			k$1 = y$1.d.length - 1;
+			yIsInt = e >= k$1;
 			sign$1 = x$1.s;
 			if (!yIsInt) {
 				if (sign$1 < 0) throw Error(decimalError + "NaN");
-			} else if ((k$3 = yn < 0 ? -yn : yn) <= MAX_SAFE_INTEGER$2) {
+			} else if ((k$1 = yn < 0 ? -yn : yn) <= MAX_SAFE_INTEGER$2) {
 				r$1 = new Ctor(ONE);
 				e = Math.ceil(pr / LOG_BASE + 4);
 				external = false;
 				for (;;) {
-					if (k$3 % 2) {
+					if (k$1 % 2) {
 						r$1 = r$1.times(x$1);
 						truncate(r$1.d, e);
 					}
-					k$3 = mathfloor(k$3 / 2);
-					if (k$3 === 0) break;
+					k$1 = mathfloor(k$1 / 2);
+					if (k$1 === 0) break;
 					x$1 = x$1.times(x$1);
 					truncate(x$1.d, e);
 				}
 				external = true;
 				return y$1.s < 0 ? new Ctor(ONE).div(r$1) : round(r$1, pr);
 			}
-			sign$1 = sign$1 < 0 && y$1.d[Math.max(e, k$3)] & 1 ? -1 : 1;
+			sign$1 = sign$1 < 0 && y$1.d[Math.max(e, k$1)] & 1 ? -1 : 1;
 			x$1.s = 1;
 			external = false;
 			r$1 = y$1.times(ln(x$1, pr + guard));
@@ -15953,7 +15275,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			r$1.s = sign$1;
 			return r$1;
 		};
-		P$1.toPrecision = function(sd, rm) {
+		P.toPrecision = function(sd, rm) {
 			var e, str, x$1 = this, Ctor = x$1.constructor;
 			if (sd === void 0) {
 				e = getBase10Exponent(x$1);
@@ -15968,7 +15290,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			}
 			return str;
 		};
-		P$1.toSignificantDigits = P$1.tosd = function(sd, rm) {
+		P.toSignificantDigits = P.tosd = function(sd, rm) {
 			var x$1 = this, Ctor = x$1.constructor;
 			if (sd === void 0) {
 				sd = Ctor.precision;
@@ -15980,22 +15302,22 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			}
 			return round(new Ctor(x$1), sd, rm);
 		};
-		P$1.toString = P$1.valueOf = P$1.val = P$1.toJSON = function() {
+		P.toString = P.valueOf = P.val = P.toJSON = function() {
 			var x$1 = this, e = getBase10Exponent(x$1), Ctor = x$1.constructor;
 			return toString$4(x$1, e <= Ctor.toExpNeg || e >= Ctor.toExpPos);
 		};
 		function add(x$1, y$1) {
-			var carry, d, e, i$2, k$3, len, xd, yd, Ctor = x$1.constructor, pr = Ctor.precision;
+			var carry, d, e, i$2, k$1, len, xd, yd, Ctor = x$1.constructor, pr = Ctor.precision;
 			if (!x$1.s || !y$1.s) {
 				if (!y$1.s) y$1 = new Ctor(x$1);
 				return external ? round(y$1, pr) : y$1;
 			}
 			xd = x$1.d;
 			yd = y$1.d;
-			k$3 = x$1.e;
+			k$1 = x$1.e;
 			e = y$1.e;
 			xd = xd.slice();
-			i$2 = k$3 - e;
+			i$2 = k$1 - e;
 			if (i$2) {
 				if (i$2 < 0) {
 					d = xd;
@@ -16003,11 +15325,11 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 					len = yd.length;
 				} else {
 					d = yd;
-					e = k$3;
+					e = k$1;
 					len = xd.length;
 				}
-				k$3 = Math.ceil(pr / LOG_BASE);
-				len = k$3 > len ? k$3 + 1 : len + 1;
+				k$1 = Math.ceil(pr / LOG_BASE);
+				len = k$1 > len ? k$1 + 1 : len + 1;
 				if (i$2 > len) {
 					i$2 = len;
 					d.length = 1;
@@ -16041,28 +15363,28 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			if (i$2 !== ~~i$2 || i$2 < min$3 || i$2 > max$4) throw Error(invalidArgument + i$2);
 		}
 		function digitsToString(d) {
-			var i$2, k$3, ws, indexOfLastWord = d.length - 1, str = "", w = d[0];
+			var i$2, k$1, ws, indexOfLastWord = d.length - 1, str = "", w = d[0];
 			if (indexOfLastWord > 0) {
 				str += w;
 				for (i$2 = 1; i$2 < indexOfLastWord; i$2++) {
 					ws = d[i$2] + "";
-					k$3 = LOG_BASE - ws.length;
-					if (k$3) str += getZeroString(k$3);
+					k$1 = LOG_BASE - ws.length;
+					if (k$1) str += getZeroString(k$1);
 					str += ws;
 				}
 				w = d[i$2];
 				ws = w + "";
-				k$3 = LOG_BASE - ws.length;
-				if (k$3) str += getZeroString(k$3);
+				k$1 = LOG_BASE - ws.length;
+				if (k$1) str += getZeroString(k$1);
 			} else if (w === 0) return "0";
 			for (; w % 10 === 0;) w /= 10;
 			return str + w;
 		}
 		var divide = (function() {
-			function multiplyInteger(x$1, k$3) {
+			function multiplyInteger(x$1, k$1) {
 				var temp, carry = 0, i$2 = x$1.length;
 				for (x$1 = x$1.slice(); i$2--;) {
-					temp = x$1[i$2] * k$3 + carry;
+					temp = x$1[i$2] * k$1 + carry;
 					x$1[i$2] = temp % BASE | 0;
 					carry = temp / BASE | 0;
 				}
@@ -16088,7 +15410,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 				for (; !a$2[0] && a$2.length > 1;) a$2.shift();
 			}
 			return function(x$1, y$1, pr, dp) {
-				var cmp, e, i$2, k$3, prod, prodL, q, qd, rem, remL, rem0, sd, t$1, xi, xL, yd0, yL, yz, Ctor = x$1.constructor, sign$1 = x$1.s == y$1.s ? 1 : -1, xd = x$1.d, yd = y$1.d;
+				var cmp, e, i$2, k$1, prod, prodL, q, qd, rem, remL, rem0, sd, t$1, xi, xL, yd0, yL, yz, Ctor = x$1.constructor, sign$1 = x$1.s == y$1.s ? 1 : -1, xd = x$1.d, yd = y$1.d;
 				if (!x$1.s) return new Ctor(x$1);
 				if (!y$1.s) throw Error(decimalError + "Division by zero");
 				e = x$1.e - y$1.e;
@@ -16105,19 +15427,19 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 				sd = sd / LOG_BASE + 2 | 0;
 				i$2 = 0;
 				if (yL == 1) {
-					k$3 = 0;
+					k$1 = 0;
 					yd = yd[0];
 					sd++;
-					for (; (i$2 < xL || k$3) && sd--; i$2++) {
-						t$1 = k$3 * BASE + (xd[i$2] || 0);
+					for (; (i$2 < xL || k$1) && sd--; i$2++) {
+						t$1 = k$1 * BASE + (xd[i$2] || 0);
 						qd[i$2] = t$1 / yd | 0;
-						k$3 = t$1 % yd | 0;
+						k$1 = t$1 % yd | 0;
 					}
 				} else {
-					k$3 = BASE / (yd[0] + 1) | 0;
-					if (k$3 > 1) {
-						yd = multiplyInteger(yd, k$3);
-						xd = multiplyInteger(xd, k$3);
+					k$1 = BASE / (yd[0] + 1) | 0;
+					if (k$1 > 1) {
+						yd = multiplyInteger(yd, k$1);
+						xd = multiplyInteger(xd, k$1);
 						yL = yd.length;
 						xL = xd.length;
 					}
@@ -16130,24 +15452,24 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 					yd0 = yd[0];
 					if (yd[1] >= BASE / 2) ++yd0;
 					do {
-						k$3 = 0;
+						k$1 = 0;
 						cmp = compare(yd, rem, yL, remL);
 						if (cmp < 0) {
 							rem0 = rem[0];
 							if (yL != remL) rem0 = rem0 * BASE + (rem[1] || 0);
-							k$3 = rem0 / yd0 | 0;
-							if (k$3 > 1) {
-								if (k$3 >= BASE) k$3 = BASE - 1;
-								prod = multiplyInteger(yd, k$3);
+							k$1 = rem0 / yd0 | 0;
+							if (k$1 > 1) {
+								if (k$1 >= BASE) k$1 = BASE - 1;
+								prod = multiplyInteger(yd, k$1);
 								prodL = prod.length;
 								remL = rem.length;
 								cmp = compare(prod, rem, prodL, remL);
 								if (cmp == 1) {
-									k$3--;
+									k$1--;
 									subtract$1(prod, yL < prodL ? yz : yd, prodL);
 								}
 							} else {
-								if (k$3 == 0) cmp = k$3 = 1;
+								if (k$1 == 0) cmp = k$1 = 1;
 								prod = yd.slice();
 							}
 							prodL = prod.length;
@@ -16157,16 +15479,16 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 								remL = rem.length;
 								cmp = compare(yd, rem, yL, remL);
 								if (cmp < 1) {
-									k$3++;
+									k$1++;
 									subtract$1(rem, yL < remL ? yz : yd, remL);
 								}
 							}
 							remL = rem.length;
 						} else if (cmp === 0) {
-							k$3++;
+							k$1++;
 							rem = [0];
 						}
-						qd[i$2++] = k$3;
+						qd[i$2++] = k$1;
 						if (cmp && rem[0]) rem[remL++] = xd[xi] || 0;
 						else {
 							rem = [xd[xi]];
@@ -16180,7 +15502,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			};
 		})();
 		function exp(x$1, sd) {
-			var denominator, guard, pow$1, sum, t$1, wpr, i$2 = 0, k$3 = 0, Ctor = x$1.constructor, pr = Ctor.precision;
+			var denominator, guard, pow$1, sum, t$1, wpr, i$2 = 0, k$1 = 0, Ctor = x$1.constructor, pr = Ctor.precision;
 			if (getBase10Exponent(x$1) > 16) throw Error(exponentOutOfRange + getBase10Exponent(x$1));
 			if (!x$1.s) return new Ctor(ONE);
 			if (sd == null) {
@@ -16190,9 +15512,9 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			t$1 = new Ctor(.03125);
 			while (x$1.abs().gte(.1)) {
 				x$1 = x$1.times(t$1);
-				k$3 += 5;
+				k$1 += 5;
 			}
-			guard = Math.log(mathpow(2, k$3)) / Math.LN10 * 2 + 5 | 0;
+			guard = Math.log(mathpow(2, k$1)) / Math.LN10 * 2 + 5 | 0;
 			wpr += guard;
 			denominator = pow$1 = sum = new Ctor(ONE);
 			Ctor.precision = wpr;
@@ -16201,7 +15523,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 				denominator = denominator.times(++i$2);
 				t$1 = sum.plus(divide(pow$1, denominator, wpr));
 				if (digitsToString(t$1.d).slice(0, wpr) === digitsToString(sum.d).slice(0, wpr)) {
-					while (k$3--) sum = round(sum.times(sum), wpr);
+					while (k$1--) sum = round(sum.times(sum), wpr);
 					Ctor.precision = pr;
 					return sd == null ? (external = true, round(sum, pr)) : sum;
 				}
@@ -16221,9 +15543,9 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			}
 			return round(new Ctor(Ctor.LN10), sd);
 		}
-		function getZeroString(k$3) {
+		function getZeroString(k$1) {
 			var zs = "";
-			for (; k$3--;) zs += "0";
+			for (; k$1--;) zs += "0";
 			return zs;
 		}
 		function ln(y$1, sd) {
@@ -16313,8 +15635,8 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			return x$1;
 		}
 		function round(x$1, sd, rm) {
-			var i$2, j, k$3, n$1, rd, doRound, w, xdi, xd = x$1.d;
-			for (n$1 = 1, k$3 = xd[0]; k$3 >= 10; k$3 /= 10) n$1++;
+			var i$2, j, k$1, n$1, rd, doRound, w, xdi, xd = x$1.d;
+			for (n$1 = 1, k$1 = xd[0]; k$1 >= 10; k$1 /= 10) n$1++;
 			i$2 = sd - n$1;
 			if (i$2 < 0) {
 				i$2 += LOG_BASE;
@@ -16322,24 +15644,24 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 				w = xd[xdi = 0];
 			} else {
 				xdi = Math.ceil((i$2 + 1) / LOG_BASE);
-				k$3 = xd.length;
-				if (xdi >= k$3) return x$1;
-				w = k$3 = xd[xdi];
-				for (n$1 = 1; k$3 >= 10; k$3 /= 10) n$1++;
+				k$1 = xd.length;
+				if (xdi >= k$1) return x$1;
+				w = k$1 = xd[xdi];
+				for (n$1 = 1; k$1 >= 10; k$1 /= 10) n$1++;
 				i$2 %= LOG_BASE;
 				j = i$2 - LOG_BASE + n$1;
 			}
 			if (rm !== void 0) {
-				k$3 = mathpow(10, n$1 - j - 1);
-				rd = w / k$3 % 10 | 0;
-				doRound = sd < 0 || xd[xdi + 1] !== void 0 || w % k$3;
+				k$1 = mathpow(10, n$1 - j - 1);
+				rd = w / k$1 % 10 | 0;
+				doRound = sd < 0 || xd[xdi + 1] !== void 0 || w % k$1;
 				doRound = rm < 4 ? (rd || doRound) && (rm == 0 || rm == (x$1.s < 0 ? 3 : 2)) : rd > 5 || rd == 5 && (rm == 4 || doRound || rm == 6 && (i$2 > 0 ? j > 0 ? w / mathpow(10, n$1 - j) : 0 : xd[xdi - 1]) % 10 & 1 || rm == (x$1.s < 0 ? 8 : 7));
 			}
 			if (sd < 1 || !xd[0]) {
 				if (doRound) {
-					k$3 = getBase10Exponent(x$1);
+					k$1 = getBase10Exponent(x$1);
 					xd.length = 1;
-					sd = sd - k$3 - 1;
+					sd = sd - k$1 - 1;
 					xd[0] = mathpow(10, (LOG_BASE - sd % LOG_BASE) % LOG_BASE);
 					x$1.e = mathfloor(-sd / LOG_BASE) || 0;
 				} else {
@@ -16350,31 +15672,31 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			}
 			if (i$2 == 0) {
 				xd.length = xdi;
-				k$3 = 1;
+				k$1 = 1;
 				xdi--;
 			} else {
 				xd.length = xdi + 1;
-				k$3 = mathpow(10, LOG_BASE - i$2);
-				xd[xdi] = j > 0 ? (w / mathpow(10, n$1 - j) % mathpow(10, j) | 0) * k$3 : 0;
+				k$1 = mathpow(10, LOG_BASE - i$2);
+				xd[xdi] = j > 0 ? (w / mathpow(10, n$1 - j) % mathpow(10, j) | 0) * k$1 : 0;
 			}
 			if (doRound) for (;;) if (xdi == 0) {
-				if ((xd[0] += k$3) == BASE) {
+				if ((xd[0] += k$1) == BASE) {
 					xd[0] = 1;
 					++x$1.e;
 				}
 				break;
 			} else {
-				xd[xdi] += k$3;
+				xd[xdi] += k$1;
 				if (xd[xdi] != BASE) break;
 				xd[xdi--] = 0;
-				k$3 = 1;
+				k$1 = 1;
 			}
 			for (i$2 = xd.length; xd[--i$2] === 0;) xd.pop();
 			if (external && (x$1.e > MAX_E || x$1.e < -MAX_E)) throw Error(exponentOutOfRange + getBase10Exponent(x$1));
 			return x$1;
 		}
 		function subtract(x$1, y$1) {
-			var d, e, i$2, j, k$3, len, xd, xe$1, xLTy, yd, Ctor = x$1.constructor, pr = Ctor.precision;
+			var d, e, i$2, j, k$1, len, xd, xe, xLTy, yd, Ctor = x$1.constructor, pr = Ctor.precision;
 			if (!x$1.s || !y$1.s) {
 				if (y$1.s) y$1.s = -y$1.s;
 				else y$1 = new Ctor(x$1);
@@ -16383,27 +15705,27 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			xd = x$1.d;
 			yd = y$1.d;
 			e = y$1.e;
-			xe$1 = x$1.e;
+			xe = x$1.e;
 			xd = xd.slice();
-			k$3 = xe$1 - e;
-			if (k$3) {
-				xLTy = k$3 < 0;
+			k$1 = xe - e;
+			if (k$1) {
+				xLTy = k$1 < 0;
 				if (xLTy) {
 					d = xd;
-					k$3 = -k$3;
+					k$1 = -k$1;
 					len = yd.length;
 				} else {
 					d = yd;
-					e = xe$1;
+					e = xe;
 					len = xd.length;
 				}
 				i$2 = Math.max(Math.ceil(pr / LOG_BASE), len) + 2;
-				if (k$3 > i$2) {
-					k$3 = i$2;
+				if (k$1 > i$2) {
+					k$1 = i$2;
 					d.length = 1;
 				}
 				d.reverse();
-				for (i$2 = k$3; i$2--;) d.push(0);
+				for (i$2 = k$1; i$2--;) d.push(0);
 				d.reverse();
 			} else {
 				i$2 = xd.length;
@@ -16414,7 +15736,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 					xLTy = xd[i$2] < yd[i$2];
 					break;
 				}
-				k$3 = 0;
+				k$1 = 0;
 			}
 			if (xLTy) {
 				d = xd;
@@ -16424,7 +15746,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			}
 			len = xd.length;
 			for (i$2 = yd.length - len; i$2 > 0; --i$2) xd[len++] = 0;
-			for (i$2 = yd.length; i$2 > k$3;) {
+			for (i$2 = yd.length; i$2 > k$1;) {
 				if (xd[--i$2] < yd[i$2]) {
 					for (j = i$2; j && xd[--j] === 0;) xd[j] = BASE - 1;
 					--xd[j];
@@ -16440,22 +15762,22 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			return external ? round(y$1, pr) : y$1;
 		}
 		function toString$4(x$1, isExp, sd) {
-			var k$3, e = getBase10Exponent(x$1), str = digitsToString(x$1.d), len = str.length;
+			var k$1, e = getBase10Exponent(x$1), str = digitsToString(x$1.d), len = str.length;
 			if (isExp) {
-				if (sd && (k$3 = sd - len) > 0) str = str.charAt(0) + "." + str.slice(1) + getZeroString(k$3);
+				if (sd && (k$1 = sd - len) > 0) str = str.charAt(0) + "." + str.slice(1) + getZeroString(k$1);
 				else if (len > 1) str = str.charAt(0) + "." + str.slice(1);
 				str = str + (e < 0 ? "e" : "e+") + e;
 			} else if (e < 0) {
 				str = "0." + getZeroString(-e - 1) + str;
-				if (sd && (k$3 = sd - len) > 0) str += getZeroString(k$3);
+				if (sd && (k$1 = sd - len) > 0) str += getZeroString(k$1);
 			} else if (e >= len) {
 				str += getZeroString(e + 1 - len);
-				if (sd && (k$3 = sd - e - 1) > 0) str = str + "." + getZeroString(k$3);
+				if (sd && (k$1 = sd - e - 1) > 0) str = str + "." + getZeroString(k$1);
 			} else {
-				if ((k$3 = e + 1) < len) str = str.slice(0, k$3) + "." + str.slice(k$3);
-				if (sd && (k$3 = sd - len) > 0) {
+				if ((k$1 = e + 1) < len) str = str.slice(0, k$1) + "." + str.slice(k$1);
+				if (sd && (k$1 = sd - len) > 0) {
 					if (e + 1 === len) str += ".";
-					str += getZeroString(k$3);
+					str += getZeroString(k$1);
 				}
 			}
 			return x$1.s < 0 ? "-" + str : str;
@@ -16467,7 +15789,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 			}
 		}
 		function clone$1(obj) {
-			var i$2, p$1, ps;
+			var i$2, p, ps;
 			function Decimal$3(value) {
 				var x$1 = this;
 				if (!(x$1 instanceof Decimal$3)) return new Decimal$3(value);
@@ -16504,7 +15826,7 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 				if (isDecimal.test(value)) parseDecimal(x$1, value);
 				else throw Error(invalidArgument + value);
 			}
-			Decimal$3.prototype = P$1;
+			Decimal$3.prototype = P;
 			Decimal$3.ROUND_UP = 0;
 			Decimal$3.ROUND_DOWN = 1;
 			Decimal$3.ROUND_CEIL = 2;
@@ -16525,14 +15847,14 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 					"toExpPos",
 					"LN10"
 				];
-				for (i$2 = 0; i$2 < ps.length;) if (!obj.hasOwnProperty(p$1 = ps[i$2++])) obj[p$1] = this[p$1];
+				for (i$2 = 0; i$2 < ps.length;) if (!obj.hasOwnProperty(p = ps[i$2++])) obj[p] = this[p];
 			}
 			Decimal$3.config(obj);
 			return Decimal$3;
 		}
 		function config$1(obj) {
 			if (!obj || typeof obj !== "object") throw Error(decimalError + "Object expected");
-			var i$2, p$1, v, ps = [
+			var i$2, p, v, ps = [
 				"precision",
 				1,
 				MAX_DIGITS,
@@ -16546,10 +15868,10 @@ var require_decimal = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 				0,
 				Infinity
 			];
-			for (i$2 = 0; i$2 < ps.length; i$2 += 3) if ((v = obj[p$1 = ps[i$2]]) !== void 0) if (mathfloor(v) === v && v >= ps[i$2 + 1] && v <= ps[i$2 + 2]) this[p$1] = v;
-			else throw Error(invalidArgument + p$1 + ": " + v);
-			if ((v = obj[p$1 = "LN10"]) !== void 0) if (v == Math.LN10) this[p$1] = new this(v);
-			else throw Error(invalidArgument + p$1 + ": " + v);
+			for (i$2 = 0; i$2 < ps.length; i$2 += 3) if ((v = obj[p = ps[i$2]]) !== void 0) if (mathfloor(v) === v && v >= ps[i$2 + 1] && v <= ps[i$2 + 2]) this[p] = v;
+			else throw Error(invalidArgument + p + ": " + v);
+			if ((v = obj[p = "LN10"]) !== void 0) if (v == Math.LN10) this[p] = new this(v);
+			else throw Error(invalidArgument + p + ": " + v);
 			return this;
 		}
 		Decimal$2 = clone$1(Decimal$2);
@@ -16736,7 +16058,7 @@ function _iterableToArrayLimit$7(arr, i$2) {
 	var _arr = [];
 	var _n = true;
 	var _d = false;
-	var _e$1 = void 0;
+	var _e = void 0;
 	try {
 		for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) {
 			_arr.push(_s.value);
@@ -16744,12 +16066,12 @@ function _iterableToArrayLimit$7(arr, i$2) {
 		}
 	} catch (err) {
 		_d = true;
-		_e$1 = err;
+		_e = err;
 	} finally {
 		try {
 			if (!_n && _i["return"] != null) _i["return"]();
 		} finally {
-			if (_d) throw _e$1;
+			if (_d) throw _e;
 		}
 	}
 	return _arr;
@@ -16927,7 +16249,7 @@ function _arrayLikeToArray$13(arr, len) {
 function _iterableToArrayLimit$6(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -16937,7 +16259,7 @@ function _iterableToArrayLimit$6(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1["return"] && (u$1 = t$1["return"](), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1["return"] && (u = t$1["return"](), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -17026,12 +16348,12 @@ function _inherits$12(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$12(subClass, superClass);
 }
-function _setPrototypeOf$12(o$1, p$1) {
-	_setPrototypeOf$12 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$12(o$1, p) {
+	_setPrototypeOf$12 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$12(o$1, p$1);
+	return _setPrototypeOf$12(o$1, p);
 }
 function _defineProperty$32(obj, key, value) {
 	key = _toPropertyKey$32(key);
@@ -17560,8 +16882,8 @@ var getDomainOfErrorBars = function getDomainOfErrorBars$1(data, item, dataKey, 
 			var entryValue = getValueByDataKey(entry, dataKey);
 			if ((0, import_isNil$7.default)(entryValue)) return result;
 			var mainValue = Array.isArray(entryValue) ? [(0, import_min.default)(entryValue), (0, import_max$1.default)(entryValue)] : [entryValue, entryValue];
-			var errorDomain = keys$6.reduce(function(prevErrorArr, k$3) {
-				var errorValue = getValueByDataKey(entry, k$3, 0);
+			var errorDomain = keys$6.reduce(function(prevErrorArr, k$1) {
+				var errorValue = getValueByDataKey(entry, k$1, 0);
 				var lowerValue = mainValue[0] - Math.abs(Array.isArray(errorValue) ? errorValue[0] : errorValue);
 				var upperValue = mainValue[1] + Math.abs(Array.isArray(errorValue) ? errorValue[1] : errorValue);
 				return [Math.min(lowerValue, prevErrorArr[0]), Math.max(upperValue, prevErrorArr[1])];
@@ -17738,7 +17060,7 @@ var STACK_OFFSET_MAP = {
 	sign: function offsetSign$1(series) {
 		var n$1 = series.length;
 		if (n$1 <= 0) return;
-		for (var j = 0, m$1 = series[0].length; j < m$1; ++j) {
+		for (var j = 0, m = series[0].length; j < m; ++j) {
 			var positive = 0;
 			var negative = 0;
 			for (var i$2 = 0; i$2 < n$1; ++i$2) {
@@ -17762,7 +17084,7 @@ var STACK_OFFSET_MAP = {
 	positive: function offsetPositive$1(series) {
 		var n$1 = series.length;
 		if (n$1 <= 0) return;
-		for (var j = 0, m$1 = series[0].length; j < m$1; ++j) {
+		for (var j = 0, m = series[0].length; j < m; ++j) {
 			var positive = 0;
 			for (var i$2 = 0; i$2 < n$1; ++i$2) {
 				var value = (0, import_isNaN$1.default)(series[i$2][j][1]) ? series[i$2][j][0] : series[i$2][j][1];
@@ -18972,14 +18294,14 @@ var CURVE_FACTORIES = {
 	curveStepAfter: stepAfter,
 	curveStepBefore: stepBefore
 };
-var defined = function defined$1(p$1) {
-	return p$1.x === +p$1.x && p$1.y === +p$1.y;
+var defined = function defined$1(p) {
+	return p.x === +p.x && p.y === +p.y;
 };
-var getX = function getX$1(p$1) {
-	return p$1.x;
+var getX = function getX$1(p) {
+	return p.x;
 };
-var getY = function getY$1(p$1) {
-	return p$1.y;
+var getY = function getY$1(p) {
+	return p.y;
 };
 var getCurveFactory = function getCurveFactory$1(type, layout) {
 	if ((0, import_isFunction$11.default)(type)) return type;
@@ -19096,7 +18418,7 @@ var require_react_is_development = /* @__PURE__ */ __commonJSMin(((exports) => {
 		var Fragment = REACT_FRAGMENT_TYPE;
 		var Lazy = REACT_LAZY_TYPE;
 		var Memo = REACT_MEMO_TYPE;
-		var Portal$1 = REACT_PORTAL_TYPE;
+		var Portal = REACT_PORTAL_TYPE;
 		var Profiler = REACT_PROFILER_TYPE;
 		var StrictMode = REACT_STRICT_MODE_TYPE;
 		var Suspense = REACT_SUSPENSE_TYPE;
@@ -19153,7 +18475,7 @@ var require_react_is_development = /* @__PURE__ */ __commonJSMin(((exports) => {
 		exports.Fragment = Fragment;
 		exports.Lazy = Lazy;
 		exports.Memo = Memo;
-		exports.Portal = Portal$1;
+		exports.Portal = Portal;
 		exports.Profiler = Profiler;
 		exports.StrictMode = StrictMode;
 		exports.Suspense = Suspense;
@@ -20113,7 +19435,7 @@ function _nonIterableRest$5() {
 function _iterableToArrayLimit$5(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -20123,7 +19445,7 @@ function _iterableToArrayLimit$5(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1.return && (u$1 = t$1.return(), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1.return && (u = t$1.return(), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -20383,7 +19705,7 @@ function _arrayLikeToArray$7(arr, len) {
 function _iterableToArrayLimit$4(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -20393,7 +19715,7 @@ function _iterableToArrayLimit$4(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1.return && (u$1 = t$1.return(), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1.return && (u = t$1.return(), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -20404,8 +19726,8 @@ function _iterableToArrayLimit$4(r$1, l) {
 function _arrayWithHoles$4(arr) {
 	if (Array.isArray(arr)) return arr;
 }
-var alpha = function alpha$1(begin, end, k$3) {
-	return begin + (end - begin) * k$3;
+var alpha = function alpha$1(begin, end, k$1) {
+	return begin + (end - begin) * k$1;
 };
 var needContinue = function needContinue$1(_ref) {
 	return _ref.from !== _ref.to;
@@ -20635,12 +19957,12 @@ function _inherits$11(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$11(subClass, superClass);
 }
-function _setPrototypeOf$11(o$1, p$1) {
-	_setPrototypeOf$11 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$11(o$1, p) {
+	_setPrototypeOf$11 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$11(o$1, p$1);
+	return _setPrototypeOf$11(o$1, p);
 }
 function _createSuper(Derived) {
 	var hasNativeReflectConstruct = _isNativeReflectConstruct$11();
@@ -20958,7 +20280,7 @@ function _arrayLikeToArray$5(arr, len) {
 function _iterableToArrayLimit$3(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -20968,7 +20290,7 @@ function _iterableToArrayLimit$3(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1["return"] && (u$1 = t$1["return"](), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1["return"] && (u = t$1["return"](), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -21336,7 +20658,7 @@ function _arrayLikeToArray$4(arr, len) {
 function _iterableToArrayLimit$2(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -21346,7 +20668,7 @@ function _iterableToArrayLimit$2(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1["return"] && (u$1 = t$1["return"](), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1["return"] && (u = t$1["return"](), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -21883,12 +21205,12 @@ function _inherits$10(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$10(subClass, superClass);
 }
-function _setPrototypeOf$10(o$1, p$1) {
-	_setPrototypeOf$10 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$10(o$1, p) {
+	_setPrototypeOf$10 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$10(o$1, p$1);
+	return _setPrototypeOf$10(o$1, p);
 }
 function _defineProperty$16(obj, key, value) {
 	key = _toPropertyKey$16(key);
@@ -22695,12 +22017,12 @@ function _inherits$9(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$9(subClass, superClass);
 }
-function _setPrototypeOf$9(o$1, p$1) {
-	_setPrototypeOf$9 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$9(o$1, p) {
+	_setPrototypeOf$9 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$9(o$1, p$1);
+	return _setPrototypeOf$9(o$1, p);
 }
 function _defineProperty$14(obj, key, value) {
 	key = _toPropertyKey$14(key);
@@ -23479,12 +22801,12 @@ function _inherits$8(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$8(subClass, superClass);
 }
-function _setPrototypeOf$8(o$1, p$1) {
-	_setPrototypeOf$8 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$8(o$1, p) {
+	_setPrototypeOf$8 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$8(o$1, p$1);
+	return _setPrototypeOf$8(o$1, p);
 }
 function ownKeys$9(e, r$1) {
 	var t$1 = Object.keys(e);
@@ -23554,7 +22876,7 @@ function _arrayLikeToArray$3(arr, len) {
 function _iterableToArrayLimit$1(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -23564,7 +22886,7 @@ function _iterableToArrayLimit$1(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1["return"] && (u$1 = t$1["return"](), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1["return"] && (u = t$1["return"](), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -23621,11 +22943,11 @@ var getEndPoints = function getEndPoints$1(scales, isFixedX, isFixedY, isSegment
 		return xAxisOrientation === "top" ? _points.reverse() : _points;
 	}
 	if (isSegment) {
-		var _points2 = props.segment.map(function(p$1) {
-			return scales.apply(p$1, { position });
+		var _points2 = props.segment.map(function(p) {
+			return scales.apply(p, { position });
 		});
-		if (ifOverflowMatches(props, "discard") && (0, import_some.default)(_points2, function(p$1) {
-			return !scales.isInRange(p$1);
+		if (ifOverflowMatches(props, "discard") && (0, import_some.default)(_points2, function(p) {
+			return !scales.isInRange(p);
 		})) return null;
 		return _points2;
 	}
@@ -23777,12 +23099,12 @@ function _inherits$7(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$7(subClass, superClass);
 }
-function _setPrototypeOf$7(o$1, p$1) {
-	_setPrototypeOf$7 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$7(o$1, p) {
+	_setPrototypeOf$7 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$7(o$1, p$1);
+	return _setPrototypeOf$7(o$1, p);
 }
 function _defineProperty$11(obj, key, value) {
 	key = _toPropertyKey$11(key);
@@ -23970,12 +23292,12 @@ function _inherits$6(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$6(subClass, superClass);
 }
-function _setPrototypeOf$6(o$1, p$1) {
-	_setPrototypeOf$6 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$6(o$1, p) {
+	_setPrototypeOf$6 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$6(o$1, p$1);
+	return _setPrototypeOf$6(o$1, p);
 }
 function _defineProperty$10(obj, key, value) {
 	key = _toPropertyKey$10(key);
@@ -24397,12 +23719,12 @@ function _inherits$5(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$5(subClass, superClass);
 }
-function _setPrototypeOf$5(o$1, p$1) {
-	_setPrototypeOf$5 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$5(o$1, p) {
+	_setPrototypeOf$5 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$5(o$1, p$1);
+	return _setPrototypeOf$5(o$1, p);
 }
 function _defineProperty$8(obj, key, value) {
 	key = _toPropertyKey$8(key);
@@ -25132,12 +24454,12 @@ function _inherits$4(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$4(subClass, superClass);
 }
-function _setPrototypeOf$4(o$1, p$1) {
-	_setPrototypeOf$4 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$4(o$1, p) {
+	_setPrototypeOf$4 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$4(o$1, p$1);
+	return _setPrototypeOf$4(o$1, p);
 }
 function _defineProperty$6(obj, key, value) {
 	key = _toPropertyKey$6(key);
@@ -25635,12 +24957,12 @@ function _inherits$3(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$3(subClass, superClass);
 }
-function _setPrototypeOf$3(o$1, p$1) {
-	_setPrototypeOf$3 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$3(o$1, p) {
+	_setPrototypeOf$3 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$3(o$1, p$1);
+	return _setPrototypeOf$3(o$1, p);
 }
 function _defineProperty$5(obj, key, value) {
 	key = _toPropertyKey$5(key);
@@ -26089,12 +25411,12 @@ function _inherits$2(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$2(subClass, superClass);
 }
-function _setPrototypeOf$2(o$1, p$1) {
-	_setPrototypeOf$2 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$2(o$1, p) {
+	_setPrototypeOf$2 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$2(o$1, p$1);
+	return _setPrototypeOf$2(o$1, p);
 }
 function _defineProperty$4(obj, key, value) {
 	key = _toPropertyKey$4(key);
@@ -26245,12 +25567,12 @@ function _inherits$1(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf$1(subClass, superClass);
 }
-function _setPrototypeOf$1(o$1, p$1) {
-	_setPrototypeOf$1 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf$1(o$1, p) {
+	_setPrototypeOf$1 = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf$1(o$1, p$1);
+	return _setPrototypeOf$1(o$1, p);
 }
 function _defineProperty$3(obj, key, value) {
 	key = _toPropertyKey$3(key);
@@ -26436,8 +25758,8 @@ var eventCenter = new (/* @__PURE__ */ __toESM((/* @__PURE__ */ __commonJSMin(((
 		var evt = prefix ? prefix + event : event, handlers = this._events[evt];
 		if (!handlers) return [];
 		if (handlers.fn) return [handlers.fn];
-		for (var i$2 = 0, l = handlers.length, ee$1 = new Array(l); i$2 < l; i$2++) ee$1[i$2] = handlers[i$2].fn;
-		return ee$1;
+		for (var i$2 = 0, l = handlers.length, ee = new Array(l); i$2 < l; i$2++) ee[i$2] = handlers[i$2].fn;
+		return ee;
 	};
 	EventEmitter$1.prototype.listenerCount = function listenerCount(event) {
 		var evt = prefix ? prefix + event : event, listeners = this._events[evt];
@@ -26844,7 +26166,7 @@ function _nonIterableRest() {
 function _iterableToArrayLimit(r$1, l) {
 	var t$1 = null == r$1 ? null : "undefined" != typeof Symbol && r$1[Symbol.iterator] || r$1["@@iterator"];
 	if (null != t$1) {
-		var e, n$1, i$2, u$1, a$2 = [], f = !0, o$1 = !1;
+		var e, n$1, i$2, u, a$2 = [], f = !0, o$1 = !1;
 		try {
 			if (i$2 = (t$1 = t$1.call(r$1)).next, 0 === l) {
 				if (Object(t$1) !== t$1) return;
@@ -26854,7 +26176,7 @@ function _iterableToArrayLimit(r$1, l) {
 			o$1 = !0, n$1 = r$2;
 		} finally {
 			try {
-				if (!f && null != t$1["return"] && (u$1 = t$1["return"](), Object(u$1) !== u$1)) return;
+				if (!f && null != t$1["return"] && (u = t$1["return"](), Object(u) !== u)) return;
 			} finally {
 				if (o$1) throw n$1;
 			}
@@ -26943,12 +26265,12 @@ function _inherits(subClass, superClass) {
 	Object.defineProperty(subClass, "prototype", { writable: false });
 	if (superClass) _setPrototypeOf(subClass, superClass);
 }
-function _setPrototypeOf(o$1, p$1) {
-	_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$2) {
-		o$2.__proto__ = p$2;
+function _setPrototypeOf(o$1, p) {
+	_setPrototypeOf = Object.setPrototypeOf ? Object.setPrototypeOf.bind() : function _setPrototypeOf$17(o$2, p$1) {
+		o$2.__proto__ = p$1;
 		return o$2;
 	};
-	return _setPrototypeOf(o$1, p$1);
+	return _setPrototypeOf(o$1, p);
 }
 function _toConsumableArray(arr) {
 	return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread();
@@ -28737,11 +28059,11 @@ function PresenterTable({ data, loading }) {
 			acc[curr.presenter].raw.push(curr);
 			return acc;
 		}, {});
-		return Object.values(grouped).map((p$1) => ({
-			...p$1,
-			conversion: p$1.lives ? p$1.conversion / p$1.lives : 0,
-			retention: p$1.lives ? p$1.retention / p$1.lives : 0,
-			raw: p$1.raw.sort((a$2, b) => new Date(a$2.date).getTime() - new Date(b.date).getTime())
+		return Object.values(grouped).map((p) => ({
+			...p,
+			conversion: p.lives ? p.conversion / p.lives : 0,
+			retention: p.lives ? p.retention / p.lives : 0,
+			raw: p.raw.sort((a$2, b) => new Date(a$2.date).getTime() - new Date(b.date).getTime())
 		}));
 	}, [data]);
 	const sortedData = (0, import_react.useMemo)(() => {
@@ -29293,4 +28615,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-C3TwbPy3.js.map
+//# sourceMappingURL=Lives-DDOhWFc4.js.map
