@@ -1,5 +1,5 @@
-import { a as parseISO, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, l as isSameDay, m as ArrowUp, n as Popover, o as subDays, p as ChevronLeft, r as PopoverContent, s as isBefore, t as Calendar } from "./calendar-C0T6z0nh.js";
-import { A as DropdownMenuItem, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, F as formatDistanceToNow, I as format, Lt as toast, N as COLUMNS, O as DropdownMenu, P as useCRMStore, Rt as cn, St as Input, T as DialogTitle, Tt as useIsMobile, U as getRoundingMethod, W as differenceInDays, Wt as LoaderCircle, X as normalizeDates, Xt as cva, Yt as createLucideIcon, a as Select, at as require_shim, b as DialogClose, c as SelectTrigger, cn as require_jsx_runtime, ct as Content, d as Label, dt as Portal, fn as require_react, ft as Root$1, gt as createDialogScope, hn as __toESM, ht as WarningProvider, j as DropdownMenuTrigger, k as DropdownMenuContent, l as SelectValue, ln as useComposedRefs, lt as Description, mt as Trigger, nt as millisecondsInHour, o as SelectContent, on as createSlottable, pt as Title, q as constructNow, rn as useCallbackRef, s as SelectItem, sn as createContextScope, st as Close, tn as useLayoutEffect2, tt as constructFrom, un as composeEventHandlers, ut as Overlay, w as DialogHeader, wt as buttonVariants, x as DialogContent, xt as Primitive, y as Dialog } from "./index-DxFsgkHc.js";
+import { _ as ChevronLeft, a as Popover, c as parseISO, f as isSameDay, g as DollarSign, h as Download, i as Calendar, l as subDays, n as AvatarFallback, o as PopoverContent, r as AvatarImage, s as PopoverTrigger, t as Avatar, u as isBefore, v as ArrowUp, y as ArrowRightLeft } from "./avatar-peZv_K9Q.js";
+import { A as DropdownMenuItem, B as format, C as DialogFooter, D as ptBR, Dt as Button, Et as Input, Ht as cn, J as differenceInDays, L as COLUMNS, O as DropdownMenu, Ot as buttonVariants, R as useCRMStore, T as DialogTitle, Vt as toast, Wt as Users, Z as constructNow, _n as require_react, _t as Title, a as Select, at as constructFrom, b as DialogClose, bn as __toESM, bt as createDialogScope, c as SelectTrigger, d as Label, dn as createSlottable, dt as Close, en as createLucideIcon, et as normalizeDates, fn as createContextScope, ft as Content, gt as Root, hn as composeEventHandlers, ht as Portal, j as DropdownMenuTrigger, k as DropdownMenuContent, kt as useIsMobile, l as SelectValue, mn as useComposedRefs, mt as Overlay, o as SelectContent, ot as millisecondsInHour, pn as require_jsx_runtime, pt as Description, q as getRoundingMethod, qt as LoaderCircle, s as SelectItem, tn as cva, vt as Trigger, w as DialogHeader, x as DialogContent, y as Dialog, yt as WarningProvider, z as formatDistanceToNow } from "./index-DYsSvQT3.js";
 var Activity = createLucideIcon("activity", [["path", {
 	d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
 	key: "169zse"
@@ -41,20 +41,6 @@ var CircleCheck = createLucideIcon("circle-check", [["circle", {
 	d: "m9 12 2 2 4-4",
 	key: "dzmm74"
 }]]);
-var Download = createLucideIcon("download", [
-	["path", {
-		d: "M12 15V3",
-		key: "m9g1x1"
-	}],
-	["path", {
-		d: "M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4",
-		key: "ih7n3h"
-	}],
-	["path", {
-		d: "m7 10 5 5 5-5",
-		key: "brsn70"
-	}]
-]);
 var Globe = createLucideIcon("globe", [
 	["circle", {
 		cx: "12",
@@ -1028,197 +1014,13 @@ function LeadTimeline({ lead }) {
 		})]
 	});
 }
-function createContextScope$1(scopeName, createContextScopeDeps = []) {
-	let defaultContexts = [];
-	function createContext3(rootComponentName, defaultContext) {
-		const BaseContext = import_react.createContext(defaultContext);
-		BaseContext.displayName = rootComponentName + "Context";
-		const index = defaultContexts.length;
-		defaultContexts = [...defaultContexts, defaultContext];
-		const Provider = (props) => {
-			const { scope, children, ...context } = props;
-			const Context = scope?.[scopeName]?.[index] || BaseContext;
-			const value = import_react.useMemo(() => context, Object.values(context));
-			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Context.Provider, {
-				value,
-				children
-			});
-		};
-		Provider.displayName = rootComponentName + "Provider";
-		function useContext2(consumerName, scope) {
-			const Context = scope?.[scopeName]?.[index] || BaseContext;
-			const context = import_react.useContext(Context);
-			if (context) return context;
-			if (defaultContext !== void 0) return defaultContext;
-			throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
-		}
-		return [Provider, useContext2];
-	}
-	const createScope = () => {
-		const scopeContexts = defaultContexts.map((defaultContext) => {
-			return import_react.createContext(defaultContext);
-		});
-		return function useScope(scope) {
-			const contexts = scope?.[scopeName] || scopeContexts;
-			return import_react.useMemo(() => ({ [`__scope${scopeName}`]: {
-				...scope,
-				[scopeName]: contexts
-			} }), [scope, contexts]);
-		};
-	};
-	createScope.scopeName = scopeName;
-	return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
-}
-function composeContextScopes(...scopes) {
-	const baseScope = scopes[0];
-	if (scopes.length === 1) return baseScope;
-	const createScope = () => {
-		const scopeHooks = scopes.map((createScope2) => ({
-			useScope: createScope2(),
-			scopeName: createScope2.scopeName
-		}));
-		return function useComposedScopes(overrideScopes) {
-			const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
-				const currentScope = useScope(overrideScopes)[`__scope${scopeName}`];
-				return {
-					...nextScopes2,
-					...currentScope
-				};
-			}, {});
-			return import_react.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
-		};
-	};
-	createScope.scopeName = baseScope.scopeName;
-	return createScope;
-}
-var import_shim = require_shim();
-function useIsHydrated() {
-	return (0, import_shim.useSyncExternalStore)(subscribe, () => true, () => false);
-}
-function subscribe() {
-	return () => {};
-}
-var AVATAR_NAME = "Avatar";
-var [createAvatarContext, createAvatarScope] = createContextScope$1(AVATAR_NAME);
-var [AvatarProvider, useAvatarContext] = createAvatarContext(AVATAR_NAME);
-var Avatar$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAvatar, ...avatarProps } = props;
-	const [imageLoadingStatus, setImageLoadingStatus] = import_react.useState("idle");
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarProvider, {
-		scope: __scopeAvatar,
-		imageLoadingStatus,
-		onImageLoadingStatusChange: setImageLoadingStatus,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
-			...avatarProps,
-			ref: forwardedRef
-		})
-	});
-});
-Avatar$1.displayName = AVATAR_NAME;
-var IMAGE_NAME = "AvatarImage";
-var AvatarImage$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAvatar, src, onLoadingStatusChange = () => {}, ...imageProps } = props;
-	const context = useAvatarContext(IMAGE_NAME, __scopeAvatar);
-	const imageLoadingStatus = useImageLoadingStatus(src, imageProps);
-	const handleLoadingStatusChange = useCallbackRef((status) => {
-		onLoadingStatusChange(status);
-		context.onImageLoadingStatusChange(status);
-	});
-	useLayoutEffect2(() => {
-		if (imageLoadingStatus !== "idle") handleLoadingStatusChange(imageLoadingStatus);
-	}, [imageLoadingStatus, handleLoadingStatusChange]);
-	return imageLoadingStatus === "loaded" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.img, {
-		...imageProps,
-		ref: forwardedRef,
-		src
-	}) : null;
-});
-AvatarImage$1.displayName = IMAGE_NAME;
-var FALLBACK_NAME = "AvatarFallback";
-var AvatarFallback$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAvatar, delayMs, ...fallbackProps } = props;
-	const context = useAvatarContext(FALLBACK_NAME, __scopeAvatar);
-	const [canRender, setCanRender] = import_react.useState(delayMs === void 0);
-	import_react.useEffect(() => {
-		if (delayMs !== void 0) {
-			const timerId = window.setTimeout(() => setCanRender(true), delayMs);
-			return () => window.clearTimeout(timerId);
-		}
-	}, [delayMs]);
-	return canRender && context.imageLoadingStatus !== "loaded" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
-		...fallbackProps,
-		ref: forwardedRef
-	}) : null;
-});
-AvatarFallback$1.displayName = FALLBACK_NAME;
-function resolveLoadingStatus(image, src) {
-	if (!image) return "idle";
-	if (!src) return "error";
-	if (image.src !== src) image.src = src;
-	return image.complete && image.naturalWidth > 0 ? "loaded" : "loading";
-}
-function useImageLoadingStatus(src, { referrerPolicy, crossOrigin }) {
-	const isHydrated = useIsHydrated();
-	const imageRef = import_react.useRef(null);
-	const image = (() => {
-		if (!isHydrated) return null;
-		if (!imageRef.current) imageRef.current = new window.Image();
-		return imageRef.current;
-	})();
-	const [loadingStatus, setLoadingStatus] = import_react.useState(() => resolveLoadingStatus(image, src));
-	useLayoutEffect2(() => {
-		setLoadingStatus(resolveLoadingStatus(image, src));
-	}, [image, src]);
-	useLayoutEffect2(() => {
-		const updateStatus = (status) => () => {
-			setLoadingStatus(status);
-		};
-		if (!image) return;
-		const handleLoad = updateStatus("loaded");
-		const handleError = updateStatus("error");
-		image.addEventListener("load", handleLoad);
-		image.addEventListener("error", handleError);
-		if (referrerPolicy) image.referrerPolicy = referrerPolicy;
-		if (typeof crossOrigin === "string") image.crossOrigin = crossOrigin;
-		return () => {
-			image.removeEventListener("load", handleLoad);
-			image.removeEventListener("error", handleError);
-		};
-	}, [
-		image,
-		crossOrigin,
-		referrerPolicy
-	]);
-	return loadingStatus;
-}
-var Root = Avatar$1;
-var Image = AvatarImage$1;
-var Fallback = AvatarFallback$1;
-var Avatar = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
-	ref,
-	className: cn("relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full", className),
-	...props
-}));
-Avatar.displayName = Root.displayName;
-var AvatarImage = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Image, {
-	ref,
-	className: cn("aspect-square h-full w-full", className),
-	...props
-}));
-AvatarImage.displayName = Image.displayName;
-var AvatarFallback = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Fallback, {
-	ref,
-	className: cn("flex h-full w-full items-center justify-center rounded-full bg-muted", className),
-	...props
-}));
-AvatarFallback.displayName = Fallback.displayName;
 var ROOT_NAME = "AlertDialog";
 var [createAlertDialogContext, createAlertDialogScope] = createContextScope(ROOT_NAME, [createDialogScope]);
 var useDialogScope = createDialogScope();
 var AlertDialog$1 = (props) => {
 	const { __scopeAlertDialog, ...alertDialogProps } = props;
 	const dialogScope = useDialogScope(__scopeAlertDialog);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root$1, {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
 		...dialogScope,
 		...alertDialogProps,
 		modal: true
@@ -2170,4 +1972,4 @@ function CRM() {
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-C2qM6538.js.map
+//# sourceMappingURL=CRM-CjuTmffo.js.map

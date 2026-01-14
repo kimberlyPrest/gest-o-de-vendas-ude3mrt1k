@@ -20,7 +20,7 @@ import { HostPerformanceChart } from '@/components/lives/HostPerformanceChart'
 import { WeekdayEfficiencyChart } from '@/components/lives/WeekdayEfficiencyChart'
 import { RevenueEvolutionChart } from '@/components/lives/RevenueEvolutionChart'
 import { AudienceScatterChart } from '@/components/lives/AudienceScatterChart'
-import { HostComparison } from '@/components/lives/HostComparison'
+import { LiveComparative } from '@/components/lives/LiveComparative'
 import { StreamTable } from '@/components/lives/StreamTable'
 
 export default function Lives() {
@@ -182,8 +182,13 @@ export default function Lives() {
         />
       </section>
 
-      {/* Host Comparison (Conditionally Rendered) */}
-      <HostComparison data={currentData} presenters={filters.presenters} />
+      {/* Comparative Analysis Section (Tabs) */}
+      <LiveComparative
+        data={currentData}
+        allData={allData}
+        loading={loading}
+        presenters={filters.presenters}
+      />
 
       {/* Main Content Area */}
       {currentData.length === 0 && !loading ? (
