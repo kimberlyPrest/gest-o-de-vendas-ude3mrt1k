@@ -1,5 +1,5 @@
-import { a as parseISO, c as startOfMonth, d as addDays, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, m as ArrowUp, n as Popover, o as subDays, p as ChevronLeft, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-B4JTLvrm.js";
-import { At as TooltipTrigger, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, Dt as Tooltip$1, E as DialogTrigger, Et as Slot, Gt as ChevronRight, H as endOfDay, Ht as TrendingUp, I as format, Jt as Calendar, M as useLivesStore, Ot as TooltipContent, Rt as cn, S as DialogDescription, St as Input, T as DialogTitle, Ut as RefreshCw, Vt as User, W as differenceInDays, Wt as LoaderCircle, Y as startOfDay, Yt as createLucideIcon, Zt as clsx_default, _ as CommandList, a as Select, c as SelectTrigger, cn as require_jsx_runtime, d as Label$1, dn as useToast, et as toDate, f as Command, fn as require_react, g as CommandItem, h as CommandInput, hn as __toESM, i as CardTitle$1, it as googleSheetsService, kt as TooltipProvider, l as SelectValue, m as CommandGroup, mn as __export, n as CardContent$1, o as SelectContent, ot as Skeleton, p as CommandEmpty, pn as __commonJSMin, qt as Check, r as CardHeader, s as SelectItem, t as Card$1, u as Switch, v as CommandSeparator, w as DialogHeader, x as DialogContent, y as Dialog, zt as Video } from "./index-DatUaPos.js";
+import { a as parseISO, c as startOfMonth, d as addDays, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, m as ArrowUp, n as Popover, o as subDays, p as ChevronLeft, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-C0T6z0nh.js";
+import { At as TooltipTrigger, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, Dt as Tooltip$1, E as DialogTrigger, Et as Slot, Gt as ChevronRight, H as endOfDay, Ht as TrendingUp, I as format, Jt as Calendar, M as useLivesStore, Ot as TooltipContent, Rt as cn, S as DialogDescription, St as Input, T as DialogTitle, Ut as RefreshCw, Vt as User, W as differenceInDays, Wt as LoaderCircle, Y as startOfDay, Yt as createLucideIcon, Zt as clsx_default, _ as CommandList, a as Select, c as SelectTrigger, cn as require_jsx_runtime, d as Label$1, dn as useToast, et as toDate, f as Command, fn as require_react, g as CommandItem, h as CommandInput, hn as __toESM, i as CardTitle, it as googleSheetsService, kt as TooltipProvider, l as SelectValue, m as CommandGroup, mn as __export, n as CardContent, o as SelectContent, ot as Skeleton, p as CommandEmpty, pn as __commonJSMin, qt as Check, r as CardHeader, s as SelectItem, t as Card, u as Switch, v as CommandSeparator, w as DialogHeader, x as DialogContent, y as Dialog, zt as Video } from "./index-DxFsgkHc.js";
 var ArrowDown = createLucideIcon("arrow-down", [["path", {
 	d: "M12 5v14",
 	key: "s699le"
@@ -6260,17 +6260,17 @@ function LiveKPIs({ currentData, previousData, comparisonEnabled, loading }) {
 	const goalProgress = Math.min(totalRevenue / 2e6 * 100, 100);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5",
-		children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card$1, {
+		children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
 			className: cn("overflow-hidden transition-all hover:shadow-md relative", item.variant === "primary" && "border-blue-200 bg-blue-50/50 dark:bg-blue-950/20", item.variant === "accent" && "border-amber-200 bg-amber-50/50 dark:bg-amber-950/20"),
 			children: [
 				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
 					className: "flex flex-row items-center justify-between space-y-0 pb-2 p-4",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle$1, {
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
 						className: "text-xs font-medium text-muted-foreground uppercase tracking-wider",
 						children: item.title
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, { className: cn("h-4 w-4", item.variant === "primary" ? "text-blue-600" : item.variant === "accent" ? "text-amber-600" : "text-gray-500") })]
 				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent$1, {
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
 					className: "p-4 pt-0",
 					children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "space-y-2",
@@ -29046,4 +29046,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-DkewWIrH.js.map
+//# sourceMappingURL=Lives-oTRyg163.js.map

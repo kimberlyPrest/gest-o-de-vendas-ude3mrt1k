@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react'
 import { Scale, Crown, TrendingDown, User } from 'lucide-react'
 import { LiveData } from '@/services/googleSheetsService'
+import { Card, CardTitle, CardContent } from '@/components/ui/card'
 
 interface MetricRowProps {
   label: string

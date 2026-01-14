@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-DkewWIrH.js","assets/calendar-B4JTLvrm.js","assets/CRM-CiKBtibk.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-oTRyg163.js","assets/calendar-C0T6z0nh.js","assets/CRM-C2qM6538.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -40563,8 +40563,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-DkewWIrH.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-CiKBtibk.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-oTRyg163.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-C2qM6538.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -40624,4 +40624,4 @@ var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 export { getDefaultOptions as $, Presence as $t, DropdownMenuItem as A, TooltipTrigger as At, startOfYear as B, Users as Bt, DialogFooter as C, Button as Ct, ptBR as D, Tooltip as Dt, DialogTrigger as E, Slot$2 as Et, formatDistanceToNow as F, createPopperScope as Ft, differenceInCalendarMonths as G, ChevronRight as Gt, endOfDay as H, TrendingUp as Ht, format as I, useId as It, differenceInCalendarDays as J, Calendar as Jt, isDate as K, ChevronDown as Kt, getWeek as L, toast as Lt, useLivesStore as M, Arrow as Mt, COLUMNS as N, Content$1 as Nt, DropdownMenu as O, TooltipContent as Ot, useCRMStore as P, Root2$2 as Pt, startOfWeek as Q, useControllableState as Qt, getISOWeek as R, cn as Rt, DialogDescription as S, Input as St, DialogTitle as T, useIsMobile as Tt, getRoundingMethod as U, RefreshCw as Ut, endOfMonth as V, User as Vt, differenceInDays as W, LoaderCircle as Wt, normalizeDates as X, cva as Xt, startOfDay as Y, createLucideIcon as Yt, startOfISOWeek as Z, clsx_default as Zt, CommandList as _, hideOthers as _t, Select as a, createSlot as an, require_shim as at, DialogClose as b, FocusScope as bt, SelectTrigger as c, require_jsx_runtime as cn, Content as ct, Label as d, useToast as dn, Portal$3 as dt, Portal as en, toDate as et, Command as f, require_react as fn, Root$3 as ft, CommandItem as g, createDialogScope as gt, CommandInput as h, __toESM as hn, WarningProvider as ht, CardTitle as i, Primitive as in, googleSheetsService as it, DropdownMenuTrigger as j, Anchor as jt, DropdownMenuContent as k, TooltipProvider as kt, SelectValue as l, useComposedRefs as ln, Description as lt, CommandGroup as m, __export as mn, Trigger$2 as mt, CardContent as n, DismissableLayer as nn, millisecondsInHour as nt, SelectContent as o, createSlottable as on, Skeleton as ot, CommandEmpty as p, __commonJSMin as pn, Title as pt, constructNow as q, Check as qt, CardHeader as r, useCallbackRef as rn, millisecondsInMinute as rt, SelectItem as s, createContextScope as sn, Close as st, Card as t, useLayoutEffect2 as tn, constructFrom as tt, Switch as u, composeEventHandlers as un, Overlay as ut, CommandSeparator as v, Combination_default as vt, DialogHeader as w, buttonVariants as wt, DialogContent as x, Primitive$1 as xt, Dialog as y, useFocusGuards as yt, enUS as z, Video as zt };
 
-//# sourceMappingURL=index-DatUaPos.js.map
+//# sourceMappingURL=index-DxFsgkHc.js.map
