@@ -1,9 +1,4 @@
-import {
-  format,
-  subMonths,
-  startOfMonth,
-  subDays,
-} from 'date-fns'
+import { format, subMonths, startOfMonth, subDays } from 'date-fns'
 import { ptBR } from 'date-fns/locale'
 import {
   Calendar as CalendarIcon,

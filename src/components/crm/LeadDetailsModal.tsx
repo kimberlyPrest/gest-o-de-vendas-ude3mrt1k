@@ -110,11 +110,7 @@ export function LeadDetailsModal({
         onOpenChange={setFollowUpOpen}
       />
 
-      <LeadEditModal
-        lead={lead}
-        open={editOpen}
-        onOpenChange={setEditOpen}
-      />
+      <LeadEditModal lead={lead} open={editOpen} onOpenChange={setEditOpen} />
     </>
   )
 }

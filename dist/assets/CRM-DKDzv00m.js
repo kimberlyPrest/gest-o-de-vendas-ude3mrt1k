@@ -1,5 +1,5 @@
-import { a as parseISO, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, l as isSameDay, m as ArrowUp, n as Popover, o as subDays, p as ChevronLeft, r as PopoverContent, s as isBefore, t as Calendar } from "./calendar-CiErFMuI.js";
-import { A as DropdownMenuContent, Ct as Input, E as DialogTitle, Et as useIsMobile, F as useCRMStore, Ft as cn, G as differenceInDays, I as formatDistanceToNow, J as constructNow, Kt as createLucideIcon, L as format, Lt as Users, M as DropdownMenuTrigger, O as ptBR, P as COLUMNS, Pt as toast, Qt as useLayoutEffect2, S as DialogContent, St as Primitive, T as DialogHeader, Tt as buttonVariants, W as getRoundingMethod, Z as normalizeDates, _t as createDialogScope, an as require_jsx_runtime, b as Dialog, c as SelectItem, ct as Close, dt as Overlay, en as useCallbackRef, f as Label, fn as __toESM, ft as Portal, gt as WarningProvider, ht as Trigger, in as createContextScope, j as DropdownMenuItem, k as DropdownMenu, l as SelectTrigger, ln as require_react, lt as Content, mt as Title, nt as constructFrom, o as Select, on as useComposedRefs, ot as require_shim, pt as Root$1, qt as cva, rn as createSlottable, rt as millisecondsInHour, s as SelectContent, sn as composeEventHandlers, u as SelectValue, ut as Description, w as DialogFooter, wt as Button, x as DialogClose } from "./index-Hz8WIHMQ.js";
+import { a as PopoverTrigger, c as isBefore, g as ArrowRightLeft, h as ArrowUp, i as PopoverContent, m as ChevronLeft, n as Calendar, o as parseISO, p as DollarSign, r as Popover, s as subDays, t as createContextScope$1, u as isSameDay } from "./dist-ZaSIZNLQ.js";
+import { A as DropdownMenuItem, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, F as formatDistanceToNow, I as format, Jt as createLucideIcon, Lt as toast, N as COLUMNS, O as DropdownMenu, P as useCRMStore, Rt as cn, St as Input, T as DialogTitle, Tt as useIsMobile, U as getRoundingMethod, Ut as LoaderCircle, W as differenceInDays, X as normalizeDates, Yt as cva, a as Select, an as createSlottable, at as require_shim, b as DialogClose, c as SelectTrigger, cn as useComposedRefs, ct as Content, d as Label, dn as require_react, dt as Portal, en as useLayoutEffect2, ft as Root$1, gt as createDialogScope, ht as WarningProvider, j as DropdownMenuTrigger, k as DropdownMenuContent, l as SelectValue, ln as composeEventHandlers, lt as Description, mn as __toESM, mt as Trigger, nn as useCallbackRef, nt as millisecondsInHour, o as SelectContent, on as createContextScope, pt as Title, q as constructNow, s as SelectItem, sn as require_jsx_runtime, st as Close, tt as constructFrom, ut as Overlay, w as DialogHeader, wt as buttonVariants, x as DialogContent, xt as Primitive, y as Dialog } from "./index-B58tqMcL.js";
 var Activity = createLucideIcon("activity", [["path", {
 	d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
 	key: "169zse"
@@ -69,36 +69,6 @@ var Globe = createLucideIcon("globe", [
 	["path", {
 		d: "M2 12h20",
 		key: "9i4pu4"
-	}]
-]);
-var Hash = createLucideIcon("hash", [
-	["line", {
-		x1: "4",
-		x2: "20",
-		y1: "9",
-		y2: "9",
-		key: "4lhtct"
-	}],
-	["line", {
-		x1: "4",
-		x2: "20",
-		y1: "15",
-		y2: "15",
-		key: "vyu0kd"
-	}],
-	["line", {
-		x1: "10",
-		x2: "8",
-		y1: "3",
-		y2: "21",
-		key: "1ggp8o"
-	}],
-	["line", {
-		x1: "16",
-		x2: "14",
-		y1: "3",
-		y2: "21",
-		key: "weycgp"
 	}]
 ]);
 var Mail = createLucideIcon("mail", [["path", {
@@ -794,190 +764,6 @@ function CRMColumn({ id, label, color, leads, onDropLead, onCardClick }) {
 		})]
 	});
 }
-function createContextScope$1(scopeName, createContextScopeDeps = []) {
-	let defaultContexts = [];
-	function createContext3(rootComponentName, defaultContext) {
-		const BaseContext = import_react.createContext(defaultContext);
-		BaseContext.displayName = rootComponentName + "Context";
-		const index = defaultContexts.length;
-		defaultContexts = [...defaultContexts, defaultContext];
-		const Provider = (props) => {
-			const { scope, children, ...context } = props;
-			const Context = scope?.[scopeName]?.[index] || BaseContext;
-			const value = import_react.useMemo(() => context, Object.values(context));
-			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Context.Provider, {
-				value,
-				children
-			});
-		};
-		Provider.displayName = rootComponentName + "Provider";
-		function useContext2(consumerName, scope) {
-			const Context = scope?.[scopeName]?.[index] || BaseContext;
-			const context = import_react.useContext(Context);
-			if (context) return context;
-			if (defaultContext !== void 0) return defaultContext;
-			throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
-		}
-		return [Provider, useContext2];
-	}
-	const createScope = () => {
-		const scopeContexts = defaultContexts.map((defaultContext) => {
-			return import_react.createContext(defaultContext);
-		});
-		return function useScope(scope) {
-			const contexts = scope?.[scopeName] || scopeContexts;
-			return import_react.useMemo(() => ({ [`__scope${scopeName}`]: {
-				...scope,
-				[scopeName]: contexts
-			} }), [scope, contexts]);
-		};
-	};
-	createScope.scopeName = scopeName;
-	return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
-}
-function composeContextScopes(...scopes) {
-	const baseScope = scopes[0];
-	if (scopes.length === 1) return baseScope;
-	const createScope = () => {
-		const scopeHooks = scopes.map((createScope2) => ({
-			useScope: createScope2(),
-			scopeName: createScope2.scopeName
-		}));
-		return function useComposedScopes(overrideScopes) {
-			const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
-				const currentScope = useScope(overrideScopes)[`__scope${scopeName}`];
-				return {
-					...nextScopes2,
-					...currentScope
-				};
-			}, {});
-			return import_react.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
-		};
-	};
-	createScope.scopeName = baseScope.scopeName;
-	return createScope;
-}
-var import_shim = require_shim();
-function useIsHydrated() {
-	return (0, import_shim.useSyncExternalStore)(subscribe, () => true, () => false);
-}
-function subscribe() {
-	return () => {};
-}
-var AVATAR_NAME = "Avatar";
-var [createAvatarContext, createAvatarScope] = createContextScope$1(AVATAR_NAME);
-var [AvatarProvider, useAvatarContext] = createAvatarContext(AVATAR_NAME);
-var Avatar$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAvatar, ...avatarProps } = props;
-	const [imageLoadingStatus, setImageLoadingStatus] = import_react.useState("idle");
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarProvider, {
-		scope: __scopeAvatar,
-		imageLoadingStatus,
-		onImageLoadingStatusChange: setImageLoadingStatus,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
-			...avatarProps,
-			ref: forwardedRef
-		})
-	});
-});
-Avatar$1.displayName = AVATAR_NAME;
-var IMAGE_NAME = "AvatarImage";
-var AvatarImage$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAvatar, src, onLoadingStatusChange = () => {}, ...imageProps } = props;
-	const context = useAvatarContext(IMAGE_NAME, __scopeAvatar);
-	const imageLoadingStatus = useImageLoadingStatus(src, imageProps);
-	const handleLoadingStatusChange = useCallbackRef((status) => {
-		onLoadingStatusChange(status);
-		context.onImageLoadingStatusChange(status);
-	});
-	useLayoutEffect2(() => {
-		if (imageLoadingStatus !== "idle") handleLoadingStatusChange(imageLoadingStatus);
-	}, [imageLoadingStatus, handleLoadingStatusChange]);
-	return imageLoadingStatus === "loaded" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.img, {
-		...imageProps,
-		ref: forwardedRef,
-		src
-	}) : null;
-});
-AvatarImage$1.displayName = IMAGE_NAME;
-var FALLBACK_NAME = "AvatarFallback";
-var AvatarFallback$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeAvatar, delayMs, ...fallbackProps } = props;
-	const context = useAvatarContext(FALLBACK_NAME, __scopeAvatar);
-	const [canRender, setCanRender] = import_react.useState(delayMs === void 0);
-	import_react.useEffect(() => {
-		if (delayMs !== void 0) {
-			const timerId = window.setTimeout(() => setCanRender(true), delayMs);
-			return () => window.clearTimeout(timerId);
-		}
-	}, [delayMs]);
-	return canRender && context.imageLoadingStatus !== "loaded" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
-		...fallbackProps,
-		ref: forwardedRef
-	}) : null;
-});
-AvatarFallback$1.displayName = FALLBACK_NAME;
-function resolveLoadingStatus(image, src) {
-	if (!image) return "idle";
-	if (!src) return "error";
-	if (image.src !== src) image.src = src;
-	return image.complete && image.naturalWidth > 0 ? "loaded" : "loading";
-}
-function useImageLoadingStatus(src, { referrerPolicy, crossOrigin }) {
-	const isHydrated = useIsHydrated();
-	const imageRef = import_react.useRef(null);
-	const image = (() => {
-		if (!isHydrated) return null;
-		if (!imageRef.current) imageRef.current = new window.Image();
-		return imageRef.current;
-	})();
-	const [loadingStatus, setLoadingStatus] = import_react.useState(() => resolveLoadingStatus(image, src));
-	useLayoutEffect2(() => {
-		setLoadingStatus(resolveLoadingStatus(image, src));
-	}, [image, src]);
-	useLayoutEffect2(() => {
-		const updateStatus = (status) => () => {
-			setLoadingStatus(status);
-		};
-		if (!image) return;
-		const handleLoad = updateStatus("loaded");
-		const handleError = updateStatus("error");
-		image.addEventListener("load", handleLoad);
-		image.addEventListener("error", handleError);
-		if (referrerPolicy) image.referrerPolicy = referrerPolicy;
-		if (typeof crossOrigin === "string") image.crossOrigin = crossOrigin;
-		return () => {
-			image.removeEventListener("load", handleLoad);
-			image.removeEventListener("error", handleError);
-		};
-	}, [
-		image,
-		crossOrigin,
-		referrerPolicy
-	]);
-	return loadingStatus;
-}
-var Root = Avatar$1;
-var Image = AvatarImage$1;
-var Fallback = AvatarFallback$1;
-var Avatar = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
-	ref,
-	className: cn("relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full", className),
-	...props
-}));
-Avatar.displayName = Root.displayName;
-var AvatarImage = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Image, {
-	ref,
-	className: cn("aspect-square h-full w-full", className),
-	...props
-}));
-AvatarImage.displayName = Image.displayName;
-var AvatarFallback = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Fallback, {
-	ref,
-	className: cn("flex h-full w-full items-center justify-center rounded-full bg-muted", className),
-	...props
-}));
-AvatarFallback.displayName = Fallback.displayName;
 var badgeVariants = cva("inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2", {
 	variants: { variant: {
 		default: "border-transparent bg-primary text-primary-foreground hover:bg-primary/80",
@@ -994,80 +780,44 @@ function Badge({ className, variant, ...props }) {
 	});
 }
 function LeadInfo({ lead }) {
-	const initials = lead.nomeCompleto.split(" ").map((n) => n[0]).join("").substring(0, 2).toUpperCase();
-	const potentialValue = lead.assentosAdicionais * 500;
 	const statusColor = COLUMNS.find((c) => c.id === lead.status)?.color || "#6B7280";
-	const role = "Estrategista de Marketing";
-	const location = "São Paulo, BR";
-	const probability = 92;
+	const potentialValue = lead.valorEstimado ?? (lead.origem === "Planilha" ? 2999 + lead.assentosAdicionais * 699 : lead.assentosAdicionais * 500);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		className: "flex flex-col gap-8 animate-fade-in",
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex flex-col items-center space-y-4 pt-2 text-center",
-			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "relative",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Avatar, {
-						className: "h-24 w-24 border-4 border-white shadow-lg",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarImage, { src: `https://img.usecurling.com/ppl/medium?seed=${lead.id}` }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarFallback, {
-							className: "bg-gray-200 text-2xl text-gray-500",
-							children: initials
-						})]
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+				className: "space-y-1",
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					className: "flex items-center justify-center gap-2",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
+						className: "text-2xl font-bold text-gray-900 tracking-tight",
+						children: lead.nomeCompleto
 					})
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "space-y-1",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center justify-center gap-2",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-							className: "text-2xl font-bold text-gray-900 tracking-tight",
-							children: lead.nomeCompleto
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
-							className: "rounded-full border-0 bg-orange-100 px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-wider text-orange-600 hover:bg-orange-200",
-							children: [
-								"HOT LEAD (",
-								probability,
-								"%)"
-							]
-						})]
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("p", {
-						className: "flex items-center justify-center gap-1.5 text-sm text-gray-500",
-						children: [
-							role,
-							" ",
-							/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-gray-300",
-								children: "•"
-							}),
-							" ",
-							location
-						]
-					})]
-				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-					className: "flex w-full max-w-xs items-center justify-center gap-8 pt-4",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-6 w-6" }),
-							label: "Ligar",
-							color: "bg-[#007AFF] shadow-blue-200",
-							onClick: () => window.open(`tel:${lead.telefone}`)
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-6 w-6" }),
-							label: "E-mail",
-							color: "bg-[#5856D6] shadow-indigo-200",
-							onClick: () => window.open(`mailto:${lead.email}`)
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageCircle, { className: "h-6 w-6" }),
-							label: "WhatsApp",
-							color: "bg-[#34C759] shadow-green-200",
-							onClick: () => window.open(`https://wa.me/55${lead.telefone.replace(/\D/g, "")}`)
-						})
-					]
 				})
-			]
+			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+				className: "flex w-full max-w-xs items-center justify-center gap-8 pt-4",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
+						icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-6 w-6" }),
+						label: "Ligar",
+						color: "bg-[#007AFF] shadow-blue-200",
+						onClick: () => window.open(`tel:${lead.telefone}`)
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
+						icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-6 w-6" }),
+						label: "E-mail",
+						color: "bg-[#5856D6] shadow-indigo-200",
+						onClick: () => window.open(`mailto:${lead.email}`)
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ActionButton, {
+						icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(MessageCircle, { className: "h-6 w-6" }),
+						label: "WhatsApp",
+						color: "bg-[#34C759] shadow-green-200",
+						onClick: () => window.open(`https://wa.me/55${lead.telefone.replace(/\D/g, "")}`)
+					})
+				]
+			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "space-y-6",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -1117,31 +867,23 @@ function LeadInfo({ lead }) {
 					children: "Dados da Venda"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "ios-group-container",
-					children: [
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "h-5 w-5 text-gray-500" }),
-							label: "Assentos Adicionais",
-							value: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
-								variant: "secondary",
-								className: "bg-gray-100 font-normal text-gray-700 hover:bg-gray-200",
-								children: [lead.assentosAdicionais, " Unidades"]
-							})
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, { className: "h-5 w-5 text-gray-500" }),
-							label: "Valor Estimado",
-							value: new Intl.NumberFormat("pt-BR", {
-								style: "currency",
-								currency: "BRL"
-							}).format(potentialValue)
-						}),
-						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
-							icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Hash, { className: "h-5 w-5 text-gray-500" }),
-							label: "Probabilidade",
-							value: `${probability}%`,
-							isLast: true
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
+						icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Users, { className: "h-5 w-5 text-gray-500" }),
+						label: "Assentos Adicionais",
+						value: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Badge, {
+							variant: "secondary",
+							className: "bg-gray-100 font-normal text-gray-700 hover:bg-gray-200",
+							children: [lead.assentosAdicionais, " Unidades"]
 						})
-					]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(InfoRow, {
+						icon: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, { className: "h-5 w-5 text-gray-500" }),
+						label: "Valor Estimado",
+						value: new Intl.NumberFormat("pt-BR", {
+							style: "currency",
+							currency: "BRL"
+						}).format(potentialValue),
+						isLast: true
+					})]
 				})]
 			})]
 		})]
@@ -1286,6 +1028,127 @@ function LeadTimeline({ lead }) {
 		})]
 	});
 }
+var import_shim = require_shim();
+function useIsHydrated() {
+	return (0, import_shim.useSyncExternalStore)(subscribe, () => true, () => false);
+}
+function subscribe() {
+	return () => {};
+}
+var AVATAR_NAME = "Avatar";
+var [createAvatarContext, createAvatarScope] = createContextScope$1(AVATAR_NAME);
+var [AvatarProvider, useAvatarContext] = createAvatarContext(AVATAR_NAME);
+var Avatar$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeAvatar, ...avatarProps } = props;
+	const [imageLoadingStatus, setImageLoadingStatus] = import_react.useState("idle");
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(AvatarProvider, {
+		scope: __scopeAvatar,
+		imageLoadingStatus,
+		onImageLoadingStatusChange: setImageLoadingStatus,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
+			...avatarProps,
+			ref: forwardedRef
+		})
+	});
+});
+Avatar$1.displayName = AVATAR_NAME;
+var IMAGE_NAME = "AvatarImage";
+var AvatarImage$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeAvatar, src, onLoadingStatusChange = () => {}, ...imageProps } = props;
+	const context = useAvatarContext(IMAGE_NAME, __scopeAvatar);
+	const imageLoadingStatus = useImageLoadingStatus(src, imageProps);
+	const handleLoadingStatusChange = useCallbackRef((status) => {
+		onLoadingStatusChange(status);
+		context.onImageLoadingStatusChange(status);
+	});
+	useLayoutEffect2(() => {
+		if (imageLoadingStatus !== "idle") handleLoadingStatusChange(imageLoadingStatus);
+	}, [imageLoadingStatus, handleLoadingStatusChange]);
+	return imageLoadingStatus === "loaded" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.img, {
+		...imageProps,
+		ref: forwardedRef,
+		src
+	}) : null;
+});
+AvatarImage$1.displayName = IMAGE_NAME;
+var FALLBACK_NAME = "AvatarFallback";
+var AvatarFallback$1 = import_react.forwardRef((props, forwardedRef) => {
+	const { __scopeAvatar, delayMs, ...fallbackProps } = props;
+	const context = useAvatarContext(FALLBACK_NAME, __scopeAvatar);
+	const [canRender, setCanRender] = import_react.useState(delayMs === void 0);
+	import_react.useEffect(() => {
+		if (delayMs !== void 0) {
+			const timerId = window.setTimeout(() => setCanRender(true), delayMs);
+			return () => window.clearTimeout(timerId);
+		}
+	}, [delayMs]);
+	return canRender && context.imageLoadingStatus !== "loaded" ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.span, {
+		...fallbackProps,
+		ref: forwardedRef
+	}) : null;
+});
+AvatarFallback$1.displayName = FALLBACK_NAME;
+function resolveLoadingStatus(image, src) {
+	if (!image) return "idle";
+	if (!src) return "error";
+	if (image.src !== src) image.src = src;
+	return image.complete && image.naturalWidth > 0 ? "loaded" : "loading";
+}
+function useImageLoadingStatus(src, { referrerPolicy, crossOrigin }) {
+	const isHydrated = useIsHydrated();
+	const imageRef = import_react.useRef(null);
+	const image = (() => {
+		if (!isHydrated) return null;
+		if (!imageRef.current) imageRef.current = new window.Image();
+		return imageRef.current;
+	})();
+	const [loadingStatus, setLoadingStatus] = import_react.useState(() => resolveLoadingStatus(image, src));
+	useLayoutEffect2(() => {
+		setLoadingStatus(resolveLoadingStatus(image, src));
+	}, [image, src]);
+	useLayoutEffect2(() => {
+		const updateStatus = (status) => () => {
+			setLoadingStatus(status);
+		};
+		if (!image) return;
+		const handleLoad = updateStatus("loaded");
+		const handleError = updateStatus("error");
+		image.addEventListener("load", handleLoad);
+		image.addEventListener("error", handleError);
+		if (referrerPolicy) image.referrerPolicy = referrerPolicy;
+		if (typeof crossOrigin === "string") image.crossOrigin = crossOrigin;
+		return () => {
+			image.removeEventListener("load", handleLoad);
+			image.removeEventListener("error", handleError);
+		};
+	}, [
+		image,
+		crossOrigin,
+		referrerPolicy
+	]);
+	return loadingStatus;
+}
+var Root = Avatar$1;
+var Image = AvatarImage$1;
+var Fallback = AvatarFallback$1;
+var Avatar = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
+	ref,
+	className: cn("relative flex h-10 w-10 shrink-0 overflow-hidden rounded-full", className),
+	...props
+}));
+Avatar.displayName = Root.displayName;
+var AvatarImage = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Image, {
+	ref,
+	className: cn("aspect-square h-full w-full", className),
+	...props
+}));
+AvatarImage.displayName = Image.displayName;
+var AvatarFallback = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Fallback, {
+	ref,
+	className: cn("flex h-full w-full items-center justify-center rounded-full bg-muted", className),
+	...props
+}));
+AvatarFallback.displayName = Fallback.displayName;
 var ROOT_NAME = "AlertDialog";
 var [createAlertDialogContext, createAlertDialogScope] = createContextScope(ROOT_NAME, [createDialogScope]);
 var useDialogScope = createDialogScope();
@@ -1712,9 +1575,205 @@ function LeadFollowUpModal({ leadId, open, onOpenChange }) {
 		})
 	});
 }
+function LeadEditModal({ lead, open, onOpenChange }) {
+	const updateLead = useCRMStore((state) => state.updateLead);
+	const [loading, setLoading] = (0, import_react.useState)(false);
+	const [formData, setFormData] = (0, import_react.useState)({
+		nomeCompleto: "",
+		email: "",
+		telefone: "",
+		assentosAdicionais: 0,
+		origem: "",
+		valorEstimado: 0
+	});
+	(0, import_react.useEffect)(() => {
+		if (lead) {
+			let initialValor = lead.valorEstimado;
+			if (initialValor === void 0) initialValor = lead.origem === "Planilha" ? 2999 + lead.assentosAdicionais * 699 : lead.assentosAdicionais * 500;
+			setFormData({
+				nomeCompleto: lead.nomeCompleto,
+				email: lead.email,
+				telefone: lead.telefone,
+				assentosAdicionais: lead.assentosAdicionais,
+				origem: lead.origem,
+				valorEstimado: initialValor
+			});
+		}
+	}, [lead, open]);
+	(0, import_react.useEffect)(() => {
+		if (formData.origem === "Planilha") {
+			const calculated = 2999 + formData.assentosAdicionais * 699;
+			setFormData((prev) => ({
+				...prev,
+				valorEstimado: calculated
+			}));
+		}
+	}, [formData.origem, formData.assentosAdicionais]);
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		setLoading(true);
+		try {
+			await new Promise((resolve) => setTimeout(resolve, 500));
+			updateLead(lead.id, {
+				nomeCompleto: formData.nomeCompleto,
+				email: formData.email,
+				telefone: formData.telefone,
+				assentosAdicionais: formData.assentosAdicionais,
+				origem: formData.origem,
+				valorEstimado: formData.valorEstimado
+			});
+			onOpenChange(false);
+		} catch (error) {
+			console.error("Failed to update lead", error);
+		} finally {
+			setLoading(false);
+		}
+	};
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
+		open,
+		onOpenChange,
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogContent, {
+			className: "sm:max-w-[425px]",
+			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogHeader, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(DialogTitle, { children: "Editar Lead" }) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("form", {
+				onSubmit: handleSubmit,
+				className: "grid gap-4 py-4",
+				children: [
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "grid gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							htmlFor: "name",
+							children: "Nome Completo"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							id: "name",
+							value: formData.nomeCompleto,
+							onChange: (e) => setFormData({
+								...formData,
+								nomeCompleto: e.target.value
+							}),
+							required: true
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "grid gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							htmlFor: "email",
+							children: "Email"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							id: "email",
+							type: "email",
+							value: formData.email,
+							onChange: (e) => setFormData({
+								...formData,
+								email: e.target.value
+							}),
+							required: true
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "grid gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							htmlFor: "phone",
+							children: "Telefone"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							id: "phone",
+							value: formData.telefone,
+							onChange: (e) => setFormData({
+								...formData,
+								telefone: e.target.value
+							})
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "grid gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							htmlFor: "seats",
+							children: "Assentos Adicionais"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							id: "seats",
+							type: "number",
+							min: "0",
+							value: formData.assentosAdicionais,
+							onChange: (e) => setFormData({
+								...formData,
+								assentosAdicionais: parseInt(e.target.value) || 0
+							})
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "grid gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							htmlFor: "estimatedValue",
+							children: "Valor Estimado (R$)"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+							id: "estimatedValue",
+							type: "number",
+							min: "0",
+							step: "0.01",
+							value: formData.valorEstimado,
+							onChange: (e) => setFormData({
+								...formData,
+								valorEstimado: parseFloat(e.target.value) || 0
+							})
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
+						className: "grid gap-2",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label, {
+							htmlFor: "origin",
+							children: "Origem"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Select, {
+							value: formData.origem,
+							onValueChange: (val) => setFormData({
+								...formData,
+								origem: val
+							}),
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectTrigger, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectValue, { placeholder: "Selecione a origem" }) }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(SelectContent, { children: [
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+									value: "Planilha",
+									children: "Planilha"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+									value: "Manual",
+									children: "Manual"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+									value: "Site",
+									children: "Site"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+									value: "Indicação",
+									children: "Indicação"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+									value: "Instagram",
+									children: "Instagram"
+								}),
+								/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SelectItem, {
+									value: "LinkedIn",
+									children: "LinkedIn"
+								})
+							] })]
+						})]
+					}),
+					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(DialogFooter, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
+						type: "button",
+						variant: "outline",
+						onClick: () => onOpenChange(false),
+						children: "Cancelar"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+						type: "submit",
+						disabled: loading,
+						children: [loading && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "mr-2 h-4 w-4 animate-spin" }), "Salvar Alterações"]
+					})] })
+				]
+			})]
+		})
+	});
+}
 function LeadDetailsModal({ lead, open, onOpenChange }) {
 	const [interactionOpen, setInteractionOpen] = (0, import_react.useState)(false);
 	const [followUpOpen, setFollowUpOpen] = (0, import_react.useState)(false);
+	const [editOpen, setEditOpen] = (0, import_react.useState)(false);
 	if (!lead) return null;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Dialog, {
@@ -1739,7 +1798,7 @@ function LeadDetailsModal({ lead, open, onOpenChange }) {
 							/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
 								variant: "ghost",
 								className: "h-auto p-0 pr-1 text-base font-normal text-[#007AFF] hover:bg-transparent hover:opacity-70",
-								onClick: () => {},
+								onClick: () => setEditOpen(true),
 								children: "Editar"
 							})
 						]
@@ -1785,6 +1844,11 @@ function LeadDetailsModal({ lead, open, onOpenChange }) {
 			leadId: lead.id,
 			open: followUpOpen,
 			onOpenChange: setFollowUpOpen
+		}),
+		/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LeadEditModal, {
+			lead,
+			open: editOpen,
+			onOpenChange: setEditOpen
 		})
 	] });
 }
@@ -2043,4 +2107,4 @@ function CRM() {
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-BJkspXZ9.js.map
+//# sourceMappingURL=CRM-DKDzv00m.js.map

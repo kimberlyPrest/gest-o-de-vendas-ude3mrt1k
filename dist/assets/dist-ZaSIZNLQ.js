@@ -1,4 +1,4 @@
-import { $ as startOfWeek, $t as DismissableLayer, At as Content, B as enUS$1, Ft as cn, H as endOfMonth, Ht as ChevronRight, K as differenceInCalendarMonths, Kt as createLucideIcon, L as format, Mt as createPopperScope, Nt as useId, Ot as Anchor, Q as startOfISOWeek, R as getWeek, Tt as buttonVariants, Ut as ChevronDown, V as startOfYear, X as startOfDay, Xt as Presence, Y as differenceInCalendarDays, Yt as useControllableState, Z as normalizeDates, Zt as Portal, an as require_jsx_runtime, bt as useFocusGuards, dn as __export, et as getDefaultOptions, fn as __toESM, in as createContextScope, it as millisecondsInMinute, jt as Root2$1, kt as Arrow, ln as require_react, nn as createSlot, nt as constructFrom, on as useComposedRefs, q as isDate, rt as millisecondsInHour, sn as composeEventHandlers, tn as Primitive, tt as toDate, vt as hideOthers, wt as Button, xt as FocusScope, yt as Combination_default, z as getISOWeek } from "./index-Hz8WIHMQ.js";
+import { $ as getDefaultOptions, $t as Portal, B as startOfYear, Ct as Button, Ft as createPopperScope, G as differenceInCalendarMonths, Gt as ChevronDown, I as format, It as useId, J as differenceInCalendarDays, Jt as createLucideIcon, K as isDate, L as getWeek, Mt as Arrow, Nt as Content, Pt as Root2$1, Q as startOfWeek, Qt as Presence, R as getISOWeek, Rt as cn, V as endOfMonth, Wt as ChevronRight, X as normalizeDates, Y as startOfDay, Z as startOfISOWeek, Zt as useControllableState, _t as hideOthers, bt as FocusScope, cn as useComposedRefs, dn as require_react, et as toDate, in as createSlot, jt as Anchor, ln as composeEventHandlers, mn as __toESM, nt as millisecondsInHour, on as createContextScope$1, pn as __export, rn as Primitive, rt as millisecondsInMinute, sn as require_jsx_runtime, tn as DismissableLayer, tt as constructFrom, vt as Combination_default, wt as buttonVariants, yt as useFocusGuards, z as enUS$1 } from "./index-B58tqMcL.js";
 var ArrowRightLeft = createLucideIcon("arrow-right-left", [
 	["path", {
 		d: "m16 3 4 4-4 4",
@@ -376,7 +376,7 @@ function setYear(date, year, options) {
 var import_react = /* @__PURE__ */ __toESM(require_react(), 1);
 var import_jsx_runtime = /* @__PURE__ */ __toESM(require_jsx_runtime(), 1);
 var POPOVER_NAME = "Popover";
-var [createPopoverContext, createPopoverScope] = createContextScope(POPOVER_NAME, [createPopperScope]);
+var [createPopoverContext, createPopoverScope] = createContextScope$1(POPOVER_NAME, [createPopperScope]);
 var usePopperScope = createPopperScope();
 var [PopoverProvider, usePopoverContext] = createPopoverContext(POPOVER_NAME);
 var Popover$1 = (props) => {
@@ -2890,6 +2890,69 @@ function CalendarDayButton({ className, day, modifiers, ...props }) {
 		...props
 	});
 }
-export { parseISO as a, startOfMonth as c, addDays as d, DollarSign as f, ArrowRightLeft as h, PopoverTrigger as i, isSameDay as l, ArrowUp as m, Popover as n, subDays as o, ChevronLeft as p, PopoverContent as r, isBefore as s, Calendar as t, addMonths as u };
+function createContextScope(scopeName, createContextScopeDeps = []) {
+	let defaultContexts = [];
+	function createContext3(rootComponentName, defaultContext) {
+		const BaseContext = import_react.createContext(defaultContext);
+		BaseContext.displayName = rootComponentName + "Context";
+		const index = defaultContexts.length;
+		defaultContexts = [...defaultContexts, defaultContext];
+		const Provider = (props) => {
+			const { scope, children, ...context } = props;
+			const Context = scope?.[scopeName]?.[index] || BaseContext;
+			const value = import_react.useMemo(() => context, Object.values(context));
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Context.Provider, {
+				value,
+				children
+			});
+		};
+		Provider.displayName = rootComponentName + "Provider";
+		function useContext2(consumerName, scope) {
+			const Context = scope?.[scopeName]?.[index] || BaseContext;
+			const context = import_react.useContext(Context);
+			if (context) return context;
+			if (defaultContext !== void 0) return defaultContext;
+			throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
+		}
+		return [Provider, useContext2];
+	}
+	const createScope = () => {
+		const scopeContexts = defaultContexts.map((defaultContext) => {
+			return import_react.createContext(defaultContext);
+		});
+		return function useScope(scope) {
+			const contexts = scope?.[scopeName] || scopeContexts;
+			return import_react.useMemo(() => ({ [`__scope${scopeName}`]: {
+				...scope,
+				[scopeName]: contexts
+			} }), [scope, contexts]);
+		};
+	};
+	createScope.scopeName = scopeName;
+	return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
+}
+function composeContextScopes(...scopes) {
+	const baseScope = scopes[0];
+	if (scopes.length === 1) return baseScope;
+	const createScope = () => {
+		const scopeHooks = scopes.map((createScope2) => ({
+			useScope: createScope2(),
+			scopeName: createScope2.scopeName
+		}));
+		return function useComposedScopes(overrideScopes) {
+			const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
+				const currentScope = useScope(overrideScopes)[`__scope${scopeName}`];
+				return {
+					...nextScopes2,
+					...currentScope
+				};
+			}, {});
+			return import_react.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+		};
+	};
+	createScope.scopeName = baseScope.scopeName;
+	return createScope;
+}
+export { PopoverTrigger as a, isBefore as c, addMonths as d, addDays as f, ArrowRightLeft as g, ArrowUp as h, PopoverContent as i, startOfMonth as l, ChevronLeft as m, Calendar as n, parseISO as o, DollarSign as p, Popover as r, subDays as s, createContextScope as t, isSameDay as u };
 
-//# sourceMappingURL=calendar-CiErFMuI.js.map
+//# sourceMappingURL=dist-ZaSIZNLQ.js.map

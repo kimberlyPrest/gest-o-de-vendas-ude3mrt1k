@@ -164,11 +164,12 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
             },
           ],
           followUp: local.followUp,
-          valorEstimado: local.valorEstimado !== undefined
-            ? local.valorEstimado
-            : (lead.origem === 'Planilha'
-              ? 2999 + ((lead.assentosAdicionais || 0) * 699)
-              : (lead.assentosAdicionais || 0) * 500)
+          valorEstimado:
+            local.valorEstimado !== undefined
+              ? local.valorEstimado
+              : lead.origem === 'Planilha'
+                ? 2999 + (lead.assentosAdicionais || 0) * 699
+                : (lead.assentosAdicionais || 0) * 500,
         }
       })
 
@@ -356,7 +357,7 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
         if (lead.id === leadId) {
           const historyItem = createHistoryItem(
             'interaction',
-            'Dados do lead atualizados manualmente'
+            'Dados do lead atualizados manualmente',
           )
           return {
             ...lead,
@@ -371,7 +372,7 @@ export const useCRMStore = create<CRMStore>((set, get) => ({
       const filtered = applyFilters(updatedLeads, state.filters)
       return { leads: updatedLeads, filteredLeads: filtered }
     })
-  }
+  },
 }))
 
 function applyFilters(leads: CRMLead[], filters: FilterState): CRMLead[] {

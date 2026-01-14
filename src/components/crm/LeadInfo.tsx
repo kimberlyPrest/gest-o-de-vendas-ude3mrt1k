@@ -22,9 +22,11 @@ export function LeadInfo({ lead }: LeadInfoProps) {
     COLUMNS.find((c) => c.id === lead.status)?.color || '#6B7280'
 
   // Calculate value for display
-  const potentialValue = lead.valorEstimado ?? (lead.origem === 'Planilha'
-    ? 2999 + (lead.assentosAdicionais * 699)
-    : lead.assentosAdicionais * 500)
+  const potentialValue =
+    lead.valorEstimado ??
+    (lead.origem === 'Planilha'
+      ? 2999 + lead.assentosAdicionais * 699
+      : lead.assentosAdicionais * 500)
 
   return (
     <div className="flex flex-col gap-8 animate-fade-in">

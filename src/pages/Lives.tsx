@@ -183,10 +183,7 @@ export default function Lives() {
       </section>
 
       {/* Host Comparison (Conditionally Rendered) */}
-      <HostComparison
-        data={currentData}
-        presenters={filters.presenters}
-      />
+      <HostComparison data={currentData} presenters={filters.presenters} />
 
       {/* Main Content Area */}
       {currentData.length === 0 && !loading ? (
