@@ -1,5 +1,5 @@
-import { a as PopoverTrigger, c as isBefore, g as ArrowRightLeft, h as ArrowUp, i as PopoverContent, m as ChevronLeft, n as Calendar, o as parseISO, p as DollarSign, r as Popover, s as subDays, t as createContextScope$1, u as isSameDay } from "./dist-ZaSIZNLQ.js";
-import { A as DropdownMenuItem, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, F as formatDistanceToNow, I as format, Jt as createLucideIcon, Lt as toast, N as COLUMNS, O as DropdownMenu, P as useCRMStore, Rt as cn, St as Input, T as DialogTitle, Tt as useIsMobile, U as getRoundingMethod, Ut as LoaderCircle, W as differenceInDays, X as normalizeDates, Yt as cva, a as Select, an as createSlottable, at as require_shim, b as DialogClose, c as SelectTrigger, cn as useComposedRefs, ct as Content, d as Label, dn as require_react, dt as Portal, en as useLayoutEffect2, ft as Root$1, gt as createDialogScope, ht as WarningProvider, j as DropdownMenuTrigger, k as DropdownMenuContent, l as SelectValue, ln as composeEventHandlers, lt as Description, mn as __toESM, mt as Trigger, nn as useCallbackRef, nt as millisecondsInHour, o as SelectContent, on as createContextScope, pt as Title, q as constructNow, s as SelectItem, sn as require_jsx_runtime, st as Close, tt as constructFrom, ut as Overlay, w as DialogHeader, wt as buttonVariants, x as DialogContent, xt as Primitive, y as Dialog } from "./index-B58tqMcL.js";
+import { a as parseISO, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, l as isSameDay, m as ArrowUp, n as Popover, o as subDays, p as ChevronLeft, r as PopoverContent, s as isBefore, t as Calendar } from "./calendar-DpdnfeCa.js";
+import { A as DropdownMenuItem, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, F as formatDistanceToNow, I as format, Jt as createLucideIcon, Lt as toast, N as COLUMNS, O as DropdownMenu, P as useCRMStore, Rt as cn, St as Input, T as DialogTitle, Tt as useIsMobile, U as getRoundingMethod, Ut as LoaderCircle, W as differenceInDays, X as normalizeDates, Yt as cva, a as Select, an as createSlottable, at as require_shim, b as DialogClose, c as SelectTrigger, cn as useComposedRefs, ct as Content, d as Label, dn as require_react, dt as Portal, en as useLayoutEffect2, ft as Root$1, gt as createDialogScope, ht as WarningProvider, j as DropdownMenuTrigger, k as DropdownMenuContent, l as SelectValue, ln as composeEventHandlers, lt as Description, mn as __toESM, mt as Trigger, nn as useCallbackRef, nt as millisecondsInHour, o as SelectContent, on as createContextScope, pt as Title, q as constructNow, s as SelectItem, sn as require_jsx_runtime, st as Close, tt as constructFrom, ut as Overlay, w as DialogHeader, wt as buttonVariants, x as DialogContent, xt as Primitive, y as Dialog } from "./index-l2fWeBwY.js";
 var Activity = createLucideIcon("activity", [["path", {
 	d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
 	key: "169zse"
@@ -1027,6 +1027,69 @@ function LeadTimeline({ lead }) {
 			})
 		})]
 	});
+}
+function createContextScope$1(scopeName, createContextScopeDeps = []) {
+	let defaultContexts = [];
+	function createContext3(rootComponentName, defaultContext) {
+		const BaseContext = import_react.createContext(defaultContext);
+		BaseContext.displayName = rootComponentName + "Context";
+		const index = defaultContexts.length;
+		defaultContexts = [...defaultContexts, defaultContext];
+		const Provider = (props) => {
+			const { scope, children, ...context } = props;
+			const Context = scope?.[scopeName]?.[index] || BaseContext;
+			const value = import_react.useMemo(() => context, Object.values(context));
+			return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Context.Provider, {
+				value,
+				children
+			});
+		};
+		Provider.displayName = rootComponentName + "Provider";
+		function useContext2(consumerName, scope) {
+			const Context = scope?.[scopeName]?.[index] || BaseContext;
+			const context = import_react.useContext(Context);
+			if (context) return context;
+			if (defaultContext !== void 0) return defaultContext;
+			throw new Error(`\`${consumerName}\` must be used within \`${rootComponentName}\``);
+		}
+		return [Provider, useContext2];
+	}
+	const createScope = () => {
+		const scopeContexts = defaultContexts.map((defaultContext) => {
+			return import_react.createContext(defaultContext);
+		});
+		return function useScope(scope) {
+			const contexts = scope?.[scopeName] || scopeContexts;
+			return import_react.useMemo(() => ({ [`__scope${scopeName}`]: {
+				...scope,
+				[scopeName]: contexts
+			} }), [scope, contexts]);
+		};
+	};
+	createScope.scopeName = scopeName;
+	return [createContext3, composeContextScopes(createScope, ...createContextScopeDeps)];
+}
+function composeContextScopes(...scopes) {
+	const baseScope = scopes[0];
+	if (scopes.length === 1) return baseScope;
+	const createScope = () => {
+		const scopeHooks = scopes.map((createScope2) => ({
+			useScope: createScope2(),
+			scopeName: createScope2.scopeName
+		}));
+		return function useComposedScopes(overrideScopes) {
+			const nextScopes = scopeHooks.reduce((nextScopes2, { useScope, scopeName }) => {
+				const currentScope = useScope(overrideScopes)[`__scope${scopeName}`];
+				return {
+					...nextScopes2,
+					...currentScope
+				};
+			}, {});
+			return import_react.useMemo(() => ({ [`__scope${baseScope.scopeName}`]: nextScopes }), [nextScopes]);
+		};
+	};
+	createScope.scopeName = baseScope.scopeName;
+	return createScope;
 }
 var import_shim = require_shim();
 function useIsHydrated() {
@@ -2107,4 +2170,4 @@ function CRM() {
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-DKDzv00m.js.map
+//# sourceMappingURL=CRM-CiGRBeni.js.map

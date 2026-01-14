@@ -1191,6 +1191,9 @@ body{
 .max-w-\[1600px\]{
   max-width: 1600px;
 }
+.max-w-\[200px\]{
+  max-width: 200px;
+}
 .max-w-\[300px\]{
   max-width: 300px;
 }
@@ -1581,6 +1584,10 @@ body{
 .border-none{
   border-style: none;
 }
+.border-\[\#E5E5E7\]{
+  --tw-border-opacity: 1;
+  border-color: rgb(229 229 231 / var(--tw-border-opacity, 1));
+}
 .border-\[--color-border\]{
   border-color: var(--color-border);
 }
@@ -1686,6 +1693,9 @@ body{
   --tw-bg-opacity: 1;
   background-color: rgb(88 86 214 / var(--tw-bg-opacity, 1));
 }
+.bg-\[\#86868B\]\/40{
+  background-color: rgb(134 134 139 / 0.4);
+}
 .bg-\[\#8E8E93\]\/10{
   background-color: rgb(142 142 147 / 0.1);
 }
@@ -1696,6 +1706,9 @@ body{
 .bg-\[\#E5E5E7\]{
   --tw-bg-opacity: 1;
   background-color: rgb(229 229 231 / var(--tw-bg-opacity, 1));
+}
+.bg-\[\#E5E5E7\]\/60{
+  background-color: rgb(229 229 231 / 0.6);
 }
 .bg-\[\#EF4444\]{
   --tw-bg-opacity: 1;
@@ -1884,6 +1897,9 @@ body{
 .to-white{
   --tw-gradient-to: #fff var(--tw-gradient-to-position);
 }
+.fill-\[\#F5A623\]{
+  fill: #F5A623;
+}
 .fill-current{
   fill: currentColor;
 }
@@ -1992,6 +2008,10 @@ body{
 .py-4{
   padding-top: 1rem;
   padding-bottom: 1rem;
+}
+.py-5{
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
 }
 .py-6{
   padding-top: 1.5rem;
@@ -2229,9 +2249,20 @@ body{
   --tw-text-opacity: 1;
   color: rgb(88 86 214 / var(--tw-text-opacity, 1));
 }
+.text-\[\#86868B\]{
+  --tw-text-opacity: 1;
+  color: rgb(134 134 139 / var(--tw-text-opacity, 1));
+}
+.text-\[\#86868B\]\/60{
+  color: rgb(134 134 139 / 0.6);
+}
 .text-\[\#8E8E93\]{
   --tw-text-opacity: 1;
   color: rgb(142 142 147 / var(--tw-text-opacity, 1));
+}
+.text-\[\#F5A623\]{
+  --tw-text-opacity: 1;
+  color: rgb(245 166 35 / var(--tw-text-opacity, 1));
 }
 .text-\[\#FF9500\]{
   --tw-text-opacity: 1;
@@ -2580,6 +2611,9 @@ body{
 .ease-linear{
   transition-timing-function: linear;
 }
+.ease-out{
+  transition-timing-function: cubic-bezier(0, 0, 0.2, 1);
+}
 @keyframes enter{
   from{
     opacity: var(--tw-enter-opacity, 1);
@@ -2624,6 +2658,9 @@ body{
 }
 .ease-linear{
   animation-timing-function: linear;
+}
+.ease-out{
+  animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
 }
 /* Scrollbar Utilities */
 .no-scrollbar::-webkit-scrollbar {
@@ -2894,6 +2931,9 @@ body{
 .hover\:bg-\[\#D1D1D6\]:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(209 209 214 / var(--tw-bg-opacity, 1));
+}
+.hover\:bg-\[\#FBFBFD\]\/50:hover{
+  background-color: rgb(251 251 253 / 0.5);
 }
 .hover\:bg-accent:hover{
   background-color: hsl(var(--accent));
@@ -3912,6 +3952,10 @@ body{
   .md\:px-6{
     padding-left: 1.5rem;
     padding-right: 1.5rem;
+  }
+  .md\:px-8{
+    padding-left: 2rem;
+    padding-right: 2rem;
   }
   .md\:pb-32{
     padding-bottom: 8rem;

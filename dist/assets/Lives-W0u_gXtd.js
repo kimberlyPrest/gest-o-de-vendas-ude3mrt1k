@@ -1,5 +1,5 @@
-import { a as PopoverTrigger, d as addMonths, f as addDays, g as ArrowRightLeft, h as ArrowUp, i as PopoverContent, l as startOfMonth, m as ChevronLeft, n as Calendar$1, o as parseISO, p as DollarSign, r as Popover, s as subDays, t as createContextScope } from "./dist-ZaSIZNLQ.js";
-import { At as TooltipTrigger, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, Dt as Tooltip$1, E as DialogTrigger, Et as Slot, H as endOfDay, Ht as RefreshCw, I as format, Jt as createLucideIcon, Kt as Check, M as useLivesStore, Ot as TooltipContent, Rt as cn, S as DialogDescription, St as Input, T as DialogTitle, Ut as LoaderCircle, Vt as TrendingUp, W as differenceInDays, Wt as ChevronRight, Xt as clsx_default, Y as startOfDay, _ as CommandList, a as Select, c as SelectTrigger, d as Label$1, dn as require_react, et as toDate, f as Command, fn as __commonJSMin, g as CommandItem, h as CommandInput, i as CardTitle, it as googleSheetsService, kt as TooltipProvider, l as SelectValue, m as CommandGroup, mn as __toESM, n as CardContent, o as SelectContent, ot as Skeleton, p as CommandEmpty, pn as __export, qt as Calendar, r as CardHeader, s as SelectItem, sn as require_jsx_runtime, t as Card, u as Switch, un as useToast, v as CommandSeparator, w as DialogHeader, x as DialogContent, xt as Primitive, y as Dialog, zt as Video } from "./index-B58tqMcL.js";
+import { a as parseISO, c as startOfMonth, d as addDays, f as DollarSign, h as ArrowRightLeft, i as PopoverTrigger, m as ArrowUp, n as Popover, o as subDays, p as ChevronLeft, r as PopoverContent, t as Calendar$1, u as addMonths } from "./calendar-DpdnfeCa.js";
+import { At as TooltipTrigger, Bt as Users, C as DialogFooter, Ct as Button, D as ptBR, Dt as Tooltip$1, E as DialogTrigger, Et as Slot, H as endOfDay, Ht as RefreshCw, I as format, Jt as createLucideIcon, Kt as Check, M as useLivesStore, Ot as TooltipContent, Rt as cn$1, S as DialogDescription, St as Input, T as DialogTitle, Ut as LoaderCircle, Vt as TrendingUp, W as differenceInDays, Wt as ChevronRight, Xt as clsx_default, Y as startOfDay, _ as CommandList, a as Select, c as SelectTrigger, d as Label$1, dn as require_react, et as toDate, f as Command, fn as __commonJSMin, g as CommandItem, h as CommandInput, i as CardTitle$1, it as googleSheetsService, kt as TooltipProvider, l as SelectValue, m as CommandGroup, mn as __toESM, n as CardContent$1, o as SelectContent, ot as Skeleton, p as CommandEmpty, pn as __export, qt as Calendar, r as CardHeader$1, s as SelectItem, sn as require_jsx_runtime, t as Card$1, u as Switch, un as useToast, v as CommandSeparator, w as DialogHeader, x as DialogContent, y as Dialog, zt as Video } from "./index-l2fWeBwY.js";
 var ArrowDown = createLucideIcon("arrow-down", [["path", {
 	d: "M12 5v14",
 	key: "s699le"
@@ -5501,7 +5501,7 @@ var FormItem = import_react.forwardRef(({ className, ...props }, ref) => {
 		value: { id },
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 			ref,
-			className: cn("space-y-2", className),
+			className: cn$1("space-y-2", className),
 			...props
 		})
 	});
@@ -5511,7 +5511,7 @@ var FormLabel = import_react.forwardRef(({ className, ...props }, ref) => {
 	const { error, formItemId } = useFormField();
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Label$1, {
 		ref,
-		className: cn(error && "text-destructive", className),
+		className: cn$1(error && "text-destructive", className),
 		htmlFor: formItemId,
 		...props
 	});
@@ -5533,7 +5533,7 @@ var FormDescription = import_react.forwardRef(({ className, ...props }, ref) => 
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 		ref,
 		id: formDescriptionId,
-		className: cn("text-sm text-muted-foreground", className),
+		className: cn$1("text-sm text-muted-foreground", className),
 		...props
 	});
 });
@@ -5545,7 +5545,7 @@ var FormMessage = import_react.forwardRef(({ className, children, ...props }, re
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
 		ref,
 		id: formMessageId,
-		className: cn("text-sm font-medium text-destructive", className),
+		className: cn$1("text-sm font-medium text-destructive", className),
 		...props,
 		children: body
 	});
@@ -5681,7 +5681,7 @@ function AddLiveModal({ presenters, onSuccess, customTrigger }) {
 											asChild: true,
 											children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(FormControl, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 												variant: "outline",
-												className: cn("w-full pl-3 text-left font-normal", !field.value && "text-muted-foreground"),
+												className: cn$1("w-full pl-3 text-left font-normal", !field.value && "text-muted-foreground"),
 												children: [field.value ? format(field.value, "dd/MM/yyyy") : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecione a data" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "ml-auto h-4 w-4 opacity-50" })]
 											}) })
 										}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
@@ -5987,7 +5987,7 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 				asChild: true,
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
 					variant: "outline",
-					className: cn("h-10 justify-start text-left font-normal shrink-0", !filters.dateRange && "text-muted-foreground"),
+					className: cn$1("h-10 justify-start text-left font-normal shrink-0", !filters.dateRange && "text-muted-foreground"),
 					onClick: () => setSelectedPreset("custom"),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, { className: "mr-2 h-4 w-4" }), filters.dateRange?.from ? filters.dateRange.to ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 						format(filters.dateRange.from, "dd/MM/yy"),
@@ -6045,8 +6045,8 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 								});
 							},
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.length === presenters.length && presenters.length > 0 ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
+								className: cn$1("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.length === presenters.length && presenters.length > 0 ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn$1("h-4 w-4") })
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: "Selecionar Todos" })]
 						}),
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CommandSeparator, { className: "my-1" }),
@@ -6054,8 +6054,8 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 							value: presenter,
 							onSelect: () => togglePresenter(presenter),
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-								className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.includes(presenter) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
+								className: cn$1("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.presenters.includes(presenter) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn$1("h-4 w-4") })
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: presenter })]
 						}, presenter))
 					] })] })] })
@@ -6078,8 +6078,8 @@ function LiveFilters({ presenters, filters, onFilterChange, loading }) {
 					value: day.value,
 					onSelect: () => toggleWeekday(day.value),
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: cn("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.weekdays.includes(day.value) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn("h-4 w-4") })
+						className: cn$1("mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary", filters.weekdays.includes(day.value) ? "bg-primary text-primary-foreground" : "opacity-50 [&_svg]:invisible"),
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Check, { className: cn$1("h-4 w-4") })
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", { children: day.value })]
 				}, day.value)) }) }) })
 			})] }),
@@ -6238,17 +6238,17 @@ function LiveKPIs({ currentData, previousData, comparisonEnabled, loading }) {
 	const goalProgress = Math.min(totalRevenue / 2e6 * 100, 100);
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		className: "grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5",
-		children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card, {
-			className: cn("overflow-hidden transition-all hover:shadow-md relative", item.variant === "primary" && "border-blue-200 bg-blue-50/50 dark:bg-blue-950/20", item.variant === "accent" && "border-amber-200 bg-amber-50/50 dark:bg-amber-950/20"),
+		children: items.map((item) => /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Card$1, {
+			className: cn$1("overflow-hidden transition-all hover:shadow-md relative", item.variant === "primary" && "border-blue-200 bg-blue-50/50 dark:bg-blue-950/20", item.variant === "accent" && "border-amber-200 bg-amber-50/50 dark:bg-amber-950/20"),
 			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader, {
+				/* @__PURE__ */ (0, import_jsx_runtime.jsxs)(CardHeader$1, {
 					className: "flex flex-row items-center justify-between space-y-0 pb-2 p-4",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle, {
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardTitle$1, {
 						className: "text-xs font-medium text-muted-foreground uppercase tracking-wider",
 						children: item.title
-					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, { className: cn("h-4 w-4", item.variant === "primary" ? "text-blue-600" : item.variant === "accent" ? "text-amber-600" : "text-gray-500") })]
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, { className: cn$1("h-4 w-4", item.variant === "primary" ? "text-blue-600" : item.variant === "accent" ? "text-amber-600" : "text-gray-500") })]
 				}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent, {
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CardContent$1, {
 					className: "p-4 pt-0",
 					children: loading ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "space-y-2",
@@ -6266,7 +6266,7 @@ function LiveKPIs({ currentData, previousData, comparisonEnabled, loading }) {
 						item.trend !== void 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center mt-1",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-								className: cn("flex items-center text-xs font-medium", item.trend > 0 ? "text-emerald-600" : item.trend < 0 ? "text-red-600" : "text-gray-500"),
+								className: cn$1("flex items-center text-xs font-medium", item.trend > 0 ? "text-emerald-600" : item.trend < 0 ? "text-red-600" : "text-gray-500"),
 								children: [
 									item.trend > 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowUp, { className: "mr-0.5 h-3 w-3" }) : item.trend < 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ArrowDown, { className: "mr-0.5 h-3 w-3" }) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Minus, { className: "mr-0.5 h-3 w-3" }),
 									Math.abs(item.trend).toFixed(1),
@@ -6292,7 +6292,7 @@ function LiveKPIs({ currentData, previousData, comparisonEnabled, loading }) {
 }
 function EmptyState({ icon: Icon, title, description, className, action }) {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: cn("flex flex-col items-center justify-center p-8 text-center animate-fade-in", className),
+		className: cn$1("flex flex-col items-center justify-center p-8 text-center animate-fade-in", className),
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "flex h-16 w-16 items-center justify-center rounded-full bg-muted/50 mb-4",
@@ -6978,15 +6978,15 @@ var require_react_is$1 = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 var require_isNumber = /* @__PURE__ */ __commonJSMin(((exports, module) => {
 	var baseGetTag$5 = require__baseGetTag(), isObjectLike$6 = require_isObjectLike();
 	var numberTag$2 = "[object Number]";
-	function isNumber$3(value) {
+	function isNumber$2(value) {
 		return typeof value == "number" || isObjectLike$6(value) && baseGetTag$5(value) == numberTag$2;
 	}
-	module.exports = isNumber$3;
+	module.exports = isNumber$2;
 }));
 var require_isNaN = /* @__PURE__ */ __commonJSMin(((exports, module) => {
-	var isNumber$2 = require_isNumber();
+	var isNumber$1 = require_isNumber();
 	function isNaN$1(value) {
-		return isNumber$2(value) && value != +value;
+		return isNumber$1(value) && value != +value;
 	}
 	module.exports = isNaN$1;
 }));
@@ -7003,14 +7003,14 @@ var mathSign = function mathSign$1(value) {
 var isPercent = function isPercent$1(value) {
 	return (0, import_isString$2.default)(value) && value.indexOf("%") === value.length - 1;
 };
-var isNumber$1 = function isNumber$4(value) {
+var isNumber = function isNumber$3(value) {
 	return (0, import_isNumber.default)(value) && !(0, import_isNaN$2.default)(value);
 };
 var isNullish = function isNullish$1(value) {
 	return (0, import_isNil$11.default)(value);
 };
 var isNumOrStr = function isNumOrStr$1(value) {
-	return isNumber$1(value) || (0, import_isString$2.default)(value);
+	return isNumber(value) || (0, import_isString$2.default)(value);
 };
 var idCounter = 0;
 var uniqueId = function uniqueId$1(prefix$2) {
@@ -7020,7 +7020,7 @@ var uniqueId = function uniqueId$1(prefix$2) {
 var getPercentValue = function getPercentValue$1(percent, totalValue) {
 	var defaultValue = arguments.length > 2 && arguments[2] !== void 0 ? arguments[2] : 0;
 	var validate = arguments.length > 3 && arguments[3] !== void 0 ? arguments[3] : false;
-	if (!isNumber$1(percent) && !(0, import_isString$2.default)(percent)) return defaultValue;
+	if (!isNumber(percent) && !(0, import_isString$2.default)(percent)) return defaultValue;
 	var value;
 	if (isPercent(percent)) {
 		var index = percent.indexOf("%");
@@ -7045,7 +7045,7 @@ var hasDuplicate = function hasDuplicate$1(ary) {
 	return false;
 };
 var interpolateNumber = function interpolateNumber$2(numberA, numberB) {
-	if (isNumber$1(numberA) && isNumber$1(numberB)) return function(t$1) {
+	if (isNumber(numberA) && isNumber(numberB)) return function(t$1) {
 		return numberA + t$1 * (numberB - numberA);
 	};
 	return function() {
@@ -7088,7 +7088,7 @@ var getLinearRegression = function getLinearRegression$1(data) {
 	};
 };
 var compareValues = function compareValues$1(a$2, b) {
-	if (isNumber$1(a$2) && isNumber$1(b)) return a$2 - b;
+	if (isNumber(a$2) && isNumber(b)) return a$2 - b;
 	if ((0, import_isString$2.default)(a$2) && (0, import_isString$2.default)(b)) return a$2.localeCompare(b);
 	if (a$2 instanceof Date && b instanceof Date) return a$2.getTime() - b.getTime();
 	return String(a$2).localeCompare(String(b));
@@ -7705,7 +7705,7 @@ function findChildByType(children, type) {
 var validateWidthHeight = function validateWidthHeight$1(el) {
 	if (!el || !el.props) return false;
 	var _el$props = el.props, width = _el$props.width, height = _el$props.height;
-	if (!isNumber$1(width) || width <= 0 || !isNumber$1(height) || height <= 0) return false;
+	if (!isNumber(width) || width <= 0 || !isNumber(height) || height <= 0) return false;
 	return true;
 };
 var SVG_TAGS = [
@@ -10299,7 +10299,7 @@ var Legend = /* @__PURE__ */ function(_PureComponent) {
 		key: "getWithHeight",
 		value: function getWithHeight(item, chartWidth) {
 			var layout = _objectSpread$34(_objectSpread$34({}, this.defaultProps), item.props).layout;
-			if (layout === "vertical" && isNumber$1(item.props.height)) return { height: item.props.height };
+			if (layout === "vertical" && isNumber(item.props.height)) return { height: item.props.height };
 			if (layout === "horizontal") return { width: item.props.width || chartWidth };
 			return null;
 		}
@@ -10771,11 +10771,11 @@ var CSS_CLASS_PREFIX = "recharts-tooltip-wrapper";
 var TOOLTIP_HIDDEN = { visibility: "hidden" };
 function getTooltipCSSClassName(_ref) {
 	var coordinate = _ref.coordinate, translateX = _ref.translateX, translateY = _ref.translateY;
-	return clsx_default(CSS_CLASS_PREFIX, _defineProperty$38(_defineProperty$38(_defineProperty$38(_defineProperty$38({}, "".concat(CSS_CLASS_PREFIX, "-right"), isNumber$1(translateX) && coordinate && isNumber$1(coordinate.x) && translateX >= coordinate.x), "".concat(CSS_CLASS_PREFIX, "-left"), isNumber$1(translateX) && coordinate && isNumber$1(coordinate.x) && translateX < coordinate.x), "".concat(CSS_CLASS_PREFIX, "-bottom"), isNumber$1(translateY) && coordinate && isNumber$1(coordinate.y) && translateY >= coordinate.y), "".concat(CSS_CLASS_PREFIX, "-top"), isNumber$1(translateY) && coordinate && isNumber$1(coordinate.y) && translateY < coordinate.y));
+	return clsx_default(CSS_CLASS_PREFIX, _defineProperty$38(_defineProperty$38(_defineProperty$38(_defineProperty$38({}, "".concat(CSS_CLASS_PREFIX, "-right"), isNumber(translateX) && coordinate && isNumber(coordinate.x) && translateX >= coordinate.x), "".concat(CSS_CLASS_PREFIX, "-left"), isNumber(translateX) && coordinate && isNumber(coordinate.x) && translateX < coordinate.x), "".concat(CSS_CLASS_PREFIX, "-bottom"), isNumber(translateY) && coordinate && isNumber(coordinate.y) && translateY >= coordinate.y), "".concat(CSS_CLASS_PREFIX, "-top"), isNumber(translateY) && coordinate && isNumber(coordinate.y) && translateY < coordinate.y));
 }
 function getTooltipTranslateXY(_ref2) {
 	var allowEscapeViewBox = _ref2.allowEscapeViewBox, coordinate = _ref2.coordinate, key = _ref2.key, offsetTopLeft = _ref2.offsetTopLeft, position = _ref2.position, reverseDirection = _ref2.reverseDirection, tooltipDimension = _ref2.tooltipDimension, viewBox = _ref2.viewBox, viewBoxDimension = _ref2.viewBoxDimension;
-	if (position && isNumber$1(position[key])) return position[key];
+	if (position && isNumber(position[key])) return position[key];
 	var negative = coordinate[key] - tooltipDimension - offsetTopLeft;
 	var positive = coordinate[key] + offsetTopLeft;
 	if (allowEscapeViewBox[key]) return reverseDirection[key] ? negative : positive;
@@ -12059,7 +12059,7 @@ var calculateWordWidths = function calculateWordWidths$1(_ref) {
 };
 var calculateWordsByLines = function calculateWordsByLines$1(_ref2, initialWordsWithComputedWith, spaceWidth, lineWidth, scaleToFit) {
 	var maxLines = _ref2.maxLines, children = _ref2.children, style = _ref2.style, breakAll = _ref2.breakAll;
-	var shouldLimitLines = isNumber$1(maxLines);
+	var shouldLimitLines = isNumber(maxLines);
 	var text = children;
 	var calculate = function calculate$1() {
 		return (arguments.length > 0 && arguments[0] !== void 0 ? arguments[0] : []).reduce(function(result$1, _ref3) {
@@ -12161,8 +12161,8 @@ var Text = function Text$1(_ref5) {
 	]);
 	var dx = props.dx, dy = props.dy, angle = props.angle, className = props.className, breakAll = props.breakAll, textProps = _objectWithoutProperties$13(props, _excluded2$5);
 	if (!isNumOrStr(propsX) || !isNumOrStr(propsY)) return null;
-	var x$1 = propsX + (isNumber$1(dx) ? dx : 0);
-	var y$1 = propsY + (isNumber$1(dy) ? dy : 0);
+	var x$1 = propsX + (isNumber(dx) ? dx : 0);
+	var y$1 = propsY + (isNumber(dy) ? dy : 0);
 	var startDy;
 	switch (verticalAnchor) {
 		case "start":
@@ -12179,7 +12179,7 @@ var Text = function Text$1(_ref5) {
 	if (scaleToFit) {
 		var lineWidth = wordsByLines[0].width;
 		var width = props.width;
-		transforms.push("scale(".concat((isNumber$1(width) ? width / lineWidth : 1) / lineWidth, ")"));
+		transforms.push("scale(".concat((isNumber(width) ? width / lineWidth : 1) / lineWidth, ")"));
 	}
 	if (angle) transforms.push("rotate(".concat(angle, ", ").concat(x$1, ", ").concat(y$1, ")"));
 	if (transforms.length) textProps.transform = transforms.join(" ");
@@ -16724,7 +16724,7 @@ function getDomainOfDataByKey(data, key, type, filterNil) {
 	});
 	if (type === "number") {
 		var domain = flattenData.filter(function(entry) {
-			return isNumber$1(entry) || parseFloat(entry);
+			return isNumber(entry) || parseFloat(entry);
 		});
 		return domain.length ? [(0, import_min.default)(domain), (0, import_max$1.default)(domain)] : [Infinity, -Infinity];
 	}
@@ -16911,8 +16911,8 @@ var appendOffsetOfLegend = function appendOffsetOfLegend$1(offset, _unused, prop
 	if (legendProps) {
 		var _ref4 = legendBox || {}, boxWidth = _ref4.width, boxHeight = _ref4.height;
 		var align = legendProps.align, verticalAlign = legendProps.verticalAlign, layout = legendProps.layout;
-		if ((layout === "vertical" || layout === "horizontal" && verticalAlign === "middle") && align !== "center" && isNumber$1(offset[align])) return _objectSpread$27(_objectSpread$27({}, offset), {}, _defineProperty$31({}, align, offset[align] + (boxWidth || 0)));
-		if ((layout === "horizontal" || layout === "vertical" && align === "center") && verticalAlign !== "middle" && isNumber$1(offset[verticalAlign])) return _objectSpread$27(_objectSpread$27({}, offset), {}, _defineProperty$31({}, verticalAlign, offset[verticalAlign] + (boxHeight || 0)));
+		if ((layout === "vertical" || layout === "horizontal" && verticalAlign === "middle") && align !== "center" && isNumber(offset[align])) return _objectSpread$27(_objectSpread$27({}, offset), {}, _defineProperty$31({}, align, offset[align] + (boxWidth || 0)));
+		if ((layout === "horizontal" || layout === "vertical" && align === "center") && verticalAlign !== "middle" && isNumber(offset[verticalAlign])) return _objectSpread$27(_objectSpread$27({}, offset), {}, _defineProperty$31({}, verticalAlign, offset[verticalAlign] + (boxHeight || 0)));
 	}
 	return offset;
 };
@@ -17101,12 +17101,12 @@ var findPositionOfBar = function findPositionOfBar$1(barPosition, child) {
 	return null;
 };
 var truncateByDomain = function truncateByDomain$1(value, domain) {
-	if (!domain || domain.length !== 2 || !isNumber$1(domain[0]) || !isNumber$1(domain[1])) return value;
+	if (!domain || domain.length !== 2 || !isNumber(domain[0]) || !isNumber(domain[1])) return value;
 	var minValue = Math.min(domain[0], domain[1]);
 	var maxValue = Math.max(domain[0], domain[1]);
 	var result = [value[0], value[1]];
-	if (!isNumber$1(value[0]) || value[0] < minValue) result[0] = minValue;
-	if (!isNumber$1(value[1]) || value[1] > maxValue) result[1] = maxValue;
+	if (!isNumber(value[0]) || value[0] < minValue) result[0] = minValue;
+	if (!isNumber(value[1]) || value[1] > maxValue) result[1] = maxValue;
 	if (result[0] > maxValue) result[0] = maxValue;
 	if (result[1] < minValue) result[1] = minValue;
 	return result;
@@ -17264,7 +17264,7 @@ var getStackedDataOfItem = function getStackedDataOfItem$1(item, stackGroups) {
 };
 var getDomainOfSingle = function getDomainOfSingle$1(data) {
 	return data.reduce(function(result, entry) {
-		return [(0, import_min.default)(entry.concat([result[0]]).filter(isNumber$1)), (0, import_max$1.default)(entry.concat([result[1]]).filter(isNumber$1))];
+		return [(0, import_min.default)(entry.concat([result[0]]).filter(isNumber)), (0, import_max$1.default)(entry.concat([result[1]]).filter(isNumber))];
 	}, [Infinity, -Infinity]);
 };
 var getDomainOfStackGroups = function getDomainOfStackGroups$1(stackGroups, startIndex, endIndex) {
@@ -17284,13 +17284,13 @@ var parseSpecifiedDomain = function parseSpecifiedDomain$1(specifiedDomain, data
 	if ((0, import_isFunction$15.default)(specifiedDomain)) return specifiedDomain(dataDomain, allowDataOverflow);
 	if (!Array.isArray(specifiedDomain)) return dataDomain;
 	var domain = [];
-	if (isNumber$1(specifiedDomain[0])) domain[0] = allowDataOverflow ? specifiedDomain[0] : Math.min(specifiedDomain[0], dataDomain[0]);
+	if (isNumber(specifiedDomain[0])) domain[0] = allowDataOverflow ? specifiedDomain[0] : Math.min(specifiedDomain[0], dataDomain[0]);
 	else if (MIN_VALUE_REG.test(specifiedDomain[0])) {
 		var value = +MIN_VALUE_REG.exec(specifiedDomain[0])[1];
 		domain[0] = dataDomain[0] - value;
 	} else if ((0, import_isFunction$15.default)(specifiedDomain[0])) domain[0] = specifiedDomain[0](dataDomain[0]);
 	else domain[0] = dataDomain[0];
-	if (isNumber$1(specifiedDomain[1])) domain[1] = allowDataOverflow ? specifiedDomain[1] : Math.max(specifiedDomain[1], dataDomain[1]);
+	if (isNumber(specifiedDomain[1])) domain[1] = allowDataOverflow ? specifiedDomain[1] : Math.max(specifiedDomain[1], dataDomain[1]);
 	else if (MAX_VALUE_REG.test(specifiedDomain[1])) {
 		var _value = +MAX_VALUE_REG.exec(specifiedDomain[1])[1];
 		domain[1] = dataDomain[1] + _value;
@@ -17772,7 +17772,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel$1(props) {
 		textAnchor: horizontalEnd,
 		verticalAnchor: verticalEnd
 	}, sizeAttrs);
-	if ((0, import_isObject$1.default)(position) && (isNumber$1(position.x) || isPercent(position.x)) && (isNumber$1(position.y) || isPercent(position.y))) return _objectSpread$25({
+	if ((0, import_isObject$1.default)(position) && (isNumber(position.x) || isPercent(position.x)) && (isNumber(position.y) || isPercent(position.y))) return _objectSpread$25({
 		x: x$1 + getPercentValue(position.x, width),
 		y: y$1 + getPercentValue(position.y, height),
 		textAnchor: "end",
@@ -17786,7 +17786,7 @@ var getAttrsOfCartesianLabel = function getAttrsOfCartesianLabel$1(props) {
 	}, sizeAttrs);
 };
 var isPolar = function isPolar$1(viewBox) {
-	return "cx" in viewBox && isNumber$1(viewBox.cx);
+	return "cx" in viewBox && isNumber(viewBox.cx);
 };
 function Label(_ref4) {
 	var _ref4$offset = _ref4.offset, offset = _ref4$offset === void 0 ? 5 : _ref4$offset, restProps = _objectWithoutProperties$11(_ref4, _excluded$11);
@@ -17809,27 +17809,27 @@ Label.displayName = "Label";
 var parseViewBox = function parseViewBox$1(props) {
 	var cx = props.cx, cy = props.cy, angle = props.angle, startAngle = props.startAngle, endAngle = props.endAngle, r$1 = props.r, radius = props.radius, innerRadius = props.innerRadius, outerRadius = props.outerRadius, x$1 = props.x, y$1 = props.y, top = props.top, left = props.left, width = props.width, height = props.height, clockWise = props.clockWise, labelViewBox = props.labelViewBox;
 	if (labelViewBox) return labelViewBox;
-	if (isNumber$1(width) && isNumber$1(height)) {
-		if (isNumber$1(x$1) && isNumber$1(y$1)) return {
+	if (isNumber(width) && isNumber(height)) {
+		if (isNumber(x$1) && isNumber(y$1)) return {
 			x: x$1,
 			y: y$1,
 			width,
 			height
 		};
-		if (isNumber$1(top) && isNumber$1(left)) return {
+		if (isNumber(top) && isNumber(left)) return {
 			x: top,
 			y: left,
 			width,
 			height
 		};
 	}
-	if (isNumber$1(x$1) && isNumber$1(y$1)) return {
+	if (isNumber(x$1) && isNumber(y$1)) return {
 		x: x$1,
 		y: y$1,
 		width: 0,
 		height: 0
 	};
-	if (isNumber$1(cx) && isNumber$1(cy)) return {
+	if (isNumber(cx) && isNumber(cy)) return {
 		cx,
 		cy,
 		startAngle: startAngle || angle || 0,
@@ -18387,8 +18387,8 @@ var getPath$1 = function getPath$2(_ref) {
 		lineFunction.defined(defined).curve(curveFactory);
 		return lineFunction(areaPoints);
 	}
-	if (layout === "vertical" && isNumber$1(baseLine)) lineFunction = area_default().y(getY).x1(getX).x0(baseLine);
-	else if (isNumber$1(baseLine)) lineFunction = area_default().x(getX).y1(getY).y0(baseLine);
+	if (layout === "vertical" && isNumber(baseLine)) lineFunction = area_default().y(getY).x1(getX).x0(baseLine);
+	else if (isNumber(baseLine)) lineFunction = area_default().x(getX).y1(getY).y0(baseLine);
 	else lineFunction = line_default().x(getX).y(getY);
 	lineFunction.defined(defined).curve(curveFactory);
 	return lineFunction(formatPoints);
@@ -20640,7 +20640,7 @@ var Cross = function Cross$1(_ref) {
 		width,
 		height
 	}, rest);
-	if (!isNumber$1(x$1) || !isNumber$1(y$1) || !isNumber$1(width) || !isNumber$1(height) || !isNumber$1(top) || !isNumber$1(left)) return null;
+	if (!isNumber(x$1) || !isNumber(y$1) || !isNumber(width) || !isNumber(height) || !isNumber(top) || !isNumber(left)) return null;
 	return /* @__PURE__ */ import_react.createElement("path", _extends$15({}, filterProps(props, true), {
 		className: clsx_default("recharts-cross", className),
 		d: getPath(x$1, y$1, width, height, top, left)
@@ -21623,7 +21623,7 @@ var Brush = /* @__PURE__ */ function(_PureComponent) {
 			value: function render() {
 				var _this$props11 = this.props, data = _this$props11.data, className = _this$props11.className, children = _this$props11.children, x$1 = _this$props11.x, y$1 = _this$props11.y, width = _this$props11.width, height = _this$props11.height, alwaysShowText = _this$props11.alwaysShowText;
 				var _this$state5 = this.state, startX = _this$state5.startX, endX = _this$state5.endX, isTextActive = _this$state5.isTextActive, isSlideMoving = _this$state5.isSlideMoving, isTravellerMoving = _this$state5.isTravellerMoving, isTravellerFocused = _this$state5.isTravellerFocused;
-				if (!data || !data.length || !isNumber$1(x$1) || !isNumber$1(y$1) || !isNumber$1(width) || !isNumber$1(height) || width <= 0 || height <= 0) return null;
+				if (!data || !data.length || !isNumber(x$1) || !isNumber(y$1) || !isNumber(width) || !isNumber(height) || width <= 0 || height <= 0) return null;
 				var layerClass = clsx_default("recharts-brush", className);
 				var isPanoramic = import_react.Children.count(children) === 1;
 				var style = generatePrefixStyle("userSelect", "none");
@@ -21945,7 +21945,7 @@ var minPointSizeCallback = function minPointSizeCallback$1(minPointSize) {
 	var defaultValue = arguments.length > 1 && arguments[1] !== void 0 ? arguments[1] : 0;
 	return function(value, index) {
 		if (typeof minPointSize === "number") return minPointSize;
-		var isValueNumberOrNil = isNumber$1(value) || isNullish(value);
+		var isValueNumberOrNil = isNumber(value) || isNullish(value);
 		if (isValueNumberOrNil) return minPointSize(value, index);
 		!isValueNumberOrNil && invariant(false, "minPointSize callback function received a value with type of ".concat(_typeof$17(value), ". Currently only numbers or null/undefined are supported."));
 		return defaultValue;
@@ -23625,7 +23625,7 @@ function getTicksStart(sign$1, boundaries, getTickSize, ticks$1, minTickGap, pre
 function getTicks(props, fontSize, letterSpacing) {
 	var tick = props.tick, ticks$1 = props.ticks, viewBox = props.viewBox, minTickGap = props.minTickGap, orientation = props.orientation, interval = props.interval, tickFormatter = props.tickFormatter, unit$1 = props.unit, angle = props.angle;
 	if (!ticks$1 || !ticks$1.length || !tick) return [];
-	if (isNumber$1(interval) || Global.isSsr) return getNumberIntervalTicks(ticks$1, typeof interval === "number" && isNumber$1(interval) ? interval : 0);
+	if (isNumber(interval) || Global.isSsr) return getNumberIntervalTicks(ticks$1, typeof interval === "number" && isNumber(interval) ? interval : 0);
 	var candidates = [];
 	var sizeKey = orientation === "top" || orientation === "bottom" ? "width" : "height";
 	var unitSize = unit$1 && sizeKey === "width" ? getStringSize(unit$1, {
@@ -23846,7 +23846,7 @@ var CartesianAxis = /* @__PURE__ */ function(_Component) {
 				var x1, x2, y1, y2, tx, ty;
 				var sign$1 = mirror ? -1 : 1;
 				var finalTickSize = data.tickSize || tickSize;
-				var tickCoord = isNumber$1(data.tickCoord) ? data.tickCoord : data.coordinate;
+				var tickCoord = isNumber(data.tickCoord) ? data.tickCoord : data.coordinate;
 				switch (orientation) {
 					case "top":
 						x1 = x2 = data.coordinate;
@@ -24303,15 +24303,15 @@ function CartesianGrid(props) {
 		horizontalFill: (_props$horizontalFill = props.horizontalFill) !== null && _props$horizontalFill !== void 0 ? _props$horizontalFill : defaultProps.horizontalFill,
 		vertical: (_props$vertical3 = props.vertical) !== null && _props$vertical3 !== void 0 ? _props$vertical3 : defaultProps.vertical,
 		verticalFill: (_props$verticalFill = props.verticalFill) !== null && _props$verticalFill !== void 0 ? _props$verticalFill : defaultProps.verticalFill,
-		x: isNumber$1(props.x) ? props.x : offset.left,
-		y: isNumber$1(props.y) ? props.y : offset.top,
-		width: isNumber$1(props.width) ? props.width : offset.width,
-		height: isNumber$1(props.height) ? props.height : offset.height
+		x: isNumber(props.x) ? props.x : offset.left,
+		y: isNumber(props.y) ? props.y : offset.top,
+		width: isNumber(props.width) ? props.width : offset.width,
+		height: isNumber(props.height) ? props.height : offset.height
 	});
 	var x$1 = propsIncludingDefaults.x, y$1 = propsIncludingDefaults.y, width = propsIncludingDefaults.width, height = propsIncludingDefaults.height, syncWithTicks = propsIncludingDefaults.syncWithTicks, horizontalValues = propsIncludingDefaults.horizontalValues, verticalValues = propsIncludingDefaults.verticalValues;
 	var xAxis = useArbitraryXAxis();
 	var yAxis = useYAxisWithFiniteDomainOrRandom();
-	if (!isNumber$1(width) || width <= 0 || !isNumber$1(height) || height <= 0 || !isNumber$1(x$1) || x$1 !== +x$1 || !isNumber$1(y$1) || y$1 !== +y$1) return null;
+	if (!isNumber(width) || width <= 0 || !isNumber(height) || height <= 0 || !isNumber(x$1) || x$1 !== +x$1 || !isNumber(y$1) || y$1 !== +y$1) return null;
 	var verticalCoordinatesGenerator = propsIncludingDefaults.verticalCoordinatesGenerator || defaultVerticalCoordinatesGenerator;
 	var horizontalCoordinatesGenerator = propsIncludingDefaults.horizontalCoordinatesGenerator || defaultHorizontalCoordinatesGenerator;
 	var horizontalPoints = propsIncludingDefaults.horizontalPoints, verticalPoints = propsIncludingDefaults.verticalPoints;
@@ -24581,11 +24581,11 @@ var Area = /* @__PURE__ */ function(_PureComponent) {
 				var maxY = (0, import_max.default)(points.map(function(entry) {
 					return entry.y || 0;
 				}));
-				if (isNumber$1(baseLine) && typeof baseLine === "number") maxY = Math.max(baseLine, maxY);
+				if (isNumber(baseLine) && typeof baseLine === "number") maxY = Math.max(baseLine, maxY);
 				else if (baseLine && Array.isArray(baseLine) && baseLine.length) maxY = Math.max((0, import_max.default)(baseLine.map(function(entry) {
 					return entry.y || 0;
 				})), maxY);
-				if (isNumber$1(maxY)) return /* @__PURE__ */ import_react.createElement("rect", {
+				if (isNumber(maxY)) return /* @__PURE__ */ import_react.createElement("rect", {
 					x: startX < endX ? startX : startX - width,
 					y: 0,
 					width,
@@ -24604,11 +24604,11 @@ var Area = /* @__PURE__ */ function(_PureComponent) {
 				var maxX = (0, import_max.default)(points.map(function(entry) {
 					return entry.x || 0;
 				}));
-				if (isNumber$1(baseLine) && typeof baseLine === "number") maxX = Math.max(baseLine, maxX);
+				if (isNumber(baseLine) && typeof baseLine === "number") maxX = Math.max(baseLine, maxX);
 				else if (baseLine && Array.isArray(baseLine) && baseLine.length) maxX = Math.max((0, import_max.default)(baseLine.map(function(entry) {
 					return entry.x || 0;
 				})), maxX);
-				if (isNumber$1(maxX)) return /* @__PURE__ */ import_react.createElement("rect", {
+				if (isNumber(maxX)) return /* @__PURE__ */ import_react.createElement("rect", {
 					x: 0,
 					y: startY < endY ? startY : startY - height,
 					width: maxX + (strokeWidth ? parseInt("".concat(strokeWidth), 10) : 1),
@@ -24689,7 +24689,7 @@ var Area = /* @__PURE__ */ function(_PureComponent) {
 							return entry;
 						});
 						var stepBaseLine;
-						if (isNumber$1(baseLine) && typeof baseLine === "number") stepBaseLine = interpolateNumber(prevBaseLine, baseLine)(t$1);
+						if (isNumber(baseLine) && typeof baseLine === "number") stepBaseLine = interpolateNumber(prevBaseLine, baseLine)(t$1);
 						else if ((0, import_isNil$2.default)(baseLine) || (0, import_isNaN.default)(baseLine)) stepBaseLine = interpolateNumber(prevBaseLine, 0)(t$1);
 						else stepBaseLine = baseLine.map(function(entry, index) {
 							var prevPointIndex = Math.floor(index * prevPointsDiffFactor);
@@ -24792,7 +24792,7 @@ _defineProperty$7(Area, "getBaseValue", function(props, item, xAxis, yAxis) {
 	var layout = props.layout, chartBaseValue = props.baseValue;
 	var itemBaseValue = item.props.baseValue;
 	var baseValue = itemBaseValue !== null && itemBaseValue !== void 0 ? itemBaseValue : chartBaseValue;
-	if (isNumber$1(baseValue) && typeof baseValue === "number") return baseValue;
+	if (isNumber(baseValue) && typeof baseValue === "number") return baseValue;
 	var numericAxis = layout === "horizontal" ? yAxis : xAxis;
 	var domain = numericAxis.scale.domain();
 	if (numericAxis.type === "number") {
@@ -25800,7 +25800,7 @@ var detectReferenceElementsDomain = function detectReferenceElementsDomain$1(chi
 	var valueKey = axisType[0];
 	var finalDomain = domain;
 	if (elements.length) finalDomain = elements.reduce(function(result, el) {
-		if (el.props[idKey] === axisId && ifOverflowMatches(el.props, "extendDomain") && isNumber$1(el.props[valueKey])) {
+		if (el.props[idKey] === axisId && ifOverflowMatches(el.props, "extendDomain") && isNumber(el.props[valueKey])) {
 			var value = el.props[valueKey];
 			return [Math.min(result[0], value), Math.max(result[1], value)];
 		}
@@ -25810,7 +25810,7 @@ var detectReferenceElementsDomain = function detectReferenceElementsDomain$1(chi
 		var key1 = "".concat(valueKey, "1");
 		var key2 = "".concat(valueKey, "2");
 		finalDomain = areas.reduce(function(result, el) {
-			if (el.props[idKey] === axisId && ifOverflowMatches(el.props, "extendDomain") && isNumber$1(el.props[key1]) && isNumber$1(el.props[key2])) {
+			if (el.props[idKey] === axisId && ifOverflowMatches(el.props, "extendDomain") && isNumber(el.props[key1]) && isNumber(el.props[key2])) {
 				var value1 = el.props[key1];
 				var value2 = el.props[key2];
 				return [Math.min(result[0], value1, value2), Math.max(result[1], value1, value2)];
@@ -25819,7 +25819,7 @@ var detectReferenceElementsDomain = function detectReferenceElementsDomain$1(chi
 		}, finalDomain);
 	}
 	if (specifiedTicks && specifiedTicks.length) finalDomain = specifiedTicks.reduce(function(result, tick) {
-		if (isNumber$1(tick)) return [Math.min(result[0], tick), Math.max(result[1], tick)];
+		if (isNumber(tick)) return [Math.min(result[0], tick), Math.max(result[1], tick)];
 		return result;
 	}, finalDomain);
 	return finalDomain;
@@ -26081,7 +26081,7 @@ function isDomainSpecifiedByUser(domain, allowDataOverflow, axisType) {
 	if (axisType === "number" && allowDataOverflow === true && Array.isArray(domain)) {
 		var domainStart = domain === null || domain === void 0 ? void 0 : domain[0];
 		var domainEnd = domain === null || domain === void 0 ? void 0 : domain[1];
-		if (!!domainStart && !!domainEnd && isNumber$1(domainStart) && isNumber$1(domainEnd)) return true;
+		if (!!domainStart && !!domainEnd && isNumber(domainStart) && isNumber(domainEnd)) return true;
 	}
 	return false;
 }
@@ -26507,7 +26507,7 @@ var getDisplayedData = function getDisplayedData$1(data, _ref) {
 		return result;
 	}, []);
 	if (itemsData.length > 0) return itemsData;
-	if (data && data.length && isNumber$1(dataStartIndex) && isNumber$1(dataEndIndex)) return data.slice(dataStartIndex, dataEndIndex + 1);
+	if (data && data.length && isNumber(dataStartIndex) && isNumber(dataEndIndex)) return data.slice(dataStartIndex, dataEndIndex + 1);
 	return [];
 };
 function getDefaultDomainByAxisType(axisType) {
@@ -27191,9 +27191,9 @@ var generateCategoricalChart = function generateCategoricalChart$1(_ref6) {
 					key: element.key || "_recharts-brush",
 					onChange: combineEventHandlers(_this.handleBrushChange, element.props.onChange),
 					data,
-					x: isNumber$1(element.props.x) ? element.props.x : offset.left,
-					y: isNumber$1(element.props.y) ? element.props.y : offset.top + offset.height + offset.brushBottom - (margin.bottom || 0),
-					width: isNumber$1(element.props.width) ? element.props.width : offset.width,
+					x: isNumber(element.props.x) ? element.props.x : offset.left,
+					y: isNumber(element.props.y) ? element.props.y : offset.top + offset.height + offset.brushBottom - (margin.bottom || 0),
+					width: isNumber(element.props.width) ? element.props.width : offset.width,
 					startIndex: dataStartIndex,
 					endIndex: dataEndIndex,
 					updateId: "brush-".concat(updateId)
@@ -28122,7 +28122,7 @@ var ChartContainer = import_react.forwardRef(({ id, className, children, config:
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			"data-chart": chartId,
 			ref,
-			className: cn("flex w-full h-full aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none", className),
+			className: cn$1("flex w-full h-full aspect-video justify-center text-xs [&_.recharts-cartesian-axis-tick_text]:fill-muted-foreground [&_.recharts-cartesian-grid_line[stroke='#ccc']]:stroke-border/50 [&_.recharts-curve.recharts-tooltip-cursor]:stroke-border [&_.recharts-dot[stroke='#fff']]:stroke-transparent [&_.recharts-layer]:outline-none [&_.recharts-polar-grid_[stroke='#ccc']]:stroke-border [&_.recharts-radial-bar-background-sector]:fill-muted [&_.recharts-rectangle.recharts-tooltip-cursor]:fill-muted [&_.recharts-reference-line_[stroke='#ccc']]:stroke-border [&_.recharts-sector[stroke='#fff']]:stroke-transparent [&_.recharts-sector]:outline-none [&_.recharts-surface]:outline-none", className),
 			...props,
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(ChartStyle, {
 				id: chartId,
@@ -28152,12 +28152,12 @@ var ChartTooltipContent = import_react.forwardRef(({ active, payload, className,
 		const itemConfig = getPayloadConfigFromPayload(config$1, item, `${labelKey || item?.dataKey || item?.name || "value"}`);
 		const value = !labelKey && typeof label === "string" ? config$1[label]?.label || label : itemConfig?.label;
 		if (labelFormatter) return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: cn("font-medium", labelClassName),
+			className: cn$1("font-medium", labelClassName),
 			children: labelFormatter(value, payload)
 		});
 		if (!value) return null;
 		return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-			className: cn("font-medium", labelClassName),
+			className: cn$1("font-medium", labelClassName),
 			children: value
 		});
 	}, [
@@ -28173,16 +28173,16 @@ var ChartTooltipContent = import_react.forwardRef(({ active, payload, className,
 	const nestLabel = payload.length === 1 && indicator !== "dot";
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 		ref,
-		className: cn("grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl", className),
+		className: cn$1("grid min-w-[8rem] items-start gap-1.5 rounded-lg border border-border/50 bg-background px-2.5 py-1.5 text-xs shadow-xl", className),
 		children: [!nestLabel ? tooltipLabel : null, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 			className: "grid gap-1.5",
 			children: payload.map((item, index) => {
 				const itemConfig = getPayloadConfigFromPayload(config$1, item, `${nameKey || item.name || item.dataKey || "value"}`);
 				const indicatorColor = color$1 || item.payload.fill || item.color;
 				return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: cn("flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground", indicator === "dot" && "items-center"),
+					className: cn$1("flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5 [&>svg]:text-muted-foreground", indicator === "dot" && "items-center"),
 					children: formatter && item?.value !== void 0 && item.name ? formatter(item.value, item.name, item, index, item.payload) : /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [itemConfig?.icon ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(itemConfig.icon, {}) : !hideIndicator && /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: cn("shrink-0 rounded-[2px] border-[--color-border] bg-[--color-bg]", {
+						className: cn$1("shrink-0 rounded-[2px] border-[--color-border] bg-[--color-bg]", {
 							"h-2.5 w-2.5": indicator === "dot",
 							"w-1": indicator === "line",
 							"w-0 border-[1.5px] border-dashed bg-transparent": indicator === "dashed",
@@ -28193,7 +28193,7 @@ var ChartTooltipContent = import_react.forwardRef(({ active, payload, className,
 							"--color-border": indicatorColor
 						}
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: cn("flex flex-1 justify-between leading-none", nestLabel ? "items-end" : "items-center"),
+						className: cn$1("flex flex-1 justify-between leading-none", nestLabel ? "items-end" : "items-center"),
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "grid gap-1.5",
 							children: [nestLabel ? tooltipLabel : null, /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
@@ -28216,11 +28216,11 @@ var ChartLegendContent = import_react.forwardRef(({ className, hideIcon = false,
 	if (!payload?.length) return null;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 		ref,
-		className: cn("flex items-center justify-center gap-4", verticalAlign === "top" ? "pb-3" : "pt-3", className),
+		className: cn$1("flex items-center justify-center gap-4", verticalAlign === "top" ? "pb-3" : "pt-3", className),
 		children: payload.map((item) => {
 			const itemConfig = getPayloadConfigFromPayload(config$1, item, `${nameKey || item.dataKey || "value"}`);
 			return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: cn("flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"),
+				className: cn$1("flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3 [&>svg]:text-muted-foreground"),
 				children: [itemConfig?.icon && !hideIcon ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)(itemConfig.icon, {}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 					className: "h-2 w-2 shrink-0 rounded-[2px]",
 					style: { backgroundColor: item.color }
@@ -28542,87 +28542,6 @@ function AudienceScatterChart({ data, loading }) {
 		})]
 	});
 }
-var PROGRESS_NAME = "Progress";
-var DEFAULT_MAX = 100;
-var [createProgressContext, createProgressScope] = createContextScope(PROGRESS_NAME);
-var [ProgressProvider, useProgressContext] = createProgressContext(PROGRESS_NAME);
-var Progress$1 = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeProgress, value: valueProp = null, max: maxProp, getValueLabel = defaultGetValueLabel, ...progressProps } = props;
-	if ((maxProp || maxProp === 0) && !isValidMaxNumber(maxProp)) console.error(getInvalidMaxError(`${maxProp}`, "Progress"));
-	const max$4 = isValidMaxNumber(maxProp) ? maxProp : DEFAULT_MAX;
-	if (valueProp !== null && !isValidValueNumber(valueProp, max$4)) console.error(getInvalidValueError(`${valueProp}`, "Progress"));
-	const value = isValidValueNumber(valueProp, max$4) ? valueProp : null;
-	const valueLabel = isNumber(value) ? getValueLabel(value, max$4) : void 0;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ProgressProvider, {
-		scope: __scopeProgress,
-		value,
-		max: max$4,
-		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-			"aria-valuemax": max$4,
-			"aria-valuemin": 0,
-			"aria-valuenow": isNumber(value) ? value : void 0,
-			"aria-valuetext": valueLabel,
-			role: "progressbar",
-			"data-state": getProgressState(value, max$4),
-			"data-value": value ?? void 0,
-			"data-max": max$4,
-			...progressProps,
-			ref: forwardedRef
-		})
-	});
-});
-Progress$1.displayName = PROGRESS_NAME;
-var INDICATOR_NAME = "ProgressIndicator";
-var ProgressIndicator = import_react.forwardRef((props, forwardedRef) => {
-	const { __scopeProgress, ...indicatorProps } = props;
-	const context = useProgressContext(INDICATOR_NAME, __scopeProgress);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Primitive.div, {
-		"data-state": getProgressState(context.value, context.max),
-		"data-value": context.value ?? void 0,
-		"data-max": context.max,
-		...indicatorProps,
-		ref: forwardedRef
-	});
-});
-ProgressIndicator.displayName = INDICATOR_NAME;
-function defaultGetValueLabel(value, max$4) {
-	return `${Math.round(value / max$4 * 100)}%`;
-}
-function getProgressState(value, maxValue) {
-	return value == null ? "indeterminate" : value === maxValue ? "complete" : "loading";
-}
-function isNumber(value) {
-	return typeof value === "number";
-}
-function isValidMaxNumber(max$4) {
-	return isNumber(max$4) && !isNaN(max$4) && max$4 > 0;
-}
-function isValidValueNumber(value, max$4) {
-	return isNumber(value) && !isNaN(value) && value <= max$4 && value >= 0;
-}
-function getInvalidMaxError(propValue, componentName) {
-	return `Invalid prop \`max\` of value \`${propValue}\` supplied to \`${componentName}\`. Only numbers greater than 0 are valid max values. Defaulting to \`${DEFAULT_MAX}\`.`;
-}
-function getInvalidValueError(propValue, componentName) {
-	return `Invalid prop \`value\` of value \`${propValue}\` supplied to \`${componentName}\`. The \`value\` prop must be:
-  - a positive number
-  - less than the value passed to \`max\` (or ${DEFAULT_MAX} if no \`max\` prop is set)
-  - \`null\` or \`undefined\` if the progress is indeterminate.
-
-Defaulting to \`null\`.`;
-}
-var Root = Progress$1;
-var Indicator = ProgressIndicator;
-var Progress = import_react.forwardRef(({ className, value, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Root, {
-	ref,
-	className: cn("relative h-4 w-full overflow-hidden rounded-full bg-secondary", className),
-	...props,
-	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Indicator, {
-		className: "h-full w-full flex-1 bg-primary transition-all",
-		style: { transform: `translateX(-${100 - (value || 0)}%)` }
-	})
-}));
-Progress.displayName = Root.displayName;
 function HostComparison({ data, presenters }) {
 	const metrics = (0, import_react.useMemo)(() => {
 		return presenters.map((p) => {
@@ -28724,50 +28643,50 @@ var Table = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE
 	className: "relative w-full overflow-auto",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("table", {
 		ref,
-		className: cn("w-full caption-bottom text-sm", className),
+		className: cn$1("w-full caption-bottom text-sm", className),
 		...props
 	})
 }));
 Table.displayName = "Table";
 var TableHeader = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("thead", {
 	ref,
-	className: cn("[&_tr]:border-b", className),
+	className: cn$1("[&_tr]:border-b", className),
 	...props
 }));
 TableHeader.displayName = "TableHeader";
 var TableBody = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tbody", {
 	ref,
-	className: cn("[&_tr:last-child]:border-0", className),
+	className: cn$1("[&_tr:last-child]:border-0", className),
 	...props
 }));
 TableBody.displayName = "TableBody";
 var TableFooter = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tfoot", {
 	ref,
-	className: cn("border-t bg-muted/50 font-medium [&>tr]:last:border-b-0", className),
+	className: cn$1("border-t bg-muted/50 font-medium [&>tr]:last:border-b-0", className),
 	...props
 }));
 TableFooter.displayName = "TableFooter";
 var TableRow = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("tr", {
 	ref,
-	className: cn("border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", className),
+	className: cn$1("border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted", className),
 	...props
 }));
 TableRow.displayName = "TableRow";
 var TableHead = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("th", {
 	ref,
-	className: cn("h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0", className),
+	className: cn$1("h-12 px-4 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0", className),
 	...props
 }));
 TableHead.displayName = "TableHead";
 var TableCell = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("td", {
 	ref,
-	className: cn("p-4 align-middle [&:has([role=checkbox])]:pr-0", className),
+	className: cn$1("p-4 align-middle [&:has([role=checkbox])]:pr-0", className),
 	...props
 }));
 TableCell.displayName = "TableCell";
 var TableCaption = import_react.forwardRef(({ className, ...props }, ref) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("caption", {
 	ref,
-	className: cn("mt-4 text-sm text-muted-foreground", className),
+	className: cn$1("mt-4 text-sm text-muted-foreground", className),
 	...props
 }));
 TableCaption.displayName = "TableCaption";
@@ -29041,4 +28960,4 @@ function Lives() {
 }
 export { Lives as default };
 
-//# sourceMappingURL=Lives-CArH-lqn.js.map
+//# sourceMappingURL=Lives-W0u_gXtd.js.map
