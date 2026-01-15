@@ -43,27 +43,27 @@ export function AudienceScatterChart({
     if (active && payload && payload.length) {
       const data = payload[0].payload
       return (
-        <div className="rounded-lg border border-[#333333] bg-[#1A1A1A] p-3 shadow-xl text-sm">
-          <p className="font-semibold mb-2 text-white font-display">
+        <div className="rounded-lg border border-border bg-popover p-3 shadow-xl text-sm">
+          <p className="font-semibold mb-2 text-foreground font-display">
             {data.presenter}
           </p>
-          <p className="text-xs text-gray-400 mb-2">
+          <p className="text-xs text-muted-foreground mb-2">
             {new Date(data.date).toLocaleDateString('pt-BR')}
           </p>
           <div className="space-y-1">
             <p className="flex justify-between gap-4">
-              <span className="text-gray-400">Pico de Audiência:</span>
-              <span className="font-medium text-[#D9B979]">
+              <span className="text-muted-foreground">Pico de Audiência:</span>
+              <span className="font-medium text-primary">
                 {data.peakViewers}
               </span>
             </p>
             <p className="flex justify-between gap-4">
-              <span className="text-gray-400">Vendas:</span>
-              <span className="font-medium text-white">{data.sales}</span>
+              <span className="text-muted-foreground">Vendas:</span>
+              <span className="font-medium text-foreground">{data.sales}</span>
             </p>
             <p className="flex justify-between gap-4">
-              <span className="text-gray-400">Faturamento:</span>
-              <span className="font-bold text-[#27E39F]">
+              <span className="text-muted-foreground">Faturamento:</span>
+              <span className="font-bold text-chart-2">
                 R$ {data.revenue.toLocaleString('pt-BR')}
               </span>
             </p>
@@ -75,23 +75,26 @@ export function AudienceScatterChart({
   }
 
   if (loading)
-    return <Skeleton className="h-[350px] w-full rounded-xl bg-[#333333]" />
+    return <Skeleton className="h-[350px] w-full rounded-xl bg-card" />
 
   return (
     <div className="h-[350px] w-full p-4 cyber-card relative">
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-2">
-          <Users className="w-5 h-5 text-[#D9B979]" />
-          <h3 className="text-lg font-bold text-white font-display">
+          <Users className="w-5 h-5 text-primary" aria-hidden="true" />
+          <h3 className="text-lg font-bold text-foreground font-display">
             Audiência vs Vendas
           </h3>
         </div>
         <TooltipProvider>
           <UITooltip>
-            <TooltipTrigger>
-              <HelpCircle className="w-4 h-4 text-gray-500 hover:text-gray-300" />
+            <TooltipTrigger aria-label="Informações sobre o gráfico">
+              <HelpCircle
+                className="w-4 h-4 text-muted-foreground hover:text-foreground"
+                aria-hidden="true"
+              />
             </TooltipTrigger>
-            <TooltipContent className="max-w-[300px] bg-[#1A1A1A] border-[#333333] text-gray-300">
+            <TooltipContent className="max-w-[300px] bg-popover border-border text-popover-foreground">
               <p>
                 Cada ponto representa uma live. <br />
                 <strong>Horizontal:</strong> Pico de audiência <br />
@@ -106,20 +109,25 @@ export function AudienceScatterChart({
       </div>
 
       <ResponsiveContainer width="100%" height="85%">
-        <ScatterChart margin={{ top: 20, right: 20, bottom: 20, left: 0 }}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#333333" />
+        <ScatterChart
+          margin={{ top: 20, right: 20, bottom: 20, left: 0 }}
+          accessibilityLayer
+          role="graphics-document"
+          aria-label="Gráfico de dispersão relacionando audiência e vendas"
+        >
+          <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
           <XAxis
             type="number"
             dataKey="peakViewers"
             name="Audiência"
             tickLine={false}
             axisLine={false}
-            tick={{ fill: '#A1A1AA', fontSize: 12 }}
+            tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
             label={{
               value: 'Pico de Pessoas',
               position: 'bottom',
               offset: 0,
-              fill: '#71717A',
+              fill: 'hsl(var(--muted-foreground))',
               fontSize: 12,
             }}
           />
@@ -129,12 +137,12 @@ export function AudienceScatterChart({
             name="Vendas"
             tickLine={false}
             axisLine={false}
-            tick={{ fill: '#A1A1AA', fontSize: 12 }}
+            tick={{ fill: 'hsl(var(--muted-foreground))', fontSize: 12 }}
             label={{
               value: 'Vendas',
               angle: -90,
               position: 'insideLeft',
-              fill: '#71717A',
+              fill: 'hsl(var(--muted-foreground))',
               fontSize: 12,
             }}
           />
@@ -151,7 +159,7 @@ export function AudienceScatterChart({
           <Scatter
             name="Lives"
             data={chartData}
-            fill="#D9B979"
+            fill="hsl(var(--primary))"
             fillOpacity={0.6}
           />
         </ScatterChart>

@@ -50,34 +50,37 @@ export function CRMColumn({
   }
 
   return (
-    <div
+    <section
       className={cn(
         'flex h-full min-w-[300px] w-[300px] flex-col rounded-2xl transition-all',
-        isOver && 'ring-2 ring-[#D9B979] ring-offset-2 ring-offset-black',
+        isOver && 'ring-2 ring-primary ring-offset-2 ring-offset-background',
       )}
       style={{
         backgroundColor: isOver
-          ? 'rgba(217, 185, 121, 0.05)'
-          : 'rgba(26, 26, 26, 0.6)',
+          ? 'hsl(var(--primary) / 0.05)'
+          : 'hsl(var(--card) / 0.6)',
         backdropFilter: 'blur(10px)',
         WebkitBackdropFilter: 'blur(10px)',
-        border: isOver ? '2px dashed #D9B979' : '1px solid #333333',
+        border: isOver
+          ? '2px dashed hsl(var(--primary))'
+          : '1px solid hsl(var(--border))',
       }}
       onDragOver={handleDragOver}
       onDragLeave={handleDragLeave}
       onDrop={handleDrop}
+      aria-label={`Coluna ${label}`}
     >
       {/* Header */}
       <div
-        className="flex items-center justify-between p-4 rounded-t-2xl bg-[#1A1A1A]/80 border-b border-[#333333]"
+        className="flex items-center justify-between p-4 rounded-t-2xl bg-card/80 border-b border-border"
         style={{
           borderTop: `4px solid ${color}`,
         }}
       >
-        <h3 className="font-bold text-[14px] font-display text-white">
+        <h3 className="font-bold text-[14px] font-display text-foreground">
           {label}
         </h3>
-        <div className="px-2.5 py-1 rounded-full text-[12px] font-semibold bg-white/5 text-gray-300">
+        <div className="px-2.5 py-1 rounded-full text-[12px] font-semibold bg-white/5 text-muted-foreground">
           {leads.length}
         </div>
       </div>
@@ -85,18 +88,20 @@ export function CRMColumn({
       {/* Content with Virtualization */}
       <div className="flex-1 p-3 overflow-hidden">
         {leads.length === 0 ? (
-          <div className="h-full flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#333333] bg-white/5">
-            <span className="material-symbols-outlined text-[32px] mb-2 text-gray-600">
+          <div className="h-full flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-border bg-white/5">
+            <span className="material-symbols-outlined text-[32px] mb-2 text-muted-foreground">
               folder_open
             </span>
-            <p className="text-[13px] font-medium text-gray-500">Nenhum lead</p>
+            <p className="text-[13px] font-medium text-muted-foreground">
+              Nenhum lead
+            </p>
           </div>
         ) : (
           <VirtualList
             items={leads}
             height="100%"
             itemHeight={170}
-            className="scrollbar-thin scrollbar-thumb-[#333333]"
+            className="scrollbar-thin scrollbar-thumb-border"
             renderItem={(lead) => (
               <CRMCard
                 key={lead.id}
@@ -108,6 +113,6 @@ export function CRMColumn({
           />
         )}
       </div>
-    </div>
+    </section>
   )
 }

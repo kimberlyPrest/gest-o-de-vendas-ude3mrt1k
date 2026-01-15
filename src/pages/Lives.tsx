@@ -131,21 +131,21 @@ export default function Lives() {
   if (error) {
     return (
       <div className="flex h-[80vh] flex-col items-center justify-center gap-4">
-        <div className="rounded-full bg-red-900/20 p-4 text-red-500">
-          <AlertTriangle size={48} />
+        <div className="rounded-full bg-destructive/20 p-4 text-destructive">
+          <AlertTriangle size={48} aria-hidden="true" />
         </div>
-        <h2 className="text-xl font-semibold text-white">
+        <h2 className="text-xl font-semibold text-foreground">
           Erro ao carregar dados
         </h2>
-        <p className="text-gray-400">
+        <p className="text-muted-foreground">
           Não foi possível conectar ao banco de dados.
         </p>
         <Button
           onClick={fetchData}
           variant="outline"
-          className="border-gray-700 text-gray-300 hover:bg-white/5 hover:text-white"
+          className="border-border text-muted-foreground hover:bg-white/5 hover:text-foreground"
         >
-          <RefreshCw className="mr-2 h-4 w-4" />
+          <RefreshCw className="mr-2 h-4 w-4" aria-hidden="true" />
           Tentar Novamente
         </Button>
       </div>
@@ -158,22 +158,28 @@ export default function Lives() {
       <header className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
         <div>
           <div className="flex items-center gap-3">
-            <h1 className="text-3xl font-bold tracking-tight text-white font-display">
+            <h1 className="text-3xl font-bold tracking-tight text-foreground font-display">
               Dashboard de Lives
             </h1>
             {loading ? (
-              <span className="flex items-center text-[12px] text-[#27E39F] bg-[#27E39F]/10 px-2 py-0.5 rounded-full animate-pulse border border-[#27E39F]/20">
-                <RefreshCw className="h-3 w-3 animate-spin mr-1.5" />
+              <span className="flex items-center text-[12px] text-chart-2 bg-chart-2/10 px-2 py-0.5 rounded-full animate-pulse border border-chart-2/20">
+                <RefreshCw
+                  className="h-3 w-3 animate-spin mr-1.5"
+                  aria-hidden="true"
+                />
                 Sincronizando...
               </span>
             ) : (
-              <span className="flex items-center text-[12px] text-gray-400 bg-gray-800/50 px-2 py-0.5 rounded-full border border-gray-700">
-                <CheckCircle2 className="h-3 w-3 mr-1.5 text-green-500" />
+              <span className="flex items-center text-[12px] text-muted-foreground bg-muted/50 px-2 py-0.5 rounded-full border border-border">
+                <CheckCircle2
+                  className="h-3 w-3 mr-1.5 text-green-500"
+                  aria-hidden="true"
+                />
                 Atualizado
               </span>
             )}
           </div>
-          <p className="text-gray-400 mt-1">
+          <p className="text-muted-foreground mt-1">
             Acompanhe a performance, compare períodos e analise KPIs em tempo
             real.
           </p>
@@ -184,9 +190,13 @@ export default function Lives() {
             size="icon"
             onClick={fetchData}
             disabled={loading}
-            className="text-gray-400 hover:text-white"
+            aria-label="Atualizar dados"
+            className="text-muted-foreground hover:text-foreground"
           >
-            <RefreshCw className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`} />
+            <RefreshCw
+              className={`h-4 w-4 ${loading ? 'animate-spin' : ''}`}
+              aria-hidden="true"
+            />
           </Button>
           <AddLiveModal
             presenters={uniquePresenters}
@@ -196,17 +206,19 @@ export default function Lives() {
       </header>
 
       {/* Filters */}
-      <LiveFilters
-        presenters={uniquePresenters}
-        filters={filters}
-        onFilterChange={setFilters}
-        loading={loading}
-        dateBounds={dateBounds}
-        comparisonRange={comparisonRange}
-      />
+      <section aria-label="Filtros">
+        <LiveFilters
+          presenters={uniquePresenters}
+          filters={filters}
+          onFilterChange={setFilters}
+          loading={loading}
+          dateBounds={dateBounds}
+          comparisonRange={comparisonRange}
+        />
+      </section>
 
       {/* KPI Dashboard */}
-      <section>
+      <section aria-label="Indicadores de Performance">
         <LiveKPIs
           currentData={currentData}
           previousData={previousData}
@@ -216,12 +228,14 @@ export default function Lives() {
       </section>
 
       {/* Comparative Analysis Section (Tabs) */}
-      <LiveComparative
-        data={currentData}
-        allData={allData}
-        loading={loading}
-        presenters={filters.presenters}
-      />
+      <section aria-label="Análise Comparativa">
+        <LiveComparative
+          data={currentData}
+          allData={allData}
+          loading={loading}
+          presenters={filters.presenters}
+        />
+      </section>
 
       {/* Main Content Area */}
       {currentData.length === 0 && !loading ? (
@@ -229,26 +243,30 @@ export default function Lives() {
           icon={Video}
           title="Nenhuma live encontrada"
           description="Tente ajustar os filtros ou selecionar um período diferente."
-          className="text-gray-400"
+          className="text-muted-foreground"
         />
       ) : (
         <div className="space-y-8">
           {/* Charts Grid - 2 Col on Desktop */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-            <HostPerformanceChart data={currentData} loading={loading} />
-            <WeekdayEfficiencyChart data={currentData} loading={loading} />
-            <RevenueEvolutionChart
-              currentData={currentData}
-              previousData={previousData}
-              comparisonEnabled={filters.comparisonEnabled}
-              dateRange={filters.dateRange as { from: Date; to: Date }}
-              loading={loading}
-            />
-            <AudienceScatterChart data={currentData} loading={loading} />
-          </div>
+          <section aria-label="Gráficos Detalhados">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              <HostPerformanceChart data={currentData} loading={loading} />
+              <WeekdayEfficiencyChart data={currentData} loading={loading} />
+              <RevenueEvolutionChart
+                currentData={currentData}
+                previousData={previousData}
+                comparisonEnabled={filters.comparisonEnabled}
+                dateRange={filters.dateRange as { from: Date; to: Date }}
+                loading={loading}
+              />
+              <AudienceScatterChart data={currentData} loading={loading} />
+            </div>
+          </section>
 
           {/* History Table */}
-          <StreamTable data={currentData} />
+          <section aria-label="Histórico de Lives">
+            <StreamTable data={currentData} />
+          </section>
         </div>
       )}
     </div>

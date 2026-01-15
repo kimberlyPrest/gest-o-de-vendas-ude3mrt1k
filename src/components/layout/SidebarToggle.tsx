@@ -3,7 +3,7 @@ import { useSidebar } from '@/components/ui/sidebar'
 import { cn } from '@/lib/utils'
 
 export function SidebarToggle({ className }: { className?: string }) {
-  const { toggleSidebar } = useSidebar()
+  const { toggleSidebar, open } = useSidebar()
 
   return (
     <Button
@@ -14,7 +14,8 @@ export function SidebarToggle({ className }: { className?: string }) {
         className,
       )}
       onClick={toggleSidebar}
-      title="Alternar Menu"
+      title={open ? 'Recolher menu' : 'Expandir menu'}
+      aria-label={open ? 'Recolher menu lateral' : 'Expandir menu lateral'}
     >
       <svg
         width="24"
@@ -26,11 +27,11 @@ export function SidebarToggle({ className }: { className?: string }) {
         strokeLinecap="round"
         strokeLinejoin="round"
         className="h-5 w-5"
+        aria-hidden="true"
       >
         <rect width="18" height="18" x="3" y="3" rx="2" ry="2" />
         <path d="M9 3v18" />
       </svg>
-      <span className="sr-only">Alternar Menu</span>
     </Button>
   )
 }

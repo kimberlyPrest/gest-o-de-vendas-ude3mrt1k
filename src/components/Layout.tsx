@@ -15,9 +15,12 @@ function DesktopOverlay() {
   if (isMobile || state !== 'expanded') return null
 
   return (
-    <div
-      className="fixed inset-0 z-[5] bg-black/50 backdrop-blur-[1px] transition-all duration-300 md:block hidden"
+    <button
+      type="button"
+      className="fixed inset-0 z-10 bg-black/50 backdrop-blur-[1px] transition-all duration-300 md:block hidden cursor-default"
       onClick={() => setOpen(false)}
+      aria-label="Fechar menu lateral"
+      tabIndex={-1}
     />
   )
 }
@@ -37,9 +40,9 @@ export default function Layout() {
       <SidebarInset className="transition-all duration-300 ease-in-out bg-background">
         <DesktopOverlay />
         <Header />
-        <div className="flex-1 overflow-auto">
+        <main className="flex-1 overflow-auto">
           <Outlet />
-        </div>
+        </main>
 
         <ConnectionStatus />
       </SidebarInset>

@@ -1,4 +1,4 @@
-const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-DqAoC2RU.js","assets/select-Djk7LTiI.js","assets/CRM-CTh9wTpN.js"])))=>i.map(i=>d[i]);
+const __vite__mapDeps=(i,m=__vite__mapDeps,d=(m.f||(m.f=["assets/Lives-CVgBoMxf.js","assets/select-BGYy05Hz.js","assets/CRM-CkTgOW7P.js"])))=>i.map(i=>d[i]);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -33671,7 +33671,7 @@ function AppSidebar() {
 		else setOpen(false);
 	};
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Sidebar, {
-		className: "border-r border-[#333333] z-40 bg-[#0C0C0D]",
+		className: "border-r border-sidebar-border z-40 bg-sidebar",
 		collapsible: "offcanvas",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarHeader, {
@@ -33679,15 +33679,18 @@ function AppSidebar() {
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex items-center gap-3",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-						className: "size-9 shrink-0 rounded-xl flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105 bg-[#D9B979] text-[#0C0C0D]",
-						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LayoutDashboard, { className: "h-5 w-5" })
+						className: "size-9 shrink-0 rounded-xl flex items-center justify-center shadow-lg transition-transform duration-300 hover:scale-105 bg-primary text-primary-foreground",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LayoutDashboard, {
+							className: "h-5 w-5",
+							"aria-hidden": "true"
+						})
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex flex-col overflow-hidden transition-all duration-300",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h1", {
-							className: "text-[15px] font-bold tracking-tight truncate font-display text-white",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+							className: "text-[15px] font-bold tracking-tight truncate font-display text-sidebar-foreground",
 							children: "Performance"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-							className: "text-[10px] font-medium uppercase tracking-wider truncate text-[#D9B979]",
+							className: "text-[10px] font-medium uppercase tracking-wider truncate text-primary",
 							children: "Analytics Suite"
 						})]
 					})]
@@ -33695,35 +33698,41 @@ function AppSidebar() {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarContent, {
 				className: "px-4 py-2",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenu, {
-					className: "space-y-1",
-					children: items.map((item) => {
-						const isActive = pathname === item.url || item.url === "/lives" && pathname === "/";
-						return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuButton, {
-							asChild: true,
-							tooltip: item.title,
-							className: cn("w-full justify-start rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200", isActive ? "bg-[#D9B979]/10 text-[#D9B979]" : "text-gray-400 hover:bg-white/5 hover:text-white"),
-							onClick: handleLinkClick,
-							children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
-								to: item.url,
-								className: "flex items-center gap-3",
-								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, { className: "h-5 w-5 shrink-0" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-									className: "text-[14px] truncate",
-									children: item.title
-								})]
-							})
-						}) }, item.title);
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("nav", {
+					"aria-label": "Menu Principal",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenu, {
+						className: "space-y-1",
+						children: items.map((item) => {
+							const isActive = pathname === item.url || item.url === "/lives" && pathname === "/";
+							return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuItem, { children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarMenuButton, {
+								asChild: true,
+								tooltip: item.title,
+								className: cn("w-full justify-start rounded-xl px-4 py-2.5 text-sm font-medium transition-all duration-200", isActive ? "bg-primary/10 text-primary" : "text-muted-foreground hover:bg-white/5 hover:text-sidebar-foreground"),
+								onClick: handleLinkClick,
+								children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Link, {
+									to: item.url,
+									className: "flex items-center gap-3",
+									children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(item.icon, {
+										className: "h-5 w-5 shrink-0",
+										"aria-hidden": "true"
+									}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+										className: "text-[14px] truncate",
+										children: item.title
+									})]
+								})
+							}) }, item.title);
+						})
 					})
 				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarFooter, {
-				className: "p-6 border-t border-[#333333]",
+				className: "p-6 border-t border-sidebar-border",
 				children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex flex-col gap-2",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "flex items-center gap-3 p-2 rounded-xl transition-colors hover:bg-white/5",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "size-8 shrink-0 rounded-full flex items-center justify-center bg-[#333333] text-white",
+							className: "size-8 shrink-0 rounded-full flex items-center justify-center bg-sidebar-border text-sidebar-foreground",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 								className: "font-medium text-xs",
 								children: user?.email?.charAt(0).toUpperCase() || "U"
@@ -33731,19 +33740,21 @@ function AppSidebar() {
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex flex-col min-w-0 overflow-hidden",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-[13px] font-medium truncate text-white",
+								className: "text-[13px] font-medium truncate text-sidebar-foreground",
 								children: user?.user_metadata?.name || "Usuário"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-[11px] truncate text-gray-400",
+								className: "text-[11px] truncate text-muted-foreground",
 								children: user?.email || "Carregando..."
 							})]
 						})]
 					}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 						onClick: handleLogout,
-						className: "flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-red-500 hover:bg-red-500/10 transition-colors w-full",
+						className: "flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-destructive hover:bg-destructive/10 transition-colors w-full",
+						"aria-label": "Sair do sistema",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LogOut, {
 							size: 14,
-							className: "shrink-0"
+							className: "shrink-0",
+							"aria-hidden": "true"
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "truncate",
 							children: "Sair do sistema"
@@ -36334,14 +36345,15 @@ function SyncManager() {
 	return null;
 }
 function SidebarToggle({ className }) {
-	const { toggleSidebar } = useSidebar();
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Button, {
+	const { toggleSidebar, open } = useSidebar();
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Button, {
 		variant: "ghost",
 		size: "icon",
 		className: cn("h-9 w-9 hover:bg-accent hover:text-accent-foreground", className),
 		onClick: toggleSidebar,
-		title: "Alternar Menu",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
+		title: open ? "Recolher menu" : "Expandir menu",
+		"aria-label": open ? "Recolher menu lateral" : "Expandir menu lateral",
+		children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("svg", {
 			width: "24",
 			height: "24",
 			viewBox: "0 0 24 24",
@@ -36351,6 +36363,7 @@ function SidebarToggle({ className }) {
 			strokeLinecap: "round",
 			strokeLinejoin: "round",
 			className: "h-5 w-5",
+			"aria-hidden": "true",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("rect", {
 				width: "18",
 				height: "18",
@@ -36359,10 +36372,7 @@ function SidebarToggle({ className }) {
 				rx: "2",
 				ry: "2"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("path", { d: "M9 3v18" })]
-		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-			className: "sr-only",
-			children: "Alternar Menu"
-		})]
+		})
 	});
 }
 var U = 1, Y$1 = .9, H = .8, J$1 = .17, p = .1, u = .999, $ = .9999;
@@ -37025,8 +37035,10 @@ function GlobalSearch() {
 }
 function Header() {
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
-		className: "sticky top-0 z-20 flex h-16 items-center gap-4 border-b border-[#333333] bg-[#0C0C0D]/80 px-4 shadow-sm backdrop-blur-md md:px-6 transition-all",
-		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarToggle, { className: "-ml-2 text-gray-200 hover:text-white" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+		className: "sticky top-0 z-20 flex h-16 items-center gap-4 border-b border-border bg-background/80 px-4 shadow-sm backdrop-blur-md md:px-6 transition-all",
+		role: "banner",
+		"aria-label": "Navegação Superior",
+		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(SidebarToggle, { className: "-ml-2 text-muted-foreground hover:text-foreground" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 			className: "flex-1 flex items-center gap-4 md:ml-4",
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(GlobalSearch, {})
 		})]
@@ -37035,9 +37047,12 @@ function Header() {
 function DesktopOverlay() {
 	const { state, setOpen, isMobile } = useSidebar();
 	if (isMobile || state !== "expanded") return null;
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-		className: "fixed inset-0 z-[5] bg-black/50 backdrop-blur-[1px] transition-all duration-300 md:block hidden",
-		onClick: () => setOpen(false)
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("button", {
+		type: "button",
+		className: "fixed inset-0 z-10 bg-black/50 backdrop-blur-[1px] transition-all duration-300 md:block hidden cursor-default",
+		onClick: () => setOpen(false),
+		"aria-label": "Fechar menu lateral",
+		tabIndex: -1
 	});
 }
 function Layout() {
@@ -37052,7 +37067,7 @@ function Layout() {
 				children: [
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DesktopOverlay, {}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Header, {}),
-					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+					/* @__PURE__ */ (0, import_jsx_runtime.jsx)("main", {
 						className: "flex-1 overflow-auto",
 						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Outlet, {})
 					}),
@@ -37285,8 +37300,8 @@ const AuthGuard = ({ children }) => {
 	});
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)(import_jsx_runtime.Fragment, { children });
 };
-var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-DqAoC2RU.js"), __vite__mapDeps([0,1])));
-var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-CTh9wTpN.js"), __vite__mapDeps([2,1])));
+var Lives = import_react.lazy(() => __vitePreload(() => import("./Lives-CVgBoMxf.js"), __vite__mapDeps([0,1])));
+var CRM = import_react.lazy(() => __vitePreload(() => import("./CRM-CkTgOW7P.js"), __vite__mapDeps([2,1])));
 var LoadingFallback = () => /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 	className: "flex h-screen w-full items-center justify-center bg-gray-50 dark:bg-background",
 	children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -37346,4 +37361,4 @@ var App_default = App;
 (0, import_client.createRoot)(document.getElementById("root")).render(/* @__PURE__ */ (0, import_jsx_runtime.jsx)(App_default, {}));
 export { Title as $, useToast as $t, isDate as A, RefreshCw as At, millisecondsInHour as B, useLayoutEffect2 as Bt, enUS as C, useId as Ct, buildFormatLongFn as D, Video as Dt, buildLocalizeFn as E, X as Et, startOfISOWeek as F, clsx_default as Ft, require_shim as G, createCollection as Gt, minutesInDay as H, useCallbackRef$1 as Ht, startOfWeek as I, VISUALLY_HIDDEN_STYLES as It, Content as J, createContextScope as Jt, Skeleton as K, createSlot as Kt, getDefaultOptions as L, useControllableState as Lt, startOfDay as M, Calendar as Mt, normalizeDates as N, createLucideIcon as Nt, startOfYear as O, Users as Ot, getTimezoneOffsetInMilliseconds as P, cva as Pt, Root as Q, composeEventHandlers as Qt, toDate as R, Presence as Rt, getISOWeek as S, useSize as St, buildMatchFn as T, cn as Tt, minutesInMonth as U, Primitive$1 as Ut, millisecondsInMinute as V, DismissableLayer as Vt, googleSheetsService as W, dispatchDiscreteCustomEvent as Wt, Overlay as X, composeRefs as Xt, Description as Y, require_jsx_runtime as Yt, Portal$1 as Z, useComposedRefs as Zt, COLUMNS as _, Anchor as _t, CommandItem as a, useFocusGuards as at, format as b, Root2 as bt, Dialog as c, Input as ct, DialogDescription as d, useIsMobile as dt, require_react_dom as en, Trigger as et, DialogFooter as f, Slot as ft, useLivesStore as g, TooltipTrigger as gt, DialogTrigger as h, TooltipProvider as ht, CommandInput as i, __toESM as in, Combination_default as it, differenceInCalendarDays as j, LoaderCircle as jt, differenceInDays as k, Search as kt, DialogClose as l, Button as lt, DialogTitle as m, TooltipContent as mt, CommandEmpty as n, __commonJSMin as nn, createDialogScope as nt, CommandList as o, FocusScope as ot, DialogHeader as p, Tooltip as pt, Close as q, createSlottable as qt, CommandGroup as r, __export as rn, hideOthers as rt, CommandSeparator as s, Primitive as st, Command as t, require_react as tn, WarningProvider as tt, DialogContent as u, buttonVariants as ut, calculateLeadValue as v, Arrow as vt, buildMatchPatternFn as w, toast as wt, getWeek as x, createPopperScope as xt, useCRMStore as y, Content$1 as yt, constructFrom as z, Portal as zt };
 
-//# sourceMappingURL=index-B7crpv7A.js.map
+//# sourceMappingURL=index--Q6dyLn5.js.map

@@ -150,31 +150,34 @@ export function LiveFilters({
     filters.comparisonEnabled
 
   return (
-    <section className="bg-[#1A1A1A] border border-[#333333] rounded-xl p-2 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar shadow-lg">
-      <div className="flex items-center gap-2 px-3 text-gray-400 shrink-0 border-r border-[#333333] pr-4 mr-2">
-        <Filter className="w-5 h-5 text-[#D9B979]" />
+    <div className="bg-card border border-border rounded-xl p-2 mb-8 flex items-center gap-2 overflow-x-auto no-scrollbar shadow-lg">
+      <div className="flex items-center gap-2 px-3 text-muted-foreground shrink-0 border-r border-border pr-4 mr-2">
+        <Filter className="w-5 h-5 text-primary" aria-hidden="true" />
         <span className="text-sm font-medium font-sans">Filtros:</span>
       </div>
 
       {/* Preset Selector */}
       <Select value={selectedPreset} onValueChange={handlePresetChange}>
-        <SelectTrigger className="h-10 w-[140px] border-[#333333] bg-[#0C0C0D] text-gray-200 shrink-0 focus:ring-[#D9B979]/50 font-sans">
+        <SelectTrigger
+          className="h-10 w-[140px] border-border bg-background text-foreground shrink-0 focus:ring-primary/50 font-sans"
+          aria-label="Selecionar período pré-definido"
+        >
           <SelectValue placeholder="Período" />
         </SelectTrigger>
-        <SelectContent className="bg-[#1A1A1A] border-[#333333] text-gray-200">
+        <SelectContent className="bg-popover border-border text-popover-foreground">
           {DATE_PRESETS.map((preset) => (
             <SelectItem
               key={preset.value}
               value={preset.value}
               disabled={preset.value === 'allTime' && !dateBounds}
-              className="focus:bg-[#D9B979] focus:text-black font-sans data-[state=checked]:bg-[#D9B979]/20 data-[state=checked]:text-[#D9B979]"
+              className="focus:bg-primary focus:text-primary-foreground font-sans data-[state=checked]:bg-primary/20 data-[state=checked]:text-primary"
             >
               {preset.label}
             </SelectItem>
           ))}
           <SelectItem
             value="custom"
-            className="focus:bg-[#D9B979] focus:text-black font-sans"
+            className="focus:bg-primary focus:text-primary-foreground font-sans"
           >
             Personalizado
           </SelectItem>
@@ -187,12 +190,13 @@ export function LiveFilters({
           <Button
             variant="outline"
             className={cn(
-              'h-10 justify-start text-left font-normal shrink-0 bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white font-sans',
+              'h-10 justify-start text-left font-normal shrink-0 bg-background border-border text-foreground hover:bg-white/5 hover:text-foreground font-sans',
               !filters.dateRange && 'text-muted-foreground',
             )}
             onClick={() => setSelectedPreset('custom')}
+            aria-label="Selecionar intervalo de datas personalizado"
           >
-            <CalendarIcon className="mr-2 h-4 w-4" />
+            <CalendarIcon className="mr-2 h-4 w-4" aria-hidden="true" />
             {filters.dateRange?.from ? (
               filters.dateRange.to ? (
                 <>
@@ -208,7 +212,7 @@ export function LiveFilters({
           </Button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-auto p-0 border-[#333333] bg-[#1A1A1A]"
+          className="w-auto p-0 border-border bg-popover"
           align="start"
         >
           <Calendar
@@ -222,7 +226,7 @@ export function LiveFilters({
             }}
             numberOfMonths={2}
             locale={ptBR}
-            className="bg-[#1A1A1A] text-white"
+            className="bg-popover text-popover-foreground"
           />
         </PopoverContent>
       </Popover>
@@ -234,21 +238,25 @@ export function LiveFilters({
             variant="outline"
             role="combobox"
             aria-expanded={openPresenters}
-            className="h-10 justify-between shrink-0 min-w-[150px] bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white font-sans"
+            aria-label="Filtrar por apresentador"
+            className="h-10 justify-between shrink-0 min-w-[150px] bg-background border-border text-foreground hover:bg-white/5 hover:text-foreground font-sans"
           >
             <span className="truncate">
               {filters.presenters.length === 0
                 ? 'Todos os Hosts'
                 : `${filters.presenters.length} selecionado(s)`}
             </span>
-            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            <ChevronsUpDown
+              className="ml-2 h-4 w-4 shrink-0 opacity-50"
+              aria-hidden="true"
+            />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[220px] p-0 border-[#333333] bg-[#1A1A1A]">
-          <Command className="bg-[#1A1A1A] text-white">
+        <PopoverContent className="w-[220px] p-0 border-border bg-popover">
+          <Command className="bg-popover text-popover-foreground">
             <CommandInput
               placeholder="Buscar apresentador..."
-              className="border-[#333333]"
+              className="border-border"
             />
             <CommandList>
               <CommandEmpty>Nenhum apresentador.</CommandEmpty>
@@ -264,38 +272,38 @@ export function LiveFilters({
                       })
                     }
                   }}
-                  className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white font-sans"
+                  className="data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground font-sans"
                 >
                   <div
                     className={cn(
                       'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                       filters.presenters.length === presenters.length &&
                         presenters.length > 0
-                        ? 'bg-[#D9B979] text-black border-[#D9B979]'
+                        ? 'bg-primary text-primary-foreground border-primary'
                         : 'opacity-50 [&_svg]:invisible',
                     )}
                   >
-                    <Check className={cn('h-4 w-4')} />
+                    <Check className={cn('h-4 w-4')} aria-hidden="true" />
                   </div>
                   <span>Selecionar Todos</span>
                 </CommandItem>
-                <CommandSeparator className="my-1 bg-[#333333]" />
+                <CommandSeparator className="my-1 bg-border" />
                 {presenters.map((presenter) => (
                   <CommandItem
                     key={presenter}
                     value={presenter}
                     onSelect={() => togglePresenter(presenter)}
-                    className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white font-sans"
+                    className="data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground font-sans"
                   >
                     <div
                       className={cn(
                         'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                         filters.presenters.includes(presenter)
-                          ? 'bg-[#D9B979] text-black border-[#D9B979]'
+                          ? 'bg-primary text-primary-foreground border-primary'
                           : 'opacity-50 [&_svg]:invisible',
                       )}
                     >
-                      <Check className={cn('h-4 w-4')} />
+                      <Check className={cn('h-4 w-4')} aria-hidden="true" />
                     </div>
                     <span>{presenter}</span>
                   </CommandItem>
@@ -312,18 +320,22 @@ export function LiveFilters({
           <Button
             variant="outline"
             role="combobox"
-            className="h-10 justify-between shrink-0 min-w-[150px] bg-[#0C0C0D] border-[#333333] text-gray-200 hover:bg-[#333333] hover:text-white font-sans"
+            aria-label="Filtrar por dia da semana"
+            className="h-10 justify-between shrink-0 min-w-[150px] bg-background border-border text-foreground hover:bg-white/5 hover:text-foreground font-sans"
           >
             <span className="truncate">
               {filters.weekdays.length === 0
                 ? 'Dia da Semana'
                 : `${filters.weekdays.length} dia(s)`}
             </span>
-            <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+            <ChevronsUpDown
+              className="ml-2 h-4 w-4 shrink-0 opacity-50"
+              aria-hidden="true"
+            />
           </Button>
         </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0 border-[#333333] bg-[#1A1A1A]">
-          <Command className="bg-[#1A1A1A] text-white">
+        <PopoverContent className="w-[200px] p-0 border-border bg-popover">
+          <Command className="bg-popover text-popover-foreground">
             <CommandList>
               <CommandGroup>
                 {WEEKDAYS.map((day) => (
@@ -331,17 +343,17 @@ export function LiveFilters({
                     key={day.value}
                     value={day.value}
                     onSelect={() => toggleWeekday(day.value)}
-                    className="data-[selected=true]:bg-[#333333] data-[selected=true]:text-white font-sans"
+                    className="data-[selected=true]:bg-accent data-[selected=true]:text-accent-foreground font-sans"
                   >
                     <div
                       className={cn(
                         'mr-2 flex h-4 w-4 items-center justify-center rounded-sm border border-primary',
                         filters.weekdays.includes(day.value)
-                          ? 'bg-[#D9B979] text-black border-[#D9B979]'
+                          ? 'bg-primary text-primary-foreground border-primary'
                           : 'opacity-50 [&_svg]:invisible',
                       )}
                     >
-                      <Check className={cn('h-4 w-4')} />
+                      <Check className={cn('h-4 w-4')} aria-hidden="true" />
                     </div>
                     <span>{day.value}</span>
                   </CommandItem>
@@ -353,14 +365,15 @@ export function LiveFilters({
       </Popover>
 
       {/* Comparison Toggle */}
-      <div
+      <label
         className="flex items-center gap-3 shrink-0 cursor-pointer group px-2"
-        onClick={() =>
+        onClick={(e) => {
+          e.preventDefault()
           onFilterChange({
             ...filters,
             comparisonEnabled: !filters.comparisonEnabled,
           })
-        }
+        }}
       >
         <Switch
           checked={filters.comparisonEnabled}
@@ -368,37 +381,38 @@ export function LiveFilters({
             onFilterChange({ ...filters, comparisonEnabled: checked })
           }
           disabled={!filters.dateRange?.from || !filters.dateRange?.to}
-          className="data-[state=checked]:bg-[#D9B979]"
+          className="data-[state=checked]:bg-primary"
+          aria-label="Ativar comparação de períodos"
         />
-        <div className="flex items-center gap-1.5 text-gray-400 group-hover:text-white transition-colors font-sans">
-          <ArrowRightLeft className="w-4 h-4" />
+        <div className="flex items-center gap-1.5 text-muted-foreground group-hover:text-foreground transition-colors font-sans">
+          <ArrowRightLeft className="w-4 h-4" aria-hidden="true" />
           <span className="text-xs font-medium">Comparar</span>
         </div>
-      </div>
+      </label>
 
       {/* Comparison Badges */}
       {filters.comparisonEnabled &&
         filters.dateRange?.from &&
         filters.dateRange?.to &&
         comparisonRange && (
-          <div className="flex items-center gap-2 animate-fade-in pl-2 border-l border-[#333333]">
+          <div className="flex items-center gap-2 animate-fade-in pl-2 border-l border-border">
             {/* Current Period Badge */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#222222] border border-[#333333] rounded-lg hover:border-[#D9B979]/50 transition-colors group cursor-default shadow-sm">
-              <span className="font-display font-semibold text-[#D9B979] text-xs uppercase tracking-wide">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-accent/50 border border-border rounded-lg hover:border-primary/50 transition-colors group cursor-default shadow-sm">
+              <span className="font-display font-semibold text-primary text-xs uppercase tracking-wide">
                 Atual:
               </span>
-              <span className="font-sans text-xs text-gray-200">
+              <span className="font-sans text-xs text-foreground">
                 {format(filters.dateRange.from, 'dd/MM')} -{' '}
                 {format(filters.dateRange.to, 'dd/MM')}
               </span>
             </div>
 
             {/* Comparison Period Badge */}
-            <div className="flex items-center gap-2 px-3 py-1.5 bg-[#222222] border border-[#333333] rounded-lg hover:border-gray-500 transition-colors group cursor-default shadow-sm">
-              <span className="font-display font-semibold text-gray-400 text-xs uppercase tracking-wide">
+            <div className="flex items-center gap-2 px-3 py-1.5 bg-accent/50 border border-border rounded-lg hover:border-gray-500 transition-colors group cursor-default shadow-sm">
+              <span className="font-display font-semibold text-muted-foreground text-xs uppercase tracking-wide">
                 vs.
               </span>
-              <span className="font-sans text-xs text-gray-400 group-hover:text-gray-300 transition-colors">
+              <span className="font-sans text-xs text-muted-foreground group-hover:text-foreground transition-colors">
                 {format(comparisonRange.from, 'dd/MM')} -{' '}
                 {format(comparisonRange.to, 'dd/MM')}
               </span>
@@ -412,12 +426,13 @@ export function LiveFilters({
       {hasActiveFilters && (
         <button
           onClick={handleClear}
-          className="flex items-center gap-1.5 px-3 py-1.5 text-gray-400 hover:text-[#FF453A] hover:bg-[#FF453A]/10 rounded-lg transition-all shrink-0 font-sans"
+          aria-label="Limpar todos os filtros"
+          className="flex items-center gap-1.5 px-3 py-1.5 text-muted-foreground hover:text-destructive hover:bg-destructive/10 rounded-lg transition-all shrink-0 font-sans"
         >
-          <FilterX className="w-4 h-4" />
+          <FilterX className="w-4 h-4" aria-hidden="true" />
           <span className="text-xs font-medium">Limpar Filtros</span>
         </button>
       )}
-    </section>
+    </div>
   )
 }

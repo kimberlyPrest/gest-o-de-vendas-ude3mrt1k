@@ -1,5 +1,5 @@
-import { A as ChevronRight, D as Download, E as Funnel, F as ArrowDown, M as Check, N as ArrowUp, O as DollarSign, P as ArrowRightLeft, T as TrendingUp, a as SelectValue, b as differenceInCalendarMonths, c as Label$1, d as PopoverContent, f as PopoverTrigger, g as isBefore, h as subDays, i as SelectTrigger, j as ChevronLeft, k as CircleCheck, l as Calendar, m as parseISO, n as SelectContent, p as ptBR, r as SelectItem, s as useDirection, t as Select, u as Popover, v as endOfMonth, w as TriangleAlert, x as isSameDay, y as endOfDay } from "./select-Djk7LTiI.js";
-import { $ as Title, At as RefreshCw, B as millisecondsInHour, Bt as useLayoutEffect2, C as enUS, Ct as useId, Et as X, G as require_shim, Gt as createCollection, H as minutesInDay, Ht as useCallbackRef, J as Content, Jt as createContextScope, Kt as createSlot, L as getDefaultOptions, Lt as useControllableState, Mt as Calendar$1, N as normalizeDates, Nt as createLucideIcon, Ot as Users, P as getTimezoneOffsetInMilliseconds, Pt as cva, Q as Root$2, Qt as composeEventHandlers, R as toDate, Rt as Presence, Tt as cn, U as minutesInMonth, Ut as Primitive, Vt as DismissableLayer, Wt as dispatchDiscreteCustomEvent, X as Overlay, Xt as composeRefs, Y as Description, Yt as require_jsx_runtime, Z as Portal$2, Zt as useComposedRefs, _ as COLUMNS, _t as Anchor, at as useFocusGuards, b as format, bt as Root2$2, c as Dialog, ct as Input, dt as useIsMobile, et as Trigger$1, f as DialogFooter, in as __toESM, it as Combination_default, jt as LoaderCircle, k as differenceInDays, kt as Search, l as DialogClose, lt as Button, m as DialogTitle, nt as createDialogScope, ot as FocusScope, p as DialogHeader, q as Close, qt as createSlottable, rt as hideOthers, st as Primitive$1, tn as require_react, tt as WarningProvider, u as DialogContent, ut as buttonVariants, v as calculateLeadValue, vt as Arrow, wt as toast, xt as createPopperScope, y as useCRMStore, yt as Content$1, z as constructFrom, zt as Portal } from "./index-B7crpv7A.js";
+import { A as ChevronRight, D as Download, E as Funnel, F as ArrowDown, M as Check, N as ArrowUp, O as DollarSign, P as ArrowRightLeft, T as TrendingUp, a as SelectValue, b as differenceInCalendarMonths, c as Label$1, d as PopoverContent, f as PopoverTrigger, g as isBefore, h as subDays, i as SelectTrigger, j as ChevronLeft, k as CircleCheck, l as Calendar, m as parseISO, n as SelectContent, p as ptBR, r as SelectItem, s as useDirection, t as Select, u as Popover, v as endOfMonth, w as TriangleAlert, x as isSameDay, y as endOfDay } from "./select-BGYy05Hz.js";
+import { $ as Title, At as RefreshCw, B as millisecondsInHour, Bt as useLayoutEffect2, C as enUS, Ct as useId, Et as X, G as require_shim, Gt as createCollection, H as minutesInDay, Ht as useCallbackRef, J as Content, Jt as createContextScope, Kt as createSlot, L as getDefaultOptions, Lt as useControllableState, Mt as Calendar$1, N as normalizeDates, Nt as createLucideIcon, Ot as Users, P as getTimezoneOffsetInMilliseconds, Pt as cva, Q as Root$2, Qt as composeEventHandlers, R as toDate, Rt as Presence, Tt as cn, U as minutesInMonth, Ut as Primitive, Vt as DismissableLayer, Wt as dispatchDiscreteCustomEvent, X as Overlay, Xt as composeRefs, Y as Description, Yt as require_jsx_runtime, Z as Portal$2, Zt as useComposedRefs, _ as COLUMNS, _t as Anchor, at as useFocusGuards, b as format, bt as Root2$2, c as Dialog, ct as Input, dt as useIsMobile, et as Trigger$1, f as DialogFooter, in as __toESM, it as Combination_default, jt as LoaderCircle, k as differenceInDays, kt as Search, l as DialogClose, lt as Button, m as DialogTitle, nt as createDialogScope, ot as FocusScope, p as DialogHeader, q as Close, qt as createSlottable, rt as hideOthers, st as Primitive$1, tn as require_react, tt as WarningProvider, u as DialogContent, ut as buttonVariants, v as calculateLeadValue, vt as Arrow, wt as toast, xt as createPopperScope, y as useCRMStore, yt as Content$1, z as constructFrom, zt as Portal } from "./index--Q6dyLn5.js";
 var Activity = createLucideIcon("activity", [["path", {
 	d: "M22 12h-2.48a2 2 0 0 0-1.93 1.46l-2.35 8.36a.25.25 0 0 1-.48 0L9.24 2.18a.25.25 0 0 0-.48 0l-2.35 8.36A2 2 0 0 1 4.49 12H2",
 	key: "169zse"
@@ -279,33 +279,40 @@ function CRMFilters() {
 		filters.valueRange.min || filters.valueRange.max
 	].filter(Boolean).length;
 	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: "cyber-card p-5 mb-8 flex flex-wrap items-center gap-8",
+		className: "cyber-card p-5 mb-8 flex flex-wrap items-center gap-8 bg-card border border-border",
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex flex-col gap-1.5 flex-1 min-w-[250px]",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-					className: "text-[11px] font-semibold uppercase tracking-wider ml-1 text-gray-500",
+					htmlFor: "crm-search",
+					className: "text-[11px] font-semibold uppercase tracking-wider ml-1 text-muted-foreground",
 					children: "Buscar Lead"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "relative",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, { className: "absolute left-3 top-1/2 -translate-y-1/2 h-[18px] w-[18px] text-gray-500" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Search, {
+						className: "absolute left-3 top-1/2 -translate-y-1/2 h-[18px] w-[18px] text-muted-foreground",
+						"aria-hidden": "true"
+					}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("input", {
+						id: "crm-search",
 						type: "text",
 						placeholder: "Nome, email ou telefone...",
 						value: searchValue,
 						onChange: (e) => setSearchValue(e.target.value),
-						className: "w-full text-[13px] font-medium pl-10 pr-3 py-2 border border-[#333333] rounded-lg bg-[#1A1A1A] text-white focus:ring-1 focus:ring-[#D9B979] focus:outline-none"
+						className: "w-full text-[13px] font-medium pl-10 pr-3 py-2 border border-border rounded-lg bg-input text-foreground focus:ring-1 focus:ring-primary focus:outline-none placeholder:text-muted-foreground"
 					})]
 				})]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex flex-col gap-1.5",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-					className: "text-[11px] font-semibold uppercase tracking-wider ml-1 text-gray-500",
+					htmlFor: "crm-origin",
+					className: "text-[11px] font-semibold uppercase tracking-wider ml-1 text-muted-foreground",
 					children: "Origem"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("select", {
+					id: "crm-origin",
 					value: filters.origin,
 					onChange: (e) => setFilter("origin", e.target.value),
-					className: "text-[13px] font-medium px-3 py-2 border border-[#333333] rounded-lg bg-[#1A1A1A] text-white focus:ring-1 focus:ring-[#D9B979] min-w-[160px] outline-none",
+					className: "text-[13px] font-medium px-3 py-2 border border-border rounded-lg bg-input text-foreground focus:ring-1 focus:ring-primary min-w-[160px] outline-none",
 					children: [
 						/* @__PURE__ */ (0, import_jsx_runtime.jsx)("option", {
 							value: "all",
@@ -328,26 +335,31 @@ function CRMFilters() {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex flex-col gap-1.5",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-					className: "text-[11px] font-semibold uppercase tracking-wider ml-1 text-gray-500",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					id: "crm-date-label",
+					className: "text-[11px] font-semibold uppercase tracking-wider ml-1 text-muted-foreground",
 					children: "Data de Captura"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
 					asChild: true,
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-						className: cn("flex items-center gap-3 px-3 py-2 border border-[#333333] rounded-lg cursor-pointer text-left min-w-[220px] bg-[#1A1A1A]"),
+						"aria-labelledby": "crm-date-label",
+						className: cn("flex items-center gap-3 px-3 py-2 border border-border rounded-lg cursor-pointer text-left min-w-[220px] bg-input"),
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "text-[13px] font-medium",
-							style: { color: filters.dateRange?.from ? "white" : "#6B7280" },
+							style: { color: filters.dateRange?.from ? "hsl(var(--foreground))" : "hsl(var(--muted-foreground))" },
 							children: filters.dateRange?.from ? filters.dateRange.to ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(import_jsx_runtime.Fragment, { children: [
 								format(filters.dateRange.from, "dd/MM/yyyy"),
 								" -",
 								" ",
 								format(filters.dateRange.to, "dd/MM/yyyy")
 							] }) : format(filters.dateRange.from, "dd/MM/yyyy") : "Selecione..."
-						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar$1, { className: "h-[18px] w-[18px] ml-auto text-gray-500" })]
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar$1, {
+							className: "h-[18px] w-[18px] ml-auto text-muted-foreground",
+							"aria-hidden": "true"
+						})]
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
-					className: "w-auto p-0 bg-[#1A1A1A] border-[#333333]",
+					className: "w-auto p-0 bg-popover border-border",
 					align: "start",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Calendar, {
 						initialFocus: true,
@@ -357,37 +369,42 @@ function CRMFilters() {
 						onSelect: (range) => setFilter("dateRange", range),
 						numberOfMonths: 2,
 						locale: ptBR,
-						className: "bg-[#1A1A1A] text-white"
+						className: "bg-popover text-popover-foreground"
 					})
 				})] })]
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex flex-col gap-1.5",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-					className: "text-[11px] font-semibold uppercase tracking-wider ml-1 text-gray-500",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					id: "crm-value-label",
+					className: "text-[11px] font-semibold uppercase tracking-wider ml-1 text-muted-foreground",
 					children: "Valor Potencial"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)(Popover, { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverTrigger, {
 					asChild: true,
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-						className: "flex items-center gap-2 px-3 py-2 border border-[#333333] rounded-lg cursor-pointer bg-[#1A1A1A]",
-						style: { borderColor: filters.valueRange.min || filters.valueRange.max ? "#D9B979" : "#333333" },
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Funnel, { className: "h-[18px] w-[18px] text-gray-500" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+						"aria-labelledby": "crm-value-label",
+						className: "flex items-center gap-2 px-3 py-2 border border-border rounded-lg cursor-pointer bg-input",
+						style: { borderColor: filters.valueRange.min || filters.valueRange.max ? "hsl(var(--primary))" : "hsl(var(--border))" },
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Funnel, {
+							className: "h-[18px] w-[18px] text-muted-foreground",
+							"aria-hidden": "true"
+						}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
 							className: "text-[13px] font-medium",
-							style: { color: filters.valueRange.min || filters.valueRange.max ? "#D9B979" : "white" },
+							style: { color: filters.valueRange.min || filters.valueRange.max ? "hsl(var(--primary))" : "hsl(var(--foreground))" },
 							children: filters.valueRange.min || filters.valueRange.max ? `R$ ${filters.valueRange.min || "0"} - R$ ${filters.valueRange.max || "∞"}` : "Filtrar valor"
 						})]
 					})
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(PopoverContent, {
-					className: "w-80 p-4 bg-[#1A1A1A] border-[#333333] rounded-2xl",
+					className: "w-80 p-4 bg-popover border-border rounded-2xl",
 					children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "grid gap-4",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "space-y-2",
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-								className: "font-medium leading-none text-white",
+								className: "font-medium leading-none text-popover-foreground",
 								children: "Valor Potencial"
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-								className: "text-sm text-gray-500",
+								className: "text-sm text-muted-foreground",
 								children: "Filtre pelo valor total estimado do lead"
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -395,9 +412,11 @@ function CRMFilters() {
 							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "grid gap-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									className: "text-xs font-medium text-gray-500",
+									htmlFor: "min-value",
+									className: "text-xs font-medium text-muted-foreground",
 									children: "Mínimo"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+									id: "min-value",
 									type: "number",
 									placeholder: "0",
 									value: filters.valueRange.min,
@@ -405,14 +424,16 @@ function CRMFilters() {
 										...filters.valueRange,
 										min: e.target.value
 									}),
-									className: "rounded-lg bg-[#0C0C0D] border-[#333333] text-white"
+									className: "rounded-lg bg-input border-border text-foreground"
 								})]
 							}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 								className: "grid gap-2",
 								children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-									className: "text-xs font-medium text-gray-500",
+									htmlFor: "max-value",
+									className: "text-xs font-medium text-muted-foreground",
 									children: "Máximo"
 								}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(Input, {
+									id: "max-value",
 									type: "number",
 									placeholder: "10000",
 									value: filters.valueRange.max,
@@ -420,7 +441,7 @@ function CRMFilters() {
 										...filters.valueRange,
 										max: e.target.value
 									}),
-									className: "rounded-lg bg-[#0C0C0D] border-[#333333] text-white"
+									className: "rounded-lg bg-input border-border text-foreground"
 								})]
 							})]
 						})]
@@ -429,18 +450,22 @@ function CRMFilters() {
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex flex-col gap-1.5 ml-auto",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("label", {
-					className: "text-[11px] font-semibold uppercase tracking-wider ml-1 text-gray-500",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+					className: "text-[11px] font-semibold uppercase tracking-wider ml-1 text-muted-foreground",
 					children: "Resultados"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 					className: "flex items-center gap-3",
 					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "px-4 py-2 rounded-xl text-[13px] font-semibold bg-[#D9B979]/10 text-[#D9B979]",
+						className: "px-4 py-2 rounded-xl text-[13px] font-semibold bg-primary/10 text-primary",
 						children: [filteredLeads.length, " Leads"]
 					}), activeFiltersCount > 0 && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 						onClick: clearFilters,
-						className: "flex items-center gap-1 px-3 py-2 rounded-lg text-[13px] font-medium transition-colors text-gray-400 hover:bg-white/5 hover:text-white",
-						children: ["Limpar", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, { className: "h-4 w-4" })]
+						"aria-label": "Limpar todos os filtros",
+						className: "flex items-center gap-1 px-3 py-2 rounded-lg text-[13px] font-medium transition-colors text-muted-foreground hover:bg-white/5 hover:text-foreground",
+						children: ["Limpar", /* @__PURE__ */ (0, import_jsx_runtime.jsx)(X, {
+							className: "h-4 w-4",
+							"aria-hidden": "true"
+						})]
 					})]
 				})]
 			})
@@ -578,12 +603,15 @@ const CRMCard = (0, import_react.memo)(({ lead, onDragStart, onClick }) => {
 	const now = /* @__PURE__ */ new Date();
 	const hoursSinceInteraction = differenceInHours(now, lastInteraction);
 	const daysSinceInteraction = differenceInDays(now, lastInteraction);
-	let borderColor = "#27E39F";
-	if (hoursSinceInteraction > 72) borderColor = "#FF453A";
-	else if (hoursSinceInteraction > 24) borderColor = "#FF9F0A";
+	let borderColor = "hsl(var(--chart-2))";
+	if (hoursSinceInteraction > 72) borderColor = "hsl(var(--destructive))";
+	else if (hoursSinceInteraction > 24) {
+		borderColor = "hsl(var(--chart-5))";
+		if (hoursSinceInteraction > 24) borderColor = "#FF9F0A";
+	}
 	const isInactive = daysSinceInteraction > 3;
 	const potentialValue = lead.valorEstimado ?? calculateLeadValue(lead);
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsx)("article", {
 		draggable: true,
 		onDragStart: (e) => {
 			e.currentTarget.style.transform = "rotate(-2deg)";
@@ -596,12 +624,13 @@ const CRMCard = (0, import_react.memo)(({ lead, onDragStart, onClick }) => {
 		},
 		onClick: () => onClick?.(lead),
 		className: "cursor-grab active:cursor-grabbing touch-none select-none pb-3 transform transition-all duration-200",
+		"aria-label": `Lead: ${lead.nomeCompleto}`,
 		children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 			className: cn("overflow-hidden transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] shadow-lg"),
 			style: {
-				background: "linear-gradient(145deg, #2C2C2E 0%, #1E1E20 100%)",
+				background: "linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--background)) 100%)",
 				borderRadius: "16px",
-				border: "1px solid #333333",
+				border: "1px solid hsl(var(--border))",
 				borderLeft: `4px solid ${borderColor}`
 			},
 			children: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
@@ -612,36 +641,48 @@ const CRMCard = (0, import_react.memo)(({ lead, onDragStart, onClick }) => {
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 							className: "flex-1 overflow-hidden",
 							children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)("h4", {
-								className: "truncate text-[14px] font-bold text-white font-display",
+								className: "truncate text-[14px] font-bold text-foreground font-display",
 								children: lead.nomeCompleto
 							})
-						}), isInactive && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleAlert, { className: "h-4 w-4 text-[#FF453A] animate-pulse" })]
+						}), isInactive && /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CircleAlert, {
+							className: "h-4 w-4 text-destructive animate-pulse",
+							"aria-hidden": "true"
+						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 						className: "space-y-2 mb-3",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center gap-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, { className: "h-3.5 w-3.5 text-gray-500" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "truncate text-[12px] text-gray-400",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Mail, {
+								className: "h-3.5 w-3.5 text-muted-foreground",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "truncate text-[12px] text-muted-foreground",
 								children: lead.email
 							})]
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center gap-2",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, { className: "h-3.5 w-3.5 text-gray-500" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-[12px] text-gray-400",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Phone, {
+								className: "h-3.5 w-3.5 text-muted-foreground",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-[12px] text-muted-foreground",
 								children: lead.telefone
 							})]
 						})]
 					}),
 					/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-						className: "flex items-center justify-between pt-3 border-t border-[#333333]",
+						className: "flex items-center justify-between pt-3 border-t border-border",
 						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-							className: "px-2 py-1 rounded-md text-[10px] font-medium bg-[#333333] text-gray-300",
+							className: "px-2 py-1 rounded-md text-[10px] font-medium bg-border text-muted-foreground",
 							children: lead.origem
 						}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 							className: "flex items-center gap-1",
-							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, { className: "h-3.5 w-3.5 text-[#D9B979]" }), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-								className: "text-[12px] font-bold text-[#D9B979]",
+							children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(DollarSign, {
+								className: "h-3.5 w-3.5 text-primary",
+								"aria-hidden": "true"
+							}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
+								className: "text-[12px] font-bold text-primary",
 								children: potentialValue.toLocaleString("pt-BR")
 							})]
 						})]
@@ -728,43 +769,44 @@ function CRMColumn({ id, label, color, leads, onDropLead, onCardClick }) {
 		e.dataTransfer.setData("leadId", leadId);
 		e.dataTransfer.effectAllowed = "move";
 	};
-	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-		className: cn("flex h-full min-w-[300px] w-[300px] flex-col rounded-2xl transition-all", isOver && "ring-2 ring-[#D9B979] ring-offset-2 ring-offset-black"),
+	return /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("section", {
+		className: cn("flex h-full min-w-[300px] w-[300px] flex-col rounded-2xl transition-all", isOver && "ring-2 ring-primary ring-offset-2 ring-offset-background"),
 		style: {
-			backgroundColor: isOver ? "rgba(217, 185, 121, 0.05)" : "rgba(26, 26, 26, 0.6)",
+			backgroundColor: isOver ? "hsl(var(--primary) / 0.05)" : "hsl(var(--card) / 0.6)",
 			backdropFilter: "blur(10px)",
 			WebkitBackdropFilter: "blur(10px)",
-			border: isOver ? "2px dashed #D9B979" : "1px solid #333333"
+			border: isOver ? "2px dashed hsl(var(--primary))" : "1px solid hsl(var(--border))"
 		},
 		onDragOver: handleDragOver,
 		onDragLeave: handleDragLeave,
 		onDrop: handleDrop,
+		"aria-label": `Coluna ${label}`,
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-			className: "flex items-center justify-between p-4 rounded-t-2xl bg-[#1A1A1A]/80 border-b border-[#333333]",
+			className: "flex items-center justify-between p-4 rounded-t-2xl bg-card/80 border-b border-border",
 			style: { borderTop: `4px solid ${color}` },
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h3", {
-				className: "font-bold text-[14px] font-display text-white",
+				className: "font-bold text-[14px] font-display text-foreground",
 				children: label
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-				className: "px-2.5 py-1 rounded-full text-[12px] font-semibold bg-white/5 text-gray-300",
+				className: "px-2.5 py-1 rounded-full text-[12px] font-semibold bg-white/5 text-muted-foreground",
 				children: leads.length
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 			className: "flex-1 p-3 overflow-hidden",
 			children: leads.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
-				className: "h-full flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-[#333333] bg-white/5",
+				className: "h-full flex flex-col items-center justify-center rounded-xl border-2 border-dashed border-border bg-white/5",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("span", {
-					className: "material-symbols-outlined text-[32px] mb-2 text-gray-600",
+					className: "material-symbols-outlined text-[32px] mb-2 text-muted-foreground",
 					children: "folder_open"
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "text-[13px] font-medium text-gray-500",
+					className: "text-[13px] font-medium text-muted-foreground",
 					children: "Nenhum lead"
 				})]
 			}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(VirtualList, {
 				items: leads,
 				height: "100%",
 				itemHeight: 170,
-				className: "scrollbar-thin scrollbar-thumb-[#333333]",
+				className: "scrollbar-thin scrollbar-thumb-border",
 				renderItem: (lead) => /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CRMCard, {
 					lead,
 					onDragStart: handleDragStart,
@@ -3343,20 +3385,26 @@ function CRM() {
 		children: [
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
 				className: "rounded-full bg-destructive/10 p-6 mb-2",
-				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TriangleAlert, { className: "h-12 w-12 text-[#FF453A]" })
+				children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(TriangleAlert, {
+					className: "h-12 w-12 text-destructive",
+					"aria-hidden": "true"
+				})
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-				className: "text-xl font-bold font-display text-white",
+				className: "text-xl font-bold font-display text-foreground",
 				children: "Erro ao carregar CRM"
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-				className: "text-gray-400 text-sm max-w-[300px] text-center",
+				className: "text-muted-foreground text-sm max-w-[300px] text-center",
 				children: "Não foi possível recuperar os dados dos leads. Verifique sua conexão e tente novamente."
 			}),
 			/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
 				onClick: () => fetchLeads(true),
-				className: "bg-[#D9B979] hover:bg-[#D9B979]/90 text-black px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)] mt-2",
-				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, { className: "h-4 w-4" }), "Tentar Novamente"]
+				className: "bg-primary hover:bg-primary/90 text-primary-foreground px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)] mt-2",
+				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, {
+					className: "h-4 w-4",
+					"aria-hidden": "true"
+				}), "Tentar Novamente"]
 			})
 		]
 	});
@@ -3365,16 +3413,19 @@ function CRM() {
 		children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("header", {
 			className: "flex flex-wrap justify-between items-end gap-4 px-10 py-8",
 			children: [/* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", { children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("h2", {
-				className: "text-[32px] font-bold tracking-tight font-display text-white",
+				className: "text-[32px] font-bold tracking-tight font-display text-foreground",
 				children: "CRM - Pipeline de Vendas"
 			}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex items-center gap-2 mt-1",
 				children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)("p", {
-					className: "text-[15px] text-gray-400",
+					className: "text-[15px] text-muted-foreground",
 					children: "Gerencie seus leads e acompanhe o funil de vendas."
 				}), loading && /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("span", {
-					className: "flex items-center text-[12px] text-[#D9B979] bg-[#D9B979]/10 px-2 py-0.5 rounded-full animate-pulse border border-[#D9B979]/20",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-3 w-3 animate-spin mr-1.5" }), "Sincronizando..."]
+					className: "flex items-center text-[12px] text-primary bg-primary/10 px-2 py-0.5 rounded-full animate-pulse border border-primary/20",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+						className: "h-3 w-3 animate-spin mr-1.5",
+						"aria-hidden": "true"
+					}), "Sincronizando..."]
 				})]
 			})] }), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 				className: "flex items-center gap-3",
@@ -3383,32 +3434,52 @@ function CRM() {
 					size: "sm",
 					onClick: () => fetchLeads(true),
 					disabled: loading,
-					className: "border-[#333333] text-gray-300 hover:text-white hover:bg-white/5 gap-2",
-					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, { className: `h-4 w-4 ${loading ? "animate-spin" : ""}` }), "Sync"]
+					"aria-label": "Sincronizar dados",
+					className: "border-border text-muted-foreground hover:text-foreground hover:bg-white/5 gap-2",
+					children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(RefreshCw, {
+						className: `h-4 w-4 ${loading ? "animate-spin" : ""}`,
+						"aria-hidden": "true"
+					}), "Sync"]
 				}), /* @__PURE__ */ (0, import_jsx_runtime.jsx)(ExportButton, {
 					data: filteredLeads,
 					filename: "crm_leads",
 					formatData: formatLeadsForExport,
 					label: "Exportar Leads",
 					customButton: /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("button", {
-						className: "bg-[#D9B979] hover:bg-[#D9B979]/90 text-black px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)]",
-						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, { className: "h-5 w-5" }), "Exportar Leads"]
+						className: "bg-primary hover:bg-primary/90 text-primary-foreground px-5 py-2.5 rounded-lg text-[14px] font-medium flex items-center gap-2 transition-all shadow-[0_0_15px_rgba(217,185,121,0.2)]",
+						children: [/* @__PURE__ */ (0, import_jsx_runtime.jsx)(Download, {
+							className: "h-5 w-5",
+							"aria-hidden": "true"
+						}), "Exportar Leads"]
 					})
 				})]
 			})]
 		}), /* @__PURE__ */ (0, import_jsx_runtime.jsxs)("div", {
 			className: "flex flex-1 flex-col overflow-hidden px-10",
 			children: [
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CRMMetrics, {}),
-				/* @__PURE__ */ (0, import_jsx_runtime.jsx)(CRMFilters, {}),
-				loading && leads.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
-					className: "flex flex-1 items-center justify-center",
-					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, { className: "h-12 w-12 animate-spin text-[#D9B979]" })
-				}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CRMBoard, {})
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+					"aria-label": "Métricas do CRM",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CRMMetrics, {})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+					"aria-label": "Filtros do CRM",
+					children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CRMFilters, {})
+				}),
+				/* @__PURE__ */ (0, import_jsx_runtime.jsx)("section", {
+					"aria-label": "Pipeline de Vendas",
+					className: "flex-1 overflow-hidden",
+					children: loading && leads.length === 0 ? /* @__PURE__ */ (0, import_jsx_runtime.jsx)("div", {
+						className: "flex flex-1 items-center justify-center h-full",
+						children: /* @__PURE__ */ (0, import_jsx_runtime.jsx)(LoaderCircle, {
+							className: "h-12 w-12 animate-spin text-primary",
+							"aria-hidden": "true"
+						})
+					}) : /* @__PURE__ */ (0, import_jsx_runtime.jsx)(CRMBoard, {})
+				})
 			]
 		})]
 	});
 }
 export { CRM as default };
 
-//# sourceMappingURL=CRM-CTh9wTpN.js.map
+//# sourceMappingURL=CRM-CkTgOW7P.js.map

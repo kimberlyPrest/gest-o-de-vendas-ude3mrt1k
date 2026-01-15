@@ -17,19 +17,20 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
   const daysSinceInteraction = differenceInDays(now, lastInteraction)
 
   // Border Color Logic
-  let borderColor = '#27E39F' // Jade - recent
+  let borderColor = 'hsl(var(--chart-2))' // Jade
   if (hoursSinceInteraction > 72) {
-    borderColor = '#FF453A' // Coral - urgent
+    borderColor = 'hsl(var(--destructive))' // Coral
   } else if (hoursSinceInteraction > 24) {
-    borderColor = '#FF9F0A' // Orange - warning
+    borderColor = 'hsl(var(--chart-5))' // Purple/Warning substitute or custom
+    // Fallback if chart-5 is not suitable
+    if (hoursSinceInteraction > 24) borderColor = '#FF9F0A'
   }
 
   const isInactive = daysSinceInteraction > 3
-
   const potentialValue = lead.valorEstimado ?? calculateLeadValue(lead)
 
   return (
-    <div
+    <article
       draggable
       onDragStart={(e) => {
         e.currentTarget.style.transform = 'rotate(-2deg)'
@@ -42,15 +43,17 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
       }}
       onClick={() => onClick?.(lead)}
       className="cursor-grab active:cursor-grabbing touch-none select-none pb-3 transform transition-all duration-200"
+      aria-label={`Lead: ${lead.nomeCompleto}`}
     >
       <div
         className={cn(
           'overflow-hidden transition-all duration-300 hover:-translate-y-1 active:scale-[0.98] shadow-lg',
         )}
         style={{
-          background: 'linear-gradient(145deg, #2C2C2E 0%, #1E1E20 100%)',
+          background:
+            'linear-gradient(145deg, hsl(var(--card)) 0%, hsl(var(--background)) 100%)',
           borderRadius: '16px',
-          border: '1px solid #333333',
+          border: '1px solid hsl(var(--border))',
           borderLeft: `4px solid ${borderColor}`,
         }}
       >
@@ -58,37 +61,51 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
           {/* Header */}
           <div className="flex items-start justify-between mb-3">
             <div className="flex-1 overflow-hidden">
-              <h4 className="truncate text-[14px] font-bold text-white font-display">
+              <h4 className="truncate text-[14px] font-bold text-foreground font-display">
                 {lead.nomeCompleto}
               </h4>
             </div>
             {isInactive && (
-              <AlertCircle className="h-4 w-4 text-[#FF453A] animate-pulse" />
+              <AlertCircle
+                className="h-4 w-4 text-destructive animate-pulse"
+                aria-hidden="true"
+              />
             )}
           </div>
 
           {/* Contact Info */}
           <div className="space-y-2 mb-3">
             <div className="flex items-center gap-2">
-              <Mail className="h-3.5 w-3.5 text-gray-500" />
-              <span className="truncate text-[12px] text-gray-400">
+              <Mail
+                className="h-3.5 w-3.5 text-muted-foreground"
+                aria-hidden="true"
+              />
+              <span className="truncate text-[12px] text-muted-foreground">
                 {lead.email}
               </span>
             </div>
             <div className="flex items-center gap-2">
-              <Phone className="h-3.5 w-3.5 text-gray-500" />
-              <span className="text-[12px] text-gray-400">{lead.telefone}</span>
+              <Phone
+                className="h-3.5 w-3.5 text-muted-foreground"
+                aria-hidden="true"
+              />
+              <span className="text-[12px] text-muted-foreground">
+                {lead.telefone}
+              </span>
             </div>
           </div>
 
           {/* Footer */}
-          <div className="flex items-center justify-between pt-3 border-t border-[#333333]">
-            <div className="px-2 py-1 rounded-md text-[10px] font-medium bg-[#333333] text-gray-300">
+          <div className="flex items-center justify-between pt-3 border-t border-border">
+            <div className="px-2 py-1 rounded-md text-[10px] font-medium bg-border text-muted-foreground">
               {lead.origem}
             </div>
             <div className="flex items-center gap-1">
-              <DollarSign className="h-3.5 w-3.5 text-[#D9B979]" />
-              <span className="text-[12px] font-bold text-[#D9B979]">
+              <DollarSign
+                className="h-3.5 w-3.5 text-primary"
+                aria-hidden="true"
+              />
+              <span className="text-[12px] font-bold text-primary">
                 {potentialValue.toLocaleString('pt-BR')}
               </span>
             </div>
@@ -107,7 +124,7 @@ export const CRMCard = memo(({ lead, onDragStart, onClick }: CRMCardProps) => {
           </div>
         </div>
       </div>
-    </div>
+    </article>
   )
 })
 

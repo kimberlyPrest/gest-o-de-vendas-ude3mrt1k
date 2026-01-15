@@ -84,20 +84,20 @@ export function WeekdayEfficiencyChart({
     if (active && payload && payload.length) {
       const data = payload[0].payload
       return (
-        <div className="rounded-lg border border-[#333333] bg-[#1A1A1A] p-3 shadow-xl text-sm">
-          <p className="font-semibold mb-2 text-white font-display">
+        <div className="rounded-lg border border-border bg-popover p-3 shadow-xl text-sm">
+          <p className="font-semibold mb-2 text-foreground font-display">
             {data.fullName}
           </p>
           <div className="space-y-1">
             <p className="flex justify-between gap-4">
-              <span className="text-gray-400">Conversão Média:</span>
-              <span className="font-bold text-[#27E39F]">
+              <span className="text-muted-foreground">Conversão Média:</span>
+              <span className="font-bold text-chart-2">
                 {data.avgConversion.toFixed(1)}%
               </span>
             </p>
             <p className="flex justify-between gap-4">
-              <span className="text-gray-400">Total de Lives:</span>
-              <span className="font-medium text-gray-200">{data.count}</span>
+              <span className="text-muted-foreground">Total de Lives:</span>
+              <span className="font-medium text-foreground">{data.count}</span>
             </p>
           </div>
         </div>
@@ -107,43 +107,52 @@ export function WeekdayEfficiencyChart({
   }
 
   if (loading)
-    return <Skeleton className="h-[350px] w-full rounded-xl bg-[#333333]" />
+    return <Skeleton className="h-[350px] w-full rounded-xl bg-card" />
 
   return (
     <div className="h-[350px] w-full p-4 cyber-card">
       <div className="flex items-center gap-2 mb-6">
-        <Calendar className="w-5 h-5 text-[#27E39F]" />
-        <h3 className="text-lg font-bold text-white font-display">
+        <Calendar className="w-5 h-5 text-chart-2" aria-hidden="true" />
+        <h3 className="text-lg font-bold text-foreground font-display">
           Eficiência por Dia
         </h3>
       </div>
       <ResponsiveContainer width="100%" height="85%">
-        <BarChart data={chartData}>
+        <BarChart
+          data={chartData}
+          accessibilityLayer
+          role="graphics-document"
+          aria-label="Gráfico de barras mostrando a eficiência por dia da semana"
+        >
           <CartesianGrid
             strokeDasharray="3 3"
             vertical={false}
-            stroke="#333333"
+            stroke="hsl(var(--border))"
           />
           <XAxis
             dataKey="name"
             axisLine={false}
             tickLine={false}
             dy={10}
-            tick={{ fontSize: 12, fill: '#A1A1AA' }}
+            tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
           />
           <YAxis
             axisLine={false}
             tickLine={false}
             tickFormatter={(value) => `${value.toFixed(0)}%`}
-            tick={{ fontSize: 12, fill: '#A1A1AA' }}
+            tick={{ fontSize: 12, fill: 'hsl(var(--muted-foreground))' }}
           />
           <Tooltip
             content={<CustomTooltip />}
-            cursor={{ fill: '#333333', opacity: 0.4 }}
+            cursor={{ fill: 'hsl(var(--muted))', opacity: 0.4 }}
           />
           <defs>
             <linearGradient id="jadeGradient" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="#27E39F" stopOpacity={1} />
+              <stop
+                offset="0%"
+                stopColor="hsl(var(--chart-2))"
+                stopOpacity={1}
+              />
               <stop offset="100%" stopColor="#10B981" stopOpacity={0.8} />
             </linearGradient>
           </defs>

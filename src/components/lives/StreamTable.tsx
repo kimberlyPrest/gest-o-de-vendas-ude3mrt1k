@@ -40,25 +40,27 @@ export function StreamTable({ data }: StreamTableProps) {
 
   return (
     <div className="cyber-card overflow-hidden">
-      <div className="p-4 border-b border-[#333333]">
-        <h3 className="font-bold text-white font-display">
+      <div className="p-4 border-b border-border">
+        <h3 className="font-bold text-foreground font-display">
           Histórico de Lives
         </h3>
       </div>
       <Table>
-        <TableHeader className="bg-[#1A1A1A]">
-          <TableRow className="border-[#333333] hover:bg-transparent">
-            <TableHead className="w-[120px] text-gray-400 font-medium">
+        <TableHeader className="bg-muted">
+          <TableRow className="border-border hover:bg-transparent">
+            <TableHead className="w-[120px] text-muted-foreground font-medium">
               Data
             </TableHead>
-            <TableHead className="text-gray-400 font-medium">
+            <TableHead className="text-muted-foreground font-medium">
               Apresentador
             </TableHead>
-            <TableHead className="text-gray-500 font-medium">Dia</TableHead>
-            <TableHead className="text-right text-[#D9B979] font-medium">
+            <TableHead className="text-muted-foreground font-medium">
+              Dia
+            </TableHead>
+            <TableHead className="text-right text-primary font-medium">
               Vendas
             </TableHead>
-            <TableHead className="text-right text-[#27E39F] font-medium">
+            <TableHead className="text-right text-chart-2 font-medium">
               Faturamento
             </TableHead>
             <TableHead className="text-right text-blue-400 font-medium">
@@ -70,19 +72,19 @@ export function StreamTable({ data }: StreamTableProps) {
           {currentData.map((live, idx) => (
             <TableRow
               key={idx}
-              className="border-[#333333] hover:bg-white/5 transition-colors"
+              className="border-border hover:bg-white/5 transition-colors"
             >
-              <TableCell className="font-medium text-gray-200">
+              <TableCell className="font-medium text-foreground">
                 {format(parseISO(live.date), 'dd/MM/yyyy')}
               </TableCell>
               <TableCell className="text-gray-300">{live.presenter}</TableCell>
-              <TableCell className="text-gray-500 text-xs uppercase">
+              <TableCell className="text-muted-foreground text-xs uppercase">
                 {live.weekday}
               </TableCell>
-              <TableCell className="text-right text-[#D9B979] font-semibold">
+              <TableCell className="text-right text-primary font-semibold">
                 {live.sales}
               </TableCell>
-              <TableCell className="text-right text-[#27E39F] font-medium">
+              <TableCell className="text-right text-chart-2 font-medium">
                 R$ {live.revenue.toLocaleString('pt-BR')}
               </TableCell>
               <TableCell className="text-right text-blue-400 font-medium">
@@ -92,8 +94,8 @@ export function StreamTable({ data }: StreamTableProps) {
           ))}
         </TableBody>
       </Table>
-      <div className="flex items-center justify-between p-4 border-t border-[#333333] bg-[#1A1A1A]">
-        <span className="text-sm text-gray-500">
+      <div className="flex items-center justify-between p-4 border-t border-border bg-card">
+        <span className="text-sm text-muted-foreground">
           Mostrando {startIndex + 1}-{endIndex} de {sortedData.length}
         </span>
         <div className="flex items-center gap-2">
@@ -102,9 +104,10 @@ export function StreamTable({ data }: StreamTableProps) {
             size="sm"
             onClick={handlePrev}
             disabled={currentPage === 1}
-            className="h-8 w-8 p-0 border-[#333333] bg-transparent text-gray-300 hover:text-white hover:bg-white/5"
+            aria-label="Página anterior"
+            className="h-8 w-8 p-0 border-border bg-transparent text-muted-foreground hover:text-foreground hover:bg-white/5"
           >
-            <ChevronLeft className="h-4 w-4" />
+            <ChevronLeft className="h-4 w-4" aria-hidden="true" />
           </Button>
           <span className="text-sm font-medium text-gray-300">
             {currentPage}/{totalPages || 1}
@@ -114,9 +117,10 @@ export function StreamTable({ data }: StreamTableProps) {
             size="sm"
             onClick={handleNext}
             disabled={currentPage === totalPages}
-            className="h-8 w-8 p-0 border-[#333333] bg-transparent text-gray-300 hover:text-white hover:bg-white/5"
+            aria-label="Próxima página"
+            className="h-8 w-8 p-0 border-border bg-transparent text-muted-foreground hover:text-foreground hover:bg-white/5"
           >
-            <ChevronRight className="h-4 w-4" />
+            <ChevronRight className="h-4 w-4" aria-hidden="true" />
           </Button>
         </div>
       </div>

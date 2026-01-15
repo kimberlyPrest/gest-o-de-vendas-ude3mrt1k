@@ -201,32 +201,33 @@ export function LiveKPIs({
           key={item.id}
           className={cn(
             'overflow-hidden relative transition-all hover:shadow-glow-hover',
-            item.variant === 'primary' && 'border-[#D9B979]/30',
-            item.variant === 'accent' && 'border-[#D9B979]/20',
+            item.variant === 'primary' && 'border-primary/30',
+            item.variant === 'accent' && 'border-primary/20',
           )}
         >
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-4">
-            <CardTitle className="text-[10px] font-semibold font-sans text-gray-400 uppercase tracking-wider">
+            <CardTitle className="text-[10px] font-semibold font-sans text-muted-foreground uppercase tracking-wider">
               {item.title}
             </CardTitle>
             <item.icon
               className={cn(
                 'h-4 w-4',
                 item.variant === 'primary' || item.variant === 'accent'
-                  ? 'text-[#D9B979]'
+                  ? 'text-primary'
                   : 'text-gray-500',
               )}
+              aria-hidden="true"
             />
           </CardHeader>
           <CardContent className="p-4 pt-0">
             {loading ? (
               <div className="space-y-2">
-                <Skeleton className="h-7 w-20 bg-[#333333]" />
-                <Skeleton className="h-3 w-12 bg-[#333333]" />
+                <Skeleton className="h-7 w-20 bg-muted" />
+                <Skeleton className="h-3 w-12 bg-muted" />
               </div>
             ) : (
               <>
-                <div className="text-2xl font-bold tracking-tight font-display text-white">
+                <div className="text-2xl font-bold tracking-tight font-display text-foreground">
                   {item.value}
                 </div>
 
@@ -245,18 +246,24 @@ export function LiveKPIs({
                       className={cn(
                         'flex items-center text-xs font-medium',
                         item.trend > 0
-                          ? 'text-[#27E39F]'
+                          ? 'text-chart-2'
                           : item.trend < 0
-                            ? 'text-[#FF453A]'
+                            ? 'text-destructive'
                             : 'text-gray-500',
                       )}
                     >
                       {item.trend > 0 ? (
-                        <ArrowUpIcon className="mr-0.5 h-3 w-3" />
+                        <ArrowUpIcon
+                          className="mr-0.5 h-3 w-3"
+                          aria-hidden="true"
+                        />
                       ) : item.trend < 0 ? (
-                        <ArrowDownIcon className="mr-0.5 h-3 w-3" />
+                        <ArrowDownIcon
+                          className="mr-0.5 h-3 w-3"
+                          aria-hidden="true"
+                        />
                       ) : (
-                        <Minus className="mr-0.5 h-3 w-3" />
+                        <Minus className="mr-0.5 h-3 w-3" aria-hidden="true" />
                       )}
                       {Math.abs(item.trend).toFixed(1)}%
                     </span>
@@ -271,10 +278,15 @@ export function LiveKPIs({
 
           {/* Goal Progress Bar for Revenue only */}
           {item.id === 'total-revenue' && !loading && (
-            <div className="absolute bottom-0 left-0 w-full h-1 bg-[#333333]">
+            <div className="absolute bottom-0 left-0 w-full h-1 bg-border">
               <div
-                className="h-full bg-[#D9B979] shadow-glow transition-all duration-1000"
+                className="h-full bg-primary shadow-glow transition-all duration-1000"
                 style={{ width: `${goalProgress}%` }}
+                role="progressbar"
+                aria-valuenow={goalProgress}
+                aria-valuemin={0}
+                aria-valuemax={100}
+                aria-label="Progresso da meta"
               />
             </div>
           )}
